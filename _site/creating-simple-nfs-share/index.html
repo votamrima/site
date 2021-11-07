@@ -9,28 +9,32 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title></title>
-<meta name="description" content=".">
+<!-- begin _includes/seo.html --><title>Creating a simple NFS share on centos -</title>
+<meta name="description" content="In this post I am noting a way how to create a simple NFS share server on centos.">
 
 
   <meta name="author" content="votamrima">
   
+  <meta property="article:author" content="votamrima">
+  
 
 
-<meta property="og:type" content="website">
+<meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="">
-<meta property="og:title" content="">
-<meta property="og:url" content="http://localhost:4000/site/">
+<meta property="og:title" content="Creating a simple NFS share on centos">
+<meta property="og:url" content="http://localhost:4000/site/creating-simple-nfs-share/">
 
 
-  <meta property="og:description" content=".">
-
-
-
+  <meta property="og:description" content="In this post I am noting a way how to create a simple NFS share server on centos.">
 
 
 
+
+
+
+
+  <meta property="article:published_time" content="2021-11-06T23:38:00+01:00">
 
 
 
@@ -41,7 +45,7 @@
   
 
 
-<link rel="canonical" href="http://localhost:4000/site/">
+<link rel="canonical" href="http://localhost:4000/site/creating-simple-nfs-share/">
 
 
 
@@ -92,7 +96,7 @@
 
   </head>
 
-  <body class="layout--home">
+  <body class="layout--single">
     <nav class="skip-links">
   <ul>
     <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
@@ -136,141 +140,22 @@
 
 <div id="main" role="main">
   
-  <div class="sidebar sticky">
-  
 
 
-<div itemscope itemtype="https://schema.org/Person" class="h-card">
-
-  
-
-  <div class="author__content">
-    <h3 class="author__name p-name" itemprop="name">
-      <a class="u-url" rel="me" href="http://localhost:4000/site/" itemprop="url">votamrima</a>
-    </h3>
-    
-      <div class="author__bio p-note" itemprop="description">
-        
-
-      </div>
-    
-  </div>
-
-  <div class="author__urls-wrapper">
-    <button class="btn btn--inverse">Follow</button>
-    <ul class="author__urls social-icons">
-      
-        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
-          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Earth</span>
-        </li>
-      
-
-      
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      <!--
-  <li>
-    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
-      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
-    </a>
-  </li>
--->
-    </ul>
-  </div>
-</div>
-  
-  </div>
-
-
-
-  <div class="archive">
-    
-      <h1 id="page-title" class="page__title"></h1>
-    
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Creating a simple NFS share on centos">
+    <meta itemprop="description" content="In this post I am noting a way how to create a simple NFS share server on centos.">
+    <meta itemprop="datePublished" content="2021-11-06T23:38:00+01:00">
     
 
-<h3 class="archive__subtitle">Recent posts</h3>
-
-
-
-
-<div class="entries-list">
-  
-    
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
+    <div class="page__inner-wrap">
       
-        <a href="/site/creating-simple-nfs-share/" rel="permalink">Creating a simple NFS share on centos
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="http://localhost:4000/site/creating-simple-nfs-share/" class="u-url" itemprop="url">Creating a simple NFS share on centos
 </a>
-      
-    </h2>
-    
+          </h1>
+          
 
   <p class="page__meta">
     
@@ -291,17 +176,72 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">In this post I am noting a way how to create a simple NFS share server on centos.
-</p>
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <p>In this post I am noting a way how to create a simple NFS share server on centos.</p>
+
+<h3 id="installing-nfs">Installing NFS</h3>
+<p>On the server side we should install <code class="language-plaintext highlighter-rouge">nfs-utils</code> packet:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[root@dns ~]# yum install nfs-utils
+</code></pre></div></div>
+
+<p>and start/enable <code class="language-plaintext highlighter-rouge">nfs-server</code> service</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[root@dns ~]# systemctl start nfs-server
+[root@dns ~]# ^start^enable
+systemctl enable nfs-server
+Created symlink /etc/systemd/system/multi-user.target.wants/nfs-server.service → /usr/lib/systemd/system/nfs-server.service.
+[root@dns ~]# 
+</code></pre></div></div>
+
+<h3 id="defining-a-directory-and-exporting-them">Defining a directory and exporting them</h3>
+<p>Following steps are preparing a specified folder to export as a network folder.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2021-11-06T23:38:00+01:00">November 6, 2021</time></p>
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/site/reseting-root-password/" class="pagination--pager" title="Reseting root password in centos
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
   </article>
-</div>
 
   
-    
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
 
 
 
-<div class="list__item">
+<div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
@@ -336,13 +276,11 @@
   </article>
 </div>
 
+        
+      </div>
+    </div>
   
-</div>
-
-
-
-
-  </div>
+  
 </div>
     </div>
 

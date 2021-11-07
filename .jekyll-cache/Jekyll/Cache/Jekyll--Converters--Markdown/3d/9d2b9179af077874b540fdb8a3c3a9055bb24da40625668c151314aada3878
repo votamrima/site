@@ -1,0 +1,18 @@
+I"-<p>In this post I am noting a way how to create a simple NFS share server on centos.</p>
+
+<h3 id="installing-nfs">Installing NFS</h3>
+<p>On the server side we should install <code class="language-plaintext highlighter-rouge">nfs-utils</code> packet:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[root@dns ~]# yum install nfs-utils
+</code></pre></div></div>
+
+<p>and start/enable <code class="language-plaintext highlighter-rouge">nfs-server</code> service</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[root@dns ~]# systemctl start nfs-server
+[root@dns ~]# ^start^enable
+systemctl enable nfs-server
+Created symlink /etc/systemd/system/multi-user.target.wants/nfs-server.service → /usr/lib/systemd/system/nfs-server.service.
+[root@dns ~]# 
+</code></pre></div></div>
+
+<h3 id="defining-a-directory-and-exporting-them">Defining a directory and exporting them</h3>
+<p>Following steps are preparing a specified folder to export as a network folder.</p>
+:ET
