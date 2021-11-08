@@ -297,7 +297,7 @@ defaults:
         nav: "docs"
   - scope:
       path: ""
-      type: docs
+      type: home
     values:
       sidebar:
         nav: "docs"
