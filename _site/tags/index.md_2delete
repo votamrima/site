@@ -9,27 +9,25 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Reseting root password in centos -</title>
-<meta name="description" content="This is a simple test post">
+<!-- begin _includes/seo.html --><title>Posts by Tag -</title>
+<meta name="description" content=".">
 
 
 
-<meta property="og:type" content="article">
+<meta property="og:type" content="website">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="">
-<meta property="og:title" content="Reseting root password in centos">
-<meta property="og:url" content="http://localhost:4000/site/reseting-root-password/">
+<meta property="og:title" content="Posts by Tag">
+<meta property="og:url" content="http://localhost:4000/site/tags/">
 
 
-  <meta property="og:description" content="This is a simple test post">
-
-
-
+  <meta property="og:description" content=".">
 
 
 
 
-  <meta property="article:published_time" content="2019-10-21T14:05:13+02:00">
+
+
 
 
 
@@ -40,7 +38,7 @@
   
 
 
-<link rel="canonical" href="http://localhost:4000/site/reseting-root-password/">
+<link rel="canonical" href="http://localhost:4000/site/tags/">
 
 
 
@@ -91,7 +89,7 @@
 
   </head>
 
-  <body class="layout--single">
+  <body class="layout--tags">
     <nav class="skip-links">
   <ul>
     <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
@@ -151,7 +149,7 @@
         <span class="sep">/</span>
       
       
-        <li class="current">Reseting root password in centos</li>
+        <li class="current">Posts by Tag</li>
       
     
   </ol>
@@ -164,6 +162,103 @@
   
   <div class="sidebar sticky">
   
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="http://localhost:4000/site/" itemprop="url"></a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
   
     
       
@@ -221,85 +316,46 @@
 
 
 
-  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Reseting root password in centos">
-    <meta itemprop="description" content="This is a simple test post">
-    <meta itemprop="datePublished" content="2019-10-21T14:05:13+02:00">
+  <div class="archive">
+    
+      <h1 id="page-title" class="page__title">Posts by Tag</h1>
+    
     
 
-    <div class="page__inner-wrap">
-      
-        <header>
-          <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="http://localhost:4000/site/reseting-root-password/" class="u-url" itemprop="url">Reseting root password in centos
-</a>
-          </h1>
-          
 
-  <p class="page__meta">
-    
 
-    
 
+<ul class="taxonomy__index">
+  
     
       
+        <li>
+          <a href="#blabla">
+            <strong>blabla</strong> <span class="taxonomy__count">1</span>
+          </a>
+        </li>
       
-
-      <span class="page__meta-readtime">
-        <i class="far fa-clock" aria-hidden="true"></i>
-        
-          less than 1 minute read
-        
-      </span>
     
-  </p>
-
-
-        </header>
       
-
-      <section class="page__content e-content" itemprop="text">
-        
-        <p>This is a simple test post</p>
-        
-      </section>
-
-      <footer class="page__meta">
-        
-        
-
-
-        
-
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2019-10-21T14:05:13+02:00">October 21, 2019</time></p>
-
-      </footer>
-
+        <li>
+          <a href="#ahaha">
+            <strong>ahaha</strong> <span class="taxonomy__count">1</span>
+          </a>
+        </li>
       
+    
+  
+</ul>
 
-      
-  <nav class="pagination">
-    
-      <a href="#" class="pagination--pager disabled">Previous</a>
-    
-    
-      <a href="/site/creating-simple-nfs-share/" class="pagination--pager" title="Creating a simple NFS share on centos
-">Next</a>
-    
-  </nav>
 
-    </div>
-
-    
-  </article>
 
   
-  
-    <div class="page__related">
-      <h2 class="page__related-title">You may also enjoy</h2>
-      <div class="grid__wrapper">
-        
+    
+      <section id="blabla" class="taxonomy__section">
+        <h2 class="archive__subtitle">blabla</h2>
+        <div class="entries-grid">
           
+            
 
 
 
@@ -338,11 +394,65 @@
   </article>
 </div>
 
+          
+        </div>
+        <a href="#page-title" class="back-to-top">Back to top &uarr;</a>
+      </section>
+    
+  
+    
+      <section id="ahaha" class="taxonomy__section">
+        <h2 class="archive__subtitle">ahaha</h2>
+        <div class="entries-grid">
+          
+            
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/site/creating-simple-nfs-share/" rel="permalink">Creating a simple NFS share on centos
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
         
-      </div>
-    </div>
+          less than 1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">In this post I am noting a way how to create a simple NFS share server on centos.
+</p>
+  </article>
+</div>
+
+          
+        </div>
+        <a href="#page-title" class="back-to-top">Back to top &uarr;</a>
+      </section>
+    
   
-  
+
+
+  </div>
 </div>
     </div>
 
