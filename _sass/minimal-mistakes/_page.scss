@@ -4,7 +4,8 @@
 
 #main {
   @include clearfix;
-  margin-left: auto;
+  /*margin-left: auto;*/
+  margin-left: 50px;
   margin-right: auto;
   padding-left: 1em;
   padding-right: 1em;
@@ -62,7 +63,7 @@ body {
       float: left;
       margin-left: 0;
       margin-right: 0;
-      width: 100%;
+      /*width: 100%;*/
       clear: both;
     }
   }
