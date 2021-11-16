@@ -2,7 +2,7 @@
 layout: single
 title: "Creating a simple NFS share on centos"
 subtitle: ""
-date: 2021-11-06 23:38:00 +0100
+date: 2020-11-06 23:38:00 +0100
 #background: '/img/posts/01.jpg'
 tags: ['nfs', 'linux']
 ---

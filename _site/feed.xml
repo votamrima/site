@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="http://localhost:4000/site/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/site/" rel="alternate" type="text/html" /><updated>2021-11-16T16:32:30+01:00</updated><id>http://localhost:4000/site/feed.xml</id><title type="html"></title><subtitle>.</subtitle><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil, &quot;links&quot;=&gt;[{&quot;label&quot;=&gt;&quot;Email&quot;, &quot;icon&quot;=&gt;&quot;fas fa-fw fa-envelope-square&quot;}, {&quot;label&quot;=&gt;&quot;Website&quot;, &quot;icon&quot;=&gt;&quot;fas fa-fw fa-link&quot;}, {&quot;label&quot;=&gt;&quot;Twitter&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-twitter-square&quot;}, {&quot;label&quot;=&gt;&quot;Facebook&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-facebook-square&quot;}, {&quot;label&quot;=&gt;&quot;GitHub&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-github&quot;}, {&quot;label&quot;=&gt;&quot;Instagram&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-instagram&quot;}]}</name></author><entry><title type="html">Creating a simple NFS share on centos</title><link href="http://localhost:4000/site/creating-simple-nfs-share/" rel="alternate" type="text/html" title="Creating a simple NFS share on centos" /><published>2021-11-06T23:38:00+01:00</published><updated>2021-11-06T23:38:00+01:00</updated><id>http://localhost:4000/site/creating-simple-nfs-share</id><content type="html" xml:base="http://localhost:4000/site/creating-simple-nfs-share/">&lt;p&gt;In this post is noted a way of creating a simple NFS share server on centos 8 machine.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="http://localhost:4000/site/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/site/" rel="alternate" type="text/html" /><updated>2021-11-16T17:27:01+01:00</updated><id>http://localhost:4000/site/feed.xml</id><title type="html"></title><subtitle>.</subtitle><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil, &quot;links&quot;=&gt;[{&quot;label&quot;=&gt;&quot;Email&quot;, &quot;icon&quot;=&gt;&quot;fas fa-fw fa-envelope-square&quot;}, {&quot;label&quot;=&gt;&quot;Website&quot;, &quot;icon&quot;=&gt;&quot;fas fa-fw fa-link&quot;}, {&quot;label&quot;=&gt;&quot;Twitter&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-twitter-square&quot;}, {&quot;label&quot;=&gt;&quot;Facebook&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-facebook-square&quot;}, {&quot;label&quot;=&gt;&quot;GitHub&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-github&quot;}, {&quot;label&quot;=&gt;&quot;Instagram&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-instagram&quot;}]}</name></author><entry><title type="html">Creating a simple NFS share on centos</title><link href="http://localhost:4000/site/creating-simple-nfs-share/" rel="alternate" type="text/html" title="Creating a simple NFS share on centos" /><published>2020-11-06T23:38:00+01:00</published><updated>2020-11-06T23:38:00+01:00</updated><id>http://localhost:4000/site/creating-simple-nfs-share</id><content type="html" xml:base="http://localhost:4000/site/creating-simple-nfs-share/">&lt;p&gt;In this post is noted a way of creating a simple NFS share server on centos 8 machine.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;1. Installing NFS&lt;/strong&gt;&lt;/p&gt;
 
@@ -101,7 +101,43 @@ Export list for 192.168.11.61:
 [root@workstation ~]# 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
-&lt;/ol&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil, &quot;links&quot;=&gt;[{&quot;label&quot;=&gt;&quot;Email&quot;, &quot;icon&quot;=&gt;&quot;fas fa-fw fa-envelope-square&quot;}, {&quot;label&quot;=&gt;&quot;Website&quot;, &quot;icon&quot;=&gt;&quot;fas fa-fw fa-link&quot;}, {&quot;label&quot;=&gt;&quot;Twitter&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-twitter-square&quot;}, {&quot;label&quot;=&gt;&quot;Facebook&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-facebook-square&quot;}, {&quot;label&quot;=&gt;&quot;GitHub&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-github&quot;}, {&quot;label&quot;=&gt;&quot;Instagram&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-instagram&quot;}]}</name></author><category term="nfs" /><category term="linux" /><summary type="html">In this post is noted a way of creating a simple NFS share server on centos 8 machine.</summary></entry><entry><title type="html">Reseting root password in centos</title><link href="http://localhost:4000/site/reseting-root-password/" rel="alternate" type="text/html" title="Reseting root password in centos" /><published>2019-10-21T14:05:13+02:00</published><updated>2019-10-21T14:05:13+02:00</updated><id>http://localhost:4000/site/reseting-root-password</id><content type="html" xml:base="http://localhost:4000/site/reseting-root-password/">&lt;p&gt;This is a simple test post&lt;/p&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil, &quot;links&quot;=&gt;[{&quot;label&quot;=&gt;&quot;Email&quot;, &quot;icon&quot;=&gt;&quot;fas fa-fw fa-envelope-square&quot;}, {&quot;label&quot;=&gt;&quot;Website&quot;, &quot;icon&quot;=&gt;&quot;fas fa-fw fa-link&quot;}, {&quot;label&quot;=&gt;&quot;Twitter&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-twitter-square&quot;}, {&quot;label&quot;=&gt;&quot;Facebook&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-facebook-square&quot;}, {&quot;label&quot;=&gt;&quot;GitHub&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-github&quot;}, {&quot;label&quot;=&gt;&quot;Instagram&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-instagram&quot;}]}</name></author><category term="linux" /><category term="centos" /><summary type="html">This is a simple test post</summary></entry><entry><title type="html">Is a port opened?</title><link href="http://localhost:4000/site/port-checking/" rel="alternate" type="text/html" title="Is a port opened?" /><published>2019-08-26T20:46:00+02:00</published><updated>2019-08-26T20:46:00+02:00</updated><id>http://localhost:4000/site/port-checking</id><content type="html" xml:base="http://localhost:4000/site/port-checking/">&lt;p&gt;If there is no telnet tools is installed on the host, try the following command to check if a port opened or not.&lt;/p&gt;
+&lt;/ol&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil, &quot;links&quot;=&gt;[{&quot;label&quot;=&gt;&quot;Email&quot;, &quot;icon&quot;=&gt;&quot;fas fa-fw fa-envelope-square&quot;}, {&quot;label&quot;=&gt;&quot;Website&quot;, &quot;icon&quot;=&gt;&quot;fas fa-fw fa-link&quot;}, {&quot;label&quot;=&gt;&quot;Twitter&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-twitter-square&quot;}, {&quot;label&quot;=&gt;&quot;Facebook&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-facebook-square&quot;}, {&quot;label&quot;=&gt;&quot;GitHub&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-github&quot;}, {&quot;label&quot;=&gt;&quot;Instagram&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-instagram&quot;}]}</name></author><category term="nfs" /><category term="linux" /><summary type="html">In this post is noted a way of creating a simple NFS share server on centos 8 machine.</summary></entry><entry><title type="html">Reseting root password in centos</title><link href="http://localhost:4000/site/reseting-root-password/" rel="alternate" type="text/html" title="Reseting root password in centos" /><published>2019-10-21T14:05:13+02:00</published><updated>2019-10-21T14:05:13+02:00</updated><id>http://localhost:4000/site/reseting-root-password</id><content type="html" xml:base="http://localhost:4000/site/reseting-root-password/">&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;In the grub menu select actual kernel and type “-e”
+&lt;img src=&quot;../images/reseting-root-password/pic-1.png&quot; alt=&quot;IMAGE&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Go to the line with “&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;linux 16&lt;/code&gt;” and change &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ro&lt;/code&gt; to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rw init=/sysroot/bin/sh&lt;/code&gt;”.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;before:
+&lt;img src=&quot;../images/reseting-root-password/pic-2.png&quot; alt=&quot;IMAGE&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;after: 
+&lt;img src=&quot;../images/reseting-root-password/pic-3.png&quot; alt=&quot;IMAGE&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Press &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ctrl+X&lt;/code&gt; for starting a single mode session&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;When single mode is started access to the system…:
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;chroot /sysroot
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;And using passwd command change the root’s password:
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;passwd root
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Finally, it is necessary to update SELinux information by createing an empty &lt;strong&gt;.autorelabel&lt;/strong&gt; in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/&lt;/code&gt;
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;touch /.autorelabel
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Exit from single mode session&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Try to login using a new password&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil, &quot;links&quot;=&gt;[{&quot;label&quot;=&gt;&quot;Email&quot;, &quot;icon&quot;=&gt;&quot;fas fa-fw fa-envelope-square&quot;}, {&quot;label&quot;=&gt;&quot;Website&quot;, &quot;icon&quot;=&gt;&quot;fas fa-fw fa-link&quot;}, {&quot;label&quot;=&gt;&quot;Twitter&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-twitter-square&quot;}, {&quot;label&quot;=&gt;&quot;Facebook&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-facebook-square&quot;}, {&quot;label&quot;=&gt;&quot;GitHub&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-github&quot;}, {&quot;label&quot;=&gt;&quot;Instagram&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-instagram&quot;}]}</name></author><category term="linux" /><category term="centos" /><category term="root" /><summary type="html">In the grub menu select actual kernel and type “-e”</summary></entry><entry><title type="html">Is a port opened?</title><link href="http://localhost:4000/site/port-checking/" rel="alternate" type="text/html" title="Is a port opened?" /><published>2019-08-26T20:46:00+02:00</published><updated>2019-08-26T20:46:00+02:00</updated><id>http://localhost:4000/site/port-checking</id><content type="html" xml:base="http://localhost:4000/site/port-checking/">&lt;p&gt;If there is no telnet tools is installed on the host, try the following command to check if a port opened or not.&lt;/p&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;-bash-4.2$ timeout 1 bash -c '(echo &amp;gt; /dev/tcp/ip_adderess/port) &amp;gt;/dev/null 2&amp;gt;&amp;amp;1' &amp;amp;&amp;amp; echo Port is open || echo Port is closed
 
@@ -113,4 +149,301 @@ Export list for 192.168.11.61:
 Port is open
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;If a port is closed, try to check network configuration or firewall access.&lt;/p&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil, &quot;links&quot;=&gt;[{&quot;label&quot;=&gt;&quot;Email&quot;, &quot;icon&quot;=&gt;&quot;fas fa-fw fa-envelope-square&quot;}, {&quot;label&quot;=&gt;&quot;Website&quot;, &quot;icon&quot;=&gt;&quot;fas fa-fw fa-link&quot;}, {&quot;label&quot;=&gt;&quot;Twitter&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-twitter-square&quot;}, {&quot;label&quot;=&gt;&quot;Facebook&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-facebook-square&quot;}, {&quot;label&quot;=&gt;&quot;GitHub&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-github&quot;}, {&quot;label&quot;=&gt;&quot;Instagram&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-instagram&quot;}]}</name></author><category term="port" /><category term="linux" /><category term="network" /><summary type="html">If there is no telnet tools is installed on the host, try the following command to check if a port opened or not.</summary></entry></feed>
+&lt;p&gt;If a port is closed, try to check network configuration or firewall access.&lt;/p&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil, &quot;links&quot;=&gt;[{&quot;label&quot;=&gt;&quot;Email&quot;, &quot;icon&quot;=&gt;&quot;fas fa-fw fa-envelope-square&quot;}, {&quot;label&quot;=&gt;&quot;Website&quot;, &quot;icon&quot;=&gt;&quot;fas fa-fw fa-link&quot;}, {&quot;label&quot;=&gt;&quot;Twitter&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-twitter-square&quot;}, {&quot;label&quot;=&gt;&quot;Facebook&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-facebook-square&quot;}, {&quot;label&quot;=&gt;&quot;GitHub&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-github&quot;}, {&quot;label&quot;=&gt;&quot;Instagram&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-instagram&quot;}]}</name></author><category term="port" /><category term="linux" /><category term="network" /><summary type="html">If there is no telnet tools is installed on the host, try the following command to check if a port opened or not.</summary></entry><entry><title type="html">Giving more space for the /boot filesystem</title><link href="http://localhost:4000/site/more-space-for-boot-fs/" rel="alternate" type="text/html" title="Giving more space for the /boot filesystem" /><published>2019-08-16T21:17:00+02:00</published><updated>2019-08-16T21:17:00+02:00</updated><id>http://localhost:4000/site/more-space-for-boot-fs</id><content type="html" xml:base="http://localhost:4000/site/more-space-for-boot-fs/">&lt;p&gt;Recently I tried to update my centos 7 test machine. Unfortunatelly, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;yum update&lt;/code&gt; command returned the following error “At least 54MB more space needed on the /boot filesystem.”.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;df -h&lt;/code&gt; command showed following:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[root@server ~]# df -h
+Filesystem                    Size  Used Avail Use% Mounted on
+/dev/mapper/cl_centos03-root   32G   13G   19G  41% /
+devtmpfs                      1.9G     0  1.9G   0% /dev
+tmpfs                         1.9G     0  1.9G   0% /dev/shm
+tmpfs                         1.9G  9.7M  1.9G   1% /run
+tmpfs                         1.9G     0  1.9G   0% /sys/fs/cgroup
+/dev/sdb1                      79G  7.6G   68G  11% /opt
+/dev/sda1                     497M  486M   11M  98% /boot
+tmpfs                         379M   40K  379M   1% /run/user/1000
+..........
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;During installation I did mount &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/dev/sda1&lt;/code&gt; partition for the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/boot&lt;/code&gt; with 500M. This storage is almost full (just 11M is free). Therefore, now I should clean up a given partition and enlarge a free space by deleting old and unused packages of the kernel.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;!!!! DO NOT DO IT MANUALLY USING rm command!!!!&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;For erasing unused packages we need &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;package-cleanup&lt;/code&gt; utility. It is being installed along with  &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;yum-utils&lt;/code&gt; package (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;yum install yum-utils -y&lt;/code&gt;).&lt;/p&gt;
+
+&lt;h3 id=&quot;running&quot;&gt;Running&lt;/h3&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[root@server ~]# package-cleanup --oldkernels --count=1
+Loaded plugins: fastestmirror, langpacks
+--&amp;gt; Running transaction check
+---&amp;gt; Package kernel.x86_64 0:3.10.0-862.3.3.el7 will be erased
+---&amp;gt; Package kernel-debug.x86_64 0:3.10.0-862.3.3.el7 will be erased
+---&amp;gt; Package kernel-devel.x86_64 0:3.10.0-862.3.3.el7 will be erased
+--&amp;gt; Finished Dependency Resolution
+
+Dependencies Resolved
+
+=============================================================================================================================================
+ Package                           Arch                        Version                                   Repository                     Size
+=============================================================================================================================================
+Removing:
+ kernel                            x86_64                      3.10.0-862.3.3.el7                        @updates                       62 M
+ kernel-debug                      x86_64                      3.10.0-862.3.3.el7                        @updates                       64 M
+ kernel-devel                      x86_64                      3.10.0-862.3.3.el7                        @updates                       37 M
+
+Transaction Summary
+=============================================================================================================================================
+Remove  3 Packages
+
+Installed size: 162 M
+Is this ok [y/N]: y
+Downloading packages:
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Erasing    : kernel-3.10.0-862.3.3.el7.x86_64                                                                                          1/3
+
+......................
+
+Removed:
+  kernel.x86_64 0:3.10.0-862.3.3.el7        kernel-debug.x86_64 0:3.10.0-862.3.3.el7        kernel-devel.x86_64 0:3.10.0-862.3.3.el7
+
+Complete!
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Parameters that I used with a command are following:&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;--oldkernels - to ensure that kernel's and kernel-devel's old packages will be removed
+--count=1 - Number of duplicate/kernel packages to keep on the system (default 2)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;And the output of df -h command:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[root@server ~]# df -h
+Filesystem                    Size  Used Avail Use% Mounted on
+/dev/mapper/cl_centos03-root   32G   14G   19G  43% /
+devtmpfs                      1.9G     0  1.9G   0% /dev
+tmpfs                         1.9G     0  1.9G   0% /dev/shm
+tmpfs                         1.9G  9.7M  1.9G   1% /run
+tmpfs                         1.9G     0  1.9G   0% /sys/fs/cgroup
+/dev/sdb1                      79G  7.6G   68G  11% /opt
+/dev/sda1                     497M  211M  287M  43% /boot
+tmpfs                         379M   40K  379M   1% /run/user/1000
+..................
+[root@server ~]#
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;In this output we can see that unused files were removed and it was cleaned up 275 MB.&lt;/p&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil, &quot;links&quot;=&gt;[{&quot;label&quot;=&gt;&quot;Email&quot;, &quot;icon&quot;=&gt;&quot;fas fa-fw fa-envelope-square&quot;}, {&quot;label&quot;=&gt;&quot;Website&quot;, &quot;icon&quot;=&gt;&quot;fas fa-fw fa-link&quot;}, {&quot;label&quot;=&gt;&quot;Twitter&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-twitter-square&quot;}, {&quot;label&quot;=&gt;&quot;Facebook&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-facebook-square&quot;}, {&quot;label&quot;=&gt;&quot;GitHub&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-github&quot;}, {&quot;label&quot;=&gt;&quot;Instagram&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-instagram&quot;}]}</name></author><category term="filesystem" /><category term="linux" /><category term="disk" /><summary type="html">Recently I tried to update my centos 7 test machine. Unfortunatelly, yum update command returned the following error “At least 54MB more space needed on the /boot filesystem.”.</summary></entry><entry><title type="html">Simple HTTPS Server using python</title><link href="http://localhost:4000/site/a-simple-python-server/" rel="alternate" type="text/html" title="Simple HTTPS Server using python" /><published>2019-08-06T00:38:00+02:00</published><updated>2019-08-06T00:38:00+02:00</updated><id>http://localhost:4000/site/a-simple-python-server</id><content type="html" xml:base="http://localhost:4000/site/a-simple-python-server/">&lt;ol&gt;
+  &lt;li&gt;Generating key and cert files with Openssl:&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[root@test crazytests]# openssl req -x509 -newkey rsa:4096 -keyout testkey.pem -out testcert.pem
+Generating a 4096 bit RSA private key
+.......++
+..............................................................................................................................................................................................................................++
+writing new private key to 'testkey.pem'
+Enter PEM pass phrase:
+Verifying - Enter PEM pass phrase:
+-----
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter '.', the field will be left blank.
+-----
+Country Name (2 letter code) [XX]:DE
+State or Province Name (full name) []:
+Locality Name (eg, city) [Default City]:
+Organization Name (eg, company) [Default Company Ltd]:
+Organizational Unit Name (eg, section) []:
+Common Name (eg, your name or your server's hostname) []: new.test.my
+Email Address []:
+[root@test crazytests]#
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Write the following python code. I tested it on python 2.x. I think on python 3.x will run  too.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[root@test crazytests]# cat simple_https.py
+import BaseHTTPServer, SimpleHTTPServer
+import ssl
+
+
+httpd = BaseHTTPServer.HTTPServer(('new.test.my', 4443), SimpleHTTPServer.SimpleHTTPRequestHandler)
+
+httpd_soccet = ssl.wrap_socket(httpd.socket, keyfile=&quot;testkey.pem&quot;, certfile='testcert.pem', server_side=True)
+
+httpd.serve_forever()
+[root@test crazytests]#
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil, &quot;links&quot;=&gt;[{&quot;label&quot;=&gt;&quot;Email&quot;, &quot;icon&quot;=&gt;&quot;fas fa-fw fa-envelope-square&quot;}, {&quot;label&quot;=&gt;&quot;Website&quot;, &quot;icon&quot;=&gt;&quot;fas fa-fw fa-link&quot;}, {&quot;label&quot;=&gt;&quot;Twitter&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-twitter-square&quot;}, {&quot;label&quot;=&gt;&quot;Facebook&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-facebook-square&quot;}, {&quot;label&quot;=&gt;&quot;GitHub&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-github&quot;}, {&quot;label&quot;=&gt;&quot;Instagram&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-instagram&quot;}]}</name></author><category term="python" /><category term="https" /><summary type="html">Generating key and cert files with Openssl:</summary></entry><entry><title type="html">Using hiera in puppet. Example: creating a folder</title><link href="http://localhost:4000/site/hiera-in-puppet/" rel="alternate" type="text/html" title="Using hiera in puppet. Example: creating a folder" /><published>2019-07-19T17:20:00+02:00</published><updated>2019-07-19T17:20:00+02:00</updated><id>http://localhost:4000/site/hiera-in-puppet</id><content type="html" xml:base="http://localhost:4000/site/hiera-in-puppet/">&lt;p&gt;In this post I am trying to show how to configure hiera files on puppet master. For demonstration purpose I use a simple task that will create a folder. The main idea of this post is to get basic understand of hiera concept.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Look up where is stored the main hiera file:
+````
+puppet config print hiera_config&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+2. Edit it a found file vim $(puppet config print hiera_config):
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;hr /&gt;
+&lt;h1 id=&quot;hiera-5-global-configuration-file&quot;&gt;Hiera 5 Global configuration file&lt;/h1&gt;
+&lt;p&gt;:backends:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;yaml&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;:hierarchy:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;common&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;:yaml:
+  :datadir: “/etc/puppetlabs/code/environments/%{environment}/hieradata”&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+3. Hiera values for our test will be stored inside ``/etc/puppetlabs/code/environments/production/hieradata/common.yaml`` with the following content: 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;hr /&gt;
+&lt;p&gt;fldr_name: ‘/opt/from_hiera’&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+3. A manifest that creates a folder using variable that stored in common.yaml. By default I am using sample ``init.pp`` file in ``/etc/puppetlabs/code/environments/production/manifests/init.pp``
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;hr /&gt;
+&lt;p&gt;class start_me (
+  $fldr_name,
+) {
+  file {‘Create test folder’:
+    ensure =&amp;gt; ‘directory’,
+    path  =&amp;gt; “${fldr_name}”,
+    force =&amp;gt; true,
+  }
+}&lt;/p&gt;
+
+&lt;p&gt;class { ‘start_me’:
+  fldr_name =&amp;gt; hiera(‘fldr_name’)
+}&lt;/p&gt;
+
+&lt;p&gt;````&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;And that is all&lt;/li&gt;
+&lt;/ol&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil, &quot;links&quot;=&gt;[{&quot;label&quot;=&gt;&quot;Email&quot;, &quot;icon&quot;=&gt;&quot;fas fa-fw fa-envelope-square&quot;}, {&quot;label&quot;=&gt;&quot;Website&quot;, &quot;icon&quot;=&gt;&quot;fas fa-fw fa-link&quot;}, {&quot;label&quot;=&gt;&quot;Twitter&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-twitter-square&quot;}, {&quot;label&quot;=&gt;&quot;Facebook&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-facebook-square&quot;}, {&quot;label&quot;=&gt;&quot;GitHub&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-github&quot;}, {&quot;label&quot;=&gt;&quot;Instagram&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-instagram&quot;}]}</name></author><category term="hiera" /><category term="puppet" /><summary type="html">In this post I am trying to show how to configure hiera files on puppet master. For demonstration purpose I use a simple task that will create a folder. The main idea of this post is to get basic understand of hiera concept.</summary></entry><entry><title type="html">Cheatsheet for Vagrant</title><link href="http://localhost:4000/site/vagrant-cheetsheet/" rel="alternate" type="text/html" title="Cheatsheet for Vagrant" /><published>2019-06-03T17:38:00+02:00</published><updated>2019-06-03T17:38:00+02:00</updated><id>http://localhost:4000/site/vagrant-cheetsheet</id><content type="html" xml:base="http://localhost:4000/site/vagrant-cheetsheet/">&lt;h3 id=&quot;creating-a-vm&quot;&gt;Creating a VM&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vagrant init&lt;/code&gt; – Initialize Vagrant with a Vagrantfile and ./.vagrant directory, using no specified base image. Beforeyou can do vagrant up, you’ll need to specify a base image in the Vagrantfile.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vagrant init&lt;/code&gt; – Initialize Vagrant with a specific box. To find a box, go to the public Vagrant box catalog. When you find one you like, just replace it’s name with boxpath. For example, vagrant init ubuntu/trusty64.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;starting-a-vm&quot;&gt;Starting a VM&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vagrant up&lt;/code&gt; – starts vagrant environment (also provisions only on the FIRST vagrant up)&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vagrant resume&lt;/code&gt; – resume a suspended machine (vagrant up works just fine for this as well)&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vagrant provision&lt;/code&gt; – forces reprovisioning of the vagrant machine&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vagrant reload&lt;/code&gt; – restarts vagrant machine, loads new Vagrantfile configuration&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vagrant reload --provision&lt;/code&gt; – restart the virtual machine and force provisioning&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;getting-into-a-vm&quot;&gt;Getting into a VM&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vagrant ssh&lt;/code&gt; – connects to machine via SSH&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vagrant ssh&lt;/code&gt; – If you give your box a name in your Vagrantfile, you can ssh into it with boxname. Works from any directory.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;stopping-a-vm&quot;&gt;Stopping a VM&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vagrant halt&lt;/code&gt; – stops the vagrant machine&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vagrant suspend&lt;/code&gt; – suspends a virtual machine (remembers state)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;cleaning-up-a-vm&quot;&gt;Cleaning Up a VM&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vagrant destroy&lt;/code&gt; – stops and deletes all traces of the vagrant machine&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vagrant destroy -f&lt;/code&gt; – same as above, without confirmation&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;boxes&quot;&gt;Boxes&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vagrant box list&lt;/code&gt; – see a list of all installed boxes on your computer&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vagrant box add&lt;/code&gt; – download a box image to your computer&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vagrant box outdated&lt;/code&gt; – check for updates vagrant box update&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vagrant boxes remove&lt;/code&gt; – deletes a box from the machine&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vagrant package&lt;/code&gt; – packages a running virtualbox env in a reusable box&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;saving-progress&quot;&gt;Saving Progress&lt;/h3&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-vagrant snapshot save [options] [vm-name]&lt;/code&gt; – vm-name is often default. Allows us to save so that we can rollback at a later time&lt;/p&gt;
+
+&lt;h3 id=&quot;tips&quot;&gt;Tips&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vagrant -v&lt;/code&gt; – get the vagrant version&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vagrant status&lt;/code&gt; – outputs status of the vagrant machine&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vagrant global-status&lt;/code&gt; – outputs status of all vagrant machines&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vagrant global-status&lt;/code&gt; –prune – same as above, but prunes invalid entries&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vagrant provision --debug&lt;/code&gt; – use the debug flag to increase the verbosity of the output&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vagrant push&lt;/code&gt; – yes, vagrant can be configured to deploy code!&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vagrant up --provision | tee provision.log&lt;/code&gt; – Runs vagrant up, forces provisioning and logs all output to a file&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;plugins&quot;&gt;Plugins&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/cogitatio/vagrant-hostsupdater&quot;&gt;vagrant-hostsupdater&lt;/a&gt;: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$ vagrant plugin install vagrant-hostsupdater&lt;/code&gt; to update your /etc/hosts file automatically each time you start/stop your vagrant box.&lt;/p&gt;
+
+&lt;h3 id=&quot;source&quot;&gt;Source&lt;/h3&gt;
+&lt;p&gt;Regularly check this &lt;a href=&quot;https://gist.github.com/wpscholar/a49594e2e2b918f4d0c4&quot;&gt;source&lt;/a&gt;&lt;/p&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil, &quot;links&quot;=&gt;[{&quot;label&quot;=&gt;&quot;Email&quot;, &quot;icon&quot;=&gt;&quot;fas fa-fw fa-envelope-square&quot;}, {&quot;label&quot;=&gt;&quot;Website&quot;, &quot;icon&quot;=&gt;&quot;fas fa-fw fa-link&quot;}, {&quot;label&quot;=&gt;&quot;Twitter&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-twitter-square&quot;}, {&quot;label&quot;=&gt;&quot;Facebook&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-facebook-square&quot;}, {&quot;label&quot;=&gt;&quot;GitHub&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-github&quot;}, {&quot;label&quot;=&gt;&quot;Instagram&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-instagram&quot;}]}</name></author><category term="puppet" /><summary type="html">Creating a VM vagrant init – Initialize Vagrant with a Vagrantfile and ./.vagrant directory, using no specified base image. Beforeyou can do vagrant up, you’ll need to specify a base image in the Vagrantfile. vagrant init – Initialize Vagrant with a specific box. To find a box, go to the public Vagrant box catalog. When you find one you like, just replace it’s name with boxpath. For example, vagrant init ubuntu/trusty64.</summary></entry><entry><title type="html">Removing tmux from the puppet learning machine</title><link href="http://localhost:4000/site/tmux-remove-puppetserver/" rel="alternate" type="text/html" title="Removing tmux from the puppet learning machine" /><published>2019-06-03T17:38:00+02:00</published><updated>2019-06-03T17:38:00+02:00</updated><id>http://localhost:4000/site/tmux-remove-puppetserver</id><content type="html" xml:base="http://localhost:4000/site/tmux-remove-puppetserver/">&lt;ol&gt;
+  &lt;li&gt;cleanly and gracefully killing all tmux opened sessions and server too:
+```
+tmux kill-server&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;2. or killing all tmux processes:
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;pkill -f tmux&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+3. removing tmux application
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;yum erase -y tmux
+````&lt;/p&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil, &quot;links&quot;=&gt;[{&quot;label&quot;=&gt;&quot;Email&quot;, &quot;icon&quot;=&gt;&quot;fas fa-fw fa-envelope-square&quot;}, {&quot;label&quot;=&gt;&quot;Website&quot;, &quot;icon&quot;=&gt;&quot;fas fa-fw fa-link&quot;}, {&quot;label&quot;=&gt;&quot;Twitter&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-twitter-square&quot;}, {&quot;label&quot;=&gt;&quot;Facebook&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-facebook-square&quot;}, {&quot;label&quot;=&gt;&quot;GitHub&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-github&quot;}, {&quot;label&quot;=&gt;&quot;Instagram&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-instagram&quot;}]}</name></author><category term="puppet" /><summary type="html">cleanly and gracefully killing all tmux opened sessions and server too: ``` tmux kill-server</summary></entry><entry><title type="html">Using logrotate</title><link href="http://localhost:4000/site/using-logrotate/" rel="alternate" type="text/html" title="Using logrotate" /><published>2019-02-14T20:45:00+01:00</published><updated>2019-02-14T20:45:00+01:00</updated><id>http://localhost:4000/site/using-logrotate</id><content type="html" xml:base="http://localhost:4000/site/using-logrotate/">&lt;ol&gt;
+  &lt;li&gt;create configuration file:
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bash-3.2# cat /etc/logrotate.d/myconf-logrotate.conf
+PATH_TO_FILE/LOG.FILE {
+daily
+missingok
+rotate 10
+compress
+delaycompress
+compresscmd /usr/bin/gzip
+notifempty
+copytruncate
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Testing
+````
+ logrotate  /etc/logrotate.conf –force -d&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+3. Add a crontab job. A job should be run every hour
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;export EDITOR=vi
+crontab -e&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;blockquote&gt;
+    &lt;p&gt;0 * * * * /usr/sbin/logrotate /etc/logrotate.conf –force &amp;gt; /dev/null 2&amp;gt;&amp;amp;1&lt;/p&gt;
+  &lt;/blockquote&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;````&lt;/p&gt;
+
+&lt;p&gt;Sources:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;man logrotate.conf and man logrotate&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://crontab-generator.org/&quot;&gt;Crontab Generator&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.linode.com/docs/uptime/logs/use-logrotate-to-manage-log-files/&quot;&gt;How to Use logrotate to Manage Log Files&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil, &quot;links&quot;=&gt;[{&quot;label&quot;=&gt;&quot;Email&quot;, &quot;icon&quot;=&gt;&quot;fas fa-fw fa-envelope-square&quot;}, {&quot;label&quot;=&gt;&quot;Website&quot;, &quot;icon&quot;=&gt;&quot;fas fa-fw fa-link&quot;}, {&quot;label&quot;=&gt;&quot;Twitter&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-twitter-square&quot;}, {&quot;label&quot;=&gt;&quot;Facebook&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-facebook-square&quot;}, {&quot;label&quot;=&gt;&quot;GitHub&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-github&quot;}, {&quot;label&quot;=&gt;&quot;Instagram&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-instagram&quot;}]}</name></author><category term="logrotate" /><category term="linux" /><summary type="html">create configuration file: bash-3.2# cat /etc/logrotate.d/myconf-logrotate.conf PATH_TO_FILE/LOG.FILE { daily missingok rotate 10 compress delaycompress compresscmd /usr/bin/gzip notifempty copytruncate }</summary></entry></feed>

@@ -9,38 +9,38 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Is a port opened? -</title>
-<meta name="description" content="If there is no telnet tools is installed on the host, try the following command to check if a port opened or not.">
+<!-- begin _includes/seo.html --><title>Cheatsheet for Vagrant -</title>
+<meta name="description" content="Creating a VM    vagrant init – Initialize Vagrant with a Vagrantfile and ./.vagrant directory, using no specified base image. Beforeyou can do vagrant up, you’ll need to specify a base image in the Vagrantfile.   vagrant init – Initialize Vagrant with a specific box. To find a box, go to the public Vagrant box catalog. When you find one you like, just replace it’s name with boxpath. For example, vagrant init ubuntu/trusty64.">
 
 
 
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="">
-<meta property="og:title" content="Is a port opened?">
-<meta property="og:url" content="http://localhost:4000/site/port-checking/">
+<meta property="og:title" content="Cheatsheet for Vagrant">
+<meta property="og:url" content="http://localhost:4000/site/vagrant-cheetsheet/">
 
 
-  <meta property="og:description" content="If there is no telnet tools is installed on the host, try the following command to check if a port opened or not.">
-
-
-
-
-
-
-
-  <meta property="article:published_time" content="2019-08-26T20:46:00+02:00">
+  <meta property="og:description" content="Creating a VM    vagrant init – Initialize Vagrant with a Vagrantfile and ./.vagrant directory, using no specified base image. Beforeyou can do vagrant up, you’ll need to specify a base image in the Vagrantfile.   vagrant init – Initialize Vagrant with a specific box. To find a box, go to the public Vagrant box catalog. When you find one you like, just replace it’s name with boxpath. For example, vagrant init ubuntu/trusty64.">
 
 
 
 
 
-  
+
+
+  <meta property="article:published_time" content="2019-06-03T17:38:00+02:00">
+
+
+
+
 
   
 
+  
 
-<link rel="canonical" href="http://localhost:4000/site/port-checking/">
+
+<link rel="canonical" href="http://localhost:4000/site/vagrant-cheetsheet/">
 
 
 
@@ -151,7 +151,7 @@
         <span class="sep">/</span>
       
       
-        <li class="current">Is a port opened?</li>
+        <li class="current">Cheatsheet for Vagrant</li>
       
     
   </ol>
@@ -222,16 +222,16 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Is a port opened?">
-    <meta itemprop="description" content="If there is no telnet tools is installed on the host, try the following command to check if a port opened or not.">
-    <meta itemprop="datePublished" content="2019-08-26T20:46:00+02:00">
+    <meta itemprop="headline" content="Cheatsheet for Vagrant">
+    <meta itemprop="description" content="Creating a VM  vagrant init – Initialize Vagrant with a Vagrantfile and ./.vagrant directory, using no specified base image. Beforeyou can do vagrant up, you’ll need to specify a base image in the Vagrantfile.  vagrant init – Initialize Vagrant with a specific box. To find a box, go to the public Vagrant box catalog. When you find one you like, just replace it’s name with boxpath. For example, vagrant init ubuntu/trusty64.">
+    <meta itemprop="datePublished" content="2019-06-03T17:38:00+02:00">
     
 
     <div class="page__inner-wrap">
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="http://localhost:4000/site/port-checking/" class="u-url" itemprop="url">Is a port opened?
+            <a href="http://localhost:4000/site/vagrant-cheetsheet/" class="u-url" itemprop="url">Cheatsheet for Vagrant
 </a>
           </h1>
           
@@ -242,7 +242,7 @@
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2019-08-26T20:46:00+02:00">August 26, 2019</time>
+        <time datetime="2019-06-03T17:38:00+02:00">June 3, 2019</time>
       </span>
     
 
@@ -257,19 +257,68 @@
 
       <section class="page__content e-content" itemprop="text">
         
-        <p>If there is no telnet tools is installed on the host, try the following command to check if a port opened or not.</p>
+        <h3 id="creating-a-vm">Creating a VM</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">vagrant init</code> – Initialize Vagrant with a Vagrantfile and ./.vagrant directory, using no specified base image. Beforeyou can do vagrant up, you’ll need to specify a base image in the Vagrantfile.</li>
+  <li><code class="language-plaintext highlighter-rouge">vagrant init</code> – Initialize Vagrant with a specific box. To find a box, go to the public Vagrant box catalog. When you find one you like, just replace it’s name with boxpath. For example, vagrant init ubuntu/trusty64.</li>
+</ul>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-bash-4.2$ timeout 1 bash -c '(echo &gt; /dev/tcp/ip_adderess/port) &gt;/dev/null 2&gt;&amp;1' &amp;&amp; echo Port is open || echo Port is closed
+<h3 id="starting-a-vm">Starting a VM</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">vagrant up</code> – starts vagrant environment (also provisions only on the FIRST vagrant up)</li>
+  <li><code class="language-plaintext highlighter-rouge">vagrant resume</code> – resume a suspended machine (vagrant up works just fine for this as well)</li>
+  <li><code class="language-plaintext highlighter-rouge">vagrant provision</code> – forces reprovisioning of the vagrant machine</li>
+  <li><code class="language-plaintext highlighter-rouge">vagrant reload</code> – restarts vagrant machine, loads new Vagrantfile configuration</li>
+  <li><code class="language-plaintext highlighter-rouge">vagrant reload --provision</code> – restart the virtual machine and force provisioning</li>
+</ul>
 
-</code></pre></div></div>
+<h3 id="getting-into-a-vm">Getting into a VM</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">vagrant ssh</code> – connects to machine via SSH</li>
+  <li><code class="language-plaintext highlighter-rouge">vagrant ssh</code> – If you give your box a name in your Vagrantfile, you can ssh into it with boxname. Works from any directory.</li>
+</ul>
 
-<p><strong>Example</strong></p>
+<h3 id="stopping-a-vm">Stopping a VM</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">vagrant halt</code> – stops the vagrant machine</li>
+  <li><code class="language-plaintext highlighter-rouge">vagrant suspend</code> – suspends a virtual machine (remembers state)</li>
+</ul>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-bash-4.2$ timeout 1 bash -c '(echo &gt; /dev/tcp/192.168.0.100/443) &gt;/dev/null 2&gt;&amp;1' &amp;&amp; echo Port is open || echo Port is closed
-Port is open
-</code></pre></div></div>
+<h3 id="cleaning-up-a-vm">Cleaning Up a VM</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">vagrant destroy</code> – stops and deletes all traces of the vagrant machine</li>
+  <li><code class="language-plaintext highlighter-rouge">vagrant destroy -f</code> – same as above, without confirmation</li>
+</ul>
 
-<p>If a port is closed, try to check network configuration or firewall access.</p>
+<h3 id="boxes">Boxes</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">vagrant box list</code> – see a list of all installed boxes on your computer</li>
+  <li><code class="language-plaintext highlighter-rouge">vagrant box add</code> – download a box image to your computer</li>
+  <li><code class="language-plaintext highlighter-rouge">vagrant box outdated</code> – check for updates vagrant box update</li>
+  <li><code class="language-plaintext highlighter-rouge">vagrant boxes remove</code> – deletes a box from the machine</li>
+  <li><code class="language-plaintext highlighter-rouge">vagrant package</code> – packages a running virtualbox env in a reusable box</li>
+</ul>
+
+<h3 id="saving-progress">Saving Progress</h3>
+
+<p><code class="language-plaintext highlighter-rouge">-vagrant snapshot save [options] [vm-name]</code> – vm-name is often default. Allows us to save so that we can rollback at a later time</p>
+
+<h3 id="tips">Tips</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">vagrant -v</code> – get the vagrant version</li>
+  <li><code class="language-plaintext highlighter-rouge">vagrant status</code> – outputs status of the vagrant machine</li>
+  <li><code class="language-plaintext highlighter-rouge">vagrant global-status</code> – outputs status of all vagrant machines</li>
+  <li><code class="language-plaintext highlighter-rouge">vagrant global-status</code> –prune – same as above, but prunes invalid entries</li>
+  <li><code class="language-plaintext highlighter-rouge">vagrant provision --debug</code> – use the debug flag to increase the verbosity of the output</li>
+  <li><code class="language-plaintext highlighter-rouge">vagrant push</code> – yes, vagrant can be configured to deploy code!</li>
+  <li><code class="language-plaintext highlighter-rouge">vagrant up --provision | tee provision.log</code> – Runs vagrant up, forces provisioning and logs all output to a file</li>
+</ul>
+
+<h3 id="plugins">Plugins</h3>
+<p><a href="https://github.com/cogitatio/vagrant-hostsupdater">vagrant-hostsupdater</a>: <code class="language-plaintext highlighter-rouge">$ vagrant plugin install vagrant-hostsupdater</code> to update your /etc/hosts file automatically each time you start/stop your vagrant box.</p>
+
+<h3 id="source">Source</h3>
+<p>Regularly check this <a href="https://gist.github.com/wpscholar/a49594e2e2b918f4d0c4">source</a></p>
 
         
       </section>
@@ -286,11 +335,7 @@ Port is open
     <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
     <span itemprop="keywords">
     
-      <a href="/site/tags/#linux" class="page__taxonomy-item p-category" rel="tag">linux</a><span class="sep">, </span>
-    
-      <a href="/site/tags/#network" class="page__taxonomy-item p-category" rel="tag">network</a><span class="sep">, </span>
-    
-      <a href="/site/tags/#port" class="page__taxonomy-item p-category" rel="tag">port</a>
+      <a href="/site/tags/#puppet" class="page__taxonomy-item p-category" rel="tag">puppet</a>
     
     </span>
   </p>
@@ -300,7 +345,7 @@ Port is open
 
         
 
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2019-08-26T20:46:00+02:00">August 26, 2019</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2019-06-03T17:38:00+02:00">June 3, 2019</time></p>
 
       </footer>
 
@@ -309,11 +354,11 @@ Port is open
       
   <nav class="pagination">
     
-      <a href="/site/more-space-for-boot-fs/" class="pagination--pager" title="Giving more space for the /boot filesystem
+      <a href="/site/using-logrotate/" class="pagination--pager" title="Using logrotate
 ">Previous</a>
     
     
-      <a href="/site/reseting-root-password/" class="pagination--pager" title="Reseting root password in centos
+      <a href="/site/tmux-remove-puppetserver/" class="pagination--pager" title="Removing tmux from the puppet learning machine
 ">Next</a>
     
   </nav>
@@ -415,6 +460,43 @@ Port is open
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
+        <a href="/site/port-checking/" rel="permalink">Is a port opened?
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2019-08-26T20:46:00+02:00">August 26, 2019</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">If there is no telnet tools is installed on the host, try the following command to check if a port opened or not.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
         <a href="/site/more-space-for-boot-fs/" rel="permalink">Giving more space for the /boot filesystem
 </a>
       
@@ -438,45 +520,6 @@ Port is open
 
 
     <p class="archive__item-excerpt" itemprop="description">Recently I tried to update my centos 7 test machine. Unfortunatelly, yum update command returned the following error “At least 54MB more space needed on the ...</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/site/a-simple-python-server/" rel="permalink">Simple HTTPS Server using python
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2019-08-06T00:38:00+02:00">August 6, 2019</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">
-  Generating key and cert files with Openssl:
-
-</p>
   </article>
 </div>
 

@@ -9,38 +9,38 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Reseting root password in centos -</title>
-<meta name="description" content="In the grub menu select actual kernel and type “-e”">
+<!-- begin _includes/seo.html --><title>Giving more space for the /boot filesystem -</title>
+<meta name="description" content="Recently I tried to update my centos 7 test machine. Unfortunatelly, yum update command returned the following error “At least 54MB more space needed on the /boot filesystem.”.">
 
 
 
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="">
-<meta property="og:title" content="Reseting root password in centos">
-<meta property="og:url" content="http://localhost:4000/site/reseting-root-password/">
+<meta property="og:title" content="Giving more space for the /boot filesystem">
+<meta property="og:url" content="http://localhost:4000/site/more-space-for-boot-fs/">
 
 
-  <meta property="og:description" content="In the grub menu select actual kernel and type “-e”">
-
-
-
-
-
-
-
-  <meta property="article:published_time" content="2019-10-21T14:05:13+02:00">
+  <meta property="og:description" content="Recently I tried to update my centos 7 test machine. Unfortunatelly, yum update command returned the following error “At least 54MB more space needed on the /boot filesystem.”.">
 
 
 
 
 
-  
+
+
+  <meta property="article:published_time" content="2019-08-16T21:17:00+02:00">
+
+
+
+
 
   
 
+  
 
-<link rel="canonical" href="http://localhost:4000/site/reseting-root-password/">
+
+<link rel="canonical" href="http://localhost:4000/site/more-space-for-boot-fs/">
 
 
 
@@ -151,7 +151,7 @@
         <span class="sep">/</span>
       
       
-        <li class="current">Reseting root password in centos</li>
+        <li class="current"> Giving more space for the /boot filesystem</li>
       
     
   </ol>
@@ -222,16 +222,16 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Reseting root password in centos">
-    <meta itemprop="description" content="  In the grub menu select actual kernel and type “-e”">
-    <meta itemprop="datePublished" content="2019-10-21T14:05:13+02:00">
+    <meta itemprop="headline" content="Giving more space for the /boot filesystem">
+    <meta itemprop="description" content="Recently I tried to update my centos 7 test machine. Unfortunatelly, yum update command returned the following error “At least 54MB more space needed on the /boot filesystem.”.">
+    <meta itemprop="datePublished" content="2019-08-16T21:17:00+02:00">
     
 
     <div class="page__inner-wrap">
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="http://localhost:4000/site/reseting-root-password/" class="u-url" itemprop="url">Reseting root password in centos
+            <a href="http://localhost:4000/site/more-space-for-boot-fs/" class="u-url" itemprop="url">Giving more space for the /boot filesystem
 </a>
           </h1>
           
@@ -242,7 +242,7 @@
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2019-10-21T14:05:13+02:00">October 21, 2019</time>
+        <time datetime="2019-08-16T21:17:00+02:00">August 16, 2019</time>
       </span>
     
 
@@ -257,43 +257,92 @@
 
       <section class="page__content e-content" itemprop="text">
         
-        <ul>
-  <li>
-    <p>In the grub menu select actual kernel and type “-e”
-<img src="../images/reseting-root-password/pic-1.png" alt="IMAGE" /></p>
-  </li>
-  <li>
-    <p>Go to the line with “<code class="language-plaintext highlighter-rouge">linux 16</code>” and change <code class="language-plaintext highlighter-rouge">ro</code> to <code class="language-plaintext highlighter-rouge">rw init=/sysroot/bin/sh</code>”.</p>
-  </li>
-</ul>
+        <p>Recently I tried to update my centos 7 test machine. Unfortunatelly, <code class="language-plaintext highlighter-rouge">yum update</code> command returned the following error “At least 54MB more space needed on the /boot filesystem.”.</p>
 
-<p>before:
-<img src="../images/reseting-root-password/pic-2.png" alt="IMAGE" /></p>
+<p><code class="language-plaintext highlighter-rouge">df -h</code> command showed following:</p>
 
-<p>after: 
-<img src="../images/reseting-root-password/pic-3.png" alt="IMAGE" /></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[root@server ~]# df -h
+Filesystem                    Size  Used Avail Use% Mounted on
+/dev/mapper/cl_centos03-root   32G   13G   19G  41% /
+devtmpfs                      1.9G     0  1.9G   0% /dev
+tmpfs                         1.9G     0  1.9G   0% /dev/shm
+tmpfs                         1.9G  9.7M  1.9G   1% /run
+tmpfs                         1.9G     0  1.9G   0% /sys/fs/cgroup
+/dev/sdb1                      79G  7.6G   68G  11% /opt
+/dev/sda1                     497M  486M   11M  98% /boot
+tmpfs                         379M   40K  379M   1% /run/user/1000
+..........
+</code></pre></div></div>
 
-<ul>
-  <li>
-    <p>Press <code class="language-plaintext highlighter-rouge">ctrl+X</code> for starting a single mode session</p>
-  </li>
-  <li>When single mode is started access to the system…:
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chroot /sysroot
-</code></pre></div>    </div>
-  </li>
-  <li>And using passwd command change the root’s password:
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>passwd root
-</code></pre></div>    </div>
-  </li>
-  <li>Finally, it is necessary to update SELinux information by createing an empty <strong>.autorelabel</strong> in <code class="language-plaintext highlighter-rouge">/</code>
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>touch /.autorelabel
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>Exit from single mode session</p>
-  </li>
-  <li>Try to login using a new password</li>
-</ul>
+<p>During installation I did mount <code class="language-plaintext highlighter-rouge">/dev/sda1</code> partition for the <code class="language-plaintext highlighter-rouge">/boot</code> with 500M. This storage is almost full (just 11M is free). Therefore, now I should clean up a given partition and enlarge a free space by deleting old and unused packages of the kernel.</p>
+
+<p><strong>!!!! DO NOT DO IT MANUALLY USING rm command!!!!</strong></p>
+
+<p>For erasing unused packages we need <code class="language-plaintext highlighter-rouge">package-cleanup</code> utility. It is being installed along with  <code class="language-plaintext highlighter-rouge">yum-utils</code> package (<code class="language-plaintext highlighter-rouge">yum install yum-utils -y</code>).</p>
+
+<h3 id="running">Running</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[root@server ~]# package-cleanup --oldkernels --count=1
+Loaded plugins: fastestmirror, langpacks
+--&gt; Running transaction check
+---&gt; Package kernel.x86_64 0:3.10.0-862.3.3.el7 will be erased
+---&gt; Package kernel-debug.x86_64 0:3.10.0-862.3.3.el7 will be erased
+---&gt; Package kernel-devel.x86_64 0:3.10.0-862.3.3.el7 will be erased
+--&gt; Finished Dependency Resolution
+
+Dependencies Resolved
+
+=============================================================================================================================================
+ Package                           Arch                        Version                                   Repository                     Size
+=============================================================================================================================================
+Removing:
+ kernel                            x86_64                      3.10.0-862.3.3.el7                        @updates                       62 M
+ kernel-debug                      x86_64                      3.10.0-862.3.3.el7                        @updates                       64 M
+ kernel-devel                      x86_64                      3.10.0-862.3.3.el7                        @updates                       37 M
+
+Transaction Summary
+=============================================================================================================================================
+Remove  3 Packages
+
+Installed size: 162 M
+Is this ok [y/N]: y
+Downloading packages:
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Erasing    : kernel-3.10.0-862.3.3.el7.x86_64                                                                                          1/3
+
+......................
+
+Removed:
+  kernel.x86_64 0:3.10.0-862.3.3.el7        kernel-debug.x86_64 0:3.10.0-862.3.3.el7        kernel-devel.x86_64 0:3.10.0-862.3.3.el7
+
+Complete!
+</code></pre></div></div>
+
+<p>Parameters that I used with a command are following:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--oldkernels - to ensure that kernel's and kernel-devel's old packages will be removed
+--count=1 - Number of duplicate/kernel packages to keep on the system (default 2)
+</code></pre></div></div>
+
+<p>And the output of df -h command:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[root@server ~]# df -h
+Filesystem                    Size  Used Avail Use% Mounted on
+/dev/mapper/cl_centos03-root   32G   14G   19G  43% /
+devtmpfs                      1.9G     0  1.9G   0% /dev
+tmpfs                         1.9G     0  1.9G   0% /dev/shm
+tmpfs                         1.9G  9.7M  1.9G   1% /run
+tmpfs                         1.9G     0  1.9G   0% /sys/fs/cgroup
+/dev/sdb1                      79G  7.6G   68G  11% /opt
+/dev/sda1                     497M  211M  287M  43% /boot
+tmpfs                         379M   40K  379M   1% /run/user/1000
+..................
+[root@server ~]#
+</code></pre></div></div>
+
+<p>In this output we can see that unused files were removed and it was cleaned up 275 MB.</p>
 
         
       </section>
@@ -310,11 +359,11 @@
     <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
     <span itemprop="keywords">
     
-      <a href="/site/tags/#centos" class="page__taxonomy-item p-category" rel="tag">centos</a><span class="sep">, </span>
+      <a href="/site/tags/#disk" class="page__taxonomy-item p-category" rel="tag">disk</a><span class="sep">, </span>
     
-      <a href="/site/tags/#linux" class="page__taxonomy-item p-category" rel="tag">linux</a><span class="sep">, </span>
+      <a href="/site/tags/#filesystem" class="page__taxonomy-item p-category" rel="tag">filesystem</a><span class="sep">, </span>
     
-      <a href="/site/tags/#root" class="page__taxonomy-item p-category" rel="tag">root</a>
+      <a href="/site/tags/#linux" class="page__taxonomy-item p-category" rel="tag">linux</a>
     
     </span>
   </p>
@@ -324,7 +373,7 @@
 
         
 
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2019-10-21T14:05:13+02:00">October 21, 2019</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2019-08-16T21:17:00+02:00">August 16, 2019</time></p>
 
       </footer>
 
@@ -333,11 +382,11 @@
       
   <nav class="pagination">
     
-      <a href="/site/port-checking/" class="pagination--pager" title="Is a port opened?
+      <a href="/site/a-simple-python-server/" class="pagination--pager" title="Simple HTTPS Server using python
 ">Previous</a>
     
     
-      <a href="/site/creating-simple-nfs-share/" class="pagination--pager" title="Creating a simple NFS share on centos
+      <a href="/site/port-checking/" class="pagination--pager" title="Is a port opened?
 ">Next</a>
     
   </nav>
@@ -399,6 +448,46 @@
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
+        <a href="/site/reseting-root-password/" rel="permalink">Reseting root password in centos
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2019-10-21T14:05:13+02:00">October 21, 2019</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">
+  In the grub menu select actual kernel and type “-e”
+
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
         <a href="/site/port-checking/" rel="permalink">Is a port opened?
 </a>
       
@@ -423,42 +512,6 @@
 
     <p class="archive__item-excerpt" itemprop="description">If there is no telnet tools is installed on the host, try the following command to check if a port opened or not.
 </p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/site/more-space-for-boot-fs/" rel="permalink">Giving more space for the /boot filesystem
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2019-08-16T21:17:00+02:00">August 16, 2019</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">Recently I tried to update my centos 7 test machine. Unfortunatelly, yum update command returned the following error “At least 54MB more space needed on the ...</p>
   </article>
 </div>
 

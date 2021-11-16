@@ -9,38 +9,38 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Reseting root password in centos -</title>
-<meta name="description" content="In the grub menu select actual kernel and type “-e”">
+<!-- begin _includes/seo.html --><title>Simple HTTPS Server using python -</title>
+<meta name="description" content="Generating key and cert files with Openssl:">
 
 
 
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="">
-<meta property="og:title" content="Reseting root password in centos">
-<meta property="og:url" content="http://localhost:4000/site/reseting-root-password/">
+<meta property="og:title" content="Simple HTTPS Server using python">
+<meta property="og:url" content="http://localhost:4000/site/a-simple-python-server/">
 
 
-  <meta property="og:description" content="In the grub menu select actual kernel and type “-e”">
-
-
-
-
-
-
-
-  <meta property="article:published_time" content="2019-10-21T14:05:13+02:00">
+  <meta property="og:description" content="Generating key and cert files with Openssl:">
 
 
 
 
 
-  
+
+
+  <meta property="article:published_time" content="2019-08-06T00:38:00+02:00">
+
+
+
+
 
   
 
+  
 
-<link rel="canonical" href="http://localhost:4000/site/reseting-root-password/">
+
+<link rel="canonical" href="http://localhost:4000/site/a-simple-python-server/">
 
 
 
@@ -151,7 +151,7 @@
         <span class="sep">/</span>
       
       
-        <li class="current">Reseting root password in centos</li>
+        <li class="current">Simple HTTPS Server using python</li>
       
     
   </ol>
@@ -222,16 +222,16 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Reseting root password in centos">
-    <meta itemprop="description" content="  In the grub menu select actual kernel and type “-e”">
-    <meta itemprop="datePublished" content="2019-10-21T14:05:13+02:00">
+    <meta itemprop="headline" content="Simple HTTPS Server using python">
+    <meta itemprop="description" content="  Generating key and cert files with Openssl:">
+    <meta itemprop="datePublished" content="2019-08-06T00:38:00+02:00">
     
 
     <div class="page__inner-wrap">
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="http://localhost:4000/site/reseting-root-password/" class="u-url" itemprop="url">Reseting root password in centos
+            <a href="http://localhost:4000/site/a-simple-python-server/" class="u-url" itemprop="url">Simple HTTPS Server using python
 </a>
           </h1>
           
@@ -242,7 +242,7 @@
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2019-10-21T14:05:13+02:00">October 21, 2019</time>
+        <time datetime="2019-08-06T00:38:00+02:00">August 6, 2019</time>
       </span>
     
 
@@ -257,43 +257,51 @@
 
       <section class="page__content e-content" itemprop="text">
         
-        <ul>
-  <li>
-    <p>In the grub menu select actual kernel and type “-e”
-<img src="../images/reseting-root-password/pic-1.png" alt="IMAGE" /></p>
-  </li>
-  <li>
-    <p>Go to the line with “<code class="language-plaintext highlighter-rouge">linux 16</code>” and change <code class="language-plaintext highlighter-rouge">ro</code> to <code class="language-plaintext highlighter-rouge">rw init=/sysroot/bin/sh</code>”.</p>
-  </li>
-</ul>
+        <ol>
+  <li>Generating key and cert files with Openssl:</li>
+</ol>
 
-<p>before:
-<img src="../images/reseting-root-password/pic-2.png" alt="IMAGE" /></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[root@test crazytests]# openssl req -x509 -newkey rsa:4096 -keyout testkey.pem -out testcert.pem
+Generating a 4096 bit RSA private key
+.......++
+..............................................................................................................................................................................................................................++
+writing new private key to 'testkey.pem'
+Enter PEM pass phrase:
+Verifying - Enter PEM pass phrase:
+-----
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter '.', the field will be left blank.
+-----
+Country Name (2 letter code) [XX]:DE
+State or Province Name (full name) []:
+Locality Name (eg, city) [Default City]:
+Organization Name (eg, company) [Default Company Ltd]:
+Organizational Unit Name (eg, section) []:
+Common Name (eg, your name or your server's hostname) []: new.test.my
+Email Address []:
+[root@test crazytests]#
+</code></pre></div></div>
 
-<p>after: 
-<img src="../images/reseting-root-password/pic-3.png" alt="IMAGE" /></p>
+<ol>
+  <li>Write the following python code. I tested it on python 2.x. I think on python 3.x will run  too.</li>
+</ol>
 
-<ul>
-  <li>
-    <p>Press <code class="language-plaintext highlighter-rouge">ctrl+X</code> for starting a single mode session</p>
-  </li>
-  <li>When single mode is started access to the system…:
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chroot /sysroot
-</code></pre></div>    </div>
-  </li>
-  <li>And using passwd command change the root’s password:
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>passwd root
-</code></pre></div>    </div>
-  </li>
-  <li>Finally, it is necessary to update SELinux information by createing an empty <strong>.autorelabel</strong> in <code class="language-plaintext highlighter-rouge">/</code>
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>touch /.autorelabel
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>Exit from single mode session</p>
-  </li>
-  <li>Try to login using a new password</li>
-</ul>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[root@test crazytests]# cat simple_https.py
+import BaseHTTPServer, SimpleHTTPServer
+import ssl
+
+
+httpd = BaseHTTPServer.HTTPServer(('new.test.my', 4443), SimpleHTTPServer.SimpleHTTPRequestHandler)
+
+httpd_soccet = ssl.wrap_socket(httpd.socket, keyfile="testkey.pem", certfile='testcert.pem', server_side=True)
+
+httpd.serve_forever()
+[root@test crazytests]#
+</code></pre></div></div>
 
         
       </section>
@@ -310,11 +318,9 @@
     <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
     <span itemprop="keywords">
     
-      <a href="/site/tags/#centos" class="page__taxonomy-item p-category" rel="tag">centos</a><span class="sep">, </span>
+      <a href="/site/tags/#https" class="page__taxonomy-item p-category" rel="tag">https</a><span class="sep">, </span>
     
-      <a href="/site/tags/#linux" class="page__taxonomy-item p-category" rel="tag">linux</a><span class="sep">, </span>
-    
-      <a href="/site/tags/#root" class="page__taxonomy-item p-category" rel="tag">root</a>
+      <a href="/site/tags/#python" class="page__taxonomy-item p-category" rel="tag">python</a>
     
     </span>
   </p>
@@ -324,7 +330,7 @@
 
         
 
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2019-10-21T14:05:13+02:00">October 21, 2019</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2019-08-06T00:38:00+02:00">August 6, 2019</time></p>
 
       </footer>
 
@@ -333,11 +339,11 @@
       
   <nav class="pagination">
     
-      <a href="/site/port-checking/" class="pagination--pager" title="Is a port opened?
+      <a href="/site/hiera-in-puppet/" class="pagination--pager" title="Using hiera in puppet. Example: creating a folder
 ">Previous</a>
     
     
-      <a href="/site/creating-simple-nfs-share/" class="pagination--pager" title="Creating a simple NFS share on centos
+      <a href="/site/more-space-for-boot-fs/" class="pagination--pager" title="Giving more space for the /boot filesystem
 ">Next</a>
     
   </nav>
@@ -385,6 +391,46 @@
 
 
     <p class="archive__item-excerpt" itemprop="description">In this post is noted a way of creating a simple NFS share server on centos 8 machine.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/site/reseting-root-password/" rel="permalink">Reseting root password in centos
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2019-10-21T14:05:13+02:00">October 21, 2019</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">
+  In the grub menu select actual kernel and type “-e”
+
+
 </p>
   </article>
 </div>
@@ -459,45 +505,6 @@
 
 
     <p class="archive__item-excerpt" itemprop="description">Recently I tried to update my centos 7 test machine. Unfortunatelly, yum update command returned the following error “At least 54MB more space needed on the ...</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/site/a-simple-python-server/" rel="permalink">Simple HTTPS Server using python
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2019-08-06T00:38:00+02:00">August 6, 2019</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">
-  Generating key and cert files with Openssl:
-
-</p>
   </article>
 </div>
 
