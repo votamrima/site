@@ -330,16 +330,16 @@
     
       
         <li>
-          <a href="#blabla">
-            <strong>blabla</strong> <span class="taxonomy__count">1</span>
+          <a href="#nfs">
+            <strong>nfs</strong> <span class="taxonomy__count">1</span>
           </a>
         </li>
       
     
       
         <li>
-          <a href="#ahaha">
-            <strong>ahaha</strong> <span class="taxonomy__count">1</span>
+          <a href="#linux">
+            <strong>linux</strong> <span class="taxonomy__count">1</span>
           </a>
         </li>
       
@@ -351,8 +351,8 @@
 
   
     
-      <section id="blabla" class="taxonomy__section">
-        <h2 class="archive__subtitle">blabla</h2>
+      <section id="nfs" class="taxonomy__section">
+        <h2 class="archive__subtitle">nfs</h2>
         <div class="entries-grid">
           
             
@@ -401,8 +401,8 @@
     
   
     
-      <section id="ahaha" class="taxonomy__section">
-        <h2 class="archive__subtitle">ahaha</h2>
+      <section id="linux" class="taxonomy__section">
+        <h2 class="archive__subtitle">linux</h2>
         <div class="entries-grid">
           
             

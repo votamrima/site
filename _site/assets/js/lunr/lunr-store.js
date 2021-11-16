@@ -7,7 +7,7 @@ var store = [{
       },{
         "title": "Creating a simple NFS share on centos",
         "excerpt":"In this post is noted a way of creating a simple NFS share server on centos 8 machine. 1. Installing NFS On the server side we should install nfs-utils packet: [root@nfs-server ~]# yum install nfs-utils and start/enable nfs-server service [root@nfs-server ~]# systemctl start nfs-server [root@nfs-server ~]# ^start^enable systemctl enable nfs-server...","categories": [],
-        "tags": ["blabla","ahaha"],
+        "tags": ["nfs","linux"],
         "url": "/site/creating-simple-nfs-share/",
         "teaser": null
       }]
