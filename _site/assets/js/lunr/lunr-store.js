@@ -1,7 +1,7 @@
 var store = [{
         "title": "Reseting root password in centos",
         "excerpt":"This is a simple test post ","categories": [],
-        "tags": [],
+        "tags": ["linux","centos"],
         "url": "/site/reseting-root-password/",
         "teaser": null
       },{
