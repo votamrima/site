@@ -1,17 +1,104 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="http://localhost:4000/site/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/site/" rel="alternate" type="text/html" /><updated>2021-11-09T17:05:06+01:00</updated><id>http://localhost:4000/site/feed.xml</id><title type="html"></title><subtitle>.</subtitle><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil, &quot;links&quot;=&gt;[{&quot;label&quot;=&gt;&quot;Email&quot;, &quot;icon&quot;=&gt;&quot;fas fa-fw fa-envelope-square&quot;}, {&quot;label&quot;=&gt;&quot;Website&quot;, &quot;icon&quot;=&gt;&quot;fas fa-fw fa-link&quot;}, {&quot;label&quot;=&gt;&quot;Twitter&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-twitter-square&quot;}, {&quot;label&quot;=&gt;&quot;Facebook&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-facebook-square&quot;}, {&quot;label&quot;=&gt;&quot;GitHub&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-github&quot;}, {&quot;label&quot;=&gt;&quot;Instagram&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-instagram&quot;}]}</name></author><entry><title type="html">Creating a simple NFS share on centos</title><link href="http://localhost:4000/site/creating-simple-nfs-share/" rel="alternate" type="text/html" title="Creating a simple NFS share on centos" /><published>2021-11-06T23:38:00+01:00</published><updated>2021-11-06T23:38:00+01:00</updated><id>http://localhost:4000/site/creating-simple-nfs-share</id><content type="html" xml:base="http://localhost:4000/site/creating-simple-nfs-share/">&lt;p&gt;In this post I am noting a way how to create a simple NFS share server on centos.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="http://localhost:4000/site/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/site/" rel="alternate" type="text/html" /><updated>2021-11-16T01:31:33+01:00</updated><id>http://localhost:4000/site/feed.xml</id><title type="html"></title><subtitle>.</subtitle><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil, &quot;links&quot;=&gt;[{&quot;label&quot;=&gt;&quot;Email&quot;, &quot;icon&quot;=&gt;&quot;fas fa-fw fa-envelope-square&quot;}, {&quot;label&quot;=&gt;&quot;Website&quot;, &quot;icon&quot;=&gt;&quot;fas fa-fw fa-link&quot;}, {&quot;label&quot;=&gt;&quot;Twitter&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-twitter-square&quot;}, {&quot;label&quot;=&gt;&quot;Facebook&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-facebook-square&quot;}, {&quot;label&quot;=&gt;&quot;GitHub&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-github&quot;}, {&quot;label&quot;=&gt;&quot;Instagram&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-instagram&quot;}]}</name></author><entry><title type="html">Creating a simple NFS share on centos</title><link href="http://localhost:4000/site/creating-simple-nfs-share/" rel="alternate" type="text/html" title="Creating a simple NFS share on centos" /><published>2021-11-06T23:38:00+01:00</published><updated>2021-11-06T23:38:00+01:00</updated><id>http://localhost:4000/site/creating-simple-nfs-share</id><content type="html" xml:base="http://localhost:4000/site/creating-simple-nfs-share/">&lt;p&gt;In this post is noted a way of creating a simple NFS share server on centos 8 machine.&lt;/p&gt;
 
-&lt;h3 id=&quot;installing-nfs&quot;&gt;Installing NFS&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;1. Installing NFS&lt;/strong&gt;&lt;/p&gt;
+
 &lt;p&gt;On the server side we should install &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nfs-utils&lt;/code&gt; packet:&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[root@dns ~]# yum install nfs-utils
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[root@nfs-server ~]# yum install nfs-utils
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;and start/enable &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nfs-server&lt;/code&gt; service&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[root@dns ~]# systemctl start nfs-server
-[root@dns ~]# ^start^enable
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[root@nfs-server ~]# systemctl start nfs-server
+[root@nfs-server ~]# ^start^enable
 systemctl enable nfs-server
 Created symlink /etc/systemd/system/multi-user.target.wants/nfs-server.service → /usr/lib/systemd/system/nfs-server.service.
-[root@dns ~]# 
+[root@nfs-server ~]# 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;defining-a-directory-and-exporting-them&quot;&gt;Defining a directory and exporting them&lt;/h3&gt;
-&lt;p&gt;Following steps are preparing a specified folder to export as a network folder.&lt;/p&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil, &quot;links&quot;=&gt;[{&quot;label&quot;=&gt;&quot;Email&quot;, &quot;icon&quot;=&gt;&quot;fas fa-fw fa-envelope-square&quot;}, {&quot;label&quot;=&gt;&quot;Website&quot;, &quot;icon&quot;=&gt;&quot;fas fa-fw fa-link&quot;}, {&quot;label&quot;=&gt;&quot;Twitter&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-twitter-square&quot;}, {&quot;label&quot;=&gt;&quot;Facebook&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-facebook-square&quot;}, {&quot;label&quot;=&gt;&quot;GitHub&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-github&quot;}, {&quot;label&quot;=&gt;&quot;Instagram&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-instagram&quot;}]}</name></author><category term="blabla" /><category term="ahaha" /><summary type="html">In this post I am noting a way how to create a simple NFS share server on centos.</summary></entry><entry><title type="html">Reseting root password in centos</title><link href="http://localhost:4000/site/reseting-root-password/" rel="alternate" type="text/html" title="Reseting root password in centos" /><published>2019-10-21T14:05:13+02:00</published><updated>2019-10-21T14:05:13+02:00</updated><id>http://localhost:4000/site/reseting-root-password</id><content type="html" xml:base="http://localhost:4000/site/reseting-root-password/">&lt;p&gt;This is a simple test post&lt;/p&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil, &quot;links&quot;=&gt;[{&quot;label&quot;=&gt;&quot;Email&quot;, &quot;icon&quot;=&gt;&quot;fas fa-fw fa-envelope-square&quot;}, {&quot;label&quot;=&gt;&quot;Website&quot;, &quot;icon&quot;=&gt;&quot;fas fa-fw fa-link&quot;}, {&quot;label&quot;=&gt;&quot;Twitter&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-twitter-square&quot;}, {&quot;label&quot;=&gt;&quot;Facebook&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-facebook-square&quot;}, {&quot;label&quot;=&gt;&quot;GitHub&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-github&quot;}, {&quot;label&quot;=&gt;&quot;Instagram&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-instagram&quot;}]}</name></author><summary type="html">This is a simple test post</summary></entry></feed>
+&lt;ol&gt;
+  &lt;li&gt;Create a necessary directory**&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mkdir /opt/myshare
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Exporting the defined directory. Define prepared directory and subnets in /etc/exportfs file. Additionally, some options for exporting should be defined along with subnets too.
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[root@nfs-server ~]# vim /etc/exports
+/opt/myshare   192.168.11.0/24(rw,sync)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;More options you can find in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;man exports&lt;/code&gt;. Some options are following:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;rw&lt;/li&gt;
+  &lt;li&gt;sync&lt;/li&gt;
+  &lt;li&gt;all_squash - Map all uids and gids from clients to the anonymous user.&lt;/li&gt;
+  &lt;li&gt;no_all_squash - used to map all UIDs and GIDs from client requests to identical UIDs and GIDs on the NFS server.&lt;/li&gt;
+  &lt;li&gt;root_squash – Map requests from uid/gid 0 to the anonymous uid/gid&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Export the defined in /etc/exports directories:
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[root@nfs-server ~]# exportfs -arv
+exporting 192.168.11.0/24:/opt/myshare
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Here &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-a&lt;/code&gt; means export all defined directories
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-r&lt;/code&gt; means reexport exported directories
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-v&lt;/code&gt; enable verbouse mode&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;To check an exported list use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-s&lt;/code&gt; flag:
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[root@nfs-server ~]# exportfs -s
+/opt/myshare  192.168.11.0/24(sync,wdelay,hide,no_subtree_check,sec=sys,rw,secure,root_squash,no_all_squash)
+[root@nfs-server ~]# 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Enable NFS services in firewalld:
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[root@nfs-server ~]# firewall-cmd --permanent --add-service=nfs
+success
+[root@nfs-server ~]# 
+[root@nfs-server ~]# 
+[root@nfs-server ~]# firewall-cmd --permanent --add-service=mountd
+success
+[root@nfs-server ~]# firewall-cmd --permanent --add-service=rpc-bind
+success
+[root@nfs-server ~]# 
+[root@nfs-server ~]# 
+[root@nfs-server ~]# firewall-cmd --reload
+success
+[root@nfs-server ~]# 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Mount a share on the client. Create a folder on the client machine for mounting nfs folder and add a mouting details in the /etc/fstab:
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[root@workstation ~]# mkdir /opt/nfs-share
+[root@workstation ~]# vim /etc/fstab
+......
+192.168.11.61:/opt/myshare /opt/nfs-share nfs defaults 0 0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;And mount a share:
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mount -a
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Check if it is mounted successfully:
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[root@workstation ~]# df -h
+.......
+192.168.11.61:/opt/myshare                45G  3.4G   42G   8% /opt/nfs-share
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Moreover, you can mount a folder manually, without adding an entry in the /etc/fstab:
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mount -t nfs  192.168.11.61:/opt/myshare /opt/nfs-share
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;In order to check available shares on the remote server you can use a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;showmount&lt;/code&gt; command:
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[root@workstation ~]# showmount -e 192.168.11.61 ##This is a remote nfs server
+Export list for 192.168.11.61:
+/opt/myshare 192.168.11.0/24
+[root@workstation ~]# 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil, &quot;links&quot;=&gt;[{&quot;label&quot;=&gt;&quot;Email&quot;, &quot;icon&quot;=&gt;&quot;fas fa-fw fa-envelope-square&quot;}, {&quot;label&quot;=&gt;&quot;Website&quot;, &quot;icon&quot;=&gt;&quot;fas fa-fw fa-link&quot;}, {&quot;label&quot;=&gt;&quot;Twitter&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-twitter-square&quot;}, {&quot;label&quot;=&gt;&quot;Facebook&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-facebook-square&quot;}, {&quot;label&quot;=&gt;&quot;GitHub&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-github&quot;}, {&quot;label&quot;=&gt;&quot;Instagram&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-instagram&quot;}]}</name></author><category term="blabla" /><category term="ahaha" /><summary type="html">In this post is noted a way of creating a simple NFS share server on centos 8 machine.</summary></entry><entry><title type="html">Reseting root password in centos</title><link href="http://localhost:4000/site/reseting-root-password/" rel="alternate" type="text/html" title="Reseting root password in centos" /><published>2019-10-21T14:05:13+02:00</published><updated>2019-10-21T14:05:13+02:00</updated><id>http://localhost:4000/site/reseting-root-password</id><content type="html" xml:base="http://localhost:4000/site/reseting-root-password/">&lt;p&gt;This is a simple test post&lt;/p&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil, &quot;links&quot;=&gt;[{&quot;label&quot;=&gt;&quot;Email&quot;, &quot;icon&quot;=&gt;&quot;fas fa-fw fa-envelope-square&quot;}, {&quot;label&quot;=&gt;&quot;Website&quot;, &quot;icon&quot;=&gt;&quot;fas fa-fw fa-link&quot;}, {&quot;label&quot;=&gt;&quot;Twitter&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-twitter-square&quot;}, {&quot;label&quot;=&gt;&quot;Facebook&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-facebook-square&quot;}, {&quot;label&quot;=&gt;&quot;GitHub&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-github&quot;}, {&quot;label&quot;=&gt;&quot;Instagram&quot;, &quot;icon&quot;=&gt;&quot;fab fa-fw fa-instagram&quot;}]}</name></author><summary type="html">This is a simple test post</summary></entry></feed>

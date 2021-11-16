@@ -10,7 +10,7 @@
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>Creating a simple NFS share on centos -</title>
-<meta name="description" content="In this post I am noting a way how to create a simple NFS share server on centos.">
+<meta name="description" content="In this post is noted a way of creating a simple NFS share server on centos 8 machine.">
 
 
 
@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://localhost:4000/site/creating-simple-nfs-share/">
 
 
-  <meta property="og:description" content="In this post I am noting a way how to create a simple NFS share server on centos.">
+  <meta property="og:description" content="In this post is noted a way of creating a simple NFS share server on centos 8 machine.">
 
 
 
@@ -223,7 +223,7 @@
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Creating a simple NFS share on centos">
-    <meta itemprop="description" content="In this post I am noting a way how to create a simple NFS share server on centos.">
+    <meta itemprop="description" content="In this post is noted a way of creating a simple NFS share server on centos 8 machine.">
     <meta itemprop="datePublished" content="2021-11-06T23:38:00+01:00">
     
 
@@ -248,7 +248,7 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          less than 1 minute read
+          1 minute read
         
       </span>
     
@@ -260,23 +260,111 @@
 
       <section class="page__content e-content" itemprop="text">
         
-        <p>In this post I am noting a way how to create a simple NFS share server on centos.</p>
+        <p>In this post is noted a way of creating a simple NFS share server on centos 8 machine.</p>
 
-<h3 id="installing-nfs">Installing NFS</h3>
+<p><strong>1. Installing NFS</strong></p>
+
 <p>On the server side we should install <code class="language-plaintext highlighter-rouge">nfs-utils</code> packet:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[root@dns ~]# yum install nfs-utils
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[root@nfs-server ~]# yum install nfs-utils
 </code></pre></div></div>
 
 <p>and start/enable <code class="language-plaintext highlighter-rouge">nfs-server</code> service</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[root@dns ~]# systemctl start nfs-server
-[root@dns ~]# ^start^enable
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[root@nfs-server ~]# systemctl start nfs-server
+[root@nfs-server ~]# ^start^enable
 systemctl enable nfs-server
 Created symlink /etc/systemd/system/multi-user.target.wants/nfs-server.service → /usr/lib/systemd/system/nfs-server.service.
-[root@dns ~]# 
+[root@nfs-server ~]# 
 </code></pre></div></div>
 
-<h3 id="defining-a-directory-and-exporting-them">Defining a directory and exporting them</h3>
-<p>Following steps are preparing a specified folder to export as a network folder.</p>
+<ol>
+  <li>Create a necessary directory**</li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir /opt/myshare
+</code></pre></div></div>
+
+<ol>
+  <li>Exporting the defined directory. Define prepared directory and subnets in /etc/exportfs file. Additionally, some options for exporting should be defined along with subnets too.
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[root@nfs-server ~]# vim /etc/exports
+/opt/myshare   192.168.11.0/24(rw,sync)
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p>More options you can find in <code class="language-plaintext highlighter-rouge">man exports</code>. Some options are following:</p>
+<ul>
+  <li>rw</li>
+  <li>sync</li>
+  <li>all_squash - Map all uids and gids from clients to the anonymous user.</li>
+  <li>no_all_squash - used to map all UIDs and GIDs from client requests to identical UIDs and GIDs on the NFS server.</li>
+  <li>root_squash – Map requests from uid/gid 0 to the anonymous uid/gid</li>
+</ul>
+
+<ol>
+  <li>Export the defined in /etc/exports directories:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[root@nfs-server ~]# exportfs -arv
+exporting 192.168.11.0/24:/opt/myshare
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p>Here <code class="language-plaintext highlighter-rouge">-a</code> means export all defined directories
+<code class="language-plaintext highlighter-rouge">-r</code> means reexport exported directories
+<code class="language-plaintext highlighter-rouge">-v</code> enable verbouse mode</p>
+
+<ol>
+  <li>To check an exported list use <code class="language-plaintext highlighter-rouge">-s</code> flag:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[root@nfs-server ~]# exportfs -s
+/opt/myshare  192.168.11.0/24(sync,wdelay,hide,no_subtree_check,sec=sys,rw,secure,root_squash,no_all_squash)
+[root@nfs-server ~]# 
+</code></pre></div>    </div>
+  </li>
+  <li>Enable NFS services in firewalld:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[root@nfs-server ~]# firewall-cmd --permanent --add-service=nfs
+success
+[root@nfs-server ~]# 
+[root@nfs-server ~]# 
+[root@nfs-server ~]# firewall-cmd --permanent --add-service=mountd
+success
+[root@nfs-server ~]# firewall-cmd --permanent --add-service=rpc-bind
+success
+[root@nfs-server ~]# 
+[root@nfs-server ~]# 
+[root@nfs-server ~]# firewall-cmd --reload
+success
+[root@nfs-server ~]# 
+</code></pre></div>    </div>
+  </li>
+  <li>Mount a share on the client. Create a folder on the client machine for mounting nfs folder and add a mouting details in the /etc/fstab:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[root@workstation ~]# mkdir /opt/nfs-share
+[root@workstation ~]# vim /etc/fstab
+......
+192.168.11.61:/opt/myshare /opt/nfs-share nfs defaults 0 0
+</code></pre></div>    </div>
+  </li>
+  <li>And mount a share:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mount -a
+</code></pre></div>    </div>
+  </li>
+  <li>Check if it is mounted successfully:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[root@workstation ~]# df -h
+.......
+192.168.11.61:/opt/myshare                45G  3.4G   42G   8% /opt/nfs-share
+</code></pre></div>    </div>
+  </li>
+  <li>Moreover, you can mount a folder manually, without adding an entry in the /etc/fstab:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mount -t nfs  192.168.11.61:/opt/myshare /opt/nfs-share
+</code></pre></div>    </div>
+  </li>
+  <li>In order to check available shares on the remote server you can use a <code class="language-plaintext highlighter-rouge">showmount</code> command:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[root@workstation ~]# showmount -e 192.168.11.61 ##This is a remote nfs server
+Export list for 192.168.11.61:
+/opt/myshare 192.168.11.0/24
+[root@workstation ~]# 
+</code></pre></div>    </div>
+  </li>
+</ol>
+
 
         
       </section>
