@@ -1,4 +1,10 @@
 var store = [{
+        "title": "Is a port opened?",
+        "excerpt":"If there is no telnet tools is installed on the host, try the following command to check if a port opened or not. -bash-4.2$ timeout 1 bash -c '(echo &gt; /dev/tcp/ip_adderess/port) &gt;/dev/null 2&gt;&amp;1' &amp;&amp; echo Port is open || echo Port is closed Example -bash-4.2$ timeout 1 bash -c '(echo...","categories": [],
+        "tags": ["port","linux","network"],
+        "url": "/site/port-checking/",
+        "teaser": null
+      },{
         "title": "Reseting root password in centos",
         "excerpt":"This is a simple test post ","categories": [],
         "tags": ["linux","centos"],

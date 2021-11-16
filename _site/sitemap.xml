@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://localhost:4000/site/port-checking/</loc>
+<lastmod>2019-08-26T20:46:00+02:00</lastmod>
+</url>
+<url>
 <loc>http://localhost:4000/site/reseting-root-password/</loc>
 <lastmod>2019-10-21T14:05:13+02:00</lastmod>
 </url>

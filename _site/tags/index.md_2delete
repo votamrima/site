@@ -329,9 +329,11 @@
   
     
       
+    
+      
         <li>
           <a href="#linux">
-            <strong>linux</strong> <span class="taxonomy__count">2</span>
+            <strong>linux</strong> <span class="taxonomy__count">3</span>
           </a>
         </li>
       
@@ -340,8 +342,38 @@
     
       
     
+      
+    
   
     
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+    
+      
+        <li>
+          <a href="#port">
+            <strong>port</strong> <span class="taxonomy__count">1</span>
+          </a>
+        </li>
+      
+    
+      
+    
+      
+        <li>
+          <a href="#network">
+            <strong>network</strong> <span class="taxonomy__count">1</span>
+          </a>
+        </li>
       
     
       
@@ -365,6 +397,8 @@
 
 
 
+  
+    
   
     
       <section id="linux" class="taxonomy__section">
@@ -451,6 +485,46 @@
 </div>
 
           
+            
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/site/port-checking/" rel="permalink">Is a port opened?
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          less than 1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">If there is no telnet tools is installed on the host, try the following command to check if a port opened or not.
+</p>
+  </article>
+</div>
+
+          
         </div>
         <a href="#page-title" class="back-to-top">Back to top &uarr;</a>
       </section>
@@ -460,8 +534,122 @@
   
     
   
+    
+  
 
   
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+  
+    
+      <section id="port" class="taxonomy__section">
+        <h2 class="archive__subtitle">port</h2>
+        <div class="entries-grid">
+          
+            
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/site/port-checking/" rel="permalink">Is a port opened?
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          less than 1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">If there is no telnet tools is installed on the host, try the following command to check if a port opened or not.
+</p>
+  </article>
+</div>
+
+          
+        </div>
+        <a href="#page-title" class="back-to-top">Back to top &uarr;</a>
+      </section>
+    
+  
+    
+  
+    
+      <section id="network" class="taxonomy__section">
+        <h2 class="archive__subtitle">network</h2>
+        <div class="entries-grid">
+          
+            
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/site/port-checking/" rel="permalink">Is a port opened?
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          less than 1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">If there is no telnet tools is installed on the host, try the following command to check if a port opened or not.
+</p>
+  </article>
+</div>
+
+          
+        </div>
+        <a href="#page-title" class="back-to-top">Back to top &uarr;</a>
+      </section>
     
   
     
