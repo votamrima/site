@@ -25,10 +25,12 @@ Created symlink /etc/systemd/system/multi-user.target.wants/nfs-server.service â
 [root@nfs-server ~]# 
 ````
 
-3. Create a necessary directory**
+3. Create a necessary directory and set ``nobody`` as an owner. Additionally, enable SELinux boolean ``nfs_export_all_rw`` 
 
 ````
 mkdir /opt/myshare
+[root@nfs-server opt]# chown nobody /opt/myshare
+[root@nfs-server opt]# setsebool -P nfs_export_all_rw 1
 ````
 
 4. Exporting the defined directory. Define prepared directory and subnets in /etc/exportfs file. Additionally, some options for exporting should be defined along with subnets too.

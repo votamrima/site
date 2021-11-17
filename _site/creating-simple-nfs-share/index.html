@@ -274,10 +274,12 @@ Created symlink /etc/systemd/system/multi-user.target.wants/nfs-server.service â
 </code></pre></div></div>
 
 <ol>
-  <li>Create a necessary directory**</li>
+  <li>Create a necessary directory and set <code class="language-plaintext highlighter-rouge">nobody</code> as an owner. Additionally, enable SELinux boolean <code class="language-plaintext highlighter-rouge">nfs_export_all_rw</code></li>
 </ol>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir /opt/myshare
+[root@nfs-server opt]# chown nobody /opt/myshare
+[root@nfs-server opt]# setsebool -P nfs_export_all_rw 1
 </code></pre></div></div>
 
 <ol>
@@ -403,7 +405,8 @@ Export list for 192.168.11.61:
 ">Previous</a>
     
     
-      <a href="#" class="pagination--pager disabled">Next</a>
+      <a href="/site/check-approve-csr-openshift/" class="pagination--pager" title="Check and approve pendings csrs
+">Next</a>
     
   </nav>
 
@@ -417,6 +420,43 @@ Export list for 192.168.11.61:
     <div class="page__related">
       <h2 class="page__related-title">You may also enjoy</h2>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/site/check-approve-csr-openshift/" rel="permalink">Check and approve pendings csrs
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-11-16T18:30:00+01:00">November 16, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">After installing Openshift cluster you should log in and check for csr. Moreover, I regularly controls if some csr should be approved or not.
+</p>
+  </article>
+</div>
+
         
           
 
@@ -527,45 +567,6 @@ Export list for 192.168.11.61:
 
 
     <p class="archive__item-excerpt" itemprop="description">Recently I tried to update my centos 7 test machine. Unfortunatelly, yum update command returned the following error â€œAt least 54MB more space needed on the ...</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/site/a-simple-python-server/" rel="permalink">Simple HTTPS Server using python
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2019-08-06T00:38:00+02:00">August 6, 2019</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">
-  Generating key and cert files with Openssl:
-
-</p>
   </article>
 </div>
 
