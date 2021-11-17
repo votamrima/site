@@ -9,38 +9,38 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Removing tmux from the puppet learning machine -</title>
-<meta name="description" content="cleanly and gracefully killing all tmux opened sessions and server too: ``` tmux kill-server">
+<!-- begin _includes/seo.html --><title>Editing files in Linux VM using remote Visual Studio Code -</title>
+<meta name="description" content="Sometimes we need to edit a file directly on Linux VM using Visual Studio Code.">
 
 
 
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="">
-<meta property="og:title" content="Removing tmux from the puppet learning machine">
-<meta property="og:url" content="http://localhost:4000/site/tmux-remove-puppetserver/">
+<meta property="og:title" content="Editing files in Linux VM using remote Visual Studio Code">
+<meta property="og:url" content="http://localhost:4000/site/edit-files-with-rmate/">
 
 
-  <meta property="og:description" content="cleanly and gracefully killing all tmux opened sessions and server too: ``` tmux kill-server">
-
-
-
-
-
-
-
-  <meta property="article:published_time" content="2019-06-03T17:38:00+02:00">
+  <meta property="og:description" content="Sometimes we need to edit a file directly on Linux VM using Visual Studio Code.">
 
 
 
 
 
-  
+
+
+  <meta property="article:published_time" content="2021-10-18T19:30:00+02:00">
+
+
+
+
 
   
 
+  
 
-<link rel="canonical" href="http://localhost:4000/site/tmux-remove-puppetserver/">
+
+<link rel="canonical" href="http://localhost:4000/site/edit-files-with-rmate/">
 
 
 
@@ -151,7 +151,7 @@
         <span class="sep">/</span>
       
       
-        <li class="current">Removing tmux from the puppet learning machine</li>
+        <li class="current">Editing files in Linux VM using remote Visual Studio Code</li>
       
     
   </ol>
@@ -222,16 +222,16 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Removing tmux from the puppet learning machine">
-    <meta itemprop="description" content="  cleanly and gracefully killing all tmux opened sessions and server too:```tmux kill-server">
-    <meta itemprop="datePublished" content="2019-06-03T17:38:00+02:00">
+    <meta itemprop="headline" content="Editing files in Linux VM using remote Visual Studio Code">
+    <meta itemprop="description" content="Sometimes we need to edit a file directly on Linux VM using Visual Studio Code.">
+    <meta itemprop="datePublished" content="2021-10-18T19:30:00+02:00">
     
 
     <div class="page__inner-wrap">
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="http://localhost:4000/site/tmux-remove-puppetserver/" class="u-url" itemprop="url">Removing tmux from the puppet learning machine
+            <a href="http://localhost:4000/site/edit-files-with-rmate/" class="u-url" itemprop="url">Editing files in Linux VM using remote Visual Studio Code
 </a>
           </h1>
           
@@ -242,7 +242,7 @@
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2019-06-03T17:38:00+02:00">June 3, 2019</time>
+        <time datetime="2021-10-18T19:30:00+02:00">October 18, 2021</time>
       </span>
     
 
@@ -257,21 +257,43 @@
 
       <section class="page__content e-content" itemprop="text">
         
-        <ol>
-  <li>cleanly and gracefully killing all tmux opened sessions and server too:
-```
-tmux kill-server</li>
+        <p>Sometimes we need to edit a file directly on Linux VM using Visual Studio Code.</p>
+
+<ol>
+  <li>
+    <p>Launch Visual Studio Code. Additionally, you have to able to connect to the bash of remote machine from VS Code.</p>
+  </li>
+  <li>
+    <p>Go to the ‘Extensions’ page and search for ‘Remote VSCode’</p>
+  </li>
+  <li>
+    <p>Install the extension and re-launch Visual Studio Code ( client side of rmate)</p>
+  </li>
+  <li>
+    <p>In your Linux Virtual Machine, execute the following command in your terminal to install rmate server</p>
+  </li>
 </ol>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2. or killing all tmux processes:
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir /opt/rmate
+$ sudo wget -O /opt/rmate/rmate https://raw.github.com/aurora/rmate/master/rmate
+$ sudo chmod a+x /opt/rmate/rmate
+ln -s /opt/rmate/rmate /usr/local/bin/rmate 
 </code></pre></div></div>
-<p>pkill -f tmux</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-3. removing tmux application
-</code></pre></div></div>
-<p>yum erase -y tmux
-````</p>
+<ol>
+  <li>Go back to your Visual Studio Code and open up the command palette (CTRL+P for Windows and CMD+P for Mac) then execute the following command:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Remote: Start Server 
+</code></pre></div>    </div>
+  </li>
+  <li>Once the server is ready, open up a new terminal and connect to your Linux Virtual Machine using the following command:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> $ ssh -R 52698:localhost:52698 VIRTUAL_MACHINE_IP_ADDRESS 
+</code></pre></div>    </div>
+  </li>
+  <li>In vs code terminal, execute the rmate command with the file that you want to open up in your Visual Studio Code in your local machine
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> $ rmate demo.py 
+</code></pre></div>    </div>
+  </li>
+</ol>
 
         
       </section>
@@ -288,7 +310,9 @@ tmux kill-server</li>
     <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
     <span itemprop="keywords">
     
-      <a href="/site/tags/#puppet" class="page__taxonomy-item p-category" rel="tag">puppet</a>
+      <a href="/site/tags/#rmate" class="page__taxonomy-item p-category" rel="tag">rmate</a><span class="sep">, </span>
+    
+      <a href="/site/tags/#vscode" class="page__taxonomy-item p-category" rel="tag">vscode</a>
     
     </span>
   </p>
@@ -298,7 +322,7 @@ tmux kill-server</li>
 
         
 
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2019-06-03T17:38:00+02:00">June 3, 2019</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2021-10-18T19:30:00+02:00">October 18, 2021</time></p>
 
       </footer>
 
@@ -307,11 +331,11 @@ tmux kill-server</li>
       
   <nav class="pagination">
     
-      <a href="/site/vagrant-cheetsheet/" class="pagination--pager" title="Cheatsheet for Vagrant
+      <a href="/site/creating-simple-nfs-share/" class="pagination--pager" title="Creating a simple NFS share on centos
 ">Previous</a>
     
     
-      <a href="/site/hiera-in-puppet/" class="pagination--pager" title="Using hiera in puppet. Example: creating a folder
+      <a href="/site/check-approve-csr-openshift/" class="pagination--pager" title="Check and approve pendings csrs
 ">Next</a>
     
   </nav>
@@ -359,43 +383,6 @@ tmux kill-server</li>
 
 
     <p class="archive__item-excerpt" itemprop="description">After installing Openshift cluster you should log in and check for csr. Moreover, I regularly controls if some csr should be approved or not.
-</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/site/edit-files-with-rmate/" rel="permalink">Editing files in Linux VM using remote Visual Studio Code
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2021-10-18T19:30:00+02:00">October 18, 2021</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">Sometimes we need to edit a file directly on Linux VM using Visual Studio Code.
 </p>
   </article>
 </div>
@@ -473,6 +460,43 @@ tmux kill-server</li>
   In the grub menu select actual kernel and type “-e”
 
 
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/site/port-checking/" rel="permalink">Is a port opened?
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2019-08-26T20:46:00+02:00">August 26, 2019</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">If there is no telnet tools is installed on the host, try the following command to check if a port opened or not.
 </p>
   </article>
 </div>

@@ -53,6 +53,12 @@ var store = [{
         "url": "/site/creating-simple-nfs-share/",
         "teaser": null
       },{
+        "title": "Editing files in Linux VM using remote Visual Studio Code",
+        "excerpt":"Sometimes we need to edit a file directly on Linux VM using Visual Studio Code. Launch Visual Studio Code. Additionally, you have to able to connect to the bash of remote machine from VS Code. Go to the ‘Extensions’ page and search for ‘Remote VSCode’ Install the extension and re-launch...","categories": [],
+        "tags": ["vscode","rmate"],
+        "url": "/site/edit-files-with-rmate/",
+        "teaser": null
+      },{
         "title": "Check and approve pendings csrs",
         "excerpt":"After installing Openshift cluster you should log in and check for csr. Moreover, I regularly controls if some csr should be approved or not. [admin@dns try]$ oc get csr NAME AGE SIGNERNAME REQUESTOR CONDITION csr-6m4m7 4m29s kubernetes.io/kube-apiserver-client-kubelet system:node:etcd-2.okd4.home.lab Approved,Issued csr-7qww9 4m13s kubernetes.io/kube-apiserver-client-kubelet system:node:okd4-compute-1.okd4.home.lab Approved,Issued csr-glzgb 4m29s kubernetes.io/kube-apiserver-client-kubelet system:node:okd4-control-plane-1.okd4.home.lab Pending csr-lsdcc...","categories": [],
         "tags": ["openshift"],
