@@ -3,12 +3,12 @@ layout: single
 title: "Using logrotate"
 subtitle: ""
 date: 2019-02-14 20:45:00 +0100
-#background: '/img/posts/01.jpg'
+background: '/image/01.jpg'
 tags: ['logrotate', 'linux']
 ---
 
 1. create configuration file:
-```
+````
 bash-3.2# cat /etc/logrotate.d/myconf-logrotate.conf
 PATH_TO_FILE/LOG.FILE {
 daily
@@ -20,20 +20,18 @@ compresscmd /usr/bin/gzip
 notifempty
 copytruncate
 }
-```
-
-2. Testing
-````
- logrotate  /etc/logrotate.conf --force -d 
-
 ````
 
-3. Add a crontab job. A job should be run every hour
+2. Testing configuration
+````
+logrotate  /etc/logrotate.conf --force -d 
+````
+
+3. Add a crontab job. A job will be run every hour. 
 ````
 export EDITOR=vi
 crontab -e
 >> 0 * * * * /usr/sbin/logrotate /etc/logrotate.conf --force > /dev/null 2>&1
-
 ````
 
 Sources:

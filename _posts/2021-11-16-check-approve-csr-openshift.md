@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "Check and approve pendings csrs"
+title: "Check and approve pendings csrs in Openshift cluster"
 subtitle: ""
 date: 2021-11-16 18:30:00 +0100
 #background: '/img/posts/01.jpg'

@@ -1,6 +1,6 @@
 var store = [{
         "title": "Using logrotate",
-        "excerpt":"create configuration file: bash-3.2# cat /etc/logrotate.d/myconf-logrotate.conf PATH_TO_FILE/LOG.FILE { daily missingok rotate 10 compress delaycompress compresscmd /usr/bin/gzip notifempty copytruncate } Testing ```` logrotate /etc/logrotate.conf –force -d 3. Add a crontab job. A job should be run every hour export EDITOR=vi crontab -e 0 * * * * /usr/sbin/logrotate /etc/logrotate.conf –force &gt;...","categories": [],
+        "excerpt":"create configuration file: bash-3.2# cat /etc/logrotate.d/myconf-logrotate.conf PATH_TO_FILE/LOG.FILE { daily missingok rotate 10 compress delaycompress compresscmd /usr/bin/gzip notifempty copytruncate } Testing configuration logrotate /etc/logrotate.conf --force -d Add a crontab job. A job will be run every hour. export EDITOR=vi crontab -e &gt;&gt; 0 * * * * /usr/sbin/logrotate /etc/logrotate.conf --force &gt;...","categories": [],
         "tags": ["logrotate","linux"],
         "url": "/site/using-logrotate/",
         "teaser": null
@@ -59,7 +59,7 @@ var store = [{
         "url": "/site/edit-files-with-rmate/",
         "teaser": null
       },{
-        "title": "Check and approve pendings csrs",
+        "title": "Check and approve pendings csrs in Openshift cluster",
         "excerpt":"After installing Openshift cluster you should log in and check for csr. Moreover, I regularly controls if some csr should be approved or not. [admin@dns try]$ oc get csr NAME AGE SIGNERNAME REQUESTOR CONDITION csr-6m4m7 4m29s kubernetes.io/kube-apiserver-client-kubelet system:node:etcd-2.okd4.home.lab Approved,Issued csr-7qww9 4m13s kubernetes.io/kube-apiserver-client-kubelet system:node:okd4-compute-1.okd4.home.lab Approved,Issued csr-glzgb 4m29s kubernetes.io/kube-apiserver-client-kubelet system:node:okd4-control-plane-1.okd4.home.lab Pending csr-lsdcc...","categories": [],
         "tags": ["openshift"],
         "url": "/site/check-approve-csr-openshift/",

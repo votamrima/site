@@ -272,23 +272,17 @@ copytruncate
 }
 </code></pre></div>    </div>
   </li>
-  <li>Testing
-````
- logrotate  /etc/logrotate.conf –force -d</li>
+  <li>Testing configuration
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>logrotate  /etc/logrotate.conf --force -d 
+</code></pre></div>    </div>
+  </li>
+  <li>Add a crontab job. A job will be run every hour.
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>export EDITOR=vi
+crontab -e
+&gt;&gt; 0 * * * * /usr/sbin/logrotate /etc/logrotate.conf --force &gt; /dev/null 2&gt;&amp;1
+</code></pre></div>    </div>
+  </li>
 </ol>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-3. Add a crontab job. A job should be run every hour
-</code></pre></div></div>
-<p>export EDITOR=vi
-crontab -e</p>
-<blockquote>
-  <blockquote>
-    <p>0 * * * * /usr/sbin/logrotate /etc/logrotate.conf –force &gt; /dev/null 2&gt;&amp;1</p>
-  </blockquote>
-</blockquote>
-
-<p>````</p>
 
 <p>Sources:</p>
 
@@ -362,7 +356,7 @@ crontab -e</p>
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/site/check-approve-csr-openshift/" rel="permalink">Check and approve pendings csrs
+        <a href="/site/check-approve-csr-openshift/" rel="permalink">Check and approve pendings csrs in Openshift cluster
 </a>
       
     </h2>
