@@ -64,4 +64,10 @@ var store = [{
         "tags": ["openshift"],
         "url": "/site/check-approve-csr-openshift/",
         "teaser": null
+      },{
+        "title": "Create persistance storage for openshift registry",
+        "excerpt":"Set ip NFS Server and export a created share. A simple NFS is described here. Configure registry For creating an persistent volume I used to create setup_pv.yaml file with the following content: vim setup_pv.yml apiVersion: v1 kind: PersistentVolume metadata: name: test-pv spec: capacity: storage: 10Gi accessModes: - ReadWriteMany persistentVolumeReclaimPolicy: Retain...","categories": [],
+        "tags": ["openshift"],
+        "url": "/site/create-persistence-storage-for-openshift-registry/",
+        "teaser": null
       }]
