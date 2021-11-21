@@ -329,7 +329,7 @@ myusers                            Opaque                                1      
 </code></pre></div></div>
 
 <ol>
-  <li>Next step, is modify OAuth custom resource. You can create a new file and apply it using <code class="language-plaintext highlighter-rouge">oc create -f &lt;resource_file&gt;.yml</code> as it shown in openshift documentation. I exported oauth custom resource, added  and applied the modified one:
+  <li>In the Next step I modified OAuth custom resource. I could create a new file and apply it using <code class="language-plaintext highlighter-rouge">oc create -f &lt;resource_file&gt;.yml</code> as it shown in openshift documentation. But I prefer to export the existing oauth custom resource, modify <code class="language-plaintext highlighter-rouge">spec</code> section and apply the modified one:
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@ocp4 try]$ oc get oauth cluster -o yaml &gt; oauth_modify.yml
 </code></pre></div>    </div>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@ocp4 try]$ vim oauth_modify.yml 
@@ -361,7 +361,7 @@ oauth-openshift-777bfcd76c-wpqsq   1/1     Running       0          41s
 </code></pre></div></div>
 
 <ol>
-  <li>Next step, assign properly roles to the created users. For admin user I want to give full access to the openshift cluster. Therefore, it should applied <code class="language-plaintext highlighter-rouge">cluster-admin</code> role.</li>
+  <li>Here I assigned properly roles to the created users. For admin user I want to give full access to the openshift cluster. Therefore, it should applied <code class="language-plaintext highlighter-rouge">cluster-admin</code> role. Developer user will be granted to create new projects.</li>
 </ol>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@ocp4 try]$ oc adm policy add-cluster-role-to-user cluster-admin admin
@@ -380,13 +380,17 @@ admin
 </code></pre></div></div>
 
 <ol>
-  <li>Now I need to remove priviledge to create projects from users who are not graned wih admin role.
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@ocp4 ~]$ oc get clusterrolebinding | grep self-prov
+  <li>Before giving any role to developer user I am going to disabled priviledge to create projects for all users. This priviledge creates Openshift during installation by default.</li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@ocp4 ~]$ oc get clusterrolebinding | grep self-prov
 self-provisioners                                                           ClusterRole/self-provisioner                                                            36d
 [admin@ocp4 ~]$ 
-</code></pre></div>    </div>
-    <p>Describe a self-provisioners rolebinding. Check out the name of the cluster role and group to which it was assgned by default.</p>
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@ocp4 ~]$ oc describe clusterrolebinding self-provisioners
+</code></pre></div></div>
+
+<p>Describe a self-provisioners rolebinding. Check out the name of the cluster role and group to which it was assgned by default.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@ocp4 ~]$ oc describe clusterrolebinding self-provisioners
 Name:         self-provisioners
 Labels:       &lt;none&gt;
 Annotations:  rbac.authorization.kubernetes.io/autoupdate: true
@@ -398,11 +402,10 @@ Subjects:
   ----   ----                        ---------
   Group  system:authenticated:oauth  
 [admin@ocp4 ~]$ 
-</code></pre></div>    </div>
-  </li>
-</ol>
+</code></pre></div></div>
 
-<p>And remove a role from the group.</p>
+<p>And remove the <code class="language-plaintext highlighter-rouge">self-provisioner</code> role from the <code class="language-plaintext highlighter-rouge">system:authenticated:oauth</code> group</p>
+
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@ocp4 ~]$ oc adm policy remove-cluster-role-from-group self-provisioner system:authenticated:oauth
 Warning: Your changes may get lost whenever a master is restarted, unless you prevent reconciliation of this rolebinding using the following command: oc annotate clusterrolebinding.rbac self-provisioners 'rbac.authorization.kubernetes.io/autoupdate=false' --overwrite
 clusterrole.rbac.authorization.k8s.io/self-provisioner removed: "system:authenticated:oauth"
@@ -416,7 +419,7 @@ clusterrole.rbac.authorization.k8s.io/self-provisioner removed: "system:authenti
 </code></pre></div></div>
 
 <ol>
-  <li>Next step is giving priviledge to create new projects for developer user. Here, I proceeded following actions: created group, added developer user to this group and granted admin (not cluster-admin) role to the group.</li>
+  <li>And granting self-provisioner cluster role to developer user.</li>
 </ol>
 
 <p>Created a group for developer user and add the user into the group</p>
@@ -454,6 +457,7 @@ to build a new example application in Ruby. Or use kubectl to deploy a simple Ku
 
 [admin@ocp4 ~]$
 </code></pre></div></div>
+
 
         
       </section>

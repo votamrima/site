@@ -83,7 +83,7 @@ myusers                            Opaque                                1      
 
 ````
 
-4. Next step, is modify OAuth custom resource. You can create a new file and apply it using ``oc create -f <resource_file>.yml`` as it shown in openshift documentation. I exported oauth custom resource, added  and applied the modified one:
+4. In the Next step I modified OAuth custom resource. I could create a new file and apply it using ``oc create -f <resource_file>.yml`` as it shown in openshift documentation. But I prefer to export the existing oauth custom resource, modify ``spec`` section and apply the modified one:
 ````
 [admin@ocp4 try]$ oc get oauth cluster -o yaml > oauth_modify.yml
 ````
@@ -116,7 +116,7 @@ oauth-openshift-777bfcd76c-v2xzl   1/1     Running       0          49s
 oauth-openshift-777bfcd76c-wpqsq   1/1     Running       0          41s
 ````
 
-5. Next step, assign properly roles to the created users. For admin user I want to give full access to the openshift cluster. Therefore, it should applied ``cluster-admin`` role.  
+5. Here I assigned properly roles to the created users. For admin user I want to give full access to the openshift cluster. Therefore, it should applied ``cluster-admin`` role. Developer user will be granted to create new projects. 
 
 ````
 [admin@ocp4 try]$ oc adm policy add-cluster-role-to-user cluster-admin admin
@@ -134,13 +134,16 @@ Using project "default".
 admin
 ````
 
-6. Now I need to remove priviledge to create projects from users who are not graned wih admin role.
+6. Before giving any role to developer user I am going to disabled priviledge to create projects for all users. This priviledge creates Openshift during installation by default.
+
 ````
 [admin@ocp4 ~]$ oc get clusterrolebinding | grep self-prov
 self-provisioners                                                           ClusterRole/self-provisioner                                                            36d
 [admin@ocp4 ~]$ 
 ````
+
 Describe a self-provisioners rolebinding. Check out the name of the cluster role and group to which it was assgned by default. 
+
 ````
 [admin@ocp4 ~]$ oc describe clusterrolebinding self-provisioners
 Name:         self-provisioners
@@ -156,7 +159,8 @@ Subjects:
 [admin@ocp4 ~]$ 
 ````
 
-And remove a role from the group. 
+And remove the ``self-provisioner`` role from the ``system:authenticated:oauth`` group
+
 ````
 [admin@ocp4 ~]$ oc adm policy remove-cluster-role-from-group self-provisioner system:authenticated:oauth
 Warning: Your changes may get lost whenever a master is restarted, unless you prevent reconciliation of this rolebinding using the following command: oc annotate clusterrolebinding.rbac self-provisioners 'rbac.authorization.kubernetes.io/autoupdate=false' --overwrite
@@ -171,7 +175,7 @@ Thus will be removed self-provisioners rolebinding and will be disabled priviled
 [admin@ocp4 ~]$ 
 ````
 
-7. Next step is giving priviledge to create new projects for developer user. Here, I proceeded following actions: created group, added developer user to this group and granted admin (not cluster-admin) role to the group.
+7. And granting self-provisioner cluster role to developer user. 
 
 Created a group for developer user and add the user into the group
 ````
@@ -211,3 +215,4 @@ to build a new example application in Ruby. Or use kubectl to deploy a simple Ku
 
 [admin@ocp4 ~]$
 ````
+
