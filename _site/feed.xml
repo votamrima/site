@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="http://localhost:4000/site/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/site/" rel="alternate" type="text/html" /><updated>2021-11-21T13:17:12+01:00</updated><id>http://localhost:4000/site/feed.xml</id><title type="html"></title><subtitle>.</subtitle><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><entry><title type="html">Configure HTPasswd Identity Provider and create OAuth users for Openshift</title><link href="http://localhost:4000/site/create-openshift-oauth-users/" rel="alternate" type="text/html" title="Configure HTPasswd Identity Provider and create OAuth users for Openshift" /><published>2021-11-19T18:30:00+01:00</published><updated>2021-11-19T18:30:00+01:00</updated><id>http://localhost:4000/site/create-openshift-oauth-users</id><content type="html" xml:base="http://localhost:4000/site/create-openshift-oauth-users/">&lt;h3 id=&quot;using-default-user&quot;&gt;Using default user&lt;/h3&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="http://localhost:4000/site/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/site/" rel="alternate" type="text/html" /><updated>2021-11-21T15:58:02+01:00</updated><id>http://localhost:4000/site/feed.xml</id><title type="html"></title><subtitle>.</subtitle><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><entry><title type="html">Configure HTPasswd Identity Provider and create OAuth users for Openshift</title><link href="http://localhost:4000/site/create-openshift-oauth-users/" rel="alternate" type="text/html" title="Configure HTPasswd Identity Provider and create OAuth users for Openshift" /><published>2021-11-19T18:30:00+01:00</published><updated>2021-11-19T18:30:00+01:00</updated><id>http://localhost:4000/site/create-openshift-oauth-users</id><content type="html" xml:base="http://localhost:4000/site/create-openshift-oauth-users/">&lt;h3 id=&quot;using-default-user&quot;&gt;Using default user&lt;/h3&gt;
 &lt;p&gt;During installation Openshift creates default &lt;em&gt;kubeadmin&lt;/em&gt; with a password. Password you can find in installation folder: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;installation_folder&amp;gt;/auth/kubeadmin-password&lt;/code&gt;&lt;/p&gt;
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@dns try]$ cat install_dir/auth/kubeadmin-password 
-bVM5i-CxeZI-NDvoS-d9wtV[admin@dns try]$ 
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@ocp4 try]$ cat install_dir/auth/kubeadmin-password 
+bVM5i-CxeZI-NDvoS-d9wtV[admin@ocp4 try]$ 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Additionally, under ```&lt;installation_folder&gt;/auth/``is located *kubeconfig* file that can be used for loging to openshift cluster and working with cluster as well.&lt;/installation_folder&gt;&lt;/p&gt;
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@dns try]$ oc --kubeconfig install_dir/auth/kubeconfig get node
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@ocp4 try]$ oc --kubeconfig install_dir/auth/kubeconfig get node
 NAME                                 STATUS     ROLES    AGE   VERSION
 etcd-2.okd4.home.lab                 Ready      master   35d   v1.20.0+558d959-1089
 etcd-3.okd4.home.lab                 Ready      master   28d   v1.20.0+558d959-1089
@@ -20,7 +20,181 @@ okd4-control-plane-1.okd4.home.lab   Ready      master   35d   v1.20.0+558d959-1
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;export KUBECONFIG=/opt/install_dir/auth/kubeconfig
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;using-oauth&quot;&gt;Using OAuth&lt;/h3&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><category term="openshift" /><category term="htpasswd" /><category term="oauth" /><summary type="html">Using default user During installation Openshift creates default kubeadmin with a password. Password you can find in installation folder: &amp;lt;installation_folder&amp;gt;/auth/kubeadmin-password</summary></entry><entry><title type="html">Create persistance storage for openshift registry</title><link href="http://localhost:4000/site/create-persistence-storage-for-openshift-registry/" rel="alternate" type="text/html" title="Create persistance storage for openshift registry" /><published>2021-11-17T16:30:00+01:00</published><updated>2021-11-17T16:30:00+01:00</updated><id>http://localhost:4000/site/create-persistence-storage-for-openshift-registry</id><content type="html" xml:base="http://localhost:4000/site/create-persistence-storage-for-openshift-registry/">&lt;h3 id=&quot;set-ip-nfs-server-and-export-a-created-share&quot;&gt;Set ip NFS Server and export a created share.&lt;/h3&gt;
+&lt;h3 id=&quot;oauth-and-identity-providers&quot;&gt;OAuth and identity providers&lt;/h3&gt;
+&lt;p&gt;Authentication in Openshift is supported by Authentication Operator which runs on OAuth server. Users attempt to authenticate to the Opeshift API using using OAuth access tokens.&lt;/p&gt;
+
+&lt;p&gt;In order to use OAuth server it should be enabled and configured as well. Using kubeadmin user I specifed &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HTPasswd&lt;/code&gt; identity provider. Generally, the following list of identity providers are able to configure and use in Openshift: HTPasswd, Keystone, LDAP, Basic authentication, Request header, GitHub or GitHub Enterprise, GitLab, Google, OpenID Connect. More in detail about each of the provider is given in &lt;a href=&quot;https://docs.openshift.com/container-platform/4.7/authentication/understanding-identity-provider.html&quot;&gt;Openhift Documentation&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;configuring-htpasswd-identity-provider&quot;&gt;Configuring HTPasswd identity provider&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;Create an HTPasswd authentication file using following format: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;htpasswd -c -b -B &amp;lt;filename&amp;gt; &amp;lt;username&amp;gt; &amp;lt;password&amp;gt;&lt;/code&gt;. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-c&lt;/code&gt; parameter creates file. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-b&lt;/code&gt; uses a password which is given in command from the command line. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-B&lt;/code&gt; - Force bcrypt encryption of the password&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@ocp4 try]$ htpasswd -c -b -B my_ocp_users admin admin
+Adding password for user admin
+[admin@ocp4 try]$ 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Check content of the created file:&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@ocp4 try]$ cat my_ocp_users 
+admin:$2y$05$XteSEzWTBX8HlzqHQv2ryecUY5On/7DBfTSnCjWfyCFlDhaDdufcq
+[admin@ocp4 try]$ 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Create another user. Do not use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-c&lt;/code&gt; parameter. In this case you create a file again with the new content.
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@ocp4 try]$ htpasswd -b -B my_ocp_users developer developer
+Adding password for user developer
+[admin@ocp4 try]$ cat my_ocp_users 
+admin:$2y$05$XteSEzWTBX8HlzqHQv2ryecUY5On/7DBfTSnCjWfyCFlDhaDdufcq
+developer:$2y$05$Ab1TxMQV0T7te6NmKXaALOX/6XsFHsV06LYcaZHwIdIDpkJiObN2m
+[admin@ocp4 try]$ 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Create a secret from created file. Here the secret named as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;myusers&lt;/code&gt; and used a prefix &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;htpasswd&lt;/code&gt; in front of the the path to the file. Moreover, the secret should be create in namespace &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;openshift-config&lt;/code&gt;
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@ocp4 try]$ oc create secret generic myusers --from-file htpasswd=my_ocp_users -n openshift-config
+secret/localusers created
+[admin@ocp4 try]$ 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Check the created secret:&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@ocp4 try]$ oc get secrets -n openshift-config
+NAME                                  TYPE                                  DATA   AGE
+......
+myusers                            Opaque                                1      27s
+.......
+[admin@ocp4 try]$ 
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Next step, is modify OAuth custom resource. You can create a new file and apply it using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;oc create -f &amp;lt;resource_file&amp;gt;.yml&lt;/code&gt; as it shown in openshift documentation. I exported oauth custom resource, added  and applied the modified one:
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@ocp4 try]$ oc get oauth cluster -o yaml &amp;gt; oauth_modify.yml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@ocp4 try]$ vim oauth_modify.yml 
+apiVersion: config.openshift.io/v1
+kind: OAuth
+.........
+spec:
+  identityProviders:
+  - htpasswd:
+   fileData:
+     name: myusers
+ mappingMethod: claim
+ name: myusers
+ type: HTPasswd
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@ocp4 try]$ oc replace -f oauth_modify.yml 
+oauth.config.openshift.io/cluster replaced
+[admin@ocp4 try]$ 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;And check if pods of openshift-authentication namespaces are being recreated:&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@ocp4 try]$ oc get pods -n openshift-authentication
+NAME                               READY   STATUS        RESTARTS   AGE
+oauth-openshift-647d98d4db-pmtx6   0/1     Terminating   0          26d
+oauth-openshift-777bfcd76c-v2xzl   1/1     Running       0          49s
+oauth-openshift-777bfcd76c-wpqsq   1/1     Running       0          41s
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Next step, assign properly roles to the created users. For admin user I want to give full access to the openshift cluster. Therefore, it should applied &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cluster-admin&lt;/code&gt; role.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@ocp4 try]$ oc adm policy add-cluster-role-to-user cluster-admin admin
+Warning: User 'admin' not found
+clusterrole.rbac.authorization.k8s.io/cluster-admin added: &quot;admin&quot;
+[admin@ocp4 try]$ 
+[admin@ocp4 ~]$ oc login -u admin -p admin oauth-openshift.okd4.home.lab:6443
+Login successful.
+
+You have access to 63 projects, the list has been suppressed. You can list all projects with 'oc projects'
+
+Using project &quot;default&quot;.
+[admin@ocp4 ~]$ 
+[admin@ocp4 ~]$ oc whoami 
+admin
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Now I need to remove priviledge to create projects from users who are not graned wih admin role.
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@ocp4 ~]$ oc get clusterrolebinding | grep self-prov
+self-provisioners                                                           ClusterRole/self-provisioner                                                            36d
+[admin@ocp4 ~]$ 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;p&gt;Describe a self-provisioners rolebinding. Check out the name of the cluster role and group to which it was assgned by default.&lt;/p&gt;
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@ocp4 ~]$ oc describe clusterrolebinding self-provisioners
+Name:         self-provisioners
+Labels:       &amp;lt;none&amp;gt;
+Annotations:  rbac.authorization.kubernetes.io/autoupdate: true
+Role:
+  Kind:  ClusterRole
+  Name:  self-provisioner
+Subjects:
+  Kind   Name                        Namespace
+  ----   ----                        ---------
+  Group  system:authenticated:oauth  
+[admin@ocp4 ~]$ 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;And remove a role from the group.&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@ocp4 ~]$ oc adm policy remove-cluster-role-from-group self-provisioner system:authenticated:oauth
+Warning: Your changes may get lost whenever a master is restarted, unless you prevent reconciliation of this rolebinding using the following command: oc annotate clusterrolebinding.rbac self-provisioners 'rbac.authorization.kubernetes.io/autoupdate=false' --overwrite
+clusterrole.rbac.authorization.k8s.io/self-provisioner removed: &quot;system:authenticated:oauth&quot;
+[admin@ocp4 ~]$ 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Thus will be removed self-provisioners rolebinding and will be disabled priviledge to create projects for all users.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@ocp4 ~]$ oc get clusterrolebinding | grep self-prov
+[admin@ocp4 ~]$ 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Next step is giving priviledge to create new projects for developer user. Here, I proceeded following actions: created group, added developer user to this group and granted admin (not cluster-admin) role to the group.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Created a group for developer user and add the user into the group&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@ocp4 ~]$ oc adm groups new developers
+group.user.openshift.io/developers created
+[admin@ocp4 ~]$ 
+[admin@ocp4 ~]$ oc adm groups add-users developers developer
+group.user.openshift.io/developers added: &quot;developer&quot;
+[admin@ocp4 ~]$ 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Assigned self-provisioner role to developers group:&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@ocp4 ~]$ oc adm policy add-cluster-role-to-group self-provisioner developers
+clusterrole.rbac.authorization.k8s.io/self-provisioner added: &quot;developers&quot;
+[admin@ocp4 ~]$ 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Verified result:&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@ocp4 ~]$ oc login -u developer -p developer
+Login successful.
+
+You have one project on this server: &quot;default&quot;
+
+Using project &quot;default&quot;.
+[admin@ocp4 ~]$ oc new-project test
+Now using project &quot;test&quot; on server &quot;https://localhost:6443&quot;.
+
+You can add applications to this project with the 'new-app' command. For example, try:
+
+    oc new-app rails-postgresql-example
+
+to build a new example application in Ruby. Or use kubectl to deploy a simple Kubernetes application:
+
+    kubectl create deployment hello-node --image=k8s.gcr.io/serve_hostname
+
+[admin@ocp4 ~]$
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><category term="openshift" /><category term="htpasswd" /><category term="oauth" /><summary type="html">Using default user During installation Openshift creates default kubeadmin with a password. Password you can find in installation folder: &amp;lt;installation_folder&amp;gt;/auth/kubeadmin-password</summary></entry><entry><title type="html">Create persistance storage for openshift registry</title><link href="http://localhost:4000/site/create-persistence-storage-for-openshift-registry/" rel="alternate" type="text/html" title="Create persistance storage for openshift registry" /><published>2021-11-17T16:30:00+01:00</published><updated>2021-11-17T16:30:00+01:00</updated><id>http://localhost:4000/site/create-persistence-storage-for-openshift-registry</id><content type="html" xml:base="http://localhost:4000/site/create-persistence-storage-for-openshift-registry/">&lt;h3 id=&quot;set-ip-nfs-server-and-export-a-created-share&quot;&gt;Set ip NFS Server and export a created share.&lt;/h3&gt;
 
 &lt;p&gt;A simple NFS is described &lt;a href=&quot;/site/creating-simple-nfs-share/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
 
