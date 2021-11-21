@@ -259,7 +259,7 @@
         
         <p>After installing Openshift cluster you should log in and check for csr. Moreover, I regularly controls if some csr have to be approved or not.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@dns try]$ oc get csr
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@ocp4 try]$ oc get csr
 NAME        AGE     SIGNERNAME                                    REQUESTOR                                        CONDITION
 csr-6m4m7   4m29s   kubernetes.io/kube-apiserver-client-kubelet   system:node:etcd-2.okd4.home.lab                 Approved,Issued
 csr-7qww9   4m13s   kubernetes.io/kube-apiserver-client-kubelet   system:node:okd4-compute-1.okd4.home.lab         Approved,Issued
@@ -273,17 +273,17 @@ csr-nwjpv   35s     kubernetes.io/kube-apiserver-client-kubelet   system:node:ok
 </code></pre></div></div>
 
 <p>And use <code class="language-plaintext highlighter-rouge">jq</code> tool to verify all csr at once:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@dns try]$ oc get csr -ojson | jq -r '.items[] | select(.status == {} ) | .metadata.name' | xargs oc adm certificate approve
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@ocp4 try]$ oc get csr -ojson | jq -r '.items[] | select(.status == {} ) | .metadata.name' | xargs oc adm certificate approve
 certificatesigningrequest.certificates.k8s.io/csr-glzgb approved
 certificatesigningrequest.certificates.k8s.io/csr-lsdcc approved
-[admin@dns try]$ oc get csr
+[admin@ocp4 try]$ oc get csr
 NAME        AGE     SIGNERNAME                                    REQUESTOR                                        CONDITION
 csr-6m4m7   5m5s    kubernetes.io/kube-apiserver-client-kubelet   system:node:etcd-2.okd4.home.lab                 Approved,Issued
 csr-7qww9   4m49s   kubernetes.io/kube-apiserver-client-kubelet   system:node:okd4-compute-1.okd4.home.lab         Approved,Issued
 csr-glzgb   5m5s    kubernetes.io/kube-apiserver-client-kubelet   system:node:okd4-control-plane-1.okd4.home.lab   Approved,Issued
 csr-lsdcc   4m55s   kubernetes.io/kube-apiserver-client-kubelet   system:node:etcd-3.okd4.home.lab                 Approved,Issued
 csr-nwjpv   71s     kubernetes.io/kube-apiserver-client-kubelet   system:node:okd4-control-plane-1.okd4.home.lab   Approved,Issued
-[admin@dns try]$ 
+[admin@ocp4 try]$ 
 </code></pre></div></div>
 
 

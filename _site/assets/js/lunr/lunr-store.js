@@ -60,7 +60,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Check and approve pendings csrs in Openshift cluster",
-        "excerpt":"After installing Openshift cluster you should log in and check for csr. Moreover, I regularly controls if some csr have to be approved or not. [admin@dns try]$ oc get csr NAME AGE SIGNERNAME REQUESTOR CONDITION csr-6m4m7 4m29s kubernetes.io/kube-apiserver-client-kubelet system:node:etcd-2.okd4.home.lab Approved,Issued csr-7qww9 4m13s kubernetes.io/kube-apiserver-client-kubelet system:node:okd4-compute-1.okd4.home.lab Approved,Issued csr-glzgb 4m29s kubernetes.io/kube-apiserver-client-kubelet system:node:okd4-control-plane-1.okd4.home.lab Pending...","categories": [],
+        "excerpt":"After installing Openshift cluster you should log in and check for csr. Moreover, I regularly controls if some csr have to be approved or not. [admin@ocp4 try]$ oc get csr NAME AGE SIGNERNAME REQUESTOR CONDITION csr-6m4m7 4m29s kubernetes.io/kube-apiserver-client-kubelet system:node:etcd-2.okd4.home.lab Approved,Issued csr-7qww9 4m13s kubernetes.io/kube-apiserver-client-kubelet system:node:okd4-compute-1.okd4.home.lab Approved,Issued csr-glzgb 4m29s kubernetes.io/kube-apiserver-client-kubelet system:node:okd4-control-plane-1.okd4.home.lab Pending...","categories": [],
         "tags": ["openshift"],
         "url": "/site/check-approve-csr-openshift/",
         "teaser": null
