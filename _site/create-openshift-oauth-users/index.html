@@ -9,38 +9,38 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Using logrotate -</title>
-<meta name="description" content="create configuration file:     bash-3.2# cat /etc/logrotate.d/myconf-logrotate.conf PATH_TO_FILE/LOG.FILE { daily missingok rotate 10 compress delaycompress compresscmd /usr/bin/gzip notifempty copytruncate }">
+<!-- begin _includes/seo.html --><title>Configure HTPasswd Identity Provider and create OAuth users for Openshift -</title>
+<meta name="description" content="Using default user During installation Openshift creates default kubeadmin with a password. Password you can find in installation folder: &lt;installation_folder&gt;/auth/kubeadmin-password">
 
 
 
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="">
-<meta property="og:title" content="Using logrotate">
-<meta property="og:url" content="http://localhost:4000/site/using-logrotate/">
+<meta property="og:title" content="Configure HTPasswd Identity Provider and create OAuth users for Openshift">
+<meta property="og:url" content="http://localhost:4000/site/create-openshift-oauth-users/">
 
 
-  <meta property="og:description" content="create configuration file:     bash-3.2# cat /etc/logrotate.d/myconf-logrotate.conf PATH_TO_FILE/LOG.FILE { daily missingok rotate 10 compress delaycompress compresscmd /usr/bin/gzip notifempty copytruncate }">
-
-
-
-
-
-
-
-  <meta property="article:published_time" content="2019-02-14T20:45:00+01:00">
+  <meta property="og:description" content="Using default user During installation Openshift creates default kubeadmin with a password. Password you can find in installation folder: &lt;installation_folder&gt;/auth/kubeadmin-password">
 
 
 
 
 
-  
+
+
+  <meta property="article:published_time" content="2021-11-19T18:30:00+01:00">
+
+
+
+
 
   
 
+  
 
-<link rel="canonical" href="http://localhost:4000/site/using-logrotate/">
+
+<link rel="canonical" href="http://localhost:4000/site/create-openshift-oauth-users/">
 
 
 
@@ -151,7 +151,7 @@
         <span class="sep">/</span>
       
       
-        <li class="current">Using logrotate</li>
+        <li class="current">Configure HTPasswd Identity Provider and create OAuth users for Openshift</li>
       
     
   </ol>
@@ -222,145 +222,19 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Using logrotate">
-    <meta itemprop="description" content="  create configuration file:    bash-3.2# cat /etc/logrotate.d/myconf-logrotate.confPATH_TO_FILE/LOG.FILE {dailymissingokrotate 10compressdelaycompresscompresscmd /usr/bin/gzipnotifemptycopytruncate}      ">
-    <meta itemprop="datePublished" content="2019-02-14T20:45:00+01:00">
+    <meta itemprop="headline" content="Configure HTPasswd Identity Provider and create OAuth users for Openshift">
+    <meta itemprop="description" content="Using default userDuring installation Openshift creates default kubeadmin with a password. Password you can find in installation folder: &lt;installation_folder&gt;/auth/kubeadmin-password">
+    <meta itemprop="datePublished" content="2021-11-19T18:30:00+01:00">
     
 
     <div class="page__inner-wrap">
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="http://localhost:4000/site/using-logrotate/" class="u-url" itemprop="url">Using logrotate
+            <a href="http://localhost:4000/site/create-openshift-oauth-users/" class="u-url" itemprop="url">Configure HTPasswd Identity Provider and create OAuth users for Openshift
 </a>
           </h1>
           
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2019-02-14T20:45:00+01:00">February 14, 2019</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-        </header>
-      
-
-      <section class="page__content e-content" itemprop="text">
-        
-        <ol>
-  <li>create configuration file:
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bash-3.2# cat /etc/logrotate.d/myconf-logrotate.conf
-PATH_TO_FILE/LOG.FILE {
-daily
-missingok
-rotate 10
-compress
-delaycompress
-compresscmd /usr/bin/gzip
-notifempty
-copytruncate
-}
-</code></pre></div>    </div>
-  </li>
-  <li>Testing configuration
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>logrotate  /etc/logrotate.conf --force -d 
-</code></pre></div>    </div>
-  </li>
-  <li>Add a crontab job. A job will be run every hour.
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>export EDITOR=vi
-crontab -e
-&gt;&gt; 0 * * * * /usr/sbin/logrotate /etc/logrotate.conf --force &gt; /dev/null 2&gt;&amp;1
-</code></pre></div>    </div>
-  </li>
-</ol>
-
-<p>Sources:</p>
-
-<ol>
-  <li>man logrotate.conf and man logrotate</li>
-  <li><a href="https://crontab-generator.org/">Crontab Generator</a></li>
-  <li><a href="https://www.linode.com/docs/uptime/logs/use-logrotate-to-manage-log-files/">How to Use logrotate to Manage Log Files</a></li>
-</ol>
-
-        
-      </section>
-
-      <footer class="page__meta">
-        
-        
-  
-
-
-  
-
-  <p class="page__taxonomy">
-    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
-    <span itemprop="keywords">
-    
-      <a href="/site/tags/#linux" class="page__taxonomy-item p-category" rel="tag">linux</a><span class="sep">, </span>
-    
-      <a href="/site/tags/#logrotate" class="page__taxonomy-item p-category" rel="tag">logrotate</a>
-    
-    </span>
-  </p>
-
-
-
-
-        
-
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2019-02-14T20:45:00+01:00">February 14, 2019</time></p>
-
-      </footer>
-
-      
-
-      
-  <nav class="pagination">
-    
-      <a href="#" class="pagination--pager disabled">Previous</a>
-    
-    
-      <a href="/site/vagrant-cheetsheet/" class="pagination--pager" title="Cheatsheet for Vagrant
-">Next</a>
-    
-  </nav>
-
-    </div>
-
-    
-  </article>
-
-  
-  
-    <div class="page__related">
-      <h2 class="page__related-title">You may also enjoy</h2>
-      <div class="grid__wrapper">
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/site/create-openshift-oauth-users/" rel="permalink">Configure HTPasswd Identity Provider and create OAuth users for Openshift
-</a>
-      
-    </h2>
-    
 
   <p class="page__meta">
     
@@ -378,11 +252,91 @@ crontab -e
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">Using default user
-During installation Openshift creates default kubeadmin with a password. Password you can find in installation folder: &lt;installation_fo...</p>
-  </article>
-</div>
+        </header>
+      
 
+      <section class="page__content e-content" itemprop="text">
+        
+        <h3 id="using-default-user">Using default user</h3>
+<p>During installation Openshift creates default <em>kubeadmin</em> with a password. Password you can find in installation folder: <code class="language-plaintext highlighter-rouge">&lt;installation_folder&gt;/auth/kubeadmin-password</code></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@dns try]$ cat install_dir/auth/kubeadmin-password 
+bVM5i-CxeZI-NDvoS-d9wtV[admin@dns try]$ 
+</code></pre></div></div>
+
+<p>Additionally, under ```<installation_folder>/auth/``is located *kubeconfig* file that can be used for loging to openshift cluster and working with cluster as well.</installation_folder></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@dns try]$ oc --kubeconfig install_dir/auth/kubeconfig get node
+NAME                                 STATUS     ROLES    AGE   VERSION
+etcd-2.okd4.home.lab                 Ready      master   35d   v1.20.0+558d959-1089
+etcd-3.okd4.home.lab                 Ready      master   28d   v1.20.0+558d959-1089
+okd4-compute-1.okd4.home.lab         Ready      worker   35d   v1.20.0+558d959-1089
+okd4-control-plane-1.okd4.home.lab   Ready      master   35d   v1.20.0+558d959-1089
+</code></pre></div></div>
+
+<p>You can set kubeconfig to KUBECONFIG environment variable:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>export KUBECONFIG=/opt/install_dir/auth/kubeconfig
+</code></pre></div></div>
+
+<h3 id="using-oauth">Using OAuth</h3>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/site/tags/#htpasswd" class="page__taxonomy-item p-category" rel="tag">htpasswd</a><span class="sep">, </span>
+    
+      <a href="/site/tags/#oauth" class="page__taxonomy-item p-category" rel="tag">oauth</a><span class="sep">, </span>
+    
+      <a href="/site/tags/#openshift" class="page__taxonomy-item p-category" rel="tag">openshift</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2021-11-19T18:30:00+01:00">November 19, 2021</time></p>
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/site/create-persistence-storage-for-openshift-registry/" class="pagination--pager" title="Create persistance storage for openshift registry
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
         
           
 
@@ -490,6 +444,43 @@ During installation Openshift creates default kubeadmin with a password. Passwor
 
 
     <p class="archive__item-excerpt" itemprop="description">Sometimes we need to edit a file directly on Linux VM using Visual Studio Code.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/site/creating-simple-nfs-share/" rel="permalink">Creating a simple NFS share on centos
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2020-11-06T23:38:00+01:00">November 6, 2020</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">In this post is noted a way of creating a simple NFS share server on centos 8 machine.
 </p>
   </article>
 </div>

@@ -7,7 +7,7 @@ date: 2021-11-16 18:30:00 +0100
 tags: ['openshift']
 ---
  
-After installing Openshift cluster you should log in and check for csr. Moreover, I regularly controls if some csr should be approved or not.
+After installing Openshift cluster you should log in and check for csr. Moreover, I regularly controls if some csr have to be approved or not.
 
 ````
 [admin@dns try]$ oc get csr

@@ -60,7 +60,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Check and approve pendings csrs in Openshift cluster",
-        "excerpt":"After installing Openshift cluster you should log in and check for csr. Moreover, I regularly controls if some csr should be approved or not. [admin@dns try]$ oc get csr NAME AGE SIGNERNAME REQUESTOR CONDITION csr-6m4m7 4m29s kubernetes.io/kube-apiserver-client-kubelet system:node:etcd-2.okd4.home.lab Approved,Issued csr-7qww9 4m13s kubernetes.io/kube-apiserver-client-kubelet system:node:okd4-compute-1.okd4.home.lab Approved,Issued csr-glzgb 4m29s kubernetes.io/kube-apiserver-client-kubelet system:node:okd4-control-plane-1.okd4.home.lab Pending csr-lsdcc...","categories": [],
+        "excerpt":"After installing Openshift cluster you should log in and check for csr. Moreover, I regularly controls if some csr have to be approved or not. [admin@dns try]$ oc get csr NAME AGE SIGNERNAME REQUESTOR CONDITION csr-6m4m7 4m29s kubernetes.io/kube-apiserver-client-kubelet system:node:etcd-2.okd4.home.lab Approved,Issued csr-7qww9 4m13s kubernetes.io/kube-apiserver-client-kubelet system:node:okd4-compute-1.okd4.home.lab Approved,Issued csr-glzgb 4m29s kubernetes.io/kube-apiserver-client-kubelet system:node:okd4-control-plane-1.okd4.home.lab Pending...","categories": [],
         "tags": ["openshift"],
         "url": "/site/check-approve-csr-openshift/",
         "teaser": null
@@ -69,5 +69,11 @@ var store = [{
         "excerpt":"Set ip NFS Server and export a created share. A simple NFS is described here. Configure registry For creating an persistent volume I used to create setup_pv.yaml file with the following content: vim setup_pv.yml apiVersion: v1 kind: PersistentVolume metadata: name: test-pv spec: capacity: storage: 10Gi accessModes: - ReadWriteMany persistentVolumeReclaimPolicy: Retain...","categories": [],
         "tags": ["openshift"],
         "url": "/site/create-persistence-storage-for-openshift-registry/",
+        "teaser": null
+      },{
+        "title": "Configure HTPasswd Identity Provider and create OAuth users for Openshift",
+        "excerpt":"Using default user During installation Openshift creates default kubeadmin with a password. Password you can find in installation folder: &lt;installation_folder&gt;/auth/kubeadmin-password [admin@dns try]$ cat install_dir/auth/kubeadmin-password bVM5i-CxeZI-NDvoS-d9wtV[admin@dns try]$ Additionally, under ```/auth/``is located *kubeconfig* file that can be used for loging to openshift cluster and working with cluster as well. [admin@dns try]$ oc...","categories": [],
+        "tags": ["openshift","htpasswd","oauth"],
+        "url": "/site/create-openshift-oauth-users/",
         "teaser": null
       }]

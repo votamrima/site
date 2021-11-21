@@ -1,4 +1,26 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="http://localhost:4000/site/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/site/" rel="alternate" type="text/html" /><updated>2021-11-19T22:47:29+01:00</updated><id>http://localhost:4000/site/feed.xml</id><title type="html"></title><subtitle>.</subtitle><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><entry><title type="html">Create persistance storage for openshift registry</title><link href="http://localhost:4000/site/create-persistence-storage-for-openshift-registry/" rel="alternate" type="text/html" title="Create persistance storage for openshift registry" /><published>2021-11-17T16:30:00+01:00</published><updated>2021-11-17T16:30:00+01:00</updated><id>http://localhost:4000/site/create-persistence-storage-for-openshift-registry</id><content type="html" xml:base="http://localhost:4000/site/create-persistence-storage-for-openshift-registry/">&lt;h3 id=&quot;set-ip-nfs-server-and-export-a-created-share&quot;&gt;Set ip NFS Server and export a created share.&lt;/h3&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="http://localhost:4000/site/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/site/" rel="alternate" type="text/html" /><updated>2021-11-21T13:06:37+01:00</updated><id>http://localhost:4000/site/feed.xml</id><title type="html"></title><subtitle>.</subtitle><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><entry><title type="html">Configure HTPasswd Identity Provider and create OAuth users for Openshift</title><link href="http://localhost:4000/site/create-openshift-oauth-users/" rel="alternate" type="text/html" title="Configure HTPasswd Identity Provider and create OAuth users for Openshift" /><published>2021-11-19T18:30:00+01:00</published><updated>2021-11-19T18:30:00+01:00</updated><id>http://localhost:4000/site/create-openshift-oauth-users</id><content type="html" xml:base="http://localhost:4000/site/create-openshift-oauth-users/">&lt;h3 id=&quot;using-default-user&quot;&gt;Using default user&lt;/h3&gt;
+&lt;p&gt;During installation Openshift creates default &lt;em&gt;kubeadmin&lt;/em&gt; with a password. Password you can find in installation folder: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;installation_folder&amp;gt;/auth/kubeadmin-password&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@dns try]$ cat install_dir/auth/kubeadmin-password 
+bVM5i-CxeZI-NDvoS-d9wtV[admin@dns try]$ 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Additionally, under ```&lt;installation_folder&gt;/auth/``is located *kubeconfig* file that can be used for loging to openshift cluster and working with cluster as well.&lt;/installation_folder&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@dns try]$ oc --kubeconfig install_dir/auth/kubeconfig get node
+NAME                                 STATUS     ROLES    AGE   VERSION
+etcd-2.okd4.home.lab                 Ready      master   35d   v1.20.0+558d959-1089
+etcd-3.okd4.home.lab                 Ready      master   28d   v1.20.0+558d959-1089
+okd4-compute-1.okd4.home.lab         Ready      worker   35d   v1.20.0+558d959-1089
+okd4-control-plane-1.okd4.home.lab   Ready      master   35d   v1.20.0+558d959-1089
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;You can set kubeconfig to KUBECONFIG environment variable:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;export KUBECONFIG=/opt/install_dir/auth/kubeconfig
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;using-oauth&quot;&gt;Using OAuth&lt;/h3&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><category term="openshift" /><category term="htpasswd" /><category term="oauth" /><summary type="html">Using default user During installation Openshift creates default kubeadmin with a password. Password you can find in installation folder: &amp;lt;installation_folder&amp;gt;/auth/kubeadmin-password</summary></entry><entry><title type="html">Create persistance storage for openshift registry</title><link href="http://localhost:4000/site/create-persistence-storage-for-openshift-registry/" rel="alternate" type="text/html" title="Create persistance storage for openshift registry" /><published>2021-11-17T16:30:00+01:00</published><updated>2021-11-17T16:30:00+01:00</updated><id>http://localhost:4000/site/create-persistence-storage-for-openshift-registry</id><content type="html" xml:base="http://localhost:4000/site/create-persistence-storage-for-openshift-registry/">&lt;h3 id=&quot;set-ip-nfs-server-and-export-a-created-share&quot;&gt;Set ip NFS Server and export a created share.&lt;/h3&gt;
 
 &lt;p&gt;A simple NFS is described &lt;a href=&quot;/site/creating-simple-nfs-share/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
 
@@ -72,7 +94,7 @@ spec:
     pvc:
       claim:
   unsupportedConfigOverrides: null
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><category term="openshift" /><summary type="html">Set ip NFS Server and export a created share.</summary></entry><entry><title type="html">Check and approve pendings csrs in Openshift cluster</title><link href="http://localhost:4000/site/check-approve-csr-openshift/" rel="alternate" type="text/html" title="Check and approve pendings csrs in Openshift cluster" /><published>2021-11-16T18:30:00+01:00</published><updated>2021-11-16T18:30:00+01:00</updated><id>http://localhost:4000/site/check-approve-csr-openshift</id><content type="html" xml:base="http://localhost:4000/site/check-approve-csr-openshift/">&lt;p&gt;After installing Openshift cluster you should log in and check for csr. Moreover, I regularly controls if some csr should be approved or not.&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><category term="openshift" /><summary type="html">Set ip NFS Server and export a created share.</summary></entry><entry><title type="html">Check and approve pendings csrs in Openshift cluster</title><link href="http://localhost:4000/site/check-approve-csr-openshift/" rel="alternate" type="text/html" title="Check and approve pendings csrs in Openshift cluster" /><published>2021-11-16T18:30:00+01:00</published><updated>2021-11-16T18:30:00+01:00</updated><id>http://localhost:4000/site/check-approve-csr-openshift</id><content type="html" xml:base="http://localhost:4000/site/check-approve-csr-openshift/">&lt;p&gt;After installing Openshift cluster you should log in and check for csr. Moreover, I regularly controls if some csr have to be approved or not.&lt;/p&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@dns try]$ oc get csr
 NAME        AGE     SIGNERNAME                                    REQUESTOR                                        CONDITION
@@ -99,7 +121,7 @@ csr-glzgb   5m5s    kubernetes.io/kube-apiserver-client-kubelet   system:node:ok
 csr-lsdcc   4m55s   kubernetes.io/kube-apiserver-client-kubelet   system:node:etcd-3.okd4.home.lab                 Approved,Issued
 csr-nwjpv   71s     kubernetes.io/kube-apiserver-client-kubelet   system:node:okd4-control-plane-1.okd4.home.lab   Approved,Issued
 [admin@dns try]$ 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><category term="openshift" /><summary type="html">After installing Openshift cluster you should log in and check for csr. Moreover, I regularly controls if some csr should be approved or not.</summary></entry><entry><title type="html">Editing files in Linux VM using remote Visual Studio Code</title><link href="http://localhost:4000/site/edit-files-with-rmate/" rel="alternate" type="text/html" title="Editing files in Linux VM using remote Visual Studio Code" /><published>2021-10-18T19:30:00+02:00</published><updated>2021-10-18T19:30:00+02:00</updated><id>http://localhost:4000/site/edit-files-with-rmate</id><content type="html" xml:base="http://localhost:4000/site/edit-files-with-rmate/">&lt;p&gt;Sometimes we need to edit a file directly on Linux VM using Visual Studio Code.&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><category term="openshift" /><summary type="html">After installing Openshift cluster you should log in and check for csr. Moreover, I regularly controls if some csr have to be approved or not.</summary></entry><entry><title type="html">Editing files in Linux VM using remote Visual Studio Code</title><link href="http://localhost:4000/site/edit-files-with-rmate/" rel="alternate" type="text/html" title="Editing files in Linux VM using remote Visual Studio Code" /><published>2021-10-18T19:30:00+02:00</published><updated>2021-10-18T19:30:00+02:00</updated><id>http://localhost:4000/site/edit-files-with-rmate</id><content type="html" xml:base="http://localhost:4000/site/edit-files-with-rmate/">&lt;p&gt;Sometimes we need to edit a file directly on Linux VM using Visual Studio Code.&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;
@@ -471,65 +493,4 @@ puppet config print hiera_config&lt;/li&gt;
 
 &lt;ol&gt;
   &lt;li&gt;And that is all&lt;/li&gt;
-&lt;/ol&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><category term="hiera" /><category term="puppet" /><summary type="html">In this post I am trying to show how to configure hiera files on puppet master. For demonstration purpose I use a simple task that will create a folder. The main idea of this post is to get basic understand of hiera concept.</summary></entry><entry><title type="html">Cheatsheet for Vagrant</title><link href="http://localhost:4000/site/vagrant-cheetsheet/" rel="alternate" type="text/html" title="Cheatsheet for Vagrant" /><published>2019-06-03T17:38:00+02:00</published><updated>2019-06-03T17:38:00+02:00</updated><id>http://localhost:4000/site/vagrant-cheetsheet</id><content type="html" xml:base="http://localhost:4000/site/vagrant-cheetsheet/">&lt;h3 id=&quot;creating-a-vm&quot;&gt;Creating a VM&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vagrant init&lt;/code&gt; – Initialize Vagrant with a Vagrantfile and ./.vagrant directory, using no specified base image. Beforeyou can do vagrant up, you’ll need to specify a base image in the Vagrantfile.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vagrant init&lt;/code&gt; – Initialize Vagrant with a specific box. To find a box, go to the public Vagrant box catalog. When you find one you like, just replace it’s name with boxpath. For example, vagrant init ubuntu/trusty64.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;starting-a-vm&quot;&gt;Starting a VM&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vagrant up&lt;/code&gt; – starts vagrant environment (also provisions only on the FIRST vagrant up)&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vagrant resume&lt;/code&gt; – resume a suspended machine (vagrant up works just fine for this as well)&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vagrant provision&lt;/code&gt; – forces reprovisioning of the vagrant machine&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vagrant reload&lt;/code&gt; – restarts vagrant machine, loads new Vagrantfile configuration&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vagrant reload --provision&lt;/code&gt; – restart the virtual machine and force provisioning&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;getting-into-a-vm&quot;&gt;Getting into a VM&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vagrant ssh&lt;/code&gt; – connects to machine via SSH&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vagrant ssh&lt;/code&gt; – If you give your box a name in your Vagrantfile, you can ssh into it with boxname. Works from any directory.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;stopping-a-vm&quot;&gt;Stopping a VM&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vagrant halt&lt;/code&gt; – stops the vagrant machine&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vagrant suspend&lt;/code&gt; – suspends a virtual machine (remembers state)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;cleaning-up-a-vm&quot;&gt;Cleaning Up a VM&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vagrant destroy&lt;/code&gt; – stops and deletes all traces of the vagrant machine&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vagrant destroy -f&lt;/code&gt; – same as above, without confirmation&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;boxes&quot;&gt;Boxes&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vagrant box list&lt;/code&gt; – see a list of all installed boxes on your computer&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vagrant box add&lt;/code&gt; – download a box image to your computer&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vagrant box outdated&lt;/code&gt; – check for updates vagrant box update&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vagrant boxes remove&lt;/code&gt; – deletes a box from the machine&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vagrant package&lt;/code&gt; – packages a running virtualbox env in a reusable box&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;saving-progress&quot;&gt;Saving Progress&lt;/h3&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-vagrant snapshot save [options] [vm-name]&lt;/code&gt; – vm-name is often default. Allows us to save so that we can rollback at a later time&lt;/p&gt;
-
-&lt;h3 id=&quot;tips&quot;&gt;Tips&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vagrant -v&lt;/code&gt; – get the vagrant version&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vagrant status&lt;/code&gt; – outputs status of the vagrant machine&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vagrant global-status&lt;/code&gt; – outputs status of all vagrant machines&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vagrant global-status&lt;/code&gt; –prune – same as above, but prunes invalid entries&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vagrant provision --debug&lt;/code&gt; – use the debug flag to increase the verbosity of the output&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vagrant push&lt;/code&gt; – yes, vagrant can be configured to deploy code!&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vagrant up --provision | tee provision.log&lt;/code&gt; – Runs vagrant up, forces provisioning and logs all output to a file&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;plugins&quot;&gt;Plugins&lt;/h3&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/cogitatio/vagrant-hostsupdater&quot;&gt;vagrant-hostsupdater&lt;/a&gt;: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$ vagrant plugin install vagrant-hostsupdater&lt;/code&gt; to update your /etc/hosts file automatically each time you start/stop your vagrant box.&lt;/p&gt;
-
-&lt;h3 id=&quot;source&quot;&gt;Source&lt;/h3&gt;
-&lt;p&gt;Regularly check this &lt;a href=&quot;https://gist.github.com/wpscholar/a49594e2e2b918f4d0c4&quot;&gt;source&lt;/a&gt;&lt;/p&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><category term="puppet" /><summary type="html">Creating a VM vagrant init – Initialize Vagrant with a Vagrantfile and ./.vagrant directory, using no specified base image. Beforeyou can do vagrant up, you’ll need to specify a base image in the Vagrantfile. vagrant init – Initialize Vagrant with a specific box. To find a box, go to the public Vagrant box catalog. When you find one you like, just replace it’s name with boxpath. For example, vagrant init ubuntu/trusty64.</summary></entry></feed>
+&lt;/ol&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><category term="hiera" /><category term="puppet" /><summary type="html">In this post I am trying to show how to configure hiera files on puppet master. For demonstration purpose I use a simple task that will create a folder. The main idea of this post is to get basic understand of hiera concept.</summary></entry></feed>
