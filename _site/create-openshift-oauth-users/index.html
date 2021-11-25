@@ -264,7 +264,7 @@
 bVM5i-CxeZI-NDvoS-d9wtV[admin@ocp4 try]$ 
 </code></pre></div></div>
 
-<p>Additionally, under ```<installation_folder>/auth/``is located *kubeconfig* file that can be used for loging to openshift cluster and working with cluster as well.</installation_folder></p>
+<p>Additionally, under <code class="language-plaintext highlighter-rouge">&lt;installation_folder&gt;/auth/</code> is located <em>kubeconfig</em> file that can be used for loging to openshift cluster and working with cluster as well.</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@ocp4 try]$ oc --kubeconfig install_dir/auth/kubeconfig get node
 NAME                                 STATUS     ROLES    AGE   VERSION
@@ -285,9 +285,7 @@ okd4-control-plane-1.okd4.home.lab   Ready      master   35d   v1.20.0+558d959-1
 <p>In order to use OAuth server it should be enabled and configured as well. Using kubeadmin user I specifed <code class="language-plaintext highlighter-rouge">HTPasswd</code> identity provider. Generally, the following list of identity providers are able to configure and use in Openshift: HTPasswd, Keystone, LDAP, Basic authentication, Request header, GitHub or GitHub Enterprise, GitLab, Google, OpenID Connect. More in detail about each of the provider is given in <a href="https://docs.openshift.com/container-platform/4.7/authentication/understanding-identity-provider.html">Openhift Documentation</a></p>
 
 <h3 id="configuring-htpasswd-identity-provider">Configuring HTPasswd identity provider</h3>
-<ol>
-  <li>Create an HTPasswd authentication file using following format: <code class="language-plaintext highlighter-rouge">htpasswd -c -b -B &lt;filename&gt; &lt;username&gt; &lt;password&gt;</code>. <code class="language-plaintext highlighter-rouge">-c</code> parameter creates file. <code class="language-plaintext highlighter-rouge">-b</code> uses a password which is given in command from the command line. <code class="language-plaintext highlighter-rouge">-B</code> - Force bcrypt encryption of the password</li>
-</ol>
+<p>Create an HTPasswd authentication file using following format: <code class="language-plaintext highlighter-rouge">htpasswd -c -b -B &lt;filename&gt; &lt;username&gt; &lt;password&gt;</code>. <code class="language-plaintext highlighter-rouge">-c</code> parameter creates file. <code class="language-plaintext highlighter-rouge">-b</code> uses a password which is given in command from the command line. <code class="language-plaintext highlighter-rouge">-B</code> - Force bcrypt encryption of the password</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@ocp4 try]$ htpasswd -c -b -B my_ocp_users admin admin
 Adding password for user admin
@@ -300,25 +298,22 @@ admin:$2y$05$XteSEzWTBX8HlzqHQv2ryecUY5On/7DBfTSnCjWfyCFlDhaDdufcq
 [admin@ocp4 try]$ 
 </code></pre></div></div>
 
-<ol>
-  <li>Create another user. Do not use <code class="language-plaintext highlighter-rouge">-c</code> parameter. In this case you create a file again with the new content.
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@ocp4 try]$ htpasswd -b -B my_ocp_users developer developer
+<p>Create another user. Do not use <code class="language-plaintext highlighter-rouge">-c</code> parameter. In this case you create a file again with the new content.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@ocp4 try]$ htpasswd -b -B my_ocp_users developer developer
 Adding password for user developer
 [admin@ocp4 try]$ cat my_ocp_users 
 admin:$2y$05$XteSEzWTBX8HlzqHQv2ryecUY5On/7DBfTSnCjWfyCFlDhaDdufcq
 developer:$2y$05$Ab1TxMQV0T7te6NmKXaALOX/6XsFHsV06LYcaZHwIdIDpkJiObN2m
 [admin@ocp4 try]$ 
-</code></pre></div>    </div>
-  </li>
-  <li>Create a secret from created file. Here the secret named as <code class="language-plaintext highlighter-rouge">myusers</code> and used a prefix <code class="language-plaintext highlighter-rouge">htpasswd</code> in front of the the path to the file. Moreover, the secret should be create in namespace <code class="language-plaintext highlighter-rouge">openshift-config</code>
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@ocp4 try]$ oc create secret generic myusers --from-file htpasswd=my_ocp_users -n openshift-config
+</code></pre></div></div>
+
+<p>Create a secret from created file. Here the secret named as <code class="language-plaintext highlighter-rouge">myusers</code> and used a prefix <code class="language-plaintext highlighter-rouge">htpasswd</code> in front of the the path to the file. Moreover, the secret should be create in namespace <code class="language-plaintext highlighter-rouge">openshift-config</code></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@ocp4 try]$ oc create secret generic myusers --from-file htpasswd=my_ocp_users -n openshift-config
 secret/localusers created
 [admin@ocp4 try]$ 
-</code></pre></div>    </div>
-  </li>
-</ol>
+</code></pre></div></div>
 
-<p>Check the created secret:</p>
+<p>Checking out created secret:</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@ocp4 try]$ oc get secrets -n openshift-config
 NAME                                  TYPE                                  DATA   AGE
 ......
@@ -328,29 +323,26 @@ myusers                            Opaque                                1      
 
 </code></pre></div></div>
 
-<ol>
-  <li>In the Next step I modified OAuth custom resource. I could create a new file and apply it using <code class="language-plaintext highlighter-rouge">oc create -f &lt;resource_file&gt;.yml</code> as it shown in openshift documentation. But I prefer to export the existing oauth custom resource, modify <code class="language-plaintext highlighter-rouge">spec</code> section and apply the modified one:
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@ocp4 try]$ oc get oauth cluster -o yaml &gt; oauth_modify.yml
-</code></pre></div>    </div>
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@ocp4 try]$ vim oauth_modify.yml 
+<p>On next step I modified OAuth custom resource. It was able to create a new file and apply it using <code class="language-plaintext highlighter-rouge">oc create -f &lt;resource_file&gt;.yml</code> as it shown in openshift documentation. But I prefer to export the existing oauth custom resource, modify <code class="language-plaintext highlighter-rouge">spec</code> section and apply the modified one:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@ocp4 try]$ oc get oauth cluster -o yaml &gt; oauth_modify.yml
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@ocp4 try]$ vim oauth_modify.yml 
 apiVersion: config.openshift.io/v1
 kind: OAuth
 .........
 spec:
   identityProviders:
   - htpasswd:
-   fileData:
-     name: myusers
- mappingMethod: claim
- name: myusers
- type: HTPasswd
-</code></pre></div>    </div>
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@ocp4 try]$ oc replace -f oauth_modify.yml 
+      fileData:
+        name: myusers
+    mappingMethod: claim
+    name: myusers
+    type: HTPasswd
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@ocp4 try]$ oc replace -f oauth_modify.yml 
 oauth.config.openshift.io/cluster replaced
 [admin@ocp4 try]$ 
-</code></pre></div>    </div>
-  </li>
-</ol>
+</code></pre></div></div>
 
 <p>And check if pods of openshift-authentication namespaces are being recreated:</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@ocp4 try]$ oc get pods -n openshift-authentication
@@ -360,9 +352,7 @@ oauth-openshift-777bfcd76c-v2xzl   1/1     Running       0          49s
 oauth-openshift-777bfcd76c-wpqsq   1/1     Running       0          41s
 </code></pre></div></div>
 
-<ol>
-  <li>Here I assigned properly roles to the created users. For admin user I want to give full access to the openshift cluster. Therefore, it should applied <code class="language-plaintext highlighter-rouge">cluster-admin</code> role. Developer user will be granted to create new projects.</li>
-</ol>
+<p>Here I assigned properly roles to the created users. For admin user I want to give full access to the openshift cluster. Therefore, it should applied <code class="language-plaintext highlighter-rouge">cluster-admin</code> role. Developer user will be granted to create new projects.</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@ocp4 try]$ oc adm policy add-cluster-role-to-user cluster-admin admin
 Warning: User 'admin' not found
@@ -379,12 +369,10 @@ Using project "default".
 admin
 </code></pre></div></div>
 
-<ol>
-  <li>Before giving any role to developer user I am going to disabled priviledge to create projects for all users. This priviledge creates Openshift during installation by default.</li>
-</ol>
+<p>Before giving any role to developer user I am going to disabled priviledge to create projects for all users. This priviledge creates Openshift during installation by default.</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@ocp4 ~]$ oc get clusterrolebinding | grep self-prov
-self-provisioners                                                           ClusterRole/self-provisioner                                                            36d
+self-provisioners                        ClusterRole/self-provisioner             36d
 [admin@ocp4 ~]$ 
 </code></pre></div></div>
 
@@ -407,7 +395,8 @@ Subjects:
 <p>And remove the <code class="language-plaintext highlighter-rouge">self-provisioner</code> role from the <code class="language-plaintext highlighter-rouge">system:authenticated:oauth</code> group</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@ocp4 ~]$ oc adm policy remove-cluster-role-from-group self-provisioner system:authenticated:oauth
-Warning: Your changes may get lost whenever a master is restarted, unless you prevent reconciliation of this rolebinding using the following command: oc annotate clusterrolebinding.rbac self-provisioners 'rbac.authorization.kubernetes.io/autoupdate=false' --overwrite
+Warning: Your changes may get lost whenever a master is restarted, unless you prevent reconciliation of this rolebinding using the following command: 
+oc annotate clusterrolebinding.rbac self-provisioners 'rbac.authorization.kubernetes.io/autoupdate=false' --overwrite
 clusterrole.rbac.authorization.k8s.io/self-provisioner removed: "system:authenticated:oauth"
 [admin@ocp4 ~]$ 
 </code></pre></div></div>
@@ -418,9 +407,7 @@ clusterrole.rbac.authorization.k8s.io/self-provisioner removed: "system:authenti
 [admin@ocp4 ~]$ 
 </code></pre></div></div>
 
-<ol>
-  <li>And granting self-provisioner cluster role to developer user.</li>
-</ol>
+<p>And granting self-provisioner cluster role to developer user.</p>
 
 <p>Created a group for developer user and add the user into the group</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@ocp4 ~]$ oc adm groups new developers
@@ -432,12 +419,14 @@ group.user.openshift.io/developers added: "developer"
 </code></pre></div></div>
 
 <p>Assigned self-provisioner role to developers group:</p>
+
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@ocp4 ~]$ oc adm policy add-cluster-role-to-group self-provisioner developers
 clusterrole.rbac.authorization.k8s.io/self-provisioner added: "developers"
 [admin@ocp4 ~]$ 
 </code></pre></div></div>
 
 <p>Verified result:</p>
+
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@ocp4 ~]$ oc login -u developer -p developer
 Login successful.
 

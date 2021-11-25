@@ -72,7 +72,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Configure HTPasswd Identity Provider and create OAuth users for Openshift",
-        "excerpt":"Using default user During installation Openshift creates default kubeadmin with a password. Password you can find in installation folder: &lt;installation_folder&gt;/auth/kubeadmin-password [admin@ocp4 try]$ cat install_dir/auth/kubeadmin-password bVM5i-CxeZI-NDvoS-d9wtV[admin@ocp4 try]$ Additionally, under ```/auth/``is located *kubeconfig* file that can be used for loging to openshift cluster and working with cluster as well. [admin@ocp4 try]$ oc...","categories": [],
+        "excerpt":"Using default user During installation Openshift creates default kubeadmin with a password. Password you can find in installation folder: &lt;installation_folder&gt;/auth/kubeadmin-password [admin@ocp4 try]$ cat install_dir/auth/kubeadmin-password bVM5i-CxeZI-NDvoS-d9wtV[admin@ocp4 try]$ Additionally, under &lt;installation_folder&gt;/auth/ is located kubeconfig file that can be used for loging to openshift cluster and working with cluster as well. [admin@ocp4 try]$...","categories": [],
         "tags": ["openshift","htpasswd","oauth"],
         "url": "/site/create-openshift-oauth-users/",
         "teaser": null

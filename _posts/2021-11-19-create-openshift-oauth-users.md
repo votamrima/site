@@ -15,7 +15,7 @@ During installation Openshift creates default *kubeadmin* with a password. Passw
 bVM5i-CxeZI-NDvoS-d9wtV[admin@ocp4 try]$ 
 ````
 
-Additionally, under ```<installation_folder>/auth/``is located *kubeconfig* file that can be used for loging to openshift cluster and working with cluster as well.
+Additionally, under ``<installation_folder>/auth/`` is located *kubeconfig* file that can be used for loging to openshift cluster and working with cluster as well.
 
 ````
 [admin@ocp4 try]$ oc --kubeconfig install_dir/auth/kubeconfig get node
@@ -40,7 +40,7 @@ In order to use OAuth server it should be enabled and configured as well. Using 
 
 
 ### Configuring HTPasswd identity provider
-1. Create an HTPasswd authentication file using following format: ``htpasswd -c -b -B <filename> <username> <password>``. ``-c`` parameter creates file. ``-b`` uses a password which is given in command from the command line. ``-B`` - Force bcrypt encryption of the password
+Create an HTPasswd authentication file using following format: ``htpasswd -c -b -B <filename> <username> <password>``. ``-c`` parameter creates file. ``-b`` uses a password which is given in command from the command line. ``-B`` - Force bcrypt encryption of the password
 
 ````
 [admin@ocp4 try]$ htpasswd -c -b -B my_ocp_users admin admin
@@ -55,7 +55,7 @@ admin:$2y$05$XteSEzWTBX8HlzqHQv2ryecUY5On/7DBfTSnCjWfyCFlDhaDdufcq
 [admin@ocp4 try]$ 
 ````
 
-2. Create another user. Do not use ``-c`` parameter. In this case you create a file again with the new content.
+Create another user. Do not use ``-c`` parameter. In this case you create a file again with the new content.
 ````
 [admin@ocp4 try]$ htpasswd -b -B my_ocp_users developer developer
 Adding password for user developer
@@ -65,14 +65,14 @@ developer:$2y$05$Ab1TxMQV0T7te6NmKXaALOX/6XsFHsV06LYcaZHwIdIDpkJiObN2m
 [admin@ocp4 try]$ 
 ````
 
-3. Create a secret from created file. Here the secret named as ``myusers`` and used a prefix ``htpasswd`` in front of the the path to the file. Moreover, the secret should be create in namespace ``openshift-config``
+Create a secret from created file. Here the secret named as ``myusers`` and used a prefix ``htpasswd`` in front of the the path to the file. Moreover, the secret should be create in namespace ``openshift-config``
 ````
 [admin@ocp4 try]$ oc create secret generic myusers --from-file htpasswd=my_ocp_users -n openshift-config
 secret/localusers created
 [admin@ocp4 try]$ 
 ````
 
-Check the created secret:
+Checking out created secret:
 ````
 [admin@ocp4 try]$ oc get secrets -n openshift-config
 NAME                                  TYPE                                  DATA   AGE
@@ -83,7 +83,7 @@ myusers                            Opaque                                1      
 
 ````
 
-4. In the Next step I modified OAuth custom resource. I could create a new file and apply it using ``oc create -f <resource_file>.yml`` as it shown in openshift documentation. But I prefer to export the existing oauth custom resource, modify ``spec`` section and apply the modified one:
+On next step I modified OAuth custom resource. It was able to create a new file and apply it using ``oc create -f <resource_file>.yml`` as it shown in openshift documentation. But I prefer to export the existing oauth custom resource, modify ``spec`` section and apply the modified one:
 ````
 [admin@ocp4 try]$ oc get oauth cluster -o yaml > oauth_modify.yml
 ````
@@ -116,7 +116,7 @@ oauth-openshift-777bfcd76c-v2xzl   1/1     Running       0          49s
 oauth-openshift-777bfcd76c-wpqsq   1/1     Running       0          41s
 ````
 
-5. Here I assigned properly roles to the created users. For admin user I want to give full access to the openshift cluster. Therefore, it should applied ``cluster-admin`` role. Developer user will be granted to create new projects. 
+Here I assigned properly roles to the created users. For admin user I want to give full access to the openshift cluster. Therefore, it should applied ``cluster-admin`` role. Developer user will be granted to create new projects. 
 
 ````
 [admin@ocp4 try]$ oc adm policy add-cluster-role-to-user cluster-admin admin
@@ -134,11 +134,11 @@ Using project "default".
 admin
 ````
 
-6. Before giving any role to developer user I am going to disabled priviledge to create projects for all users. This priviledge creates Openshift during installation by default.
+Before giving any role to developer user I am going to disabled priviledge to create projects for all users. This priviledge creates Openshift during installation by default.
 
 ````
 [admin@ocp4 ~]$ oc get clusterrolebinding | grep self-prov
-self-provisioners                                                           ClusterRole/self-provisioner                                                            36d
+self-provisioners                        ClusterRole/self-provisioner             36d
 [admin@ocp4 ~]$ 
 ````
 
@@ -163,7 +163,8 @@ And remove the ``self-provisioner`` role from the ``system:authenticated:oauth``
 
 ````
 [admin@ocp4 ~]$ oc adm policy remove-cluster-role-from-group self-provisioner system:authenticated:oauth
-Warning: Your changes may get lost whenever a master is restarted, unless you prevent reconciliation of this rolebinding using the following command: oc annotate clusterrolebinding.rbac self-provisioners 'rbac.authorization.kubernetes.io/autoupdate=false' --overwrite
+Warning: Your changes may get lost whenever a master is restarted, unless you prevent reconciliation of this rolebinding using the following command: 
+oc annotate clusterrolebinding.rbac self-provisioners 'rbac.authorization.kubernetes.io/autoupdate=false' --overwrite
 clusterrole.rbac.authorization.k8s.io/self-provisioner removed: "system:authenticated:oauth"
 [admin@ocp4 ~]$ 
 ````
@@ -175,7 +176,7 @@ Thus will be removed self-provisioners rolebinding and will be disabled priviled
 [admin@ocp4 ~]$ 
 ````
 
-7. And granting self-provisioner cluster role to developer user. 
+And granting self-provisioner cluster role to developer user. 
 
 Created a group for developer user and add the user into the group
 ````
@@ -188,6 +189,7 @@ group.user.openshift.io/developers added: "developer"
 ````
 
 Assigned self-provisioner role to developers group:
+
 ````
 [admin@ocp4 ~]$ oc adm policy add-cluster-role-to-group self-provisioner developers
 clusterrole.rbac.authorization.k8s.io/self-provisioner added: "developers"
@@ -195,6 +197,7 @@ clusterrole.rbac.authorization.k8s.io/self-provisioner added: "developers"
 ````
 
 Verified result:
+
 ````
 [admin@ocp4 ~]$ oc login -u developer -p developer
 Login successful.
