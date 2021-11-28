@@ -1,4 +1,95 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="http://localhost:4000/site/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/site/" rel="alternate" type="text/html" /><updated>2021-11-28T16:19:43+01:00</updated><id>http://localhost:4000/site/feed.xml</id><title type="html"></title><subtitle>.</subtitle><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><entry><title type="html">Configure HTPasswd Identity Provider and create OAuth users for Openshift</title><link href="http://localhost:4000/site/create-openshift-oauth-users/" rel="alternate" type="text/html" title="Configure HTPasswd Identity Provider and create OAuth users for Openshift" /><published>2021-11-19T18:30:00+01:00</published><updated>2021-11-19T18:30:00+01:00</updated><id>http://localhost:4000/site/create-openshift-oauth-users</id><content type="html" xml:base="http://localhost:4000/site/create-openshift-oauth-users/">&lt;h3 id=&quot;using-default-user&quot;&gt;Using default user&lt;/h3&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="http://localhost:4000/site/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/site/" rel="alternate" type="text/html" /><updated>2021-11-28T20:54:08+01:00</updated><id>http://localhost:4000/site/feed.xml</id><title type="html"></title><subtitle>.</subtitle><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><entry><title type="html">Deploy a python application using podman. Deploy rootless container and connect podmanized database container</title><link href="http://localhost:4000/site/deploy-application-on-podman/" rel="alternate" type="text/html" title="Deploy a python application using podman. Deploy rootless container and connect podmanized database container" /><published>2021-11-28T19:30:00+01:00</published><updated>2021-11-28T19:30:00+01:00</updated><id>http://localhost:4000/site/deploy-application-on-podman</id><content type="html" xml:base="http://localhost:4000/site/deploy-application-on-podman/">&lt;p&gt;In order to connect a rootless application container to the rootles database container I used port mapping technique. The following steps were used for successfully applying application with connection to database.&lt;/p&gt;
+
+&lt;p&gt;Deploy database container. I mapped the database port 3306 from the container to the port 33306 at host machine.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;podman run -d --name mysql-db -e MYSQL_USER=admin -e MYSQL_PASSWORD=mysql -e MYSQL_DATABASE=words -e MYSQL_ROOT_PASSWORD=mysql -p 33306:3306 -v /opt/homelab_projects/mysql_db_dir_noroot:/var/lib/mysql/data rhscl/mysql-57-rhel7
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Check out ip address of the podman interface at the host.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[seymur@workstation homelab_projects]$ ip addr
+...........
+5: virbr0: &amp;lt;NO-CARRIER,BROADCAST,MULTICAST,UP&amp;gt; mtu 1500 qdisc noqueue state DOWN group default qlen 1000
+    link/ether 52:54:00:dc:2d:dc brd ff:ff:ff:ff:ff:ff
+    inet 192.168.122.1/24 brd 192.168.122.255 scope global virbr0
+       valid_lft forever preferred_lft forever
+6: virbr0-nic: &amp;lt;BROADCAST,MULTICAST&amp;gt; mtu 1500 qdisc fq_codel master virbr0 state DOWN group default qlen 1000
+    link/ether 52:54:00:dc:2d:dc brd ff:ff:ff:ff:ff:ff
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;And finally, deploy application using parameters for mapping port and setting environment variables:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[seymur@workstation homelab_projects]$ podman run -d --name testapp -p 8090:8090 -e MYSQL_HOST=192.168.122.1 -e MYSQL_USER=admin -e MYSQL_PASSWORD=mysql -e MYSQL_PORT=33306 -e MYSQL_DB=words testapp
+4bb1627cfa1c1c0690cebfd011e340162ead9f50143bde5269e90f24bbe10f83
+[seymur@workstation homelab_projects]$ podman ps -a
+CONTAINER ID  IMAGE                                                                                                      COMMAND               CREATED        STATUS            PORTS                    NAMES
+4bb1627cfa1c  localhost/testapp:latest                                                                                   nohup python /opt...  3 seconds ago  Up 3 seconds ago  0.0.0.0:8090-&amp;gt;8090/tcp   testapp
+0fb7b0ad8de7  registry.access.redhat.com/rhscl/mysql-57-rhel7:latest                                                     run-mysqld            2 hours ago    Up 2 hours ago    0.0.0.0:33306-&amp;gt;3306/tcp  mysql-db
+[seymur@workstation homelab_projects]$ 
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;That’s it.&lt;/p&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><category term="podman" /><category term="python" /><summary type="html">In order to connect a rootless application container to the rootles database container I used port mapping technique. The following steps were used for successfully applying application with connection to database.</summary></entry><entry><title type="html">Deploy a MySQL database on Podman with regular user</title><link href="http://localhost:4000/site/running-database-on-podman/" rel="alternate" type="text/html" title="Deploy a MySQL database on Podman with regular user" /><published>2021-11-28T16:30:00+01:00</published><updated>2021-11-28T16:30:00+01:00</updated><id>http://localhost:4000/site/running-database-on-podman</id><content type="html" xml:base="http://localhost:4000/site/running-database-on-podman/">&lt;p&gt;Install mysql client:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo yum install mysql
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Create a folder on the local host for storing databases and configure SELinux option:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mkdir /opt/homelab_projects/mysql_db_dir_noroot
+
+[admin@workstation homelab_projects]$ sudo semanage fcontext -a -t container_file_t '/opt/homelab_projects/mysql_db_dir_noroot(/*)'
+[admin@workstation homelab_projects]$ restorecon -v 'mysql_db_dir_noroot'
+[admin@workstation homelab_projects]$ ll -Z 
+total 56
+.........
+drwxrwxr-x.  2 admin admin unconfined_u:object_r:container_file_t:s0  4096 Nov 28 17:30 mysql_db_dir_noroot
+...........
+[admin@workstation homelab_projects]$ 
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Run mysql container. Here I set additionally environment variables, port mapping and folders for sharing database :&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@workstation homelab_projects]$ podman run -d --name mysql-db -e MYSQL_USER=admin -e MYSQL_PASSWORD=mysql -e MYSQL_DATABASE=words -e MYSQL_ROOT_PASSWORD=mysql -p 33306:3306 -v /opt/homelab_projects/mysql_db_dir_noroot:/var/lib/mysql/data rhscl/mysql-57-rhel7
+0fb7b0ad8de7f00acccf7ddd3ccd296836da24ef575727e99bc63a2c0cdbe11e
+[admin@workstation homelab_projects]$ 
+[admin@workstation homelab_projects]$ 
+[admin@workstation homelab_projects]$ podman ps -a
+CONTAINER ID  IMAGE                                                                                                      COMMAND         CREATED        STATUS            PORTS                    NAMES
+0fb7b0ad8de7  registry.access.redhat.com/rhscl/mysql-57-rhel7:latest                                                     run-mysqld      5 seconds ago  Up 4 seconds ago  0.0.0.0:33306-&amp;gt;3306/tcp  mysql-db
+.........
+[admin@workstation homelab_projects]$ 
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Let’s check if the database has been created:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@workstation homelab_projects]$ mysql -h 127.0.0.1 -uadmin -pmysql -P 33306
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MySQL connection id is 2
+Server version: 5.7.24 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MySQL [(none)]&amp;gt; show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| words              |
++--------------------+
+2 rows in set (0.001 sec)
+
+MySQL [(none)]&amp;gt; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Deploy dump of the db:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@workstation homelab_projects]$ mysql -h 127.0.0.1 -uadmin -pmysql -P 33306 words &amp;lt; db.sql 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><category term="podman" /><category term="mysql" /><summary type="html">Install mysql client:</summary></entry><entry><title type="html">Configure HTPasswd Identity Provider and create OAuth users for Openshift</title><link href="http://localhost:4000/site/create-openshift-oauth-users/" rel="alternate" type="text/html" title="Configure HTPasswd Identity Provider and create OAuth users for Openshift" /><published>2021-11-19T18:30:00+01:00</published><updated>2021-11-19T18:30:00+01:00</updated><id>http://localhost:4000/site/create-openshift-oauth-users</id><content type="html" xml:base="http://localhost:4000/site/create-openshift-oauth-users/">&lt;h3 id=&quot;using-default-user&quot;&gt;Using default user&lt;/h3&gt;
 &lt;p&gt;During installation Openshift creates default &lt;em&gt;kubeadmin&lt;/em&gt; with a password. Password you can find in installation folder: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;installation_folder&amp;gt;/auth/kubeadmin-password&lt;/code&gt;&lt;/p&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@ocp4 try]$ cat install_dir/auth/kubeadmin-password 
@@ -561,102 +652,4 @@ tmpfs                         379M   40K  379M   1% /run/user/1000
 [root@server ~]#
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;In this output we can see that unused files were removed and it was cleaned up 275 MB.&lt;/p&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><category term="filesystem" /><category term="linux" /><category term="disk" /><summary type="html">Recently I tried to update my centos 7 test machine. Unfortunatelly, yum update command returned the following error “At least 54MB more space needed on the /boot filesystem.”.</summary></entry><entry><title type="html">Simple HTTPS Server using python</title><link href="http://localhost:4000/site/a-simple-python-server/" rel="alternate" type="text/html" title="Simple HTTPS Server using python" /><published>2019-08-06T00:38:00+02:00</published><updated>2019-08-06T00:38:00+02:00</updated><id>http://localhost:4000/site/a-simple-python-server</id><content type="html" xml:base="http://localhost:4000/site/a-simple-python-server/">&lt;ol&gt;
-  &lt;li&gt;Generating key and cert files with Openssl:&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[root@test crazytests]# openssl req -x509 -newkey rsa:4096 -keyout testkey.pem -out testcert.pem
-Generating a 4096 bit RSA private key
-.......++
-..............................................................................................................................................................................................................................++
-writing new private key to 'testkey.pem'
-Enter PEM pass phrase:
-Verifying - Enter PEM pass phrase:
------
-You are about to be asked to enter information that will be incorporated
-into your certificate request.
-What you are about to enter is what is called a Distinguished Name or a DN.
-There are quite a few fields but you can leave some blank
-For some fields there will be a default value,
-If you enter '.', the field will be left blank.
------
-Country Name (2 letter code) [XX]:DE
-State or Province Name (full name) []:
-Locality Name (eg, city) [Default City]:
-Organization Name (eg, company) [Default Company Ltd]:
-Organizational Unit Name (eg, section) []:
-Common Name (eg, your name or your server's hostname) []: new.test.my
-Email Address []:
-[root@test crazytests]#
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Write the following python code. I tested it on python 2.x. I think on python 3.x will run  too.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[root@test crazytests]# cat simple_https.py
-import BaseHTTPServer, SimpleHTTPServer
-import ssl
-
-
-httpd = BaseHTTPServer.HTTPServer(('new.test.my', 4443), SimpleHTTPServer.SimpleHTTPRequestHandler)
-
-httpd_soccet = ssl.wrap_socket(httpd.socket, keyfile=&quot;testkey.pem&quot;, certfile='testcert.pem', server_side=True)
-
-httpd.serve_forever()
-[root@test crazytests]#
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><category term="python" /><category term="https" /><summary type="html">Generating key and cert files with Openssl:</summary></entry><entry><title type="html">Using hiera in puppet. Example: creating a folder</title><link href="http://localhost:4000/site/hiera-in-puppet/" rel="alternate" type="text/html" title="Using hiera in puppet. Example: creating a folder" /><published>2019-07-19T17:20:00+02:00</published><updated>2019-07-19T17:20:00+02:00</updated><id>http://localhost:4000/site/hiera-in-puppet</id><content type="html" xml:base="http://localhost:4000/site/hiera-in-puppet/">&lt;p&gt;In this post I am trying to show how to configure hiera files on puppet master. For demonstration purpose I use a simple task that will create a folder. The main idea of this post is to get basic understand of hiera concept.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Look up where is stored the main hiera file:
-````
-puppet config print hiera_config&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-2. Edit it a found file vim $(puppet config print hiera_config):
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;hr /&gt;
-&lt;h1 id=&quot;hiera-5-global-configuration-file&quot;&gt;Hiera 5 Global configuration file&lt;/h1&gt;
-&lt;p&gt;:backends:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;yaml&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;:hierarchy:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;common&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;:yaml:
-  :datadir: “/etc/puppetlabs/code/environments/%{environment}/hieradata”&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-3. Hiera values for our test will be stored inside ``/etc/puppetlabs/code/environments/production/hieradata/common.yaml`` with the following content: 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;hr /&gt;
-&lt;p&gt;fldr_name: ‘/opt/from_hiera’&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-3. A manifest that creates a folder using variable that stored in common.yaml. By default I am using sample ``init.pp`` file in ``/etc/puppetlabs/code/environments/production/manifests/init.pp``
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;hr /&gt;
-&lt;p&gt;class start_me (
-  $fldr_name,
-) {
-  file {‘Create test folder’:
-    ensure =&amp;gt; ‘directory’,
-    path  =&amp;gt; “${fldr_name}”,
-    force =&amp;gt; true,
-  }
-}&lt;/p&gt;
-
-&lt;p&gt;class { ‘start_me’:
-  fldr_name =&amp;gt; hiera(‘fldr_name’)
-}&lt;/p&gt;
-
-&lt;p&gt;````&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;And that is all&lt;/li&gt;
-&lt;/ol&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><category term="hiera" /><category term="puppet" /><summary type="html">In this post I am trying to show how to configure hiera files on puppet master. For demonstration purpose I use a simple task that will create a folder. The main idea of this post is to get basic understand of hiera concept.</summary></entry></feed>
+&lt;p&gt;In this output we can see that unused files were removed and it was cleaned up 275 MB.&lt;/p&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><category term="filesystem" /><category term="linux" /><category term="disk" /><summary type="html">Recently I tried to update my centos 7 test machine. Unfortunatelly, yum update command returned the following error “At least 54MB more space needed on the /boot filesystem.”.</summary></entry></feed>

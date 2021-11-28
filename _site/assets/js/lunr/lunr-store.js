@@ -76,4 +76,16 @@ var store = [{
         "tags": ["openshift","htpasswd","oauth"],
         "url": "/site/create-openshift-oauth-users/",
         "teaser": null
+      },{
+        "title": "Deploy a MySQL database on Podman with regular user",
+        "excerpt":"Install mysql client: sudo yum install mysql Create a folder on the local host for storing databases and configure SELinux option: mkdir /opt/homelab_projects/mysql_db_dir_noroot [admin@workstation homelab_projects]$ sudo semanage fcontext -a -t container_file_t '/opt/homelab_projects/mysql_db_dir_noroot(/*)' [admin@workstation homelab_projects]$ restorecon -v 'mysql_db_dir_noroot' [admin@workstation homelab_projects]$ ll -Z total 56 ......... drwxrwxr-x. 2 admin admin unconfined_u:object_r:container_file_t:s0 4096...","categories": [],
+        "tags": ["podman","mysql"],
+        "url": "/site/running-database-on-podman/",
+        "teaser": null
+      },{
+        "title": "Deploy a python application using podman. Deploy rootless container and connect podmanized database container",
+        "excerpt":"In order to connect a rootless application container to the rootles database container I used port mapping technique. The following steps were used for successfully applying application with connection to database. Deploy database container. I mapped the database port 3306 from the container to the port 33306 at host machine....","categories": [],
+        "tags": ["podman","python"],
+        "url": "/site/deploy-application-on-podman/",
+        "teaser": null
       }]

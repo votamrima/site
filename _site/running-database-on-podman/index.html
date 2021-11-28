@@ -9,38 +9,38 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Removing tmux from the puppet learning machine -</title>
-<meta name="description" content="cleanly and gracefully killing all tmux opened sessions and server too: ``` tmux kill-server">
+<!-- begin _includes/seo.html --><title>Deploy a MySQL database on Podman with regular user -</title>
+<meta name="description" content="Install mysql client:">
 
 
 
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="">
-<meta property="og:title" content="Removing tmux from the puppet learning machine">
-<meta property="og:url" content="http://localhost:4000/site/tmux-remove-puppetserver/">
+<meta property="og:title" content="Deploy a MySQL database on Podman with regular user">
+<meta property="og:url" content="http://localhost:4000/site/running-database-on-podman/">
 
 
-  <meta property="og:description" content="cleanly and gracefully killing all tmux opened sessions and server too: ``` tmux kill-server">
-
-
-
-
-
-
-
-  <meta property="article:published_time" content="2019-06-03T17:38:00+02:00">
+  <meta property="og:description" content="Install mysql client:">
 
 
 
 
 
-  
+
+
+  <meta property="article:published_time" content="2021-11-28T16:30:00+01:00">
+
+
+
+
 
   
 
+  
 
-<link rel="canonical" href="http://localhost:4000/site/tmux-remove-puppetserver/">
+
+<link rel="canonical" href="http://localhost:4000/site/running-database-on-podman/">
 
 
 
@@ -151,7 +151,7 @@
         <span class="sep">/</span>
       
       
-        <li class="current">Removing tmux from the puppet learning machine</li>
+        <li class="current">Deploy a MySQL database on Podman with regular user</li>
       
     
   </ol>
@@ -222,16 +222,16 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Removing tmux from the puppet learning machine">
-    <meta itemprop="description" content="  cleanly and gracefully killing all tmux opened sessions and server too:```tmux kill-server">
-    <meta itemprop="datePublished" content="2019-06-03T17:38:00+02:00">
+    <meta itemprop="headline" content="Deploy a MySQL database on Podman with regular user">
+    <meta itemprop="description" content="Install mysql client:">
+    <meta itemprop="datePublished" content="2021-11-28T16:30:00+01:00">
     
 
     <div class="page__inner-wrap">
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="http://localhost:4000/site/tmux-remove-puppetserver/" class="u-url" itemprop="url">Removing tmux from the puppet learning machine
+            <a href="http://localhost:4000/site/running-database-on-podman/" class="u-url" itemprop="url">Deploy a MySQL database on Podman with regular user
 </a>
           </h1>
           
@@ -242,7 +242,7 @@
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2019-06-03T17:38:00+02:00">June 3, 2019</time>
+        <time datetime="2021-11-28T16:30:00+01:00">November 28, 2021</time>
       </span>
     
 
@@ -257,21 +257,68 @@
 
       <section class="page__content e-content" itemprop="text">
         
-        <ol>
-  <li>cleanly and gracefully killing all tmux opened sessions and server too:
-```
-tmux kill-server</li>
-</ol>
+        <p>Install mysql client:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2. or killing all tmux processes:
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo yum install mysql
 </code></pre></div></div>
-<p>pkill -f tmux</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-3. removing tmux application
+<p>Create a folder on the local host for storing databases and configure SELinux option:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir /opt/homelab_projects/mysql_db_dir_noroot
+
+[admin@workstation homelab_projects]$ sudo semanage fcontext -a -t container_file_t '/opt/homelab_projects/mysql_db_dir_noroot(/*)'
+[admin@workstation homelab_projects]$ restorecon -v 'mysql_db_dir_noroot'
+[admin@workstation homelab_projects]$ ll -Z 
+total 56
+.........
+drwxrwxr-x.  2 admin admin unconfined_u:object_r:container_file_t:s0  4096 Nov 28 17:30 mysql_db_dir_noroot
+...........
+[admin@workstation homelab_projects]$ 
+
 </code></pre></div></div>
-<p>yum erase -y tmux
-````</p>
+
+<p>Run mysql container. Here I set additionally environment variables, port mapping and folders for sharing database :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@workstation homelab_projects]$ podman run -d --name mysql-db -e MYSQL_USER=admin -e MYSQL_PASSWORD=mysql -e MYSQL_DATABASE=words -e MYSQL_ROOT_PASSWORD=mysql -p 33306:3306 -v /opt/homelab_projects/mysql_db_dir_noroot:/var/lib/mysql/data rhscl/mysql-57-rhel7
+0fb7b0ad8de7f00acccf7ddd3ccd296836da24ef575727e99bc63a2c0cdbe11e
+[admin@workstation homelab_projects]$ 
+[admin@workstation homelab_projects]$ 
+[admin@workstation homelab_projects]$ podman ps -a
+CONTAINER ID  IMAGE                                                                                                      COMMAND         CREATED        STATUS            PORTS                    NAMES
+0fb7b0ad8de7  registry.access.redhat.com/rhscl/mysql-57-rhel7:latest                                                     run-mysqld      5 seconds ago  Up 4 seconds ago  0.0.0.0:33306-&gt;3306/tcp  mysql-db
+.........
+[admin@workstation homelab_projects]$ 
+
+</code></pre></div></div>
+
+<p>Let’s check if the database has been created:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@workstation homelab_projects]$ mysql -h 127.0.0.1 -uadmin -pmysql -P 33306
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MySQL connection id is 2
+Server version: 5.7.24 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MySQL [(none)]&gt; show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| words              |
++--------------------+
+2 rows in set (0.001 sec)
+
+MySQL [(none)]&gt; 
+</code></pre></div></div>
+
+<p>Deploy dump of the db:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@workstation homelab_projects]$ mysql -h 127.0.0.1 -uadmin -pmysql -P 33306 words &lt; db.sql 
+</code></pre></div></div>
+
 
         
       </section>
@@ -288,7 +335,9 @@ tmux kill-server</li>
     <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
     <span itemprop="keywords">
     
-      <a href="/site/tags/#puppet" class="page__taxonomy-item p-category" rel="tag">puppet</a>
+      <a href="/site/tags/#mysql" class="page__taxonomy-item p-category" rel="tag">mysql</a><span class="sep">, </span>
+    
+      <a href="/site/tags/#podman" class="page__taxonomy-item p-category" rel="tag">podman</a>
     
     </span>
   </p>
@@ -298,7 +347,7 @@ tmux kill-server</li>
 
         
 
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2019-06-03T17:38:00+02:00">June 3, 2019</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2021-11-28T16:30:00+01:00">November 28, 2021</time></p>
 
       </footer>
 
@@ -307,11 +356,11 @@ tmux kill-server</li>
       
   <nav class="pagination">
     
-      <a href="/site/vagrant-cheetsheet/" class="pagination--pager" title="Cheatsheet for Vagrant
+      <a href="/site/create-openshift-oauth-users/" class="pagination--pager" title="Configure HTPasswd Identity Provider and create OAuth users for Openshift
 ">Previous</a>
     
     
-      <a href="/site/hiera-in-puppet/" class="pagination--pager" title="Using hiera in puppet. Example: creating a folder
+      <a href="/site/deploy-application-on-podman/" class="pagination--pager" title="Deploy a python application using podman. Deploy rootless container and connect podmanized database container
 ">Next</a>
     
   </nav>
@@ -359,43 +408,6 @@ tmux kill-server</li>
 
 
     <p class="archive__item-excerpt" itemprop="description">In order to connect a rootless application container to the rootles database container I used port mapping technique. The following steps were used for succe...</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/site/running-database-on-podman/" rel="permalink">Deploy a MySQL database on Podman with regular user
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2021-11-28T16:30:00+01:00">November 28, 2021</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">Install mysql client:
-</p>
   </article>
 </div>
 
@@ -469,6 +481,43 @@ During installation Openshift creates default kubeadmin with a password. Passwor
 
 
     <p class="archive__item-excerpt" itemprop="description">Set ip NFS Server and export a created share.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/site/check-approve-csr-openshift/" rel="permalink">Check and approve pendings csrs in Openshift cluster
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-11-16T18:30:00+01:00">November 16, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">After installing Openshift cluster you should log in and check for csr. Moreover, I regularly controls if some csr have to be approved or not.
 </p>
   </article>
 </div>

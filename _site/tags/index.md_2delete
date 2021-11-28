@@ -356,7 +356,15 @@
     
       
     
+      
+    
+      
+    
   
+    
+      
+    
+      
     
       
     
@@ -444,6 +452,10 @@
     
       
     
+      
+    
+      
+    
   
     
       
@@ -455,7 +467,11 @@
       
     
       
-    
+        <li>
+          <a href="#python">
+            <strong>python</strong> <span class="taxonomy__count">2</span>
+          </a>
+        </li>
       
     
       
@@ -478,6 +494,18 @@
     
       
     
+      
+    
+      
+    
+      
+    
+      
+        <li>
+          <a href="#podman">
+            <strong>podman</strong> <span class="taxonomy__count">2</span>
+          </a>
+        </li>
       
     
       
@@ -504,12 +532,6 @@
         </li>
       
     
-      
-        <li>
-          <a href="#python">
-            <strong>python</strong> <span class="taxonomy__count">1</span>
-          </a>
-        </li>
       
     
       
@@ -606,6 +628,16 @@
         <li>
           <a href="#oauth">
             <strong>oauth</strong> <span class="taxonomy__count">1</span>
+          </a>
+        </li>
+      
+    
+      
+    
+      
+        <li>
+          <a href="#mysql">
+            <strong>mysql</strong> <span class="taxonomy__count">1</span>
           </a>
         </li>
       
@@ -854,7 +886,15 @@ delaycompre...</p>
   
     
   
+    
+  
+    
+  
 
+  
+    
+  
+    
   
     
   
@@ -1172,6 +1212,10 @@ During installation Openshift creates default kubeadmin with a password. Passwor
   
     
   
+    
+  
+    
+  
 
   
     
@@ -1183,7 +1227,88 @@ During installation Openshift creates default kubeadmin with a password. Passwor
     
   
     
-  
+      <section id="python" class="taxonomy__section">
+        <h2 class="archive__subtitle">python</h2>
+        <div class="entries-grid">
+          
+            
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/site/deploy-application-on-podman/" rel="permalink">Deploy a python application using podman. Deploy rootless container and connect podmanized database container
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-11-28T19:30:00+01:00">November 28, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">In order to connect a rootless application container to the rootles database container I used port mapping technique. The following steps were used for succe...</p>
+  </article>
+</div>
+
+          
+            
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/site/a-simple-python-server/" rel="permalink">Simple HTTPS Server using python
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2019-08-06T00:38:00+02:00">August 6, 2019</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">
+  Generating key and cert files with Openssl:
+
+</p>
+  </article>
+</div>
+
+          
+        </div>
+        <a href="#page-title" class="back-to-top">Back to top &uarr;</a>
+      </section>
     
   
     
@@ -1206,6 +1331,93 @@ During installation Openshift creates default kubeadmin with a password. Passwor
   
     
   
+    
+  
+    
+  
+    
+  
+    
+      <section id="podman" class="taxonomy__section">
+        <h2 class="archive__subtitle">podman</h2>
+        <div class="entries-grid">
+          
+            
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/site/deploy-application-on-podman/" rel="permalink">Deploy a python application using podman. Deploy rootless container and connect podmanized database container
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-11-28T19:30:00+01:00">November 28, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">In order to connect a rootless application container to the rootles database container I used port mapping technique. The following steps were used for succe...</p>
+  </article>
+</div>
+
+          
+            
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/site/running-database-on-podman/" rel="permalink">Deploy a MySQL database on Podman with regular user
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-11-28T16:30:00+01:00">November 28, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Install mysql client:
+</p>
+  </article>
+</div>
+
+          
+        </div>
+        <a href="#page-title" class="back-to-top">Back to top &uarr;</a>
+      </section>
     
   
     
@@ -1316,53 +1528,6 @@ delaycompre...</p>
       </section>
     
   
-    
-      <section id="python" class="taxonomy__section">
-        <h2 class="archive__subtitle">python</h2>
-        <div class="entries-grid">
-          
-            
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/site/a-simple-python-server/" rel="permalink">Simple HTTPS Server using python
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2019-08-06T00:38:00+02:00">August 6, 2019</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">
-  Generating key and cert files with Openssl:
-
-</p>
-  </article>
-</div>
-
-          
-        </div>
-        <a href="#page-title" class="back-to-top">Back to top &uarr;</a>
-      </section>
     
   
     
@@ -1928,6 +2093,55 @@ During installation Openshift creates default kubeadmin with a password. Passwor
 
     <p class="archive__item-excerpt" itemprop="description">Using default user
 During installation Openshift creates default kubeadmin with a password. Password you can find in installation folder: &lt;installation_fo...</p>
+  </article>
+</div>
+
+          
+        </div>
+        <a href="#page-title" class="back-to-top">Back to top &uarr;</a>
+      </section>
+    
+  
+    
+  
+    
+      <section id="mysql" class="taxonomy__section">
+        <h2 class="archive__subtitle">mysql</h2>
+        <div class="entries-grid">
+          
+            
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/site/running-database-on-podman/" rel="permalink">Deploy a MySQL database on Podman with regular user
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-11-28T16:30:00+01:00">November 28, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Install mysql client:
+</p>
   </article>
 </div>
 
