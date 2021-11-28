@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="http://localhost:4000/site/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/site/" rel="alternate" type="text/html" /><updated>2021-11-28T20:54:08+01:00</updated><id>http://localhost:4000/site/feed.xml</id><title type="html"></title><subtitle>.</subtitle><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><entry><title type="html">Deploy a python application using podman. Deploy rootless container and connect podmanized database container</title><link href="http://localhost:4000/site/deploy-application-on-podman/" rel="alternate" type="text/html" title="Deploy a python application using podman. Deploy rootless container and connect podmanized database container" /><published>2021-11-28T19:30:00+01:00</published><updated>2021-11-28T19:30:00+01:00</updated><id>http://localhost:4000/site/deploy-application-on-podman</id><content type="html" xml:base="http://localhost:4000/site/deploy-application-on-podman/">&lt;p&gt;In order to connect a rootless application container to the rootles database container I used port mapping technique. The following steps were used for successfully applying application with connection to database.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="http://localhost:4000/site/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/site/" rel="alternate" type="text/html" /><updated>2021-11-28T20:54:30+01:00</updated><id>http://localhost:4000/site/feed.xml</id><title type="html"></title><subtitle>.</subtitle><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><entry><title type="html">Deploy a python application using podman. Deploy rootless container and connect podmanized database container</title><link href="http://localhost:4000/site/deploy-application-on-podman/" rel="alternate" type="text/html" title="Deploy a python application using podman. Deploy rootless container and connect podmanized database container" /><published>2021-11-28T19:30:00+01:00</published><updated>2021-11-28T19:30:00+01:00</updated><id>http://localhost:4000/site/deploy-application-on-podman</id><content type="html" xml:base="http://localhost:4000/site/deploy-application-on-podman/">&lt;p&gt;In order to connect a rootless application container to the rootles database container I used port mapping technique. The following steps were used for successfully applying application with connection to database.&lt;/p&gt;
 
 &lt;p&gt;Deploy database container. I mapped the database port 3306 from the container to the port 33306 at host machine.&lt;/p&gt;
 
@@ -7,7 +7,7 @@
 
 &lt;p&gt;Check out ip address of the podman interface at the host.&lt;/p&gt;
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[seymur@workstation homelab_projects]$ ip addr
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@workstation homelab_projects]$ ip addr
 ...........
 5: virbr0: &amp;lt;NO-CARRIER,BROADCAST,MULTICAST,UP&amp;gt; mtu 1500 qdisc noqueue state DOWN group default qlen 1000
     link/ether 52:54:00:dc:2d:dc brd ff:ff:ff:ff:ff:ff
@@ -19,13 +19,13 @@
 
 &lt;p&gt;And finally, deploy application using parameters for mapping port and setting environment variables:&lt;/p&gt;
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[seymur@workstation homelab_projects]$ podman run -d --name testapp -p 8090:8090 -e MYSQL_HOST=192.168.122.1 -e MYSQL_USER=admin -e MYSQL_PASSWORD=mysql -e MYSQL_PORT=33306 -e MYSQL_DB=words testapp
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@workstation homelab_projects]$ podman run -d --name testapp -p 8090:8090 -e MYSQL_HOST=192.168.122.1 -e MYSQL_USER=admin -e MYSQL_PASSWORD=mysql -e MYSQL_PORT=33306 -e MYSQL_DB=words testapp
 4bb1627cfa1c1c0690cebfd011e340162ead9f50143bde5269e90f24bbe10f83
-[seymur@workstation homelab_projects]$ podman ps -a
+[admin@workstation homelab_projects]$ podman ps -a
 CONTAINER ID  IMAGE                                                                                                      COMMAND               CREATED        STATUS            PORTS                    NAMES
 4bb1627cfa1c  localhost/testapp:latest                                                                                   nohup python /opt...  3 seconds ago  Up 3 seconds ago  0.0.0.0:8090-&amp;gt;8090/tcp   testapp
 0fb7b0ad8de7  registry.access.redhat.com/rhscl/mysql-57-rhel7:latest                                                     run-mysqld            2 hours ago    Up 2 hours ago    0.0.0.0:33306-&amp;gt;3306/tcp  mysql-db
-[seymur@workstation homelab_projects]$ 
+[admin@workstation homelab_projects]$ 
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
