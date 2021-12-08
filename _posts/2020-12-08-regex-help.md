@@ -2,7 +2,7 @@
 layout: single
 title: "A short help for regular expressions" 
 subtitle: ""
-date: 2021-12-08 16:30:00 +0100
+date: 2020-12-08 16:30:00 +0100
 background: '/image/01.jpg'
 tags: ['regex']
 ---
