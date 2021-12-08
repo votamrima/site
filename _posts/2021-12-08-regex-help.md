@@ -14,6 +14,7 @@ tags: ['regex']
 
 ## Most used regex paterns
 
+
 | Token | Explanation |
 | --- | --- |
 | [abcd] | a single character of a/b/c or d |
@@ -24,39 +25,39 @@ tags: ['regex']
 | . | any single character |
 | a\|b | sing of alternate. either *a* or *b* |
 | \s | any whitespace character |
-| \S | any non-whitespace character
-| \d | any digit
-| \D | any non-digit
-| \w | any word charater
-| \W | any non-word charater
-| (?:...) | Match everything enclosed
-| (...) | Capture everything enclosed
-| a? | a or zero
-| a* | more of a or a zero
-| a+ | one or more of a
-| a{3} | 3 of a
-| a{3,} | 3 and more of a
-| a{3,6} | between 3 and 6 of a
-| ^ |Start of string
-| $ | End of string
-| \n | New line
-| \r | Return sign
-| \t | Tab
-| \0 | Null character
+| \S | any non-whitespace character |
+| \d | any digit |
+| \D | any non-digit |
+| \w | any word charater |
+| \W | any non-word charater |
+| (?:...) | Match everything enclosed |
+| (...) | Capture everything enclosed |
+| a? | a or zero |
+| a* | more of a or a zero |
+| a+ | one or more of a |
+| a{3} | 3 of a |
+| a{3,} | 3 and more of a |
+| a{3,6} | between 3 and 6 of a |
+| ^ |Start of string |
+| $ | End of string |
+| \n | New line |
+| \r | Return sign |
+| \t | Tab |
+| \0 | Null character |
 
 
 ## Other patterns
-Token | Explanation 
-:--- | :--- |
-\v | Vertical whitespace character
-\# | Match subpattern number #
-\xYY | Hex character 
-\ddd | oktal character 
-[\b] | backspace character
-\A | Start of string
-\Z | End of string
-\b | A word boundary
-\B | Non-word boundary
+| Token | Explanation |
+| --- | --- |
+| \v | Vertical whitespace character |
+| \# | Match subpattern number # |
+| \xYY | Hex character |
+| \ddd | oktal character |
+| [\b] | backspace character |
+| \A | Start of string |
+| \Z | End of string |
+| \b | A word boundary |
+| \B | Non-word boundary |
 
 
 
