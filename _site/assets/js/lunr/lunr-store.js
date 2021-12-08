@@ -53,12 +53,6 @@ var store = [{
         "url": "/site/creating-simple-nfs-share/",
         "teaser": null
       },{
-        "title": "A short help for regular expressions",
-        "excerpt":"Most used regex paterns Other patterns Examples: Source Most used regex paterns Token Explanation [abcd] a single character of a/b/c or d [^abcd] any character except a/b/c or d [a-z] matches any characters between a to z [a-zA-Z] matches any characters between a to z and A to Z [^a-p]...","categories": [],
-        "tags": ["regex"],
-        "url": "/site/regex-help/",
-        "teaser": null
-      },{
         "title": "Editing files in Linux VM using remote Visual Studio Code",
         "excerpt":"Sometimes we need to edit a file directly on Linux VM using Visual Studio Code. Launch Visual Studio Code. Additionally, you have to able to connect to the bash of remote machine from VS Code. Go to the ‘Extensions’ page and search for ‘Remote VSCode’ Install the extension and re-launch...","categories": [],
         "tags": ["vscode","rmate"],
@@ -93,5 +87,11 @@ var store = [{
         "excerpt":"In order to connect a rootless application container to the rootles database container I used port mapping technique. The following steps were used for successfully applying application with connection to database. Deploy database container. I mapped the database port 3306 from the container to the port 33306 at host machine....","categories": [],
         "tags": ["podman","python"],
         "url": "/site/deploy-application-on-podman/",
+        "teaser": null
+      },{
+        "title": "A short help for regular expressions",
+        "excerpt":"Most used regex paterns Other patterns Examples: Source Most used regex paterns Token Explanation [abcd] a single character of a/b/c or d [^abcd] any character except a/b/c or d [a-z] matches any characters between a to z [a-zA-Z] matches any characters between a to z and A to Z [^a-p]...","categories": [],
+        "tags": ["regex"],
+        "url": "/site/regex-help/",
         "teaser": null
       }]
