@@ -10,7 +10,7 @@ tags: ['openshift']
 ### Set ip NFS Server and export a created share.
 
 
-A simple NFS is described [here]({% post_url ..site/_posts/2020-11-06-creating-simple-nfs-share %}).
+A simple NFS is described [here]({% post_url ../site/_posts/2020-11-06-creating-simple-nfs-share %}).
 
 ### Configure registry
 For creating an persistent volume I used to create setup_pv.yaml file with the following content:
