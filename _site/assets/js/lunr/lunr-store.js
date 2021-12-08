@@ -88,4 +88,10 @@ var store = [{
         "tags": ["podman","python"],
         "url": "/site/deploy-application-on-podman/",
         "teaser": null
+      },{
+        "title": "A short help for regular expressions",
+        "excerpt":"Most used regex paterns Other patterns Examples: Source Most used regex paterns | Token | Explanation | | — | — | | [abcd] | a single character of a/b/c or d | | [^abcd] | any character except a/b/c or d | | [a-z] | matches any characters between...","categories": [],
+        "tags": ["regex"],
+        "url": "/site/regex-help/",
+        "teaser": null
       }]

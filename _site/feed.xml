@@ -1,4 +1,69 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="http://localhost:4000/site/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/site/" rel="alternate" type="text/html" /><updated>2021-11-28T20:54:30+01:00</updated><id>http://localhost:4000/site/feed.xml</id><title type="html"></title><subtitle>.</subtitle><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><entry><title type="html">Deploy a python application using podman. Deploy rootless container and connect podmanized database container</title><link href="http://localhost:4000/site/deploy-application-on-podman/" rel="alternate" type="text/html" title="Deploy a python application using podman. Deploy rootless container and connect podmanized database container" /><published>2021-11-28T19:30:00+01:00</published><updated>2021-11-28T19:30:00+01:00</updated><id>http://localhost:4000/site/deploy-application-on-podman</id><content type="html" xml:base="http://localhost:4000/site/deploy-application-on-podman/">&lt;p&gt;In order to connect a rootless application container to the rootles database container I used port mapping technique. The following steps were used for successfully applying application with connection to database.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="http://localhost:4000/site/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/site/" rel="alternate" type="text/html" /><updated>2021-12-08T16:49:23+01:00</updated><id>http://localhost:4000/site/feed.xml</id><title type="html"></title><subtitle>.</subtitle><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><entry><title type="html">A short help for regular expressions</title><link href="http://localhost:4000/site/regex-help/" rel="alternate" type="text/html" title="A short help for regular expressions" /><published>2021-12-08T16:30:00+01:00</published><updated>2021-12-08T16:30:00+01:00</updated><id>http://localhost:4000/site/regex-help</id><content type="html" xml:base="http://localhost:4000/site/regex-help/">&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;#most-used-regex-paterns&quot;&gt;Most used regex paterns&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#other-patterns&quot;&gt;Other patterns&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#examples&quot;&gt;Examples:&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#source&quot;&gt;Source&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;most-used-regex-paterns&quot;&gt;Most used regex paterns&lt;/h2&gt;
+&lt;p&gt;| Token | Explanation |
+| — | — |
+| [abcd] | a single character of a/b/c or d |
+| [^abcd] | any character except a/b/c or d |
+| [a-z] | matches any characters between a to z |
+| [a-zA-Z] | matches any characters between a to z and A to Z |
+| [^a-p] | matches any characters that are not in range between a to p |
+| . | any single character |
+| a|b | sing of alternate. either &lt;em&gt;a&lt;/em&gt; or &lt;em&gt;b&lt;/em&gt; |
+| \s | any whitespace character |
+| \S | any non-whitespace character
+| \d | any digit
+| \D | any non-digit
+| \w | any word charater
+| \W | any non-word charater
+| (?:…) | Match everything enclosed
+| (…) | Capture everything enclosed
+| a? | a or zero
+| a* | more of a or a zero
+| a+ | one or more of a
+| a{3} | 3 of a
+| a{3,} | 3 and more of a
+| a{3,6} | between 3 and 6 of a
+| ^ |Start of string
+| $ | End of string
+| \n | New line
+| \r | Return sign
+| \t | Tab
+| \0 | Null character&lt;/p&gt;
+
+&lt;h2 id=&quot;other-patterns&quot;&gt;Other patterns&lt;/h2&gt;
+&lt;p&gt;Token | Explanation 
+:— | :— |
+\v | Vertical whitespace character
+# | Match subpattern number #
+\xYY | Hex character 
+\ddd | oktal character 
+[\b] | backspace character
+\A | Start of string
+\Z | End of string
+\b | A word boundary
+\B | Non-word boundary&lt;/p&gt;
+
+&lt;h2 id=&quot;examples&quot;&gt;Examples:&lt;/h2&gt;
+
+&lt;p&gt;This statement searches in text for the words more than 5 letters and following 2 digits:&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;\s\w{5,}\s+\d{2}\s
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Here a regex command searches for the all last words in the sentences.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;\W+\w{1,}(?:\.)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;source&quot;&gt;Source&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://regex101.com/&quot;&gt;https://regex101.com/&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><category term="regex" /><summary type="html">Most used regex paterns Other patterns Examples: Source</summary></entry><entry><title type="html">Deploy a python application using podman. Deploy rootless container and connect podmanized database container</title><link href="http://localhost:4000/site/deploy-application-on-podman/" rel="alternate" type="text/html" title="Deploy a python application using podman. Deploy rootless container and connect podmanized database container" /><published>2021-11-28T19:30:00+01:00</published><updated>2021-11-28T19:30:00+01:00</updated><id>http://localhost:4000/site/deploy-application-on-podman</id><content type="html" xml:base="http://localhost:4000/site/deploy-application-on-podman/">&lt;p&gt;In order to connect a rootless application container to the rootles database container I used port mapping technique. The following steps were used for successfully applying application with connection to database.&lt;/p&gt;
 
 &lt;p&gt;Deploy database container. I mapped the database port 3306 from the container to the port 33306 at host machine.&lt;/p&gt;
 
@@ -567,89 +632,4 @@ Export list for 192.168.11.61:
 Port is open
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;If a port is closed, try to check network configuration or firewall access.&lt;/p&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><category term="port" /><category term="linux" /><category term="network" /><summary type="html">If there is no telnet tools is installed on the host, try the following command to check if a port opened or not.</summary></entry><entry><title type="html">Giving more space for the /boot filesystem</title><link href="http://localhost:4000/site/more-space-for-boot-fs/" rel="alternate" type="text/html" title="Giving more space for the /boot filesystem" /><published>2019-08-16T21:17:00+02:00</published><updated>2019-08-16T21:17:00+02:00</updated><id>http://localhost:4000/site/more-space-for-boot-fs</id><content type="html" xml:base="http://localhost:4000/site/more-space-for-boot-fs/">&lt;p&gt;Recently I tried to update my centos 7 test machine. Unfortunatelly, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;yum update&lt;/code&gt; command returned the following error “At least 54MB more space needed on the /boot filesystem.”.&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;df -h&lt;/code&gt; command showed following:&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[root@server ~]# df -h
-Filesystem                    Size  Used Avail Use% Mounted on
-/dev/mapper/cl_centos03-root   32G   13G   19G  41% /
-devtmpfs                      1.9G     0  1.9G   0% /dev
-tmpfs                         1.9G     0  1.9G   0% /dev/shm
-tmpfs                         1.9G  9.7M  1.9G   1% /run
-tmpfs                         1.9G     0  1.9G   0% /sys/fs/cgroup
-/dev/sdb1                      79G  7.6G   68G  11% /opt
-/dev/sda1                     497M  486M   11M  98% /boot
-tmpfs                         379M   40K  379M   1% /run/user/1000
-..........
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;During installation I did mount &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/dev/sda1&lt;/code&gt; partition for the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/boot&lt;/code&gt; with 500M. This storage is almost full (just 11M is free). Therefore, now I should clean up a given partition and enlarge a free space by deleting old and unused packages of the kernel.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;!!!! DO NOT DO IT MANUALLY USING rm command!!!!&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;For erasing unused packages we need &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;package-cleanup&lt;/code&gt; utility. It is being installed along with  &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;yum-utils&lt;/code&gt; package (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;yum install yum-utils -y&lt;/code&gt;).&lt;/p&gt;
-
-&lt;h3 id=&quot;running&quot;&gt;Running&lt;/h3&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[root@server ~]# package-cleanup --oldkernels --count=1
-Loaded plugins: fastestmirror, langpacks
---&amp;gt; Running transaction check
----&amp;gt; Package kernel.x86_64 0:3.10.0-862.3.3.el7 will be erased
----&amp;gt; Package kernel-debug.x86_64 0:3.10.0-862.3.3.el7 will be erased
----&amp;gt; Package kernel-devel.x86_64 0:3.10.0-862.3.3.el7 will be erased
---&amp;gt; Finished Dependency Resolution
-
-Dependencies Resolved
-
-=============================================================================================================================================
- Package                           Arch                        Version                                   Repository                     Size
-=============================================================================================================================================
-Removing:
- kernel                            x86_64                      3.10.0-862.3.3.el7                        @updates                       62 M
- kernel-debug                      x86_64                      3.10.0-862.3.3.el7                        @updates                       64 M
- kernel-devel                      x86_64                      3.10.0-862.3.3.el7                        @updates                       37 M
-
-Transaction Summary
-=============================================================================================================================================
-Remove  3 Packages
-
-Installed size: 162 M
-Is this ok [y/N]: y
-Downloading packages:
-Running transaction check
-Running transaction test
-Transaction test succeeded
-Running transaction
-  Erasing    : kernel-3.10.0-862.3.3.el7.x86_64                                                                                          1/3
-
-......................
-
-Removed:
-  kernel.x86_64 0:3.10.0-862.3.3.el7        kernel-debug.x86_64 0:3.10.0-862.3.3.el7        kernel-devel.x86_64 0:3.10.0-862.3.3.el7
-
-Complete!
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Parameters that I used with a command are following:&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;--oldkernels - to ensure that kernel's and kernel-devel's old packages will be removed
---count=1 - Number of duplicate/kernel packages to keep on the system (default 2)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;And the output of df -h command:&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[root@server ~]# df -h
-Filesystem                    Size  Used Avail Use% Mounted on
-/dev/mapper/cl_centos03-root   32G   14G   19G  43% /
-devtmpfs                      1.9G     0  1.9G   0% /dev
-tmpfs                         1.9G     0  1.9G   0% /dev/shm
-tmpfs                         1.9G  9.7M  1.9G   1% /run
-tmpfs                         1.9G     0  1.9G   0% /sys/fs/cgroup
-/dev/sdb1                      79G  7.6G   68G  11% /opt
-/dev/sda1                     497M  211M  287M  43% /boot
-tmpfs                         379M   40K  379M   1% /run/user/1000
-..................
-[root@server ~]#
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;In this output we can see that unused files were removed and it was cleaned up 275 MB.&lt;/p&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><category term="filesystem" /><category term="linux" /><category term="disk" /><summary type="html">Recently I tried to update my centos 7 test machine. Unfortunatelly, yum update command returned the following error “At least 54MB more space needed on the /boot filesystem.”.</summary></entry></feed>
+&lt;p&gt;If a port is closed, try to check network configuration or firewall access.&lt;/p&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><category term="port" /><category term="linux" /><category term="network" /><summary type="html">If there is no telnet tools is installed on the host, try the following command to check if a port opened or not.</summary></entry></feed>
