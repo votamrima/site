@@ -14,6 +14,9 @@ tags: ['regex']
 
 ## Most used regex paterns
 
+<table class="table table-bordered table-hover table-condensed">
+ 
+</table>  
 
 | Token | Explanation |
 | --- | --- |
@@ -38,27 +41,33 @@ tags: ['regex']
 | a{3} | 3 of a |
 | a{3,} | 3 and more of a |
 | a{3,6} | between 3 and 6 of a |
-| ^ |Start of string |
+| ^ | Start of string |
 | $ | End of string |
 | \n | New line |
 | \r | Return sign |
 | \t | Tab |
 | \0 | Null character |
+| --- | --- |
 
 
 ## Other patterns
+
+<table class="table table-bordered table-hover table-condensed">
+ 
+</table>  
+
 | Token | Explanation |
 | --- | --- |
-| \v | Vertical whitespace character |
-| \# | Match subpattern number # |
-| \xYY | Hex character |
-| \ddd | oktal character |
-| [\b] | backspace character |
-| \A | Start of string |
-| \Z | End of string |
-| \b | A word boundary |
-| \B | Non-word boundary |
-
+| \v    | Vertical whitespace character |
+| \#    | Match subpattern number # |
+| \xYY  | Hex character |
+| \ddd  | oktal character |
+| [\b]  | backspace character |
+| \A    | Start of string |
+| \Z    | End of string |
+| \b    | A word boundary |
+| \B    | Non-word boundary |
+| --- | --- |
 
 
 
