@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="http://localhost:4000/site/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/site/" rel="alternate" type="text/html" /><updated>2021-12-08T16:49:23+01:00</updated><id>http://localhost:4000/site/feed.xml</id><title type="html"></title><subtitle>.</subtitle><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><entry><title type="html">A short help for regular expressions</title><link href="http://localhost:4000/site/regex-help/" rel="alternate" type="text/html" title="A short help for regular expressions" /><published>2021-12-08T16:30:00+01:00</published><updated>2021-12-08T16:30:00+01:00</updated><id>http://localhost:4000/site/regex-help</id><content type="html" xml:base="http://localhost:4000/site/regex-help/">&lt;ul&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="http://localhost:4000/site/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/site/" rel="alternate" type="text/html" /><updated>2021-12-08T17:34:04+01:00</updated><id>http://localhost:4000/site/feed.xml</id><title type="html"></title><subtitle>.</subtitle><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><entry><title type="html">A short help for regular expressions</title><link href="http://localhost:4000/site/regex-help/" rel="alternate" type="text/html" title="A short help for regular expressions" /><published>2021-12-08T16:30:00+01:00</published><updated>2021-12-08T16:30:00+01:00</updated><id>http://localhost:4000/site/regex-help</id><content type="html" xml:base="http://localhost:4000/site/regex-help/">&lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;#most-used-regex-paterns&quot;&gt;Most used regex paterns&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#other-patterns&quot;&gt;Other patterns&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#examples&quot;&gt;Examples:&lt;/a&gt;&lt;/li&gt;
@@ -6,35 +6,125 @@
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;most-used-regex-paterns&quot;&gt;Most used regex paterns&lt;/h2&gt;
-&lt;p&gt;| Token | Explanation |
-| — | — |
-| [abcd] | a single character of a/b/c or d |
-| [^abcd] | any character except a/b/c or d |
-| [a-z] | matches any characters between a to z |
-| [a-zA-Z] | matches any characters between a to z and A to Z |
-| [^a-p] | matches any characters that are not in range between a to p |
-| . | any single character |
-| a|b | sing of alternate. either &lt;em&gt;a&lt;/em&gt; or &lt;em&gt;b&lt;/em&gt; |
-| \s | any whitespace character |
-| \S | any non-whitespace character
-| \d | any digit
-| \D | any non-digit
-| \w | any word charater
-| \W | any non-word charater
-| (?:…) | Match everything enclosed
-| (…) | Capture everything enclosed
-| a? | a or zero
-| a* | more of a or a zero
-| a+ | one or more of a
-| a{3} | 3 of a
-| a{3,} | 3 and more of a
-| a{3,6} | between 3 and 6 of a
-| ^ |Start of string
-| $ | End of string
-| \n | New line
-| \r | Return sign
-| \t | Tab
-| \0 | Null character&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Token&lt;/th&gt;
+      &lt;th&gt;Explanation&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;[abcd]&lt;/td&gt;
+      &lt;td&gt;a single character of a/b/c or d&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;[^abcd]&lt;/td&gt;
+      &lt;td&gt;any character except a/b/c or d&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;[a-z]&lt;/td&gt;
+      &lt;td&gt;matches any characters between a to z&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;[a-zA-Z]&lt;/td&gt;
+      &lt;td&gt;matches any characters between a to z and A to Z&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;[^a-p]&lt;/td&gt;
+      &lt;td&gt;matches any characters that are not in range between a to p&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;.&lt;/td&gt;
+      &lt;td&gt;any single character&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;a|b&lt;/td&gt;
+      &lt;td&gt;sing of alternate. either &lt;em&gt;a&lt;/em&gt; or &lt;em&gt;b&lt;/em&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;\s&lt;/td&gt;
+      &lt;td&gt;any whitespace character&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;\S&lt;/td&gt;
+      &lt;td&gt;any non-whitespace character&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;\d&lt;/td&gt;
+      &lt;td&gt;any digit&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;\D&lt;/td&gt;
+      &lt;td&gt;any non-digit&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;\w&lt;/td&gt;
+      &lt;td&gt;any word charater&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;\W&lt;/td&gt;
+      &lt;td&gt;any non-word charater&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;(?:…)&lt;/td&gt;
+      &lt;td&gt;Match everything enclosed&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;(…)&lt;/td&gt;
+      &lt;td&gt;Capture everything enclosed&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;a?&lt;/td&gt;
+      &lt;td&gt;a or zero&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;a*&lt;/td&gt;
+      &lt;td&gt;more of a or a zero&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;a+&lt;/td&gt;
+      &lt;td&gt;one or more of a&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;a{3}&lt;/td&gt;
+      &lt;td&gt;3 of a&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;a{3,}&lt;/td&gt;
+      &lt;td&gt;3 and more of a&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;a{3,6}&lt;/td&gt;
+      &lt;td&gt;between 3 and 6 of a&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;^&lt;/td&gt;
+      &lt;td&gt;Start of string&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;$&lt;/td&gt;
+      &lt;td&gt;End of string&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;\n&lt;/td&gt;
+      &lt;td&gt;New line&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;\r&lt;/td&gt;
+      &lt;td&gt;Return sign&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;\t&lt;/td&gt;
+      &lt;td&gt;Tab&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;\0&lt;/td&gt;
+      &lt;td&gt;Null character&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
 
 &lt;h2 id=&quot;other-patterns&quot;&gt;Other patterns&lt;/h2&gt;
 &lt;p&gt;Token | Explanation 
