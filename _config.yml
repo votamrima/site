@@ -300,7 +300,7 @@ defaults:
       sidebar:
         nav: "docs"
   - scope:
-      path: "_pages"
+      path: ""
       type: pages
     values:
       sidebar:
