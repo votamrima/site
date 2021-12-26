@@ -304,6 +304,7 @@ defaults:
       type: pages
     values:
       sidebar:
+        layout: home
         nav: "docs"
 
 toc: true

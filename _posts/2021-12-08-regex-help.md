@@ -7,12 +7,12 @@ background: '/image/01.jpg'
 tags: ['regex']
 ---
 
-- [Most used regex paterns](#most-used-regex-paterns)
+- [Mostly used regex paterns](#mostly-used-regex-paterns)
 - [Other patterns](#other-patterns)
 - [Examples:](#examples)
 - [Source](#source)
 
-## Most used regex paterns
+## Mostly used regex paterns
 
 <table class="table table-bordered table-hover table-condensed">
  

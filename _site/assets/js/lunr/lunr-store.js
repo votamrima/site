@@ -90,7 +90,7 @@ var store = [{
         "teaser": null
       },{
         "title": "A short help for regular expressions",
-        "excerpt":"Most used regex paterns Other patterns Examples: Source Most used regex paterns Token Explanation [abcd] a single character of a/b/c or d [^abcd] any character except a/b/c or d [a-z] matches any characters between a to z [a-zA-Z] matches any characters between a to z and A to Z [^a-p]...","categories": [],
+        "excerpt":"Mostly used regex paterns Other patterns Examples: Source Mostly used regex paterns Token Explanation [abcd] a single character of a/b/c or d [^abcd] any character except a/b/c or d [a-z] matches any characters between a to z [a-zA-Z] matches any characters between a to z and A to Z [^a-p]...","categories": [],
         "tags": ["regex"],
         "url": "/site/regex-help/",
         "teaser": null

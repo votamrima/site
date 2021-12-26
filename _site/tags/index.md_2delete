@@ -249,7 +249,9 @@
   </div>
 
 
+  <!---- -->
 
+<!---- -->
   <div class="archive">
     
       <h1 id="page-title" class="page__title">Posts by Tag</h1>
@@ -2160,7 +2162,7 @@ During installation Openshift creates default kubeadmin with a password. Passwor
 
 
     <p class="archive__item-excerpt" itemprop="description">
-  Most used regex paterns
+  Mostly used regex paterns
   Other patterns
   Examples:
   Source
@@ -2179,6 +2181,7 @@ During installation Openshift creates default kubeadmin with a password. Passwor
 
   </div>
 </div>
+
     </div>
 
     
