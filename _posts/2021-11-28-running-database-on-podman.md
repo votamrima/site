@@ -7,6 +7,7 @@ background: '/image/01.jpg'
 tags: ['podman', 'mysql']
 ---
 
+## MySQL
 Install mysql client:
 
 ````
@@ -73,4 +74,54 @@ Deploy dump of the db:
 ````
 [admin@workstation homelab_projects]$ mysql -h 127.0.0.1 -uadmin -pmysql -P 33306 words < db.sql 
 ````
+
+## PostgreSQL
+Installation of rootless PosgreSQL on Podman is quite similar with MySQL. Here below I going to describe it in nutshell with most important commands.
+
+1. Firstly I have created a local folder which will be mounted to container as volume. Here will be stored the database and all system files of the postgresql. Additionally, it is necessary to set required selinux file-context for the folder:
+````bash
+[admin@workstation opt]$ mkdir -pv /opt/podman/postgresql13
+mkdir: created directory '/opt/podman'
+mkdir: created directory '/opt/podman/postgresql13'
+
+[admin@workstation opt]$ sudo semanage fcontext -a -t container_file_t "/opt/podman/postgresql13(/.*)?"
+[sudo] password for admin: 
+[admin@workstation opt]$ 
+[admin@workstation opt]$ sudo restorecon -R -v podman/postgresql13
+Relabeled /opt/podman/postgresql13 from unconfined_u:object_r:usr_t:s0 to unconfined_u:object_r:container_file_t:s0
+[admin@workstation opt]$ 
+````
+
+2. Plan which local port will be used. You can left a default postgres port ``5432``, but I decided to use another port - ``54321``. Therefore, we need to define the new port in Selinux. 
+
+Check what is the name of SELinux port type and if the port already defined:
+````bash
+[seymur@workstation ~]$ sudo semanage port -l | grep postgres
+postgresql_port_t              tcp      5432, 9898
+[seymur@workstation ~]$ 
+````
+
+Define custom port in Selinux:
+````bash
+semanage port -a -t postgresql_port_t -p tcp 54321
+````
+
+3. Next, deploy Posgresql with the required parameters: 
+````bash
+[seymur@workstation ~]$ podman run -d --name postgresql_database -e POSTGRESQL_USER=user -e POSTGRESQL_PASSWORD=pass -e POSTGRESQL_DATABASE=db -p 54321:5432 -v /opt/podman/postgresql13:/var/lib/pgsql/data registry.fedoraproject.org/f33/postgresql
+732837a2fbe88033a26760c25c06cfc80d823578a57e227083820604c6a4b186
+[seymur@workstation ~]$ 
+````
+
+Here ``POSTGRESQL_USER=user`` - is a database user, ``POSTGRESQL_PASSWORD=pass`` - password for user, ``POSTGRESQL_DATABASE=db`` - name of database. Parameter ``-v /opt/podman/postgresql13:/var/lib/pgsql/data`` mounts local folder ``/opt/podman/postgresql13`` to the ``/var/lib/pgsql/data``. 
+
+4. Check application runs:
+````bash
+[seymur@workstation ~]$ podman ps -a
+CONTAINER ID    IMAGE                                          COMMAND               CREATED       STATUS                   PORTS                    NAMES
+732837a2fbe8    registry.fedoraproject.org/f33/postgresql      run-postgresql        2 hours ago   Up 2 hours ago           0.0.0.0:54321->5432/tcp  postgresql_database
+...
+````
+
+
 
