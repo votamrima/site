@@ -30,7 +30,8 @@ Click right button on the blank space of the window and choose: New -> DWORD (32
 Rename created value to BypassTPMCheck. Thenk double-click on the on the created object and change Value date to 1.
 ![Image](images/../../images/windows11-requirements-error/pic6.png)
 
-Create more DWORDS values and give them following names: BypassCPUCheck, BypassRAMCheck and BypassSecureBootCheck. The value data of all created objects should be 1. 
+Create more DWORDS values and give them following names: BypassCPUCheck, BypassRAMCheck and BypassSecureBootCheck. 
+The value data of all created objects should be 1.
 ![Image](images/../../images/windows11-requirements-error/pic7.png)
 
 Close all opened windows. 
