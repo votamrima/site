@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "Deploy a MySQL database on Podman with regular user" 
+title: "Deploy MySQL and PostgreSQL database systems on Podman with regular (non-root) user" 
 subtitle: ""
 date: 2021-11-28 16:30:00 +0100
 background: '/image/01.jpg'
