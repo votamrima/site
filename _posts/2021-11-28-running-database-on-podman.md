@@ -79,6 +79,7 @@ Deploy dump of the db:
 Installation of rootless PosgreSQL on Podman is quite similar with MySQL. Here below I going to describe it in nutshell with most important commands.
 
 1. Firstly I have created a local folder which will be mounted to container as volume. Here will be stored the database and all system files of the postgresql. Additionally, it is necessary to set required selinux file-context for the folder:
+
 ````bash
 [admin@workstation opt]$ mkdir -pv /opt/podman/postgresql13
 mkdir: created directory '/opt/podman'
