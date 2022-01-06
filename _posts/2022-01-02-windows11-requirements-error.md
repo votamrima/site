@@ -22,12 +22,15 @@ In the opened Registry Editor window, go to HKEY_LOCAL_MACHINE -> SYSTEM -> Setu
 ![Image](images/../../images/windows11-requirements-error/pic3.png)
 
 Right click on Setup and then create a New -> Key. Give some name to created key. I named it "MyConfig". **!!!! Give "LabConfig" name. !!!**
+
 ![Image](images/../../images/windows11-requirements-error/pic4.png)
 
 Click right button on the blank space of the window and choose: New -> DWORD (32-bit) Value.
+
 ![Image](images/../../images/windows11-requirements-error/pic5.png)
 
 Rename created value to BypassTPMCheck. Thenk double-click on the on the created object and change Value date to 1.
+
 ![Image](images/../../images/windows11-requirements-error/pic6.png)
 
 Create more DWORDS values and give them following names: BypassCPUCheck, BypassRAMCheck and BypassSecureBootCheck. The value data of all created objects should be 1.
@@ -35,10 +38,12 @@ Create more DWORDS values and give them following names: BypassCPUCheck, BypassR
 ![Image](images/../../images/windows11-requirements-error/pic7.png)
 
 Close all opened windows. 
+
 ![Image](images/../../images/windows11-requirements-error/pic8.png)
 
 
 And click on "Install now" button.
+
 ![Image](images/../../images/windows11-requirements-error/pic9.png)
 
 That's it.
