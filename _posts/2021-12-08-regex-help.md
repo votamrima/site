@@ -39,14 +39,21 @@ tags: ['regex']
 | a* | more of a or a zero |
 | a+ | one or more of a |
 | a{3} | 3 of a |
+| [0..9]{3} | any 3 digits in sequence |
+| [0..9]{3,5} | from 3 to 5 digits in sequence  |
 | a{3,} | 3 and more of a |
 | a{3,6} | between 3 and 6 of a |
+| [0..9]+ | from 1 to infinity |
+| [0..9]{1,} | from 1 to infinity |
+| [0..9]* | from 0 to infinity |
+| [0..9]{0,} | from 0 to infinity |
 | ^ | Start of string |
 | $ | End of string |
 | \n | New line |
 | \r | Return sign |
 | \t | Tab |
 | \0 | Null character |
+| () |  Grouping |
 | --- | --- |
 
 
@@ -84,7 +91,14 @@ Here a regex command searches for the all last words in the sentences.
 \W+\w{1,}(?:\.)
 ````
 
+A regex that identifies all urls in the text:
+
+````bash
+(http|https://)(a-zA-z0-9.-_)\.(com|net)
+````
+
 
 
 ## Source
 1. [https://regex101.com/](https://regex101.com/)
+2. [https://www.youtube.com/watch?v=8sv-6AN0_cg](Основы Регулярных Выражений В Python | Модуль re)
