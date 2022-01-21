@@ -65,7 +65,7 @@ tags: ['regex']
 | [\b]  | backspace character |
 | \A    | Start of string |
 | \Z    | End of string |
-| \b    | A word boundary |
+| \b    | A word boundary. (Neither starts or ends with a specific letter.) |
 | \B    | Non-word boundary |
 | --- | --- |
 
@@ -83,6 +83,8 @@ Here a regex command searches for the all last words in the sentences.
 ````
 \W+\w{1,}(?:\.)
 ````
+
+
 
 ## Source
 1. [https://regex101.com/](https://regex101.com/)
