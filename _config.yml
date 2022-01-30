@@ -18,7 +18,7 @@ minimal_mistakes_skin    : "dark" #"default" # "air", "aqua", "contrast", "dark"
 locale                   : "en-US"
 title                    : "notes"
 title_separator          : "-"
-subtitle                 : "Welcome, dear guest. Please, keep in mind that there are not published any tutorials or learning materials. All published materials"
+subtitle                 :  #"Welcome, dear guest. Please, keep in mind that there are not published any tutorials or learning materials. All published materials"
 #subtitle                 : # site tagline that appears below site title in masthead
 name                     : ""
 description              : "."
