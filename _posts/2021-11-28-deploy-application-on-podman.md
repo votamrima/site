@@ -24,11 +24,10 @@ Check out ip address of the podman interface at the host.
     link/ether 52:54:00:dc:2d:dc brd ff:ff:ff:ff:ff:ff
     inet 192.168.122.1/24 brd 192.168.122.255 scope global virbr0
        valid_lft forever preferred_lft forever
-6: virbr0-nic: <BROADCAST,MULTICAST> mtu 1500 qdisc fq_codel master virbr0 state DOWN group default qlen 1000
-    link/ether 52:54:00:dc:2d:dc brd ff:ff:ff:ff:ff:ff
+............
 ````
 
-And finally, deploy application using parameters for mapping port and setting environment variables:
+And finally, deploy application using parameters for mapping port and setting environment variables. In order to access to database container, I need to set a gateway ip address of podman network as database host. In this way all all traffic between application and database containers will run through main host. Of course, in this case, do not forget to map the port of mysql container and set it as env value for application container. 
 
 ````
 [admin@workstation homelab_projects]$ podman run -d --name testapp -p 8090:8090 -e MYSQL_HOST=192.168.122.1 -e MYSQL_USER=admin -e MYSQL_PASSWORD=mysql -e MYSQL_PORT=33306 -e MYSQL_DB=words testapp
@@ -41,4 +40,8 @@ CONTAINER ID  IMAGE                                                             
 
 ````
 
-That's it.
+Additionally, I would give a short command for entering to the container:
+
+````bash
+podman exec -it testapp bash
+````
