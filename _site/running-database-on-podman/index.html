@@ -9,19 +9,19 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Deploy a MySQL database on Podman with regular user -</title>
-<meta name="description" content="Install mysql client:">
+<!-- begin _includes/seo.html --><title>Deploy MySQL and PostgreSQL database systems on Podman with regular (non-root) user -</title>
+<meta name="description" content="MySQL Install mysql client:">
 
 
 
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="">
-<meta property="og:title" content="Deploy a MySQL database on Podman with regular user">
+<meta property="og:title" content="Deploy MySQL and PostgreSQL database systems on Podman with regular (non-root) user">
 <meta property="og:url" content="http://localhost:4000/site/running-database-on-podman/">
 
 
-  <meta property="og:description" content="Install mysql client:">
+  <meta property="og:description" content="MySQL Install mysql client:">
 
 
 
@@ -113,7 +113,7 @@
         
         <a class="site-title" href="/site/">
           
-          
+          <span class="site-subtitle">Welcome, dear guest. Please, keep in mind that there are not published any tutorials or learning materials. All published materials</span>
         </a>
         <ul class="visible-links"></ul>
         
@@ -151,7 +151,7 @@
         <span class="sep">/</span>
       
       
-        <li class="current">Deploy a MySQL database on Podman with regular user</li>
+        <li class="current">Deploy MySQL and PostgreSQL database systems on Podman with regular (non-root) user</li>
       
     
   </ol>
@@ -222,8 +222,8 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Deploy a MySQL database on Podman with regular user">
-    <meta itemprop="description" content="Install mysql client:">
+    <meta itemprop="headline" content="Deploy MySQL and PostgreSQL database systems on Podman with regular (non-root) user">
+    <meta itemprop="description" content="MySQLInstall mysql client:">
     <meta itemprop="datePublished" content="2021-11-28T16:30:00+01:00">
     
 
@@ -231,7 +231,7 @@
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="http://localhost:4000/site/running-database-on-podman/" class="u-url" itemprop="url">Deploy a MySQL database on Podman with regular user
+            <a href="http://localhost:4000/site/running-database-on-podman/" class="u-url" itemprop="url">Deploy MySQL and PostgreSQL database systems on Podman with regular (non-root) user
 </a>
           </h1>
           
@@ -257,7 +257,8 @@
 
       <section class="page__content e-content" itemprop="text">
         
-        <p>Install mysql client:</p>
+        <h2 id="mysql">MySQL</h2>
+<p>Install mysql client:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo yum install mysql
 </code></pre></div></div>
@@ -319,6 +320,60 @@ MySQL [(none)]&gt;
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@workstation homelab_projects]$ mysql -h 127.0.0.1 -uadmin -pmysql -P 33306 words &lt; db.sql 
 </code></pre></div></div>
 
+<h2 id="postgresql">PostgreSQL</h2>
+<p>Installation of rootless PosgreSQL on Podman is quite similar with MySQL. Here below I going to describe it in nutshell with most important commands.</p>
+
+<ol>
+  <li>Firstly I have created a local folder which will be mounted to container as volume. Here will be stored the database and all system files of the postgresql. Additionally, it is necessary to set required selinux file-context for the folder:</li>
+</ol>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>admin@workstation opt]<span class="nv">$ </span><span class="nb">mkdir</span> <span class="nt">-pv</span> /opt/podman/postgresql13
+<span class="nb">mkdir</span>: created directory <span class="s1">'/opt/podman'</span>
+<span class="nb">mkdir</span>: created directory <span class="s1">'/opt/podman/postgresql13'</span>
+
+<span class="o">[</span>admin@workstation opt]<span class="nv">$ </span><span class="nb">sudo </span>semanage fcontext <span class="nt">-a</span> <span class="nt">-t</span> container_file_t <span class="s2">"/opt/podman/postgresql13(/.*)?"</span>
+<span class="o">[</span><span class="nb">sudo</span><span class="o">]</span> password <span class="k">for </span>admin: 
+<span class="o">[</span>admin@workstation opt]<span class="nv">$ </span>
+<span class="o">[</span>admin@workstation opt]<span class="nv">$ </span><span class="nb">sudo </span>restorecon <span class="nt">-R</span> <span class="nt">-v</span> podman/postgresql13
+Relabeled /opt/podman/postgresql13 from unconfined_u:object_r:usr_t:s0 to unconfined_u:object_r:container_file_t:s0
+<span class="o">[</span>admin@workstation opt]<span class="nv">$ </span>
+</code></pre></div></div>
+
+<ol>
+  <li>Plan which local port will be used. You can left a default postgres port <code class="language-plaintext highlighter-rouge">5432</code>, but I decided to use another port - <code class="language-plaintext highlighter-rouge">54321</code>. Therefore, we need to define the new port in Selinux.</li>
+</ol>
+
+<p>Check what is the name of SELinux port type and if the port already defined:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>seymur@workstation ~]<span class="nv">$ </span><span class="nb">sudo </span>semanage port <span class="nt">-l</span> | <span class="nb">grep </span>postgres
+postgresql_port_t              tcp      5432, 9898
+<span class="o">[</span>seymur@workstation ~]<span class="nv">$ </span>
+</code></pre></div></div>
+
+<p>Define custom port in Selinux:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>semanage port <span class="nt">-a</span> <span class="nt">-t</span> postgresql_port_t <span class="nt">-p</span> tcp 54321
+</code></pre></div></div>
+
+<ol>
+  <li>Next, deploy Posgresql with the required parameters:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>seymur@workstation ~]<span class="nv">$ </span>podman run <span class="nt">-d</span> <span class="nt">--name</span> postgresql_database <span class="nt">-e</span> <span class="nv">POSTGRESQL_USER</span><span class="o">=</span>user <span class="nt">-e</span> <span class="nv">POSTGRESQL_PASSWORD</span><span class="o">=</span>pass <span class="nt">-e</span> <span class="nv">POSTGRESQL_DATABASE</span><span class="o">=</span>db <span class="nt">-p</span> 54321:5432 <span class="nt">-v</span> /opt/podman/postgresql13:/var/lib/pgsql/data registry.fedoraproject.org/f33/postgresql
+732837a2fbe88033a26760c25c06cfc80d823578a57e227083820604c6a4b186
+<span class="o">[</span>seymur@workstation ~]<span class="nv">$ </span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p>Here <code class="language-plaintext highlighter-rouge">POSTGRESQL_USER=user</code> - is a database user, <code class="language-plaintext highlighter-rouge">POSTGRESQL_PASSWORD=pass</code> - password for user, <code class="language-plaintext highlighter-rouge">POSTGRESQL_DATABASE=db</code> - name of database. Parameter <code class="language-plaintext highlighter-rouge">-v /opt/podman/postgresql13:/var/lib/pgsql/data</code> mounts local folder <code class="language-plaintext highlighter-rouge">/opt/podman/postgresql13</code> to the <code class="language-plaintext highlighter-rouge">/var/lib/pgsql/data</code>.</p>
+
+<ol>
+  <li>Check application runs:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>seymur@workstation ~]<span class="nv">$ </span>podman ps <span class="nt">-a</span>
+CONTAINER ID    IMAGE                                          COMMAND               CREATED       STATUS                   PORTS                    NAMES
+732837a2fbe8    registry.fedoraproject.org/f33/postgresql      run-postgresql        2 hours ago   Up 2 hours ago           0.0.0.0:54321-&gt;5432/tcp  postgresql_database
+...
+</code></pre></div>    </div>
+  </li>
+</ol>
+
 
         
       </section>
@@ -375,6 +430,45 @@ MySQL [(none)]&gt;
     <div class="page__related">
       <h2 class="page__related-title">You may also enjoy</h2>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/site/windows11-requirements-error/" rel="permalink">Fixing “Cannot Install Windows 11” error during installation
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-01-02T18:40:00+01:00">January 2, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Problem
+Today I tried to install Windows 11 on my virtual platform and during installation faced with the following problem:
+
+</p>
+  </article>
+</div>
+
         
           
 
@@ -491,43 +585,6 @@ During installation Openshift creates default kubeadmin with a password. Passwor
 </div>
 
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/site/create-persistence-storage-for-openshift-registry/" rel="permalink">Create persistance storage for openshift registry
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2021-11-17T16:30:00+01:00">November 17, 2021</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">Set ip NFS Server and export a created share.
-</p>
-  </article>
-</div>
-
-        
       </div>
     </div>
   
@@ -570,7 +627,7 @@ During installation Openshift creates default kubeadmin with a password. Passwor
   </ul>
 </div>
 
-<div class="page__footer-copyright">&copy; 2021 . Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">&copy; 2022 . Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
 
       </footer>
     </div>

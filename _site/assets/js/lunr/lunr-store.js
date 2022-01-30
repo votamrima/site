@@ -53,6 +53,12 @@ var store = [{
         "url": "/site/creating-simple-nfs-share/",
         "teaser": null
       },{
+        "title": "Basic SQL Joins",
+        "excerpt":"Left Join and right Let’s say we have two tables - posts and users. Struncture of the both tables is following: post table has such columns as: id, title, content, user_id and date. Column user_id is a foreign key and related with the id column of users table users table...","categories": [],
+        "tags": ["sql"],
+        "url": "/site/basic-sql-joins/",
+        "teaser": null
+      },{
         "title": "Editing files in Linux VM using remote Visual Studio Code",
         "excerpt":"Sometimes we need to edit a file directly on Linux VM using Visual Studio Code. Launch Visual Studio Code. Additionally, you have to able to connect to the bash of remote machine from VS Code. Go to the ‘Extensions’ page and search for ‘Remote VSCode’ Install the extension and re-launch...","categories": [],
         "tags": ["vscode","rmate"],
@@ -77,8 +83,8 @@ var store = [{
         "url": "/site/create-openshift-oauth-users/",
         "teaser": null
       },{
-        "title": "Deploy a MySQL database on Podman with regular user",
-        "excerpt":"Install mysql client: sudo yum install mysql Create a folder on the local host for storing databases and configure SELinux option: mkdir /opt/homelab_projects/mysql_db_dir_noroot [admin@workstation homelab_projects]$ sudo semanage fcontext -a -t container_file_t '/opt/homelab_projects/mysql_db_dir_noroot(/*)' [admin@workstation homelab_projects]$ restorecon -v 'mysql_db_dir_noroot' [admin@workstation homelab_projects]$ ll -Z total 56 ......... drwxrwxr-x. 2 admin admin unconfined_u:object_r:container_file_t:s0 4096...","categories": [],
+        "title": "Deploy MySQL and PostgreSQL database systems on Podman with regular (non-root) user",
+        "excerpt":"MySQL Install mysql client: sudo yum install mysql Create a folder on the local host for storing databases and configure SELinux option: mkdir /opt/homelab_projects/mysql_db_dir_noroot [admin@workstation homelab_projects]$ sudo semanage fcontext -a -t container_file_t '/opt/homelab_projects/mysql_db_dir_noroot(/*)' [admin@workstation homelab_projects]$ restorecon -v 'mysql_db_dir_noroot' [admin@workstation homelab_projects]$ ll -Z total 56 ......... drwxrwxr-x. 2 admin admin unconfined_u:object_r:container_file_t:s0...","categories": [],
         "tags": ["podman","mysql"],
         "url": "/site/running-database-on-podman/",
         "teaser": null
@@ -93,5 +99,11 @@ var store = [{
         "excerpt":"Mostly used regex paterns Other patterns Examples: Source Mostly used regex paterns Token Explanation [abcd] a single character of a/b/c or d [^abcd] any character except a/b/c or d [a-z] matches any characters between a to z [a-zA-Z] matches any characters between a to z and A to Z [^a-p]...","categories": [],
         "tags": ["regex"],
         "url": "/site/regex-help/",
+        "teaser": null
+      },{
+        "title": "Fixing \"Cannot Install Windows 11\" error during installation",
+        "excerpt":"Problem Today I tried to install Windows 11 on my virtual platform and during installation faced with the following problem: Solution In this screen type Shift + F10 at the same time to open a command promt. Then in command line type regedit: In the opened Registry Editor window, go...","categories": [],
+        "tags": ["windows11"],
+        "url": "/site/windows11-requirements-error/",
         "teaser": null
       }]

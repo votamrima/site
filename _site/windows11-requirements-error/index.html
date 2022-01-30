@@ -9,38 +9,38 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Check and approve pendings csrs in Openshift cluster -</title>
-<meta name="description" content="After installing Openshift cluster you should log in and check for csr. Moreover, I regularly controls if some csr have to be approved or not.">
+<!-- begin _includes/seo.html --><title>Fixing “Cannot Install Windows 11” error during installation -</title>
+<meta name="description" content="Problem Today I tried to install Windows 11 on my virtual platform and during installation faced with the following problem:">
 
 
 
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="">
-<meta property="og:title" content="Check and approve pendings csrs in Openshift cluster">
-<meta property="og:url" content="http://localhost:4000/site/check-approve-csr-openshift/">
+<meta property="og:title" content="Fixing “Cannot Install Windows 11” error during installation">
+<meta property="og:url" content="http://localhost:4000/site/windows11-requirements-error/">
 
 
-  <meta property="og:description" content="After installing Openshift cluster you should log in and check for csr. Moreover, I regularly controls if some csr have to be approved or not.">
-
-
-
-
-
-
-
-  <meta property="article:published_time" content="2021-11-16T18:30:00+01:00">
+  <meta property="og:description" content="Problem Today I tried to install Windows 11 on my virtual platform and during installation faced with the following problem:">
 
 
 
 
 
-  
+
+
+  <meta property="article:published_time" content="2022-01-02T18:40:00+01:00">
+
+
+
+
 
   
 
+  
 
-<link rel="canonical" href="http://localhost:4000/site/check-approve-csr-openshift/">
+
+<link rel="canonical" href="http://localhost:4000/site/windows11-requirements-error/">
 
 
 
@@ -151,7 +151,7 @@
         <span class="sep">/</span>
       
       
-        <li class="current">Check and approve pendings csrs in Openshift cluster</li>
+        <li class="current">Fixing "Cannot Install Windows 11" error during installation</li>
       
     
   </ol>
@@ -222,139 +222,19 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Check and approve pendings csrs in Openshift cluster">
-    <meta itemprop="description" content="After installing Openshift cluster you should log in and check for csr. Moreover, I regularly controls if some csr have to be approved or not.">
-    <meta itemprop="datePublished" content="2021-11-16T18:30:00+01:00">
+    <meta itemprop="headline" content="Fixing “Cannot Install Windows 11” error during installation">
+    <meta itemprop="description" content="ProblemToday I tried to install Windows 11 on my virtual platform and during installation faced with the following problem:">
+    <meta itemprop="datePublished" content="2022-01-02T18:40:00+01:00">
     
 
     <div class="page__inner-wrap">
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="http://localhost:4000/site/check-approve-csr-openshift/" class="u-url" itemprop="url">Check and approve pendings csrs in Openshift cluster
+            <a href="http://localhost:4000/site/windows11-requirements-error/" class="u-url" itemprop="url">Fixing “Cannot Install Windows 11” error during installation
 </a>
           </h1>
           
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2021-11-16T18:30:00+01:00">November 16, 2021</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-        </header>
-      
-
-      <section class="page__content e-content" itemprop="text">
-        
-        <p>After installing Openshift cluster you should log in and check for csr. Moreover, I regularly controls if some csr have to be approved or not.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@ocp4 try]$ oc get csr
-NAME        AGE     SIGNERNAME                                    REQUESTOR                                        CONDITION
-csr-6m4m7   4m29s   kubernetes.io/kube-apiserver-client-kubelet   system:node:etcd-2.okd4.home.lab                 Approved,Issued
-csr-7qww9   4m13s   kubernetes.io/kube-apiserver-client-kubelet   system:node:okd4-compute-1.okd4.home.lab         Approved,Issued
-csr-glzgb   4m29s   kubernetes.io/kube-apiserver-client-kubelet   system:node:okd4-control-plane-1.okd4.home.lab   Pending
-csr-lsdcc   4m19s   kubernetes.io/kube-apiserver-client-kubelet   system:node:etcd-3.okd4.home.lab                 Pending
-csr-nwjpv   35s     kubernetes.io/kube-apiserver-client-kubelet   system:node:okd4-control-plane-1.okd4.home.lab   Approved,Issued
-</code></pre></div></div>
-
-<p>As you can see, there is some certificates in Pending status. In order to approve each of them manually, run the following command:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>oc adm certificate approve &lt;csr_name&gt;
-</code></pre></div></div>
-
-<p>And use <code class="language-plaintext highlighter-rouge">jq</code> tool to verify all csr at once:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@ocp4 try]$ oc get csr -ojson | jq -r '.items[] | select(.status == {} ) | .metadata.name' | xargs oc adm certificate approve
-certificatesigningrequest.certificates.k8s.io/csr-glzgb approved
-certificatesigningrequest.certificates.k8s.io/csr-lsdcc approved
-[admin@ocp4 try]$ oc get csr
-NAME        AGE     SIGNERNAME                                    REQUESTOR                                        CONDITION
-csr-6m4m7   5m5s    kubernetes.io/kube-apiserver-client-kubelet   system:node:etcd-2.okd4.home.lab                 Approved,Issued
-csr-7qww9   4m49s   kubernetes.io/kube-apiserver-client-kubelet   system:node:okd4-compute-1.okd4.home.lab         Approved,Issued
-csr-glzgb   5m5s    kubernetes.io/kube-apiserver-client-kubelet   system:node:okd4-control-plane-1.okd4.home.lab   Approved,Issued
-csr-lsdcc   4m55s   kubernetes.io/kube-apiserver-client-kubelet   system:node:etcd-3.okd4.home.lab                 Approved,Issued
-csr-nwjpv   71s     kubernetes.io/kube-apiserver-client-kubelet   system:node:okd4-control-plane-1.okd4.home.lab   Approved,Issued
-[admin@ocp4 try]$ 
-</code></pre></div></div>
-
-
-        
-      </section>
-
-      <footer class="page__meta">
-        
-        
-  
-
-
-  
-
-  <p class="page__taxonomy">
-    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
-    <span itemprop="keywords">
-    
-      <a href="/site/tags/#openshift" class="page__taxonomy-item p-category" rel="tag">openshift</a>
-    
-    </span>
-  </p>
-
-
-
-
-        
-
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2021-11-16T18:30:00+01:00">November 16, 2021</time></p>
-
-      </footer>
-
-      
-
-      
-  <nav class="pagination">
-    
-      <a href="/site/edit-files-with-rmate/" class="pagination--pager" title="Editing files in Linux VM using remote Visual Studio Code
-">Previous</a>
-    
-    
-      <a href="/site/create-persistence-storage-for-openshift-registry/" class="pagination--pager" title="Create persistance storage for openshift registry
-">Next</a>
-    
-  </nav>
-
-    </div>
-
-    
-  </article>
-
-  
-  
-    <div class="page__related">
-      <h2 class="page__related-title">You may also enjoy</h2>
-      <div class="grid__wrapper">
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/site/windows11-requirements-error/" rel="permalink">Fixing “Cannot Install Windows 11” error during installation
-</a>
-      
-    </h2>
-    
 
   <p class="page__meta">
     
@@ -372,13 +252,106 @@ csr-nwjpv   71s     kubernetes.io/kube-apiserver-client-kubelet   system:node:ok
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">Problem
-Today I tried to install Windows 11 on my virtual platform and during installation faced with the following problem:
+        </header>
+      
 
-</p>
+      <section class="page__content e-content" itemprop="text">
+        
+        <h2 id="problem">Problem</h2>
+<p>Today I tried to install Windows 11 on my virtual platform and during installation faced with the following problem:
+<img src="images/../../images/windows11-requirements-error/pic1.png" alt="Image" /></p>
+
+<h2 id="solution">Solution</h2>
+
+<p>In this screen type <code class="language-plaintext highlighter-rouge">Shift + F10</code> at the same time to open a command promt. Then in command line type <code class="language-plaintext highlighter-rouge">regedit</code>:</p>
+
+<p><img src="images/../../images/windows11-requirements-error/pic2.png" alt="Image" /></p>
+
+<p>In the opened Registry Editor window, go to HKEY_LOCAL_MACHINE -&gt; SYSTEM -&gt; Setup.</p>
+
+<p><img src="images/../../images/windows11-requirements-error/pic3.png" alt="Image" /></p>
+
+<p>Right click on Setup and then create a New -&gt; Key. Give some name to created key. I named it “MyConfig”. <strong>!!!! Give “LabConfig” name. !!!</strong></p>
+
+<p><img src="images/../../images/windows11-requirements-error/pic4.png" alt="Image" /></p>
+
+<p>Click right button on the blank space of the window and choose: New -&gt; DWORD (32-bit) Value.</p>
+
+<p><img src="images/../../images/windows11-requirements-error/pic5.png" alt="Image" /></p>
+
+<p>Rename created value to BypassTPMCheck. Thenk double-click on the on the created object and change Value date to 1.</p>
+
+<p><img src="images/../../images/windows11-requirements-error/pic6.png" alt="Image" /></p>
+
+<p>Create more DWORDS values and give them following names: BypassCPUCheck, BypassRAMCheck and BypassSecureBootCheck. The value data of all created objects should be 1.</p>
+
+<p><img src="images/../../images/windows11-requirements-error/pic7.png" alt="Image" /></p>
+
+<p>Close all opened windows.</p>
+
+<p><img src="images/../../images/windows11-requirements-error/pic8.png" alt="Image" /></p>
+
+<p>And click on “Install now” button.</p>
+
+<p><img src="images/../../images/windows11-requirements-error/pic9.png" alt="Image" /></p>
+
+<p>That’s it.</p>
+
+<h2 id="reference">Reference:</h2>
+<p><a href="https://www.youtube.com/watch?v=sCLJYNI77Bk">How to Fix Cannot Install Windows 11 on VMware Workstation</a></p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/site/tags/#windows11" class="page__taxonomy-item p-category" rel="tag">windows11</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2022-01-02T18:40:00+01:00">January 2, 2022</time></p>
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/site/regex-help/" class="pagination--pager" title="A short help for regular expressions
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
   </article>
-</div>
 
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
         
           
 
@@ -492,6 +465,43 @@ Today I tried to install Windows 11 on my virtual platform and during installati
     <p class="archive__item-excerpt" itemprop="description">MySQL
 Install mysql client:
 </p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/site/create-openshift-oauth-users/" rel="permalink">Configure HTPasswd Identity Provider and create OAuth users for Openshift
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-11-19T18:30:00+01:00">November 19, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Using default user
+During installation Openshift creates default kubeadmin with a password. Password you can find in installation folder: &lt;installation_fo...</p>
   </article>
 </div>
 

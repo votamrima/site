@@ -113,7 +113,7 @@
         
         <a class="site-title" href="/site/">
           
-          
+          <span class="site-subtitle">Welcome, dear guest. Please, keep in mind that there are not published any tutorials or learning materials. All published materials</span>
         </a>
         <ul class="visible-links"></ul>
         
@@ -355,12 +355,36 @@
       <td>3 of a</td>
     </tr>
     <tr>
+      <td>[0..9]{3}</td>
+      <td>any 3 digits in sequence</td>
+    </tr>
+    <tr>
+      <td>[0..9]{3,5}</td>
+      <td>from 3 to 5 digits in sequence</td>
+    </tr>
+    <tr>
       <td>a{3,}</td>
       <td>3 and more of a</td>
     </tr>
     <tr>
       <td>a{3,6}</td>
       <td>between 3 and 6 of a</td>
+    </tr>
+    <tr>
+      <td>[0..9]+</td>
+      <td>from 1 to infinity</td>
+    </tr>
+    <tr>
+      <td>[0..9]{1,}</td>
+      <td>from 1 to infinity</td>
+    </tr>
+    <tr>
+      <td>[0..9]*</td>
+      <td>from 0 to infinity</td>
+    </tr>
+    <tr>
+      <td>[0..9]{0,}</td>
+      <td>from 0 to infinity</td>
     </tr>
     <tr>
       <td>^</td>
@@ -385,6 +409,10 @@
     <tr>
       <td>\0</td>
       <td>Null character</td>
+    </tr>
+    <tr>
+      <td>()</td>
+      <td>Grouping</td>
     </tr>
   </tbody>
 </table>
@@ -433,7 +461,7 @@
     </tr>
     <tr>
       <td>\b</td>
-      <td>A word boundary</td>
+      <td>A word boundary. (Neither starts or ends with a specific letter.)</td>
     </tr>
     <tr>
       <td>\B</td>
@@ -453,9 +481,15 @@
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>\W+\w{1,}(?:\.)
 </code></pre></div></div>
 
+<p>A regex that identifies all urls in the text:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">(</span>http|https://<span class="o">)(</span>a-zA-z0-9.-_<span class="o">)</span><span class="se">\.</span><span class="o">(</span>com|net<span class="o">)</span>
+</code></pre></div></div>
+
 <h2 id="source">Source</h2>
 <ol>
   <li><a href="https://regex101.com/">https://regex101.com/</a></li>
+  <li><a href="https://www.youtube.com/watch?v=8sv-6AN0_cg">https://www.youtube.com/watch?v=8sv-6AN0_cg</a></li>
 </ol>
 
         
@@ -496,7 +530,8 @@
 ">Previous</a>
     
     
-      <a href="#" class="pagination--pager disabled">Next</a>
+      <a href="/site/windows11-requirements-error/" class="pagination--pager" title="Fixing “Cannot Install Windows 11” error during installation
+">Next</a>
     
   </nav>
 
@@ -510,6 +545,45 @@
     <div class="page__related">
       <h2 class="page__related-title">You may also enjoy</h2>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/site/windows11-requirements-error/" rel="permalink">Fixing “Cannot Install Windows 11” error during installation
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-01-02T18:40:00+01:00">January 2, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Problem
+Today I tried to install Windows 11 on my virtual platform and during installation faced with the following problem:
+
+</p>
+  </article>
+</div>
+
         
           
 
@@ -556,7 +630,7 @@
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/site/running-database-on-podman/" rel="permalink">Deploy a MySQL database on Podman with regular user
+        <a href="/site/running-database-on-podman/" rel="permalink">Deploy MySQL and PostgreSQL database systems on Podman with regular (non-root) user
 </a>
       
     </h2>
@@ -578,7 +652,8 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">Install mysql client:
+    <p class="archive__item-excerpt" itemprop="description">MySQL
+Install mysql client:
 </p>
   </article>
 </div>
@@ -617,43 +692,6 @@
 
     <p class="archive__item-excerpt" itemprop="description">Using default user
 During installation Openshift creates default kubeadmin with a password. Password you can find in installation folder: &lt;installation_fo...</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/site/create-persistence-storage-for-openshift-registry/" rel="permalink">Create persistance storage for openshift registry
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2021-11-17T16:30:00+01:00">November 17, 2021</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">Set ip NFS Server and export a created share.
-</p>
   </article>
 </div>
 
@@ -700,7 +738,7 @@ During installation Openshift creates default kubeadmin with a password. Passwor
   </ul>
 </div>
 
-<div class="page__footer-copyright">&copy; 2021 . Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">&copy; 2022 . Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
 
       </footer>
     </div>
