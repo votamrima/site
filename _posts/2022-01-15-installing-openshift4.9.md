@@ -182,4 +182,4 @@ Log in to Openshift using default kubeadmin user. Password is being generated du
 
 
 ## Reference:
-[How to Fix Cannot Install Windows 11 on VMware Workstation](https://www.youtube.com/watch?v=sCLJYNI77Bk)
+[Installing a user-provisioned bare metal cluster on a restricted network](https://docs.openshift.com/container-platform/4.9/installing/installing_bare_metal/installing-restricted-networks-bare-metal.html)
