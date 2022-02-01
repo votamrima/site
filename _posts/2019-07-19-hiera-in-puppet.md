@@ -9,14 +9,14 @@ tags: ['hiera', 'puppet']
  
 In this post I am trying to show how to configure hiera files on puppet master. For demonstration purpose I use a simple task that will create a folder. The main idea of this post is to get basic understand of hiera concept.
 
-1. Look up where is stored the main hiera file:
+Look up where is stored the main hiera file:
 
 ````bash
 puppet config print hiera_config 
 
 ````
 
-2. Edit it a found file vim $(puppet config print hiera_config):
+Edit it a found file vim $(puppet config print hiera_config):
 
 ````puppet
 ---
@@ -31,14 +31,14 @@ puppet config print hiera_config
   :datadir: "/etc/puppetlabs/code/environments/%{environment}/hieradata"
 ````
 
-3. Hiera values for our test will be stored inside ``/etc/puppetlabs/code/environments/production/hieradata/common.yaml`` with the following content:
+Hiera values for our test will be stored inside ``/etc/puppetlabs/code/environments/production/hieradata/common.yaml`` with the following content:
 
 ````puppet
 ---
 fldr_name: '/opt/from_hiera'
 ````
 
-4. A manifest that creates a folder using variable that stored in common.yaml. By default I am using sample ``init.pp`` file in ``/etc/puppetlabs/code/environments/production/manifests/init.pp``
+A manifest that creates a folder using variable that stored in common.yaml. By default I am using sample ``init.pp`` file in ``/etc/puppetlabs/code/environments/production/manifests/init.pp``
 
 ````puppet
 ---
