@@ -9,6 +9,8 @@ subtitle: ""
 
 Welcome, dear guest. 
 
-You can not find here any tutorials or learning materials. All posts here I use as wiki for personal needs. Of course, if you find something usefull, you are welcome to use it. However, please, take into consideration that there are some mistakes in posts too. 
+You can not find here any tutorials or learning materials. All posts here I use as wiki for personal needs. Of course, if you find something usefull, you are welcome to use it. However, please, take into consideration that there are able to be mistakes in posts. I do not review texts during writing. 
+
+Thank you.
 
 
