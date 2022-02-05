@@ -7,6 +7,8 @@ background: '/image/01.jpg'
 tags: ['linux']
 ---
 
+Here I have posted some information about how to create a simple service startup job for linux.
+
 
 Here below is shown a sample service file for systemctl
 
