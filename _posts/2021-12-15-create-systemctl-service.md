@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "Creating systemctl service manage job"
+title: "Creating a systemctl application startup job"
 subtitle: ""
 date: 2021-12-15 07:15:00 +0100
 background: '/image/01.jpg'
