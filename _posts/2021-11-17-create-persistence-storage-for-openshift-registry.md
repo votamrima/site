@@ -12,8 +12,9 @@ tags: ['openshift']
 
 A simple NFS is described [here]({% post_url ../site/_posts/2020-11-06-creating-simple-nfs-share %}).
 
-### Configure registry
-For creating an persistent volume I used to create setup_pv.yaml file with the following content:
+### Set up persistent volume
+Firstly, I created a setup_pv.yaml file with following content:
+
 ````
 vim setup_pv.yml
 apiVersion: v1
@@ -31,12 +32,19 @@ spec:
     server: 192.168.11.61
 ````
 
-Then, using oc create command I applied setup_pv.yml:
+According to the yaml file I used share from the host 192.168.11.61. 
+
+> ``showmount -e 192.168.11.61`` command prints list of available shares that available on the host. 
+
+
+When yaml file is created, create apply it using oc command:
+
 ````
 oc create -f setup_pv.yml
 ````
 
-A ``oc get pv`` command shows created persistence volumes. In my case I have only one.
+And finally, check if a persistence volume is created:
+
 ````
 [admin@dns try]$ oc get pv
 NAME      CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS   REASON   AGE
@@ -44,7 +52,9 @@ test-pv   10Gi       RWX            Retain           Available                  
 [admin@dns try]$ 
 ````
 
-Afterwards, I started to edit image-registry operator:
+
+<!Afterwards, I started to edit image-registry operator:
+
 ````
 [admin@dns try]$ oc edit configs.imageregistry.operator.openshift.io 
 
@@ -88,4 +98,4 @@ spec:
       claim:
   unsupportedConfigOverrides: null
 ````
-
+!>
