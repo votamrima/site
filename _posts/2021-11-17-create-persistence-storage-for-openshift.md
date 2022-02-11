@@ -32,7 +32,7 @@ spec:
     server: 192.168.11.61
 ````
 
-According to the yaml file I used share from the host 192.168.11.61. 
+According to the yaml file I used share from the host 192.168.11.61, path ``/opt/okdn_share/test``. Name of the storage will be test-pv. 
 
 > ``showmount -e 192.168.11.61`` command prints list of available shares that available on the host. 
 
