@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "Create persistance storage for openshift registry"
+title: "Create persistance storage for openshift"
 subtitle: ""
 date: 2021-11-17 16:30:00 +0100
 background: '/image/01.jpg'
