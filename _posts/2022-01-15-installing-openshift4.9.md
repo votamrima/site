@@ -74,25 +74,25 @@ Create virtual machines on your virtual platform. Each node will run on seperate
 
 Start each machine and load up the downloaded RHCOS iso image. 
 
-When RHCOS is loaded you should install ign file that you have created before. Type following commands for the following machines accordingly. The structure of the command is `` sudo coreos-installer install --ignition-file=<url with ignition file> <partition for installation> --insecure-ignition``
+When RHCOS is loaded you should install ign file that you have created before. Type following commands for the following machines accordingly. The structure of the command is `` sudo coreos-installer install --ignition-url=<url with ignition file> <partition for installation> --insecure-ignition``
 
 
 In my case I used following commands for installing a bootstrap node:
 
 ````bash
-coreos-installer install --ignition-file=http://192.168.11.61:8080/okd/bootstrap.ign /dev/sda --insecure-ignition
+coreos-installer install --ignition-url=http://192.168.11.61:8080/okd/bootstrap.ign /dev/sda --insecure-ignition
 ````
 
 For installing master node:
 
 ````bash
-coreos-installer install --ignition-file=http://192.168.11.61:8080/okd/master.ign /dev/sda --insecure-ignition
+coreos-installer install --ignition-url=http://192.168.11.61:8080/okd/master.ign /dev/sda --insecure-ignition
 ````
 
 For installing worker node:
 
 ````bash
-coreos-installer install --ignition-file=http://192.168.11.61:8080/okd/worker.ign /dev/sda --insecure-ignition
+coreos-installer install --ignition-url=http://192.168.11.61:8080/okd/worker.ign /dev/sda --insecure-ignition
 ````
 
 Wait until all ignitions will be installed.
