@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "My experience with installing Openshift 4.9 on Proxmox with a restricted network"
+title: "My experience of Openshift 4.9 installation on Proxmox with a restricted network"
 subtitle: ""
 date: 2022-01-15 20:00:00 +0100
 background: '/image/01.jpg'

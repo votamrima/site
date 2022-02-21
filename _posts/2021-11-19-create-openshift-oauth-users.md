@@ -1,13 +1,17 @@
 ---
 layout: single
-title: "Configure HTPasswd Identity Provider and create OAuth users for Openshift"
+title: "Openshift authentication using HTPasswd provider"
 subtitle: ""
 date: 2021-11-19 18:30:00 +0100
 background: '/image/01.jpg'
-tags: ['openshift', 'htpasswd', 'oauth']
+tags: ['openshift']
 ---
 
+In this post I shortly describe how to create users for Openshift using HTPasswd provider. More about authentication providers are able to find in [official documentation](https://docs.openshift.com/container-platform/4.9/authentication/understanding-authentication.html)
+
+
 ### Using default user
+
 During installation Openshift creates default *kubeadmin* with a password. Password you can find in installation folder: ``<installation_folder>/auth/kubeadmin-password``
 
 ````
@@ -34,12 +38,14 @@ export KUBECONFIG=/opt/install_dir/auth/kubeconfig
 
 
 ### OAuth and identity providers
+
 Authentication in Openshift is supported by Authentication Operator which runs on OAuth server. Users attempt to authenticate to the Opeshift API using using OAuth access tokens. 
 
 In order to use OAuth server it should be enabled and configured as well. Using kubeadmin user I specifed ``HTPasswd`` identity provider. Generally, the following list of identity providers are able to configure and use in Openshift: HTPasswd, Keystone, LDAP, Basic authentication, Request header, GitHub or GitHub Enterprise, GitLab, Google, OpenID Connect. More in detail about each of the provider is given in [Openhift Documentation](https://docs.openshift.com/container-platform/4.7/authentication/understanding-identity-provider.html)
 
 
 ### Configuring HTPasswd identity provider
+
 Create an HTPasswd authentication file using following format: ``htpasswd -c -b -B <filename> <username> <password>``. ``-c`` parameter creates file. ``-b`` uses a password which is given in command from the command line. ``-B`` - Force bcrypt encryption of the password
 
 ````
@@ -49,6 +55,7 @@ Adding password for user admin
 ````
 
 Check content of the created file:
+
 ````
 [admin@ocp4 try]$ cat my_ocp_users 
 admin:$2y$05$XteSEzWTBX8HlzqHQv2ryecUY5On/7DBfTSnCjWfyCFlDhaDdufcq
@@ -56,6 +63,7 @@ admin:$2y$05$XteSEzWTBX8HlzqHQv2ryecUY5On/7DBfTSnCjWfyCFlDhaDdufcq
 ````
 
 Create another user. Do not use ``-c`` parameter. In this case you create a file again with the new content.
+
 ````
 [admin@ocp4 try]$ htpasswd -b -B my_ocp_users developer developer
 Adding password for user developer
@@ -65,7 +73,8 @@ developer:$2y$05$Ab1TxMQV0T7te6NmKXaALOX/6XsFHsV06LYcaZHwIdIDpkJiObN2m
 [admin@ocp4 try]$ 
 ````
 
-Create a secret from created file. Here the secret named as ``myusers`` and used a prefix ``htpasswd`` in front of the the path to the file. Moreover, the secret should be create in namespace ``openshift-config``
+Create a secret from created file. Here the secret named as ``myusers`` and used a prefix ``htpasswd`` in front of the the path to the file. Moreover, the secret should be create in namespace ``openshift-config``.
+
 ````
 [admin@ocp4 try]$ oc create secret generic myusers --from-file htpasswd=my_ocp_users -n openshift-config
 secret/localusers created
@@ -73,6 +82,7 @@ secret/localusers created
 ````
 
 Checking out created secret:
+
 ````
 [admin@ocp4 try]$ oc get secrets -n openshift-config
 NAME                                  TYPE                                  DATA   AGE
@@ -84,9 +94,13 @@ myusers                            Opaque                                1      
 ````
 
 On next step I modified OAuth custom resource. It was able to create a new file and apply it using ``oc create -f <resource_file>.yml`` as it shown in openshift documentation. But I prefer to export the existing oauth custom resource, modify ``spec`` section and apply the modified one:
+
 ````
 [admin@ocp4 try]$ oc get oauth cluster -o yaml > oauth_modify.yml
 ````
+
+Edit exported file:
+
 ````
 [admin@ocp4 try]$ vim oauth_modify.yml 
 apiVersion: config.openshift.io/v1
@@ -101,6 +115,9 @@ spec:
     name: myusers
     type: HTPasswd
 ````
+
+Apply new oauth file:
+
 ````
 [admin@ocp4 try]$ oc replace -f oauth_modify.yml 
 oauth.config.openshift.io/cluster replaced
@@ -108,6 +125,7 @@ oauth.config.openshift.io/cluster replaced
 ````
 
 And check if pods of openshift-authentication namespaces are being recreated:
+
 ````
 [admin@ocp4 try]$ oc get pods -n openshift-authentication
 NAME                               READY   STATUS        RESTARTS   AGE
