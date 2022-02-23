@@ -9,38 +9,38 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Removing tmux from the puppet learning machine - notes</title>
-<meta name="description" content="cleanly and gracefully killing all tmux opened sessions and server too: ``` tmux kill-server">
+<!-- begin _includes/seo.html --><title>Activate autocomplete for the Openshift cli (oc) - notes</title>
+<meta name="description" content=".">
 
 
 
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="notes">
-<meta property="og:title" content="Removing tmux from the puppet learning machine">
-<meta property="og:url" content="http://localhost:4000/site/tmux-remove-puppetserver/">
+<meta property="og:title" content="Activate autocomplete for the Openshift cli (oc)">
+<meta property="og:url" content="http://localhost:4000/site/drafts/2022-01-16-autocomplete-oc.md_draft">
 
 
-  <meta property="og:description" content="cleanly and gracefully killing all tmux opened sessions and server too: ``` tmux kill-server">
-
-
-
-
-
-
-
-  <meta property="article:published_time" content="2019-06-03T17:38:00+02:00">
+  <meta property="og:description" content=".">
 
 
 
 
 
-  
+
+
+  <meta property="article:published_time" content="2022-01-16T18:00:00+01:00">
+
+
+
+
 
   
 
+  
 
-<link rel="canonical" href="http://localhost:4000/site/tmux-remove-puppetserver/">
+
+<link rel="canonical" href="http://localhost:4000/site/drafts/2022-01-16-autocomplete-oc.md_draft">
 
 
 
@@ -156,7 +156,17 @@
         <span class="sep">/</span>
       
       
-        <li class="current">Removing tmux from the puppet learning machine</li>
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/site/drafts" itemprop="item"><span itemprop="name">Drafts</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">Activate autocomplete for the Openshift cli (oc)</li>
       
     
   </ol>
@@ -170,6 +180,11 @@
   <div class="sidebar sticky">
   
   
+    
+      
+      
+      
+      
     
       
       
@@ -227,34 +242,19 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Removing tmux from the puppet learning machine">
-    <meta itemprop="description" content="  cleanly and gracefully killing all tmux opened sessions and server too:```tmux kill-server">
-    <meta itemprop="datePublished" content="2019-06-03T17:38:00+02:00">
+    <meta itemprop="headline" content="Activate autocomplete for the Openshift cli (oc)">
+    
+    <meta itemprop="datePublished" content="2022-01-16T18:00:00+01:00">
     
 
     <div class="page__inner-wrap">
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="http://localhost:4000/site/tmux-remove-puppetserver/" class="u-url" itemprop="url">Removing tmux from the puppet learning machine
+            <a href="http://localhost:4000/site/drafts/2022-01-16-autocomplete-oc.md_draft" class="u-url" itemprop="url">Activate autocomplete for the Openshift cli (oc)
 </a>
           </h1>
           
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2019-06-03T17:38:00+02:00">June 3, 2019</time>
-      </span>
-    
-
-    
-
-    
-  </p>
 
 
         </header>
@@ -262,21 +262,80 @@
 
       <section class="page__content e-content" itemprop="text">
         
-        <ol>
-  <li>cleanly and gracefully killing all tmux opened sessions and server too:
-```
-tmux kill-server</li>
-</ol>
+        In this post is described the commands for activating autocompletion for oc.
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2. or killing all tmux processes:
-</code></pre></div></div>
-<p>pkill -f tmux</p>
+## Download and prepare cli tool
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-3. removing tmux application
-</code></pre></div></div>
-<p>yum erase -y tmux
-````</p>
+Download Command-line interface (CLI) tools from [here](https://console.redhat.com/openshift/downloads#tool-ocm-api-token)
+
+Unpack downloaded file (openshift-client-linux.tar.gz):
+
+````bash
+[seymur@workstation oc]$ tar xvzf openshift-client-linux.tar.gz 
+README.md
+oc
+kubectl
+[seymur@workstation oc]$ 
+````
+
+Copy unpacked files to ``/usr/bin/`` and change owner to root
+
+````bash
+[seymur@workstation oc]$ sudo sudo cp kubectl oc /usr/bin/
+[seymur@workstation oc]$ 
+[seymur@workstation oc]$ 
+[seymur@workstation oc]$ sudo chown root:seymur /usr/bin/{kubectl,oc}
+[seymur@workstation oc]$ ll /usr/bin/{kubectl,oc}
+-rwxr-xr-x. 1 root seymur 122849344 Feb 11 20:21 /usr/bin/kubectl
+-rwxr-xr-x. 1 root seymur 122849344 Feb 11 20:21 /usr/bin/oc
+[seymur@workstation oc]$ 
+````
+
+## Activate autocomplete in oc
+
+
+
+````bash
+[seymur@workstation ~]$ oc completion bash > oc_bash_completion
+````
+
+
+````bash
+
+
+````
+
+
+````bash
+
+````
+
+
+````bash
+
+````
+
+
+````bash
+
+````
+
+
+Save bash completion code to a file
+oc completion bash > oc_bash_completion
+
+Save it in secured place. In my case it is /var/tmp/openshift/oc_bash_completion
+cp oc_bash_completion /var/tmp/openshift/oc_bash_completion
+Run a code from ~/.bashrc:
+source /var/tmp/openshift/oc_bash_completion
+In some cases you can receive following error:
+oc stbash: _get_comp_words_by_ref: command not found
+To solve this issue, install bash-completion package:
+sudo yum install -y bash-completion
+Rebuild current application:
+oc start-build echo
+
+
 
         
       </section>
@@ -293,7 +352,7 @@ tmux kill-server</li>
     <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
     <span itemprop="keywords">
     
-      <a href="/site/tags/#puppet" class="page__taxonomy-item p-category" rel="tag">puppet</a>
+      <a href="/site/tags/#openshift" class="page__taxonomy-item p-category" rel="tag">openshift</a>
     
     </span>
   </p>
@@ -303,191 +362,18 @@ tmux kill-server</li>
 
         
 
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2019-06-03T17:38:00+02:00">June 3, 2019</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2022-01-16T18:00:00+01:00">January 16, 2022</time></p>
 
       </footer>
 
       
 
       
-  <nav class="pagination">
-    
-      <a href="/site/vagrant-cheetsheet/" class="pagination--pager" title="Cheatsheet for Vagrant
-">Previous</a>
-    
-    
-      <a href="/site/hiera-in-puppet/" class="pagination--pager" title="Using hiera in puppet. Example: creating a folder
-">Next</a>
-    
-  </nav>
-
     </div>
 
     
   </article>
 
-  
-  
-    <div class="page__related">
-      <h2 class="page__related-title">You may also enjoy</h2>
-      <div class="grid__wrapper">
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/site/installing-openshift4.9/" rel="permalink">My experience of Openshift 4.9 installation on Proxmox with a restricted network
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2022-01-15T20:00:00+01:00">January 15, 2022</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">In this post I tried to describe my experience that I had during Openshift 4.9 installation at my home lab. Redhat allows to use Openshift during 60 days for...</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/site/windows11-requirements-error/" rel="permalink">Fixing “Cannot Install Windows 11” error during installation
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2022-01-02T18:40:00+01:00">January 2, 2022</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">Problem
-Today I tried to install Windows 11 on my virtual platform and during installation faced with the following problem:
-
-</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/site/create-systemctl-service/" rel="permalink">Creating a systemctl application startup job
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2021-12-15T07:15:00+01:00">December 15, 2021</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">Here I have posted some information about how to create a simple service startup job for linux.
-</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/site/regex-help/" rel="permalink">A short help for regular expressions
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2021-12-08T16:30:00+01:00">December 8, 2021</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">
-  Mostly used regex paterns
-  Other patterns
-  Examples:
-  Source
-
-</p>
-  </article>
-</div>
-
-        
-      </div>
-    </div>
   
   
 </div>

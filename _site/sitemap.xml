@@ -49,7 +49,7 @@
 <lastmod>2021-11-16T18:30:00+01:00</lastmod>
 </url>
 <url>
-<loc>http://localhost:4000/site/create-persistence-storage-for-openshift-registry/</loc>
+<loc>http://localhost:4000/site/create-persistence-storage-for-openshift/</loc>
 <lastmod>2021-11-17T16:30:00+01:00</lastmod>
 </url>
 <url>
@@ -69,8 +69,16 @@
 <lastmod>2021-12-08T16:30:00+01:00</lastmod>
 </url>
 <url>
+<loc>http://localhost:4000/site/create-systemctl-service/</loc>
+<lastmod>2021-12-15T07:15:00+01:00</lastmod>
+</url>
+<url>
 <loc>http://localhost:4000/site/windows11-requirements-error/</loc>
 <lastmod>2022-01-02T18:40:00+01:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/site/installing-openshift4.9/</loc>
+<lastmod>2022-01-15T20:00:00+01:00</lastmod>
 </url>
 <url>
 <loc>http://localhost:4000/site/_pages/about/</loc>

@@ -9,19 +9,19 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Configure HTPasswd Identity Provider and create OAuth users for Openshift -</title>
-<meta name="description" content="Using default user During installation Openshift creates default kubeadmin with a password. Password you can find in installation folder: &lt;installation_folder&gt;/auth/kubeadmin-password">
+<!-- begin _includes/seo.html --><title>Openshift authentication using HTPasswd provider - notes</title>
+<meta name="description" content="In this post I shortly describe how to create users for Openshift using HTPasswd provider. More about authentication providers are able to find in official documentation">
 
 
 
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
-<meta property="og:site_name" content="">
-<meta property="og:title" content="Configure HTPasswd Identity Provider and create OAuth users for Openshift">
+<meta property="og:site_name" content="notes">
+<meta property="og:title" content="Openshift authentication using HTPasswd provider">
 <meta property="og:url" content="http://localhost:4000/site/create-openshift-oauth-users/">
 
 
-  <meta property="og:description" content="Using default user During installation Openshift creates default kubeadmin with a password. Password you can find in installation folder: &lt;installation_folder&gt;/auth/kubeadmin-password">
+  <meta property="og:description" content="In this post I shortly describe how to create users for Openshift using HTPasswd provider. More about authentication providers are able to find in official documentation">
 
 
 
@@ -66,7 +66,7 @@
 
 
 
-  <link href="/site/feed.xml" type="application/atom+xml" rel="alternate" title=" Feed">
+  <link href="/site/feed.xml" type="application/atom+xml" rel="alternate" title="notes Feed">
 
 
 <!-- https://t.co/dKP3o1e -->
@@ -112,10 +112,15 @@
       <nav id="site-nav" class="greedy-nav">
         
         <a class="site-title" href="/site/">
+          notes
           
-          <span class="site-subtitle">Welcome, dear guest. Please, keep in mind that there are not published any tutorials or learning materials. All published materials</span>
         </a>
         <ul class="visible-links"></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
         
         <button class="greedy-nav__toggle hidden" type="button">
           <span class="visually-hidden">Toggle menu</span>
@@ -151,7 +156,7 @@
         <span class="sep">/</span>
       
       
-        <li class="current">Configure HTPasswd Identity Provider and create OAuth users for Openshift</li>
+        <li class="current">Openshift authentication using HTPasswd provider</li>
       
     
   </ol>
@@ -222,8 +227,8 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Configure HTPasswd Identity Provider and create OAuth users for Openshift">
-    <meta itemprop="description" content="Using default userDuring installation Openshift creates default kubeadmin with a password. Password you can find in installation folder: &lt;installation_folder&gt;/auth/kubeadmin-password">
+    <meta itemprop="headline" content="Openshift authentication using HTPasswd provider">
+    <meta itemprop="description" content="In this post I shortly describe how to create users for Openshift using HTPasswd provider. More about authentication providers are able to find in official documentation">
     <meta itemprop="datePublished" content="2021-11-19T18:30:00+01:00">
     
 
@@ -231,7 +236,7 @@
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="http://localhost:4000/site/create-openshift-oauth-users/" class="u-url" itemprop="url">Configure HTPasswd Identity Provider and create OAuth users for Openshift
+            <a href="http://localhost:4000/site/create-openshift-oauth-users/" class="u-url" itemprop="url">Openshift authentication using HTPasswd provider
 </a>
           </h1>
           
@@ -257,7 +262,10 @@
 
       <section class="page__content e-content" itemprop="text">
         
-        <h3 id="using-default-user">Using default user</h3>
+        <p>In this post I shortly describe how to create users for Openshift using HTPasswd provider. More about authentication providers are able to find in <a href="https://docs.openshift.com/container-platform/4.9/authentication/understanding-authentication.html">official documentation</a></p>
+
+<h3 id="using-default-user">Using default user</h3>
+
 <p>During installation Openshift creates default <em>kubeadmin</em> with a password. Password you can find in installation folder: <code class="language-plaintext highlighter-rouge">&lt;installation_folder&gt;/auth/kubeadmin-password</code></p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@ocp4 try]$ cat install_dir/auth/kubeadmin-password 
@@ -280,11 +288,13 @@ okd4-control-plane-1.okd4.home.lab   Ready      master   35d   v1.20.0+558d959-1
 </code></pre></div></div>
 
 <h3 id="oauth-and-identity-providers">OAuth and identity providers</h3>
+
 <p>Authentication in Openshift is supported by Authentication Operator which runs on OAuth server. Users attempt to authenticate to the Opeshift API using using OAuth access tokens.</p>
 
 <p>In order to use OAuth server it should be enabled and configured as well. Using kubeadmin user I specifed <code class="language-plaintext highlighter-rouge">HTPasswd</code> identity provider. Generally, the following list of identity providers are able to configure and use in Openshift: HTPasswd, Keystone, LDAP, Basic authentication, Request header, GitHub or GitHub Enterprise, GitLab, Google, OpenID Connect. More in detail about each of the provider is given in <a href="https://docs.openshift.com/container-platform/4.7/authentication/understanding-identity-provider.html">Openhift Documentation</a></p>
 
 <h3 id="configuring-htpasswd-identity-provider">Configuring HTPasswd identity provider</h3>
+
 <p>Create an HTPasswd authentication file using following format: <code class="language-plaintext highlighter-rouge">htpasswd -c -b -B &lt;filename&gt; &lt;username&gt; &lt;password&gt;</code>. <code class="language-plaintext highlighter-rouge">-c</code> parameter creates file. <code class="language-plaintext highlighter-rouge">-b</code> uses a password which is given in command from the command line. <code class="language-plaintext highlighter-rouge">-B</code> - Force bcrypt encryption of the password</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@ocp4 try]$ htpasswd -c -b -B my_ocp_users admin admin
@@ -293,12 +303,14 @@ Adding password for user admin
 </code></pre></div></div>
 
 <p>Check content of the created file:</p>
+
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@ocp4 try]$ cat my_ocp_users 
 admin:$2y$05$XteSEzWTBX8HlzqHQv2ryecUY5On/7DBfTSnCjWfyCFlDhaDdufcq
 [admin@ocp4 try]$ 
 </code></pre></div></div>
 
 <p>Create another user. Do not use <code class="language-plaintext highlighter-rouge">-c</code> parameter. In this case you create a file again with the new content.</p>
+
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@ocp4 try]$ htpasswd -b -B my_ocp_users developer developer
 Adding password for user developer
 [admin@ocp4 try]$ cat my_ocp_users 
@@ -307,13 +319,15 @@ developer:$2y$05$Ab1TxMQV0T7te6NmKXaALOX/6XsFHsV06LYcaZHwIdIDpkJiObN2m
 [admin@ocp4 try]$ 
 </code></pre></div></div>
 
-<p>Create a secret from created file. Here the secret named as <code class="language-plaintext highlighter-rouge">myusers</code> and used a prefix <code class="language-plaintext highlighter-rouge">htpasswd</code> in front of the the path to the file. Moreover, the secret should be create in namespace <code class="language-plaintext highlighter-rouge">openshift-config</code></p>
+<p>Create a secret from created file. Here the secret named as <code class="language-plaintext highlighter-rouge">myusers</code> and used a prefix <code class="language-plaintext highlighter-rouge">htpasswd</code> in front of the the path to the file. Moreover, the secret should be create in namespace <code class="language-plaintext highlighter-rouge">openshift-config</code>.</p>
+
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@ocp4 try]$ oc create secret generic myusers --from-file htpasswd=my_ocp_users -n openshift-config
 secret/localusers created
 [admin@ocp4 try]$ 
 </code></pre></div></div>
 
 <p>Checking out created secret:</p>
+
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@ocp4 try]$ oc get secrets -n openshift-config
 NAME                                  TYPE                                  DATA   AGE
 ......
@@ -324,8 +338,12 @@ myusers                            Opaque                                1      
 </code></pre></div></div>
 
 <p>On next step I modified OAuth custom resource. It was able to create a new file and apply it using <code class="language-plaintext highlighter-rouge">oc create -f &lt;resource_file&gt;.yml</code> as it shown in openshift documentation. But I prefer to export the existing oauth custom resource, modify <code class="language-plaintext highlighter-rouge">spec</code> section and apply the modified one:</p>
+
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@ocp4 try]$ oc get oauth cluster -o yaml &gt; oauth_modify.yml
 </code></pre></div></div>
+
+<p>Edit exported file:</p>
+
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@ocp4 try]$ vim oauth_modify.yml 
 apiVersion: config.openshift.io/v1
 kind: OAuth
@@ -339,12 +357,16 @@ spec:
     name: myusers
     type: HTPasswd
 </code></pre></div></div>
+
+<p>Apply new oauth file:</p>
+
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@ocp4 try]$ oc replace -f oauth_modify.yml 
 oauth.config.openshift.io/cluster replaced
 [admin@ocp4 try]$ 
 </code></pre></div></div>
 
 <p>And check if pods of openshift-authentication namespaces are being recreated:</p>
+
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@ocp4 try]$ oc get pods -n openshift-authentication
 NAME                               READY   STATUS        RESTARTS   AGE
 oauth-openshift-647d98d4db-pmtx6   0/1     Terminating   0          26d
@@ -463,10 +485,6 @@ to build a new example application in Ruby. Or use kubectl to deploy a simple Ku
     <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
     <span itemprop="keywords">
     
-      <a href="/site/tags/#htpasswd" class="page__taxonomy-item p-category" rel="tag">htpasswd</a><span class="sep">, </span>
-    
-      <a href="/site/tags/#oauth" class="page__taxonomy-item p-category" rel="tag">oauth</a><span class="sep">, </span>
-    
       <a href="/site/tags/#openshift" class="page__taxonomy-item p-category" rel="tag">openshift</a>
     
     </span>
@@ -486,7 +504,7 @@ to build a new example application in Ruby. Or use kubectl to deploy a simple Ku
       
   <nav class="pagination">
     
-      <a href="/site/create-persistence-storage-for-openshift-registry/" class="pagination--pager" title="Create persistance storage for openshift registry
+      <a href="/site/create-persistence-storage-for-openshift/" class="pagination--pager" title="Create persistance storage for openshift
 ">Previous</a>
     
     
@@ -505,6 +523,42 @@ to build a new example application in Ruby. Or use kubectl to deploy a simple Ku
     <div class="page__related">
       <h2 class="page__related-title">You may also enjoy</h2>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/site/installing-openshift4.9/" rel="permalink">My experience of Openshift 4.9 installation on Proxmox with a restricted network
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-01-15T20:00:00+01:00">January 15, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">In this post I tried to describe my experience that I had during Openshift 4.9 installation at my home lab. Redhat allows to use Openshift during 60 days for...</p>
+  </article>
+</div>
+
         
           
 
@@ -554,6 +608,43 @@ Today I tried to install Windows 11 on my virtual platform and during installati
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
+        <a href="/site/create-systemctl-service/" rel="permalink">Creating a systemctl application startup job
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-12-15T07:15:00+01:00">December 15, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Here I have posted some information about how to create a simple service startup job for linux.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
         <a href="/site/regex-help/" rel="permalink">A short help for regular expressions
 </a>
       
@@ -587,80 +678,6 @@ Today I tried to install Windows 11 on my virtual platform and during installati
 </div>
 
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/site/deploy-application-on-podman/" rel="permalink">Deploy a python application using podman. Deploy rootless container and connect podmanized database container
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2021-11-28T19:30:00+01:00">November 28, 2021</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">In order to connect a rootless application container to the rootles database container I used port mapping technique. The following steps were used for succe...</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/site/running-database-on-podman/" rel="permalink">Deploy MySQL and PostgreSQL database systems on Podman with regular (non-root) user
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2021-11-28T16:30:00+01:00">November 28, 2021</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">MySQL
-Install mysql client:
-</p>
-  </article>
-</div>
-
-        
       </div>
     </div>
   
@@ -668,6 +685,17 @@ Install mysql client:
 </div>
     </div>
 
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
     
 
     <div id="footer" class="page__footer">
@@ -703,7 +731,7 @@ Install mysql client:
   </ul>
 </div>
 
-<div class="page__footer-copyright">&copy; 2022 . Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">&copy; 2022 notes. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
 
       </footer>
     </div>
@@ -713,6 +741,10 @@ Install mysql client:
 
 
 
+
+<script src="/site/assets/js/lunr/lunr.min.js"></script>
+<script src="/site/assets/js/lunr/lunr-store.js"></script>
+<script src="/site/assets/js/lunr/lunr-en.js"></script>
 
 
 

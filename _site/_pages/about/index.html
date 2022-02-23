@@ -9,15 +9,15 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>About -</title>
+<!-- begin _includes/seo.html --><title>notes</title>
 <meta name="description" content=".">
 
 
 
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_US">
-<meta property="og:site_name" content="">
-<meta property="og:title" content="About">
+<meta property="og:site_name" content="notes">
+<meta property="og:title" content="notes">
 <meta property="og:url" content="http://localhost:4000/site/_pages/about/">
 
 
@@ -64,7 +64,7 @@
 
 
 
-  <link href="/site/feed.xml" type="application/atom+xml" rel="alternate" title=" Feed">
+  <link href="/site/feed.xml" type="application/atom+xml" rel="alternate" title="notes Feed">
 
 
 <!-- https://t.co/dKP3o1e -->
@@ -110,10 +110,15 @@
       <nav id="site-nav" class="greedy-nav">
         
         <a class="site-title" href="/site/">
+          notes
           
-          <span class="site-subtitle">Welcome, dear guest. Please, keep in mind that there are not published any tutorials or learning materials. All published materials</span>
         </a>
         <ul class="visible-links"></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
         
         <button class="greedy-nav__toggle hidden" type="button">
           <span class="visually-hidden">Toggle menu</span>
@@ -159,7 +164,7 @@
     
       
       
-        <li class="current">About</li>
+        <li class="current"></li>
       
     
   </ol>
@@ -235,7 +240,7 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="About">
+    
     
     
     
@@ -243,10 +248,7 @@
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="http://localhost:4000/site/_pages/about/" class="u-url" itemprop="url">About
-</a>
-          </h1>
+          
           
 
 
@@ -255,7 +257,12 @@
 
       <section class="page__content e-content" itemprop="text">
         
-        
+        <p>Welcome, dear guest.</p>
+
+<p>You can not find here any tutorials or learning materials. All posts here I use as wiki for personal needs. Of course, if you find something usefull, you are welcome to use it. However, please, take into consideration that there are able to be mistakes in posts. I do not review texts during writing.</p>
+
+<p>Thank you.</p>
+
 
         
       </section>
@@ -263,21 +270,6 @@
       <footer class="page__meta">
         
         
-  
-
-
-  
-
-  <p class="page__taxonomy">
-    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
-    <span itemprop="keywords">
-    
-      <a href="/site/tags/#about" class="page__taxonomy-item p-category" rel="tag">about</a>
-    
-    </span>
-  </p>
-
-
 
 
         
@@ -297,6 +289,17 @@
 </div>
     </div>
 
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
     
 
     <div id="footer" class="page__footer">
@@ -332,7 +335,7 @@
   </ul>
 </div>
 
-<div class="page__footer-copyright">&copy; 2022 . Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">&copy; 2022 notes. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
 
       </footer>
     </div>
@@ -342,6 +345,10 @@
 
 
 
+
+<script src="/site/assets/js/lunr/lunr.min.js"></script>
+<script src="/site/assets/js/lunr/lunr-store.js"></script>
+<script src="/site/assets/js/lunr/lunr-en.js"></script>
 
 
 

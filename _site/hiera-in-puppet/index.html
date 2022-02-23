@@ -9,14 +9,14 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Using hiera in puppet. Example: creating a folder -</title>
+<!-- begin _includes/seo.html --><title>Using hiera in puppet. Example: creating a folder - notes</title>
 <meta name="description" content="In this post I am trying to show how to configure hiera files on puppet master. For demonstration purpose I use a simple task that will create a folder. The main idea of this post is to get basic understand of hiera concept.">
 
 
 
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
-<meta property="og:site_name" content="">
+<meta property="og:site_name" content="notes">
 <meta property="og:title" content="Using hiera in puppet. Example: creating a folder">
 <meta property="og:url" content="http://localhost:4000/site/hiera-in-puppet/">
 
@@ -66,7 +66,7 @@
 
 
 
-  <link href="/site/feed.xml" type="application/atom+xml" rel="alternate" title=" Feed">
+  <link href="/site/feed.xml" type="application/atom+xml" rel="alternate" title="notes Feed">
 
 
 <!-- https://t.co/dKP3o1e -->
@@ -112,10 +112,15 @@
       <nav id="site-nav" class="greedy-nav">
         
         <a class="site-title" href="/site/">
+          notes
           
-          <span class="site-subtitle">Welcome, dear guest. Please, keep in mind that there are not published any tutorials or learning materials. All published materials</span>
         </a>
         <ul class="visible-links"></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
         
         <button class="greedy-nav__toggle hidden" type="button">
           <span class="visually-hidden">Toggle menu</span>
@@ -259,59 +264,50 @@
         
         <p>In this post I am trying to show how to configure hiera files on puppet master. For demonstration purpose I use a simple task that will create a folder. The main idea of this post is to get basic understand of hiera concept.</p>
 
-<ol>
-  <li>Look up where is stored the main hiera file:
-````
-puppet config print hiera_config</li>
-</ol>
+<p>Look up where is stored the main hiera file:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-2. Edit it a found file vim $(puppet config print hiera_config):
-</code></pre></div></div>
-<hr />
-<h1 id="hiera-5-global-configuration-file">Hiera 5 Global configuration file</h1>
-<p>:backends:</p>
-<ul>
-  <li>yaml</li>
-</ul>
-
-<p>:hierarchy:</p>
-<ul>
-  <li>common</li>
-</ul>
-
-<p>:yaml:
-  :datadir: “/etc/puppetlabs/code/environments/%{environment}/hieradata”</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-3. Hiera values for our test will be stored inside ``/etc/puppetlabs/code/environments/production/hieradata/common.yaml`` with the following content: 
-</code></pre></div></div>
-<hr />
-<p>fldr_name: ‘/opt/from_hiera’</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-3. A manifest that creates a folder using variable that stored in common.yaml. By default I am using sample ``init.pp`` file in ``/etc/puppetlabs/code/environments/production/manifests/init.pp``
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>puppet config print hiera_config 
 
 </code></pre></div></div>
-<hr />
-<p>class start_me (
-  $fldr_name,
-) {
-  file {‘Create test folder’:
-    ensure =&gt; ‘directory’,
-    path  =&gt; “${fldr_name}”,
-    force =&gt; true,
-  }
-}</p>
 
-<p>class { ‘start_me’:
-  fldr_name =&gt; hiera(‘fldr_name’)
-}</p>
+<p>Edit it a found file vim $(puppet config print hiera_config):</p>
 
-<p>````</p>
+<div class="language-puppet highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">---</span>
+<span class="c"># Hiera 5 Global configuration file
+</span><span class="p">:</span><span class="n">backends</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">yaml</span>
 
-<ol>
-  <li>And that is all</li>
-</ol>
+<span class="p">:</span><span class="n">hierarchy</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">common</span>
+
+<span class="p">:</span><span class="n">yaml</span><span class="p">:</span>
+  <span class="p">:</span><span class="n">datadir</span><span class="p">:</span> <span class="s2">"/etc/puppetlabs/code/environments/%{environment}/hieradata"</span>
+</code></pre></div></div>
+
+<p>Hiera values for our test will be stored inside <code class="language-plaintext highlighter-rouge">/etc/puppetlabs/code/environments/production/hieradata/common.yaml</code> with the following content:</p>
+
+<div class="language-puppet highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">---</span>
+<span class="n">fldr_name</span><span class="p">:</span> <span class="s1">'/opt/from_hiera'</span>
+</code></pre></div></div>
+
+<p>A manifest that creates a folder using variable that stored in common.yaml. By default I am using sample <code class="language-plaintext highlighter-rouge">init.pp</code> file in <code class="language-plaintext highlighter-rouge">/etc/puppetlabs/code/environments/production/manifests/init.pp</code></p>
+
+<div class="language-puppet highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">---</span>
+<span class="k">class</span> <span class="nc">start_me</span> <span class="p">(</span>
+  <span class="nv">$fldr_name</span><span class="p">,</span>
+<span class="p">)</span> <span class="p">{</span>
+  <span class="n">file</span> <span class="p">{</span><span class="s1">'Create test folder'</span><span class="p">:</span>
+    <span class="py">ensure</span> <span class="p">=&gt;</span> <span class="s1">'directory'</span><span class="p">,</span>
+    <span class="py">path</span>  <span class="p">=&gt;</span> <span class="s2">"</span><span class="nv">${fldr_name}</span><span class="s2">"</span><span class="p">,</span>
+    <span class="py">force</span> <span class="p">=&gt;</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="p">{</span> <span class="s1">'start_me'</span><span class="p">:</span>
+  <span class="py">fldr_name</span> <span class="p">=&gt;</span> <span class="nf">hiera</span><span class="p">(</span><span class="s1">'fldr_name'</span><span class="p">)</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
 
 
         
@@ -379,6 +375,42 @@ puppet config print hiera_config</li>
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
+        <a href="/site/installing-openshift4.9/" rel="permalink">My experience of Openshift 4.9 installation on Proxmox with a restricted network
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-01-15T20:00:00+01:00">January 15, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">In this post I tried to describe my experience that I had during Openshift 4.9 installation at my home lab. Redhat allows to use Openshift during 60 days for...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
         <a href="/site/windows11-requirements-error/" rel="permalink">Fixing “Cannot Install Windows 11” error during installation
 </a>
       
@@ -404,6 +436,43 @@ puppet config print hiera_config</li>
     <p class="archive__item-excerpt" itemprop="description">Problem
 Today I tried to install Windows 11 on my virtual platform and during installation faced with the following problem:
 
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/site/create-systemctl-service/" rel="permalink">Creating a systemctl application startup job
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-12-15T07:15:00+01:00">December 15, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Here I have posted some information about how to create a simple service startup job for linux.
 </p>
   </article>
 </div>
@@ -451,80 +520,6 @@ Today I tried to install Windows 11 on my virtual platform and during installati
 </div>
 
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/site/deploy-application-on-podman/" rel="permalink">Deploy a python application using podman. Deploy rootless container and connect podmanized database container
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2021-11-28T19:30:00+01:00">November 28, 2021</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">In order to connect a rootless application container to the rootles database container I used port mapping technique. The following steps were used for succe...</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/site/running-database-on-podman/" rel="permalink">Deploy MySQL and PostgreSQL database systems on Podman with regular (non-root) user
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2021-11-28T16:30:00+01:00">November 28, 2021</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">MySQL
-Install mysql client:
-</p>
-  </article>
-</div>
-
-        
       </div>
     </div>
   
@@ -532,6 +527,17 @@ Install mysql client:
 </div>
     </div>
 
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
     
 
     <div id="footer" class="page__footer">
@@ -567,7 +573,7 @@ Install mysql client:
   </ul>
 </div>
 
-<div class="page__footer-copyright">&copy; 2022 . Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">&copy; 2022 notes. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
 
       </footer>
     </div>
@@ -577,6 +583,10 @@ Install mysql client:
 
 
 
+
+<script src="/site/assets/js/lunr/lunr.min.js"></script>
+<script src="/site/assets/js/lunr/lunr-store.js"></script>
+<script src="/site/assets/js/lunr/lunr-en.js"></script>
 
 
 

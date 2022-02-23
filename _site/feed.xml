@@ -1,4 +1,167 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="http://localhost:4000/site/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/site/" rel="alternate" type="text/html" /><updated>2022-01-30T16:59:26+01:00</updated><id>http://localhost:4000/site/feed.xml</id><title type="html"></title><subtitle>.</subtitle><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><entry><title type="html">Fixing “Cannot Install Windows 11” error during installation</title><link href="http://localhost:4000/site/windows11-requirements-error/" rel="alternate" type="text/html" title="Fixing “Cannot Install Windows 11” error during installation" /><published>2022-01-02T18:40:00+01:00</published><updated>2022-01-02T18:40:00+01:00</updated><id>http://localhost:4000/site/windows11-requirements-error</id><content type="html" xml:base="http://localhost:4000/site/windows11-requirements-error/">&lt;h2 id=&quot;problem&quot;&gt;Problem&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="http://localhost:4000/site/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/site/" rel="alternate" type="text/html" /><updated>2022-02-23T21:36:58+01:00</updated><id>http://localhost:4000/site/feed.xml</id><title type="html">notes</title><subtitle>.</subtitle><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><entry><title type="html">My experience of Openshift 4.9 installation on Proxmox with a restricted network</title><link href="http://localhost:4000/site/installing-openshift4.9/" rel="alternate" type="text/html" title="My experience of Openshift 4.9 installation on Proxmox with a restricted network" /><published>2022-01-15T20:00:00+01:00</published><updated>2022-01-15T20:00:00+01:00</updated><id>http://localhost:4000/site/installing-openshift4.9</id><content type="html" xml:base="http://localhost:4000/site/installing-openshift4.9/">&lt;p&gt;In this post I tried to describe my experience that I had during Openshift 4.9 installation at my home lab. Redhat allows to use Openshift during 60 days for free without support.&lt;/p&gt;
+
+&lt;h2 id=&quot;preparing-environment&quot;&gt;Preparing environment&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Set up DNS and DHCP&lt;/li&gt;
+  &lt;li&gt;Set up proxy&lt;/li&gt;
+  &lt;li&gt;Download RHCOS (https://console.redhat.com/openshift/install/metal/user-provisioned)&lt;/li&gt;
+  &lt;li&gt;Create bare metal environment. In my case I use Proxmox virtualization platform&lt;/li&gt;
+  &lt;li&gt;Install http server&lt;/li&gt;
+  &lt;li&gt;Install haproxy&lt;/li&gt;
+  &lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;preparing-for-installation&quot;&gt;Preparing for installation&lt;/h2&gt;
+&lt;p&gt;For Openshift installation it is necessary to have following:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;DNS and DHCP services&lt;/li&gt;
+  &lt;li&gt;HTTP server. In my case I installed httpd server&lt;/li&gt;
+  &lt;li&gt;Loadbalacer. I use Haproxy&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;All these services are running on Linux machine (in my case it is last version of CentOS 8). I named it ocp-services.&lt;/p&gt;
+
+&lt;p&gt;For installation and configuration of mentioned services I used ansible. Roles are available here: https://github.com/votamrima/ansible_activity&lt;/p&gt;
+
+&lt;p&gt;At my home lab Openshift nodes are being run on Proxmox virtualisation platform. There are 6 nodes: 1 - bootstrap node, 3 master nodes, 2 worker nodes.&lt;/p&gt;
+
+&lt;h3 id=&quot;obtaining-openshift-installer-and-token&quot;&gt;Obtaining Openshift installer and token&lt;/h3&gt;
+&lt;p&gt;Register at Red Hat portal.&lt;/p&gt;
+
+&lt;p&gt;Installer, token and Redhat CoreOS are able to download from https://console.redhat.com/openshift/install/metal/user-provisioned.&lt;/p&gt;
+
+&lt;p&gt;Unpack downloanded zip into &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/usr/local/bin/&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Create a folder where will be generated igns. In my case it is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/opt/try/install_dir/&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Create &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;install-config.yaml&lt;/code&gt; in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/opt/try/install_dir/&lt;/code&gt;. Sample for install-config.yaml is able to find here: https://docs.openshift.com/container-platform/4.9/installing/installing_bare_metal/installing-restricted-networks-bare-metal.html#installation-bare-metal-config-yaml_installing-restricted-networks-bare-metal.&lt;/p&gt;
+
+&lt;p&gt;Edit created file. Add copied from Redhat portal token into the file.&lt;/p&gt;
+
+&lt;p&gt;Create manifests:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;openshift-install create manifests &lt;span class=&quot;nt&quot;&gt;--dir&lt;/span&gt; /opt/try/install_dir/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Modify the created cluster-scheduler-02-config.yml manifest file to make the control plane nodes schedulable by updating &lt;em&gt;mastersSchedulable&lt;/em&gt; value to true. This option will deactivate scheduling control plane nodes by default:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sed&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'s/mastersSchedulable: true/mastersSchedulable: false/'&lt;/span&gt; /opt/try/install_dir/manifests/cluster-scheduler-02-config.yml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Create ignition files:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;openshift-install create ignition-configs &lt;span class=&quot;nt&quot;&gt;--dir&lt;/span&gt; /opt/try/install_dir/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Copy created ignition files to apache httpd folder. In my case it is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/var/www/html/okd/&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo cp&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-Rf&lt;/span&gt; install_dir/&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; /var/www/html/okd/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;install-coreos-and-openshift&quot;&gt;Install CoreOS and Openshift&lt;/h3&gt;
+
+&lt;p&gt;Create virtual machines on your virtual platform. Each node will run on seperated VM. In my case, as I mentioned above I used Proxmox and I have created 6 virtual machines - 1 bootstrap node, 3 for master nodes, 2 for worker nodes. All machines have following parameters: CPU - 4 core, memory - 16GB, hard drive - 100 GB, one phisycal network interface.&lt;/p&gt;
+
+&lt;p&gt;Start each machine and load up the downloaded RHCOS iso image.&lt;/p&gt;
+
+&lt;p&gt;When RHCOS is loaded you should install ign file that you have created before. Type following commands for the following machines accordingly. The structure of the command is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo coreos-installer install --ignition-url=&amp;lt;url with ignition file&amp;gt; &amp;lt;partition for installation&amp;gt; --insecure-ignition&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;In my case I used following commands for installing a bootstrap node:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;coreos-installer &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--ignition-url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;http://192.168.11.61:8080/okd/bootstrap.ign /dev/sda &lt;span class=&quot;nt&quot;&gt;--insecure-ignition&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;For installing master node:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;coreos-installer &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--ignition-url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;http://192.168.11.61:8080/okd/master.ign /dev/sda &lt;span class=&quot;nt&quot;&gt;--insecure-ignition&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;For installing worker node:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;coreos-installer &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--ignition-url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;http://192.168.11.61:8080/okd/worker.ign /dev/sda &lt;span class=&quot;nt&quot;&gt;--insecure-ignition&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Wait until all ignitions will be installed.&lt;/p&gt;
+
+&lt;p&gt;Restart all nodes.&lt;/p&gt;
+
+&lt;p&gt;And wait until Openshift will be installed. On my home lab installation continued more than 1,5 hour.&lt;/p&gt;
+
+&lt;h3 id=&quot;bootstrap-installation&quot;&gt;Bootstrap installation&lt;/h3&gt;
+
+&lt;p&gt;To monitor the bootstrap process Red Hat recommends to use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$ ./openshift-install --dir &amp;lt;installation_directory&amp;gt; wait-for bootstrap-complete --log-level=info&lt;/code&gt; command. Unfortunatelly, in my case it does not work. Every time this commands ended with error. Although, configuration was correct and installation process continued. Moreover, I wanted to observe bootstap process in detail. Therefore, I run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;journalctl&lt;/code&gt; on the host (using ssh and with core user). For bootstrap node I typed following:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;root@ocp-services ~]# ssh core@192.168.11.66
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;core@ocp-bootstrap ~]# &lt;span class=&quot;nb&quot;&gt;sudo&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;root@ocp-bootstrap ~]# journalctl &lt;span class=&quot;nt&quot;&gt;-b&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; release-image.service &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; bootkube.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Additionally, I regularly observed running containers as well:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;root@ocp-bootstrap ~]# crictl ps &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt;
+CONTAINER           IMAGE                                                                                                                    CREATED              STATE               NAME                        ATTEMPT             POD ID
+e6466af3587aa       quay.io/openshift-release-dev/ocp-release@sha256:bb1987fb718f81fb30bec4e0e1cd5772945269b77006576b02546cf84c77498e        About a minute ago   Running             cluster-version-operator    0                   811748d44e1d8
+c24e9d6dbf475       d5d10803f3ebd3ef51495518565dedc1c8c3b722a016026c613fc22dba95ea90                                                         About a minute ago   Running             cloud-credential-operator   0                   b01a7b4cfc1ef
+41c1b7d1ab749       28ea52b98c63aa5dd899d67bf267a3b7dd623f5a694b97a56793bb12597e2de9                                                         2 minutes ago        Running             machine-config-server       0                   40b5c46667d10
+66e72fc96cd44       28ea52b98c63aa5dd899d67bf267a3b7dd623f5a694b97a56793bb12597e2de9                                                         2 minutes ago        Exited              machine-config-controller   0                   40b5c46667d10
+58a422a9e4320       quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:fd41b7237cac235fead9bda6dc9bf5c6cbde163ebf9d9249f33065d5ceadded0   4 minutes ago        Running             etcd                        0                   90ed4068c2c5d
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;root@ocp-bootstrap ~]# 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Wait for the end of bootstrap process.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;journalctl &lt;span class=&quot;nt&quot;&gt;-b&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; release-image.service &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; bootkube.service
+........
+bootkube.service: Succeeded.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;master-node-installation&quot;&gt;Master node installation&lt;/h3&gt;
+
+&lt;p&gt;During bootstrap node installation, I did restart master and worker nodes. This speeds up installation of master and worker nodes (I do not reason).&lt;/p&gt;
+
+&lt;p&gt;To monitor master and working nodes I used journalctl too. Additionally, was checked the status of containers regulary:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;journalctl &lt;span class=&quot;nt&quot;&gt;-b&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt;
+crictl ps &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Wait for master nodes installation to be deployed&lt;/p&gt;
+
+&lt;p&gt;For checking if openshift is run and up, see the stats page of loadbalancer (in my case it is haproxy). There are all nodes should be green.&lt;/p&gt;
+
+&lt;h3 id=&quot;worker-nodes&quot;&gt;Worker nodes&lt;/h3&gt;
+
+&lt;p&gt;Before starting deploying worker node, shutdown bootstap node and deactivate it from loadbalancer.&lt;/p&gt;
+
+&lt;p&gt;When master nodes are successfuly installed and in stats page all master nodes are green, the next step is signing csrs.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#check for pending certificates:&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;admin@ocp-services ~]&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;oc get csr 
+
+
+&lt;span class=&quot;c&quot;&gt;#check and sing all pending certificates:&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;admin@ocp-services ~]&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;oc get csr &lt;span class=&quot;nt&quot;&gt;-ojson&lt;/span&gt; | jq &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'.items[] | select(.status == {} ) | .metadata.name'&lt;/span&gt; | xargs oc adm certificate approve
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Before running &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;oc&lt;/code&gt; command do not forget to export KUBECONFIG variable in ocp-services machine.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;KUBECONFIG&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/opt/try/install_dir/auth/kubeconfig
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;During deployment of worker nodes, regularly check for new pending csr’s and sign new generated ones.&lt;/p&gt;
+
+&lt;h3 id=&quot;final-result&quot;&gt;Final result&lt;/h3&gt;
+&lt;p&gt;Finally, when all nodes are being deployed, check for url of openshift console:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#check for openshift console url&lt;/span&gt;
+oc &lt;span class=&quot;nb&quot;&gt;whoami&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--show-console&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Log in to Openshift using default kubeadmin user. Password is being generated during creation of manifests and ignition files. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/opt/try/install_dir/auth/kubeadmin-password&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;reference&quot;&gt;Reference:&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://docs.openshift.com/container-platform/4.9/installing/installing_bare_metal/installing-restricted-networks-bare-metal.html&quot;&gt;Installing a user-provisioned bare metal cluster on a restricted network. Redhat documentation&lt;/a&gt;&lt;/p&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><category term="openshift" /><summary type="html">In this post I tried to describe my experience that I had during Openshift 4.9 installation at my home lab. Redhat allows to use Openshift during 60 days for free without support.</summary></entry><entry><title type="html">Fixing “Cannot Install Windows 11” error during installation</title><link href="http://localhost:4000/site/windows11-requirements-error/" rel="alternate" type="text/html" title="Fixing “Cannot Install Windows 11” error during installation" /><published>2022-01-02T18:40:00+01:00</published><updated>2022-01-02T18:40:00+01:00</updated><id>http://localhost:4000/site/windows11-requirements-error</id><content type="html" xml:base="http://localhost:4000/site/windows11-requirements-error/">&lt;h2 id=&quot;problem&quot;&gt;Problem&lt;/h2&gt;
 &lt;p&gt;Today I tried to install Windows 11 on my virtual platform and during installation faced with the following problem:
 &lt;img src=&quot;images/../../images/windows11-requirements-error/pic1.png&quot; alt=&quot;Image&quot; /&gt;&lt;/p&gt;
 
@@ -39,7 +202,42 @@
 &lt;p&gt;That’s it.&lt;/p&gt;
 
 &lt;h2 id=&quot;reference&quot;&gt;Reference:&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=sCLJYNI77Bk&quot;&gt;How to Fix Cannot Install Windows 11 on VMware Workstation&lt;/a&gt;&lt;/p&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><category term="windows11" /><summary type="html">Problem Today I tried to install Windows 11 on my virtual platform and during installation faced with the following problem:</summary></entry><entry><title type="html">A short help for regular expressions</title><link href="http://localhost:4000/site/regex-help/" rel="alternate" type="text/html" title="A short help for regular expressions" /><published>2021-12-08T16:30:00+01:00</published><updated>2021-12-08T16:30:00+01:00</updated><id>http://localhost:4000/site/regex-help</id><content type="html" xml:base="http://localhost:4000/site/regex-help/">&lt;ul&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=sCLJYNI77Bk&quot;&gt;How to Fix Cannot Install Windows 11 on VMware Workstation&lt;/a&gt;&lt;/p&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><category term="windows11" /><summary type="html">Problem Today I tried to install Windows 11 on my virtual platform and during installation faced with the following problem:</summary></entry><entry><title type="html">Creating a systemctl application startup job</title><link href="http://localhost:4000/site/create-systemctl-service/" rel="alternate" type="text/html" title="Creating a systemctl application startup job" /><published>2021-12-15T07:15:00+01:00</published><updated>2021-12-15T07:15:00+01:00</updated><id>http://localhost:4000/site/create-systemctl-service</id><content type="html" xml:base="http://localhost:4000/site/create-systemctl-service/">&lt;p&gt;Here I have posted some information about how to create a simple service startup job for linux.&lt;/p&gt;
+
+&lt;p&gt;Here below is shown a sample service file for systemctl&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Unit]
+&lt;span class=&quot;nv&quot;&gt;Description&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Description &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;application
+&lt;span class=&quot;nv&quot;&gt;After&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;network.target
+
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Service]
+&lt;span class=&quot;nv&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&amp;lt;user&amp;gt;
+&lt;span class=&quot;nv&quot;&gt;Group&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&amp;lt;group&amp;gt;
+&lt;span class=&quot;nv&quot;&gt;WorkingDirectory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&amp;lt;path where running file is located&amp;gt;
+&lt;span class=&quot;nv&quot;&gt;Environment&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&amp;lt;path with environment variable PATH &lt;span class=&quot;s2&quot;&gt;&quot;PATH=/location&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;EnvironmentFile&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&amp;lt;path to environment file&amp;gt;
+&lt;span class=&quot;nv&quot;&gt;ExecStart&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&amp;lt;a &lt;span class=&quot;nb&quot;&gt;command &lt;/span&gt;with necessary parameters to start application&amp;gt;
+
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Install]
+&lt;span class=&quot;nv&quot;&gt;WantedBy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;multi-user.target
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;A service file should be located under &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/systemd/system&lt;/code&gt; folder. A service file can be named anyhow, but extension of the file should be ended with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.service&lt;/code&gt;. For instance: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/systemd/system/testapp.service&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;When file is being created reload daemon:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl daemon-reload
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;And start application:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl start testapp.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;If application has to be started automatically, do not do not forget to enable it:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl &lt;span class=&quot;nb&quot;&gt;enable &lt;/span&gt;testapp.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><category term="linux" /><summary type="html">Here I have posted some information about how to create a simple service startup job for linux.</summary></entry><entry><title type="html">A short help for regular expressions</title><link href="http://localhost:4000/site/regex-help/" rel="alternate" type="text/html" title="A short help for regular expressions" /><published>2021-12-08T16:30:00+01:00</published><updated>2021-12-08T16:30:00+01:00</updated><id>http://localhost:4000/site/regex-help</id><content type="html" xml:base="http://localhost:4000/site/regex-help/">&lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;#mostly-used-regex-paterns&quot;&gt;Mostly used regex paterns&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#other-patterns&quot;&gt;Other patterns&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#examples&quot;&gt;Examples:&lt;/a&gt;&lt;/li&gt;
@@ -287,11 +485,10 @@
     link/ether 52:54:00:dc:2d:dc brd ff:ff:ff:ff:ff:ff
     inet 192.168.122.1/24 brd 192.168.122.255 scope global virbr0
        valid_lft forever preferred_lft forever
-6: virbr0-nic: &amp;lt;BROADCAST,MULTICAST&amp;gt; mtu 1500 qdisc fq_codel master virbr0 state DOWN group default qlen 1000
-    link/ether 52:54:00:dc:2d:dc brd ff:ff:ff:ff:ff:ff
+............
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;And finally, deploy application using parameters for mapping port and setting environment variables:&lt;/p&gt;
+&lt;p&gt;And finally, deploy application using parameters for mapping port and setting environment variables. In order to access to database container, I need to set a gateway ip address of podman network as database host. In this way all all traffic between application and database containers will run through main host. Of course, in this case, do not forget to map the port of mysql container and set it as env value for application container.&lt;/p&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@workstation homelab_projects]$ podman run -d --name testapp -p 8090:8090 -e MYSQL_HOST=192.168.122.1 -e MYSQL_USER=admin -e MYSQL_PASSWORD=mysql -e MYSQL_PORT=33306 -e MYSQL_DB=words testapp
 4bb1627cfa1c1c0690cebfd011e340162ead9f50143bde5269e90f24bbe10f83
@@ -303,7 +500,10 @@ CONTAINER ID  IMAGE                                                             
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;That’s it.&lt;/p&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><category term="podman" /><category term="python" /><summary type="html">In order to connect a rootless application container to the rootles database container I used port mapping technique. The following steps were used for successfully applying application with connection to database.</summary></entry><entry><title type="html">Deploy MySQL and PostgreSQL database systems on Podman with regular (non-root) user</title><link href="http://localhost:4000/site/running-database-on-podman/" rel="alternate" type="text/html" title="Deploy MySQL and PostgreSQL database systems on Podman with regular (non-root) user" /><published>2021-11-28T16:30:00+01:00</published><updated>2021-11-28T16:30:00+01:00</updated><id>http://localhost:4000/site/running-database-on-podman</id><content type="html" xml:base="http://localhost:4000/site/running-database-on-podman/">&lt;h2 id=&quot;mysql&quot;&gt;MySQL&lt;/h2&gt;
+&lt;p&gt;Additionally, I would give a short command for entering to the container:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;podman &lt;span class=&quot;nb&quot;&gt;exec&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-it&lt;/span&gt; testapp bash
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><category term="podman" /><category term="python" /><summary type="html">In order to connect a rootless application container to the rootles database container I used port mapping technique. The following steps were used for successfully applying application with connection to database.</summary></entry><entry><title type="html">Deploy MySQL and PostgreSQL database systems on Podman with regular (non-root) user</title><link href="http://localhost:4000/site/running-database-on-podman/" rel="alternate" type="text/html" title="Deploy MySQL and PostgreSQL database systems on Podman with regular (non-root) user" /><published>2021-11-28T16:30:00+01:00</published><updated>2021-11-28T16:30:00+01:00</updated><id>http://localhost:4000/site/running-database-on-podman</id><content type="html" xml:base="http://localhost:4000/site/running-database-on-podman/">&lt;h2 id=&quot;mysql&quot;&gt;MySQL&lt;/h2&gt;
 &lt;p&gt;Install mysql client:&lt;/p&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo yum install mysql
@@ -418,7 +618,10 @@ CONTAINER ID    IMAGE                                          COMMAND          
 ...
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
-&lt;/ol&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><category term="podman" /><category term="mysql" /><summary type="html">MySQL Install mysql client:</summary></entry><entry><title type="html">Configure HTPasswd Identity Provider and create OAuth users for Openshift</title><link href="http://localhost:4000/site/create-openshift-oauth-users/" rel="alternate" type="text/html" title="Configure HTPasswd Identity Provider and create OAuth users for Openshift" /><published>2021-11-19T18:30:00+01:00</published><updated>2021-11-19T18:30:00+01:00</updated><id>http://localhost:4000/site/create-openshift-oauth-users</id><content type="html" xml:base="http://localhost:4000/site/create-openshift-oauth-users/">&lt;h3 id=&quot;using-default-user&quot;&gt;Using default user&lt;/h3&gt;
+&lt;/ol&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><category term="podman" /><category term="mysql" /><summary type="html">MySQL Install mysql client:</summary></entry><entry><title type="html">Openshift authentication using HTPasswd provider</title><link href="http://localhost:4000/site/create-openshift-oauth-users/" rel="alternate" type="text/html" title="Openshift authentication using HTPasswd provider" /><published>2021-11-19T18:30:00+01:00</published><updated>2021-11-19T18:30:00+01:00</updated><id>http://localhost:4000/site/create-openshift-oauth-users</id><content type="html" xml:base="http://localhost:4000/site/create-openshift-oauth-users/">&lt;p&gt;In this post I shortly describe how to create users for Openshift using HTPasswd provider. More about authentication providers are able to find in &lt;a href=&quot;https://docs.openshift.com/container-platform/4.9/authentication/understanding-authentication.html&quot;&gt;official documentation&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;using-default-user&quot;&gt;Using default user&lt;/h3&gt;
+
 &lt;p&gt;During installation Openshift creates default &lt;em&gt;kubeadmin&lt;/em&gt; with a password. Password you can find in installation folder: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;installation_folder&amp;gt;/auth/kubeadmin-password&lt;/code&gt;&lt;/p&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@ocp4 try]$ cat install_dir/auth/kubeadmin-password 
@@ -441,11 +644,13 @@ okd4-control-plane-1.okd4.home.lab   Ready      master   35d   v1.20.0+558d959-1
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;oauth-and-identity-providers&quot;&gt;OAuth and identity providers&lt;/h3&gt;
+
 &lt;p&gt;Authentication in Openshift is supported by Authentication Operator which runs on OAuth server. Users attempt to authenticate to the Opeshift API using using OAuth access tokens.&lt;/p&gt;
 
 &lt;p&gt;In order to use OAuth server it should be enabled and configured as well. Using kubeadmin user I specifed &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HTPasswd&lt;/code&gt; identity provider. Generally, the following list of identity providers are able to configure and use in Openshift: HTPasswd, Keystone, LDAP, Basic authentication, Request header, GitHub or GitHub Enterprise, GitLab, Google, OpenID Connect. More in detail about each of the provider is given in &lt;a href=&quot;https://docs.openshift.com/container-platform/4.7/authentication/understanding-identity-provider.html&quot;&gt;Openhift Documentation&lt;/a&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;configuring-htpasswd-identity-provider&quot;&gt;Configuring HTPasswd identity provider&lt;/h3&gt;
+
 &lt;p&gt;Create an HTPasswd authentication file using following format: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;htpasswd -c -b -B &amp;lt;filename&amp;gt; &amp;lt;username&amp;gt; &amp;lt;password&amp;gt;&lt;/code&gt;. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-c&lt;/code&gt; parameter creates file. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-b&lt;/code&gt; uses a password which is given in command from the command line. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-B&lt;/code&gt; - Force bcrypt encryption of the password&lt;/p&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@ocp4 try]$ htpasswd -c -b -B my_ocp_users admin admin
@@ -454,12 +659,14 @@ Adding password for user admin
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Check content of the created file:&lt;/p&gt;
+
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@ocp4 try]$ cat my_ocp_users 
 admin:$2y$05$XteSEzWTBX8HlzqHQv2ryecUY5On/7DBfTSnCjWfyCFlDhaDdufcq
 [admin@ocp4 try]$ 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Create another user. Do not use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-c&lt;/code&gt; parameter. In this case you create a file again with the new content.&lt;/p&gt;
+
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@ocp4 try]$ htpasswd -b -B my_ocp_users developer developer
 Adding password for user developer
 [admin@ocp4 try]$ cat my_ocp_users 
@@ -468,13 +675,15 @@ developer:$2y$05$Ab1TxMQV0T7te6NmKXaALOX/6XsFHsV06LYcaZHwIdIDpkJiObN2m
 [admin@ocp4 try]$ 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Create a secret from created file. Here the secret named as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;myusers&lt;/code&gt; and used a prefix &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;htpasswd&lt;/code&gt; in front of the the path to the file. Moreover, the secret should be create in namespace &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;openshift-config&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Create a secret from created file. Here the secret named as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;myusers&lt;/code&gt; and used a prefix &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;htpasswd&lt;/code&gt; in front of the the path to the file. Moreover, the secret should be create in namespace &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;openshift-config&lt;/code&gt;.&lt;/p&gt;
+
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@ocp4 try]$ oc create secret generic myusers --from-file htpasswd=my_ocp_users -n openshift-config
 secret/localusers created
 [admin@ocp4 try]$ 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Checking out created secret:&lt;/p&gt;
+
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@ocp4 try]$ oc get secrets -n openshift-config
 NAME                                  TYPE                                  DATA   AGE
 ......
@@ -485,8 +694,12 @@ myusers                            Opaque                                1      
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;On next step I modified OAuth custom resource. It was able to create a new file and apply it using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;oc create -f &amp;lt;resource_file&amp;gt;.yml&lt;/code&gt; as it shown in openshift documentation. But I prefer to export the existing oauth custom resource, modify &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;spec&lt;/code&gt; section and apply the modified one:&lt;/p&gt;
+
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@ocp4 try]$ oc get oauth cluster -o yaml &amp;gt; oauth_modify.yml
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Edit exported file:&lt;/p&gt;
+
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@ocp4 try]$ vim oauth_modify.yml 
 apiVersion: config.openshift.io/v1
 kind: OAuth
@@ -500,12 +713,16 @@ spec:
     name: myusers
     type: HTPasswd
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Apply new oauth file:&lt;/p&gt;
+
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@ocp4 try]$ oc replace -f oauth_modify.yml 
 oauth.config.openshift.io/cluster replaced
 [admin@ocp4 try]$ 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;And check if pods of openshift-authentication namespaces are being recreated:&lt;/p&gt;
+
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@ocp4 try]$ oc get pods -n openshift-authentication
 NAME                               READY   STATUS        RESTARTS   AGE
 oauth-openshift-647d98d4db-pmtx6   0/1     Terminating   0          26d
@@ -606,12 +823,13 @@ to build a new example application in Ruby. Or use kubectl to deploy a simple Ku
     kubectl create deployment hello-node --image=k8s.gcr.io/serve_hostname
 
 [admin@ocp4 ~]$
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><category term="openshift" /><category term="htpasswd" /><category term="oauth" /><summary type="html">Using default user During installation Openshift creates default kubeadmin with a password. Password you can find in installation folder: &amp;lt;installation_folder&amp;gt;/auth/kubeadmin-password</summary></entry><entry><title type="html">Create persistance storage for openshift registry</title><link href="http://localhost:4000/site/create-persistence-storage-for-openshift-registry/" rel="alternate" type="text/html" title="Create persistance storage for openshift registry" /><published>2021-11-17T16:30:00+01:00</published><updated>2021-11-17T16:30:00+01:00</updated><id>http://localhost:4000/site/create-persistence-storage-for-openshift-registry</id><content type="html" xml:base="http://localhost:4000/site/create-persistence-storage-for-openshift-registry/">&lt;h3 id=&quot;set-ip-nfs-server-and-export-a-created-share&quot;&gt;Set ip NFS Server and export a created share.&lt;/h3&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><category term="openshift" /><summary type="html">In this post I shortly describe how to create users for Openshift using HTPasswd provider. More about authentication providers are able to find in official documentation</summary></entry><entry><title type="html">Create persistance storage for openshift</title><link href="http://localhost:4000/site/create-persistence-storage-for-openshift/" rel="alternate" type="text/html" title="Create persistance storage for openshift" /><published>2021-11-17T16:30:00+01:00</published><updated>2021-11-17T16:30:00+01:00</updated><id>http://localhost:4000/site/create-persistence-storage-for-openshift</id><content type="html" xml:base="http://localhost:4000/site/create-persistence-storage-for-openshift/">&lt;h3 id=&quot;set-ip-nfs-server-and-export-a-created-share&quot;&gt;Set ip NFS Server and export a created share.&lt;/h3&gt;
 
-&lt;p&gt;A simple NFS is described &lt;a href=&quot;/site/creating-simple-nfs-share/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;A simple process of creating NFS is described on this site. Please, use search function.&lt;/p&gt;
 
-&lt;h3 id=&quot;configure-registry&quot;&gt;Configure registry&lt;/h3&gt;
-&lt;p&gt;For creating an persistent volume I used to create setup_pv.yaml file with the following content:&lt;/p&gt;
+&lt;h3 id=&quot;set-up-persistent-volume&quot;&gt;Set up persistent volume&lt;/h3&gt;
+&lt;p&gt;Firstly, I created a setup_pv.yaml file with following content:&lt;/p&gt;
+
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;vim setup_pv.yml
 apiVersion: v1
 kind: PersistentVolume
@@ -628,58 +846,23 @@ spec:
     server: 192.168.11.61
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Then, using oc create command I applied setup_pv.yml:&lt;/p&gt;
+&lt;p&gt;According to the yaml file I used share from the host 192.168.11.61, path &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/opt/okdn_share/test&lt;/code&gt;. Name of the storage will be test-pv.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;showmount -e 192.168.11.61&lt;/code&gt; command prints list of available shares that available on the host.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;When yaml file is created, create apply it using oc command:&lt;/p&gt;
+
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;oc create -f setup_pv.yml
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;A &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;oc get pv&lt;/code&gt; command shows created persistence volumes. In my case I have only one.&lt;/p&gt;
+&lt;p&gt;And finally, check if a persistence volume is created:&lt;/p&gt;
+
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@dns try]$ oc get pv
 NAME      CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS   REASON   AGE
 test-pv   10Gi       RWX            Retain           Available                                   22h
 [admin@dns try]$ 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Afterwards, I started to edit image-registry operator:&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@dns try]$ oc edit configs.imageregistry.operator.openshift.io 
-
-........
-spec:
-  logLevel: Normal
-  managementState: Removed
-  observedConfig: null
-  operatorLogLevel: Normal
-  proxy: {}
-  replicas: 1
-  requests:
-    read:
-      maxWaitInQueue: 0s
-    write:
-      maxWaitInQueue: 0s
-  rolloutStrategy: RollingUpdate
-  storage: {}
-  unsupportedConfigOverrides: null
-........
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Here I did two changes under the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;spec&lt;/code&gt; section. It was chaged &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;managementState&lt;/code&gt; field from “Removed” to “Managed” and enabled &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;storage&lt;/code&gt;. The final version of &lt;strong&gt;spec&lt;/strong&gt; section section is shown below:&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;spec:
-  logLevel: Normal
-  managementState: Managed
-  observedConfig: null
-  operatorLogLevel: Normal
-  proxy: {}
-  replicas: 1
-  requests:
-    read:
-      maxWaitInQueue: 0s
-    write:
-      maxWaitInQueue: 0s
-  rolloutStrategy: RollingUpdate
-  storage: 
-    pvc:
-      claim:
-  unsupportedConfigOverrides: null
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><category term="openshift" /><summary type="html">Set ip NFS Server and export a created share.</summary></entry><entry><title type="html">Check and approve pendings csrs in Openshift cluster</title><link href="http://localhost:4000/site/check-approve-csr-openshift/" rel="alternate" type="text/html" title="Check and approve pendings csrs in Openshift cluster" /><published>2021-11-16T18:30:00+01:00</published><updated>2021-11-16T18:30:00+01:00</updated><id>http://localhost:4000/site/check-approve-csr-openshift</id><content type="html" xml:base="http://localhost:4000/site/check-approve-csr-openshift/">&lt;p&gt;After installing Openshift cluster you should log in and check for csr. Moreover, I regularly controls if some csr have to be approved or not.&lt;/p&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@ocp4 try]$ oc get csr
@@ -743,135 +926,4 @@ ln -s /opt/rmate/rmate /usr/local/bin/rmate
     &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; $ rmate demo.py 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
-&lt;/ol&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><category term="vscode" /><category term="rmate" /><summary type="html">Sometimes we need to edit a file directly on Linux VM using Visual Studio Code.</summary></entry><entry><title type="html">Basic SQL Joins</title><link href="http://localhost:4000/site/basic-sql-joins/" rel="alternate" type="text/html" title="Basic SQL Joins" /><published>2021-08-15T19:40:00+02:00</published><updated>2021-08-15T19:40:00+02:00</updated><id>http://localhost:4000/site/basic-sql-joins</id><content type="html" xml:base="http://localhost:4000/site/basic-sql-joins/">&lt;h2 id=&quot;left-join-and-right&quot;&gt;Left Join and right&lt;/h2&gt;
-&lt;p&gt;Let’s say we have two tables - &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;posts&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;users&lt;/code&gt;. Struncture of the both tables is following:&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;post&lt;/code&gt; table has such columns as: id, title, content, user_id and date. Column user_id is a foreign key and related with the id column of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;users&lt;/code&gt; table&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;users&lt;/code&gt; table has following columns: id, username, password, date&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Let’s grab usernames from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;posts&lt;/code&gt; table:&lt;/p&gt;
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;select&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;users&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;posts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;posts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;content&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;posts&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;left&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;join&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;users&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;on&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;posts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user_id&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;users&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;left join&lt;/code&gt; does mean a direction of the table. Here, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;posts&lt;/code&gt; table is on the left of the statement and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;users&lt;/code&gt; table is on the right side accordingly. By left join, query selects data from the left table, compares values between two columns. And if the values are equal, the left join creates a new row that contains columns of the both tables. Left join can show when something exists on left table, but does not exists on the right table, too.&lt;/p&gt;
-
-&lt;p&gt;See how many posts have been created by each user:&lt;/p&gt;
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;users&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;posts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;posts&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;left&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;join&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;users&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;on&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;posts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;owner_id&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;users&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;group&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;users&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;But logically, result of this query is not accurate. In output it does not show users that do not have any post. Therefore, for solving this issue we need to use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;right join&lt;/code&gt;.&lt;/p&gt;
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;users&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;posts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;posts&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;right&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;join&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;users&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;on&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;posts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;owner_id&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;users&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;group&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;users&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;By default, by &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;left join&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;right join&lt;/code&gt; is being used &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;outer join&lt;/code&gt;.  If you need to run inner join, try either &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;left inner join&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;right inner join&lt;/code&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;references&quot;&gt;References:&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.postgresqltutorial.com/postgresql-joins/&quot;&gt;Postgres Tutorial. Joins&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><category term="sql" /><summary type="html">Left Join and right Let’s say we have two tables - posts and users. Struncture of the both tables is following: post table has such columns as: id, title, content, user_id and date. Column user_id is a foreign key and related with the id column of users table users table has following columns: id, username, password, date Let’s grab usernames from posts table: select users.username, posts.title, posts.content from posts left join users on posts.user_id = users.id</summary></entry><entry><title type="html">Creating a simple NFS share on centos</title><link href="http://localhost:4000/site/creating-simple-nfs-share/" rel="alternate" type="text/html" title="Creating a simple NFS share on centos" /><published>2020-11-06T23:38:00+01:00</published><updated>2020-11-06T23:38:00+01:00</updated><id>http://localhost:4000/site/creating-simple-nfs-share</id><content type="html" xml:base="http://localhost:4000/site/creating-simple-nfs-share/">&lt;p&gt;In this post is noted a way of creating a simple NFS share server on centos 8 machine.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;1. Installing NFS&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;On the server side we should install &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nfs-utils&lt;/code&gt; packet:&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[root@nfs-server ~]# yum install nfs-utils
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;and start/enable &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nfs-server&lt;/code&gt; service&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[root@nfs-server ~]# systemctl start nfs-server
-[root@nfs-server ~]# ^start^enable
-systemctl enable nfs-server
-Created symlink /etc/systemd/system/multi-user.target.wants/nfs-server.service → /usr/lib/systemd/system/nfs-server.service.
-[root@nfs-server ~]# 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Create a necessary directory and set &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nobody&lt;/code&gt; as an owner. Additionally, enable SELinux boolean &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nfs_export_all_rw&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mkdir /opt/myshare
-[root@nfs-server opt]# chown nobody /opt/myshare
-[root@nfs-server opt]# setsebool -P nfs_export_all_rw 1
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Exporting the defined directory. Define prepared directory and subnets in /etc/exportfs file. Additionally, some options for exporting should be defined along with subnets too.
-    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[root@nfs-server ~]# vim /etc/exports
-/opt/myshare   192.168.11.0/24(rw,sync)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;More options you can find in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;man exports&lt;/code&gt;. Some options are following:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;rw&lt;/li&gt;
-  &lt;li&gt;sync&lt;/li&gt;
-  &lt;li&gt;all_squash - Map all uids and gids from clients to the anonymous user.&lt;/li&gt;
-  &lt;li&gt;no_all_squash - used to map all UIDs and GIDs from client requests to identical UIDs and GIDs on the NFS server.&lt;/li&gt;
-  &lt;li&gt;root_squash – Map requests from uid/gid 0 to the anonymous uid/gid&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Export the defined in /etc/exports directories:
-    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[root@nfs-server ~]# exportfs -arv
-exporting 192.168.11.0/24:/opt/myshare
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Here &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-a&lt;/code&gt; means export all defined directories
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-r&lt;/code&gt; means reexport exported directories
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-v&lt;/code&gt; enable verbouse mode&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;To check an exported list use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-s&lt;/code&gt; flag:
-    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[root@nfs-server ~]# exportfs -s
-/opt/myshare  192.168.11.0/24(sync,wdelay,hide,no_subtree_check,sec=sys,rw,secure,root_squash,no_all_squash)
-[root@nfs-server ~]# 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Enable NFS services in firewalld:
-    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[root@nfs-server ~]# firewall-cmd --permanent --add-service=nfs
-success
-[root@nfs-server ~]# 
-[root@nfs-server ~]# 
-[root@nfs-server ~]# firewall-cmd --permanent --add-service=mountd
-success
-[root@nfs-server ~]# firewall-cmd --permanent --add-service=rpc-bind
-success
-[root@nfs-server ~]# 
-[root@nfs-server ~]# 
-[root@nfs-server ~]# firewall-cmd --reload
-success
-[root@nfs-server ~]# 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Mount a share on the client. Create a folder on the client machine for mounting nfs folder and add a mouting details in the /etc/fstab:
-    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[root@workstation ~]# mkdir /opt/nfs-share
-[root@workstation ~]# vim /etc/fstab
-......
-192.168.11.61:/opt/myshare /opt/nfs-share nfs defaults 0 0
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;And mount a share:
-    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mount -a
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Check if it is mounted successfully:
-    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[root@workstation ~]# df -h
-.......
-192.168.11.61:/opt/myshare                45G  3.4G   42G   8% /opt/nfs-share
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Moreover, you can mount a folder manually, without adding an entry in the /etc/fstab:
-    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mount -t nfs  192.168.11.61:/opt/myshare /opt/nfs-share
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;In order to check available shares on the remote server you can use a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;showmount&lt;/code&gt; command:
-    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[root@workstation ~]# showmount -e 192.168.11.61 ##This is a remote nfs server
-Export list for 192.168.11.61:
-/opt/myshare 192.168.11.0/24
-[root@workstation ~]# 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><category term="nfs" /><category term="linux" /><summary type="html">In this post is noted a way of creating a simple NFS share server on centos 8 machine.</summary></entry></feed>
+&lt;/ol&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><category term="ide" /><summary type="html">Sometimes we need to edit a file directly on Linux VM using Visual Studio Code.</summary></entry></feed>

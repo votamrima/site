@@ -41,27 +41,27 @@ var store = [{
         "url": "/site/port-checking/",
         "teaser": null
       },{
-        "title": "Reseting root password in centos",
+        "title": "root password reseting in centos",
         "excerpt":"In the grub menu select actual kernel and type “-e” Go to the line with “linux 16” and change ro to rw init=/sysroot/bin/sh”. before: after: Press ctrl+X for starting a single mode session When single mode is started access to the system…: chroot /sysroot And using passwd command change the...","categories": [],
-        "tags": ["linux","centos","root"],
+        "tags": ["linux"],
         "url": "/site/reseting-root-password/",
         "teaser": null
       },{
         "title": "Creating a simple NFS share on centos",
         "excerpt":"In this post is noted a way of creating a simple NFS share server on centos 8 machine. 1. Installing NFS On the server side we should install nfs-utils packet: [root@nfs-server ~]# yum install nfs-utils and start/enable nfs-server service [root@nfs-server ~]# systemctl start nfs-server [root@nfs-server ~]# ^start^enable systemctl enable nfs-server...","categories": [],
-        "tags": ["nfs","linux"],
+        "tags": ["linux"],
         "url": "/site/creating-simple-nfs-share/",
         "teaser": null
       },{
         "title": "Basic SQL Joins",
         "excerpt":"Left Join and right Let’s say we have two tables - posts and users. Struncture of the both tables is following: post table has such columns as: id, title, content, user_id and date. Column user_id is a foreign key and related with the id column of users table users table...","categories": [],
-        "tags": ["sql"],
+        "tags": ["database"],
         "url": "/site/basic-sql-joins/",
         "teaser": null
       },{
         "title": "Editing files in Linux VM using remote Visual Studio Code",
         "excerpt":"Sometimes we need to edit a file directly on Linux VM using Visual Studio Code. Launch Visual Studio Code. Additionally, you have to able to connect to the bash of remote machine from VS Code. Go to the ‘Extensions’ page and search for ‘Remote VSCode’ Install the extension and re-launch...","categories": [],
-        "tags": ["vscode","rmate"],
+        "tags": ["ide"],
         "url": "/site/edit-files-with-rmate/",
         "teaser": null
       },{
@@ -71,15 +71,15 @@ var store = [{
         "url": "/site/check-approve-csr-openshift/",
         "teaser": null
       },{
-        "title": "Create persistance storage for openshift registry",
-        "excerpt":"Set ip NFS Server and export a created share. A simple NFS is described here. Configure registry For creating an persistent volume I used to create setup_pv.yaml file with the following content: vim setup_pv.yml apiVersion: v1 kind: PersistentVolume metadata: name: test-pv spec: capacity: storage: 10Gi accessModes: - ReadWriteMany persistentVolumeReclaimPolicy: Retain...","categories": [],
+        "title": "Create persistance storage for openshift",
+        "excerpt":"Set ip NFS Server and export a created share. A simple process of creating NFS is described on this site. Please, use search function. Set up persistent volume Firstly, I created a setup_pv.yaml file with following content: vim setup_pv.yml apiVersion: v1 kind: PersistentVolume metadata: name: test-pv spec: capacity: storage: 10Gi...","categories": [],
         "tags": ["openshift"],
-        "url": "/site/create-persistence-storage-for-openshift-registry/",
+        "url": "/site/create-persistence-storage-for-openshift/",
         "teaser": null
       },{
-        "title": "Configure HTPasswd Identity Provider and create OAuth users for Openshift",
-        "excerpt":"Using default user During installation Openshift creates default kubeadmin with a password. Password you can find in installation folder: &lt;installation_folder&gt;/auth/kubeadmin-password [admin@ocp4 try]$ cat install_dir/auth/kubeadmin-password bVM5i-CxeZI-NDvoS-d9wtV[admin@ocp4 try]$ Additionally, under &lt;installation_folder&gt;/auth/ is located kubeconfig file that can be used for loging to openshift cluster and working with cluster as well. [admin@ocp4 try]$...","categories": [],
-        "tags": ["openshift","htpasswd","oauth"],
+        "title": "Openshift authentication using HTPasswd provider",
+        "excerpt":"In this post I shortly describe how to create users for Openshift using HTPasswd provider. More about authentication providers are able to find in official documentation Using default user During installation Openshift creates default kubeadmin with a password. Password you can find in installation folder: &lt;installation_folder&gt;/auth/kubeadmin-password [admin@ocp4 try]$ cat install_dir/auth/kubeadmin-password...","categories": [],
+        "tags": ["openshift"],
         "url": "/site/create-openshift-oauth-users/",
         "teaser": null
       },{
@@ -101,9 +101,21 @@ var store = [{
         "url": "/site/regex-help/",
         "teaser": null
       },{
+        "title": "Creating a systemctl application startup job",
+        "excerpt":"Here I have posted some information about how to create a simple service startup job for linux. Here below is shown a sample service file for systemctl [Unit] Description=Description for application After=network.target [Service] User=&lt;user&gt; Group=&lt;group&gt; WorkingDirectory=&lt;path where running file is located&gt; Environment=&lt;path with environment variable PATH \"PATH=/location\"&gt; EnvironmentFile=&lt;path to environment...","categories": [],
+        "tags": ["linux"],
+        "url": "/site/create-systemctl-service/",
+        "teaser": null
+      },{
         "title": "Fixing \"Cannot Install Windows 11\" error during installation",
         "excerpt":"Problem Today I tried to install Windows 11 on my virtual platform and during installation faced with the following problem: Solution In this screen type Shift + F10 at the same time to open a command promt. Then in command line type regedit: In the opened Registry Editor window, go...","categories": [],
         "tags": ["windows11"],
         "url": "/site/windows11-requirements-error/",
+        "teaser": null
+      },{
+        "title": "My experience of Openshift 4.9 installation on Proxmox with a restricted network",
+        "excerpt":"In this post I tried to describe my experience that I had during Openshift 4.9 installation at my home lab. Redhat allows to use Openshift during 60 days for free without support. Preparing environment Set up DNS and DHCP Set up proxy Download RHCOS (https://console.redhat.com/openshift/install/metal/user-provisioned) Create bare metal environment. In...","categories": [],
+        "tags": ["openshift"],
+        "url": "/site/installing-openshift4.9/",
         "teaser": null
       }]
