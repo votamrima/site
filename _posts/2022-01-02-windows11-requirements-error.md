@@ -4,7 +4,7 @@ title: "Fixing \"Cannot Install Windows 11\" error during installation"
 subtitle: ""
 date: 2022-01-02 18:40:00 +0100
 background: '/image/01.jpg'
-tags: ['windows11']
+tags: ['windows']
 ---
 
 ## Problem

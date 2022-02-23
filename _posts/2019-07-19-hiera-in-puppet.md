@@ -4,7 +4,7 @@ title: "Using hiera in puppet. Example: creating a folder"
 subtitle: ""
 date: 2019-07-19 16:20:00 +0100
 #background: '/img/posts/01.jpg'
-tags: ['hiera', 'puppet']
+tags: ['puppet']
 ---
  
 In this post I am trying to show how to configure hiera files on puppet master. For demonstration purpose I use a simple task that will create a folder. The main idea of this post is to get basic understand of hiera concept.

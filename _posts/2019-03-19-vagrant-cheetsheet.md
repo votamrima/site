@@ -4,7 +4,7 @@ title: "Cheatsheet for Vagrant"
 subtitle: ""
 date: 2019-06-03 16:38:00 +0100
 #background: '/img/posts/01.jpg'
-tags: ['puppet']
+tags: ['vagrant']
 ---
 
 

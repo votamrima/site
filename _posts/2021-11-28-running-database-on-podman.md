@@ -4,7 +4,7 @@ title: "Deploy MySQL and PostgreSQL database systems on Podman with regular (non
 subtitle: ""
 date: 2021-11-28 16:30:00 +0100
 background: '/image/01.jpg'
-tags: ['podman', 'mysql']
+tags: ['podman', 'database']
 ---
 
 ## MySQL
