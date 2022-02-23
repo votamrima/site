@@ -1,10 +1,10 @@
 ---
 layout: single
-title: "Is a port opened?"
+title: "Check for opened ports without telnet"
 subtitle: ""
 date: 2019-08-26 19:46:00 +0100
 #background: '/img/posts/01.jpg'
-tags: ['port', 'linux', 'network']
+tags: ['linux']
 ---
  
 

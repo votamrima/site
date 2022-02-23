@@ -4,7 +4,7 @@ title: "Simple HTTPS Server using python"
 subtitle: ""
 date: 2019-08-05 23:38:00 +0100
 #background: '/img/posts/01.jpg'
-tags: ['python', 'https']
+tags: ['python', 'webserver']
 ---
  
 1. Generating key and cert files with Openssl:

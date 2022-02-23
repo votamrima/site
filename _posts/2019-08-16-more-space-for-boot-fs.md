@@ -1,10 +1,10 @@
 ---
 layout: single
-title: " Giving more space for the /boot filesystem"
+title: "Expanding /boot partition"
 subtitle: ""
 date: 2019-08-16 20:17:00 +0100
 #background: '/img/posts/01.jpg'
-tags: ['filesystem', 'linux', 'disk']
+tags: ['linux']
 ---
  
 Recently I tried to update my centos 7 test machine. Unfortunatelly, ``yum update`` command returned the following error "At least 54MB more space needed on the /boot filesystem.".
