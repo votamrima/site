@@ -1,10 +1,10 @@
 ---
 layout: single
-title: "Reseting root password in centos"
+title: "root password reseting in centos"
 subtitle: ""
 date: 2019-10-21 13:05:13 +0100
 background: '/img/posts/01.jpg'
-tags: ['linux', 'centos', 'root']
+tags: ['linux']
 ---
 
 * In the grub menu select actual kernel and type "-e"
