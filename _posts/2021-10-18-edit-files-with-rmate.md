@@ -4,7 +4,7 @@ title: "Editing files in Linux VM using remote Visual Studio Code"
 subtitle: ""
 date: 2021-10-18 18:30:00 +0100
 #background: '/img/posts/01.jpg'
-tags: ['vscode', 'rmate']
+tags: ['ide']
 ---
  
 Sometimes we need to edit a file directly on Linux VM using Visual Studio Code.

@@ -4,7 +4,7 @@ title: "Creating a simple NFS share on centos"
 subtitle: ""
 date: 2020-11-06 23:38:00 +0100
 #background: '/img/posts/01.jpg'
-tags: ['nfs', 'linux']
+tags: ['linux']
 ---
  
 <p>In this post is noted a way of creating a simple NFS share server on centos 8 machine.</p>

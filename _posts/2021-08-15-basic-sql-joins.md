@@ -4,7 +4,7 @@ title: "Basic SQL Joins"
 subtitle: ""
 date: 2021-08-15 18:40:00 +0100
 background: '/image/01.jpg'
-tags: ['sql']
+tags: ['database']
 ---
 
 ## Left Join and right
