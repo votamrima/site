@@ -205,7 +205,7 @@ Subjects:
 
 And remove the ``self-provisioner`` role from the ``system:authenticated:oauth`` group
 
-````
+````bash
 [admin@ocp4 ~]$ oc adm policy remove-cluster-role-from-group self-provisioner system:authenticated:oauth
 Warning: Your changes may get lost whenever a master is restarted, unless you prevent reconciliation of this rolebinding using the following command: 
 oc annotate clusterrolebinding.rbac self-provisioners 'rbac.authorization.kubernetes.io/autoupdate=false' --overwrite
@@ -215,7 +215,7 @@ clusterrole.rbac.authorization.k8s.io/self-provisioner removed: "system:authenti
 
 Thus will be removed self-provisioners rolebinding and will be disabled priviledge to create projects for all users. 
 
-````
+````bash
 [admin@ocp4 ~]$ oc get clusterrolebinding | grep self-prov
 [admin@ocp4 ~]$ 
 ````
@@ -235,8 +235,8 @@ group.user.openshift.io/developers added: "developer"
 Assigned self-provisioner role to developers group:
 
 ````
-[admin@ocp4 ~]$ oc adm policy add-cluster-role-to-group self-provisioner developers
-clusterrole.rbac.authorization.k8s.io/self-provisioner added: "developers"
+[admin@ocp4 ~]$ oc adm policy add-cluster-role-to-user --rolebinding-name self-provisioning-admin self-provisioner admin
+clusterrole.rbac.authorization.k8s.io/self-provisioner added: "admin"
 [admin@ocp4 ~]$ 
 ````
 
