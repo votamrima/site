@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "Openshift authentication using HTPasswd provider"
+title: "Basic user management in Openshift"
 subtitle: ""
 date: 2021-11-19 18:30:00 +0100
 background: '/image/01.jpg'
@@ -10,16 +10,16 @@ tags: ['openshift']
 In this post I shortly describe how to create users for Openshift using HTPasswd provider. More about authentication providers are able to find in [official documentation](https://docs.openshift.com/container-platform/4.9/authentication/understanding-authentication.html)
 
 
-### Using default user
+## kubeadmin user
 
-During installation Openshift creates default *kubeadmin* with a password. Password you can find in installation folder: ``<installation_folder>/auth/kubeadmin-password``
+During installation Openshift creates default *kubeadmin* with a automatically generated password. Password you can find in installation folder: ``<installation_folder>/auth/kubeadmin-password``
 
 ````
 [admin@ocp4 try]$ cat install_dir/auth/kubeadmin-password 
 bVM5i-CxeZI-NDvoS-d9wtV[admin@ocp4 try]$ 
 ````
 
-Additionally, under ``<installation_folder>/auth/`` is located *kubeconfig* file that can be used for loging to openshift cluster and working with cluster as well.
+*kubeconfig* locates in ``<installation_folder>/auth/``.
 
 ````
 [admin@ocp4 try]$ oc --kubeconfig install_dir/auth/kubeconfig get node
@@ -37,16 +37,18 @@ export KUBECONFIG=/opt/install_dir/auth/kubeconfig
 ````
 
 
-### OAuth and identity providers
+## OAuth and identity providers
 
 Authentication in Openshift is supported by Authentication Operator which runs on OAuth server. Users attempt to authenticate to the Opeshift API using using OAuth access tokens. 
 
 In order to use OAuth server it should be enabled and configured as well. Using kubeadmin user I specifed ``HTPasswd`` identity provider. Generally, the following list of identity providers are able to configure and use in Openshift: HTPasswd, Keystone, LDAP, Basic authentication, Request header, GitHub or GitHub Enterprise, GitLab, Google, OpenID Connect. More in detail about each of the provider is given in [Openhift Documentation](https://docs.openshift.com/container-platform/4.7/authentication/understanding-identity-provider.html)
 
 
-### Configuring HTPasswd identity provider
+## Configuring HTPasswd identity provider
 
-Create an HTPasswd authentication file using following format: ``htpasswd -c -b -B <filename> <username> <password>``. ``-c`` parameter creates file. ``-b`` uses a password which is given in command from the command line. ``-B`` - Force bcrypt encryption of the password
+### Creating htpasswd file
+
+Basic format for creating HTPasswd authentitation file looks like this: ``htpasswd -c -b -B <filename> <username> <password>``. Here ``-c`` parameter creates file, ``-b`` uses a password which is given in command from the command line. ``-B`` - Force bcrypt encryption of the password
 
 ````
 [admin@ocp4 try]$ htpasswd -c -b -B my_ocp_users admin admin
@@ -73,7 +75,9 @@ developer:$2y$05$Ab1TxMQV0T7te6NmKXaALOX/6XsFHsV06LYcaZHwIdIDpkJiObN2m
 [admin@ocp4 try]$ 
 ````
 
-Create a secret from created file. Here the secret named as ``myusers`` and used a prefix ``htpasswd`` in front of the the path to the file. Moreover, the secret should be create in namespace ``openshift-config``.
+### Apply htpasswd file
+
+In order to apply a httpasswd file for Openshift, first of should be created a secret in openshift-config namespace. In the following command I described how I did. Here, it is important to define *htpasswd* as a type of appling secret. 
 
 ````
 [admin@ocp4 try]$ oc create secret generic myusers --from-file htpasswd=my_ocp_users -n openshift-config
@@ -85,9 +89,9 @@ Checking out created secret:
 
 ````
 [admin@ocp4 try]$ oc get secrets -n openshift-config
-NAME                                  TYPE                                  DATA   AGE
+NAME                      TYPE                     DATA   AGE
 ......
-myusers                            Opaque                                1      27s
+myusers                   Opaque                   1      27s
 .......
 [admin@ocp4 try]$ 
 
@@ -134,7 +138,27 @@ oauth-openshift-777bfcd76c-v2xzl   1/1     Running       0          49s
 oauth-openshift-777bfcd76c-wpqsq   1/1     Running       0          41s
 ````
 
-Here I assigned properly roles to the created users. For admin user I want to give full access to the openshift cluster. Therefore, it should applied ``cluster-admin`` role. Developer user will be granted to create new projects. 
+If the pods are not being recreated, remove them. In this case, Openshift will re-deploy new pods with the updated configuration. 
+
+````bash
+[admin@ocp4 htpasswd]$ oc delete pods -n openshift-authentication --all --force
+warning: Immediate deletion does not wait for confirmation that the running resource has been terminated. The resource may continue to run on the cluster indefinitely.
+pod "oauth-openshift-7f55497fcd-s56qd" force deleted
+pod "oauth-openshift-7f55497fcd-z7d9c" force deleted
+[admin@ocp4 htpasswd]$ oc get pods -n openshift-authentication
+NAME                               READY   STATUS              RESTARTS   AGE
+oauth-openshift-7f55497fcd-9v4zl   0/1     ContainerCreating   0          3s
+oauth-openshift-7f55497fcd-h7x8m   0/1     ContainerCreating   0          3s
+[admin@ocp4 htpasswd]$ oc get pods -n openshift-authentication
+NAME                               READY   STATUS    RESTARTS   AGE
+oauth-openshift-5c6444d496-hj52l   1/1     Running   0          9m35s
+oauth-openshift-5c6444d496-hvf2m   1/1     Running   0          9m31s
+[admin@ocp4 htpasswd]$ 
+````
+
+## Assigning privileges 
+
+Here I shortly show how has been assigned ``cluster-admin`` role to ``admin`` user. For admin user I want to give full access to the openshift cluster. Therefore, it should applied ``cluster-admin`` role. Developer user will be granted to create new projects. 
 
 ````
 [admin@ocp4 try]$ oc adm policy add-cluster-role-to-user cluster-admin admin
@@ -152,7 +176,9 @@ Using project "default".
 admin
 ````
 
-Before giving any role to developer user I am going to disabled priviledge to create projects for all users. This priviledge creates Openshift during installation by default.
+## Remove project creation privileges
+
+One of important points of user managment is vemove project creation privileges from all users by default. By default, this option is active for all users. 
 
 ````
 [admin@ocp4 ~]$ oc get clusterrolebinding | grep self-prov
