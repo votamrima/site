@@ -37,11 +37,13 @@ Additionally, you can create backup of namespaces. See [velero](https://velero.i
 
 ## Start cluster:
 
-1. Start master node: ``oc get nodes``
+1. Start master nodes.
 
 2. Start infra nodes.
 
-3. Start worker node
+3. Start worker node.
+
+Check if nodes are started: ``oc get nodes``
 
 Check if pods are working: ``oc get pods --all-namespaces``
 
