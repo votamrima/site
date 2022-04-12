@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="http://localhost:4000/site/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/site/" rel="alternate" type="text/html" /><updated>2022-04-12T17:43:42+02:00</updated><id>http://localhost:4000/site/feed.xml</id><title type="html">notes</title><subtitle>.</subtitle><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><entry><title type="html">Private container registry on podman</title><link href="http://localhost:4000/site/private-container-registry/" rel="alternate" type="text/html" title="Private container registry on podman" /><published>2022-03-28T21:00:00+02:00</published><updated>2022-03-28T21:00:00+02:00</updated><id>http://localhost:4000/site/private-container-registry</id><content type="html" xml:base="http://localhost:4000/site/private-container-registry/">&lt;p&gt;It is very easy to set up a simple container registry on podman. Here below I show how to set up a local simple container registry for personal use.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="http://localhost:4000/site/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/site/" rel="alternate" type="text/html" /><updated>2022-04-12T17:46:09+02:00</updated><id>http://localhost:4000/site/feed.xml</id><title type="html">notes</title><subtitle>.</subtitle><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><entry><title type="html">Private container registry on podman</title><link href="http://localhost:4000/site/private-container-registry/" rel="alternate" type="text/html" title="Private container registry on podman" /><published>2022-03-28T21:00:00+02:00</published><updated>2022-03-28T21:00:00+02:00</updated><id>http://localhost:4000/site/private-container-registry</id><content type="html" xml:base="http://localhost:4000/site/private-container-registry/">&lt;p&gt;It is very easy to set up a simple container registry on podman. Here below I show how to set up a local simple container registry for personal use.&lt;/p&gt;
 
 &lt;h2 id=&quot;preparation&quot;&gt;Preparation&lt;/h2&gt;
 
@@ -117,16 +117,9 @@ registry.ocp.home.lab:5000/newsbase        1.0         f8e04e34b36d  5 days ago 
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;admin@podman auth]&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;podman push registry.ocp.home.lab:5000/newsbase:1.0
 Getting image &lt;span class=&quot;nb&quot;&gt;source &lt;/span&gt;signatures
-Copying blob 1edf512cf84d &lt;span class=&quot;k&quot;&gt;done  
-&lt;/span&gt;Copying blob ef5d9ad2a541 &lt;span class=&quot;k&quot;&gt;done  
-&lt;/span&gt;Copying blob 3a3840c076ed &lt;span class=&quot;k&quot;&gt;done  
-&lt;/span&gt;Copying blob 3c00d5ae4a99 &lt;span class=&quot;k&quot;&gt;done  
-&lt;/span&gt;Copying blob e0b9a99c51af &lt;span class=&quot;k&quot;&gt;done  
-&lt;/span&gt;Copying blob c862261aa254 &lt;span class=&quot;k&quot;&gt;done  
-&lt;/span&gt;Copying blob 60ab6cf94fff &lt;span class=&quot;k&quot;&gt;done  
-&lt;/span&gt;Copying blob 93749af418e7 &lt;span class=&quot;k&quot;&gt;done  
-&lt;/span&gt;Copying blob 718375ad3f65 &lt;span class=&quot;k&quot;&gt;done  
-&lt;/span&gt;Copying config f8e04e34b3 &lt;span class=&quot;k&quot;&gt;done  
+Copying blob 1edf512cf84d &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;  
+......
+Copying config f8e04e34b3 &lt;span class=&quot;k&quot;&gt;done
 &lt;/span&gt;Writing manifest to image destination
 Storing signatures
 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;admin@podman auth]&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;

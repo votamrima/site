@@ -138,15 +138,8 @@ And then push it to the registry:
 [admin@podman auth]$ podman push registry.ocp.home.lab:5000/newsbase:1.0
 Getting image source signatures
 Copying blob 1edf512cf84d done  
-Copying blob ef5d9ad2a541 done  
-Copying blob 3a3840c076ed done  
-Copying blob 3c00d5ae4a99 done  
-Copying blob e0b9a99c51af done  
-Copying blob c862261aa254 done  
-Copying blob 60ab6cf94fff done  
-Copying blob 93749af418e7 done  
-Copying blob 718375ad3f65 done  
-Copying config f8e04e34b3 done  
+......
+Copying config f8e04e34b3 done
 Writing manifest to image destination
 Storing signatures
 [admin@podman auth]$ 
