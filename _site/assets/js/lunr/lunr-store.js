@@ -124,4 +124,10 @@ var store = [{
         "tags": ["openshift"],
         "url": "/site/openshift49-gracefull-restart/",
         "teaser": null
+      },{
+        "title": "Private container registry on podman",
+        "excerpt":"It is very easy to set up a simple container registry on podman. Here below I show how to set up a local simple container registry for personal use. Preparation If podman and htpasswd packages are not installed on the host, install them: [admin@podman auth]$ sudo dnf provides htpasswd [sudo]...","categories": [],
+        "tags": ["podman","container"],
+        "url": "/site/private-container-registry/",
+        "teaser": null
       }]

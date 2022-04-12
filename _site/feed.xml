@@ -1,4 +1,158 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="http://localhost:4000/site/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/site/" rel="alternate" type="text/html" /><updated>2022-04-12T17:20:33+02:00</updated><id>http://localhost:4000/site/feed.xml</id><title type="html">notes</title><subtitle>.</subtitle><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><entry><title type="html">Stop and start Openshift 4 cluster</title><link href="http://localhost:4000/site/openshift49-gracefull-restart/" rel="alternate" type="text/html" title="Stop and start Openshift 4 cluster" /><published>2022-02-10T20:00:00+01:00</published><updated>2022-02-10T20:00:00+01:00</updated><id>http://localhost:4000/site/openshift49-gracefull-restart</id><content type="html" xml:base="http://localhost:4000/site/openshift49-gracefull-restart/">&lt;p&gt;In this post I describe shortly how to shutdown and start up Openshift cluster.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="http://localhost:4000/site/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/site/" rel="alternate" type="text/html" /><updated>2022-04-12T17:43:42+02:00</updated><id>http://localhost:4000/site/feed.xml</id><title type="html">notes</title><subtitle>.</subtitle><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><entry><title type="html">Private container registry on podman</title><link href="http://localhost:4000/site/private-container-registry/" rel="alternate" type="text/html" title="Private container registry on podman" /><published>2022-03-28T21:00:00+02:00</published><updated>2022-03-28T21:00:00+02:00</updated><id>http://localhost:4000/site/private-container-registry</id><content type="html" xml:base="http://localhost:4000/site/private-container-registry/">&lt;p&gt;It is very easy to set up a simple container registry on podman. Here below I show how to set up a local simple container registry for personal use.&lt;/p&gt;
+
+&lt;h2 id=&quot;preparation&quot;&gt;Preparation&lt;/h2&gt;
+
+&lt;p&gt;If podman and htpasswd packages are not installed on the host, install them:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;admin@podman auth]&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;dnf provides htpasswd
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; password &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;admin: 
+Last metadata expiration check: 1:10:40 ago on Mon 11 Apr 2022 06:12:44 PM CEST.
+httpd-tools-2.4.37-30.module_el8.3.0+462+ba287492.0.1.x86_64 : Tools &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;use with the Apache HTTP Server
+Repo        : appstream
+Matched from:
+Filename    : /usr/bin/htpasswd
+
+httpd-tools-2.4.37-39.module_el8.4.0+778+c970deab.x86_64 : Tools &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;use with the Apache HTTP Server
+Repo        : appstream
+Matched from:
+Filename    : /usr/bin/htpasswd
+
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;admin@podman auth]&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;yum &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;httpd-tools podman
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Create a file with credentials:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;admin@podman auth]&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;htpasswd &lt;span class=&quot;nt&quot;&gt;-bc&lt;/span&gt; auth admin admin
+Adding password &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;user admin
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;admin@podman auth]&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;admin@podman auth]&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cat &lt;/span&gt;auth 
+admin:&lt;span class=&quot;nv&quot;&gt;$apr1$OQzj4eaY$ipt3p40Vipneb2PTn1W7e0&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;admin@podman auth]&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Define local folders that will be mounted to registry container. I am going to mount 2 folders: one for data, another one for credentials file. For data will be used &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/opt/registry/volume&lt;/code&gt; and for credentials - &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/opt/registry/auth&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Create TLS certificate:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;admin@podman tls]&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;openssl req &lt;span class=&quot;nt&quot;&gt;-newkey&lt;/span&gt; rsa:4096 &lt;span class=&quot;nt&quot;&gt;-nodes&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-sha256&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-keyout&lt;/span&gt; /opt/registry/tls/domain.key &lt;span class=&quot;nt&quot;&gt;-x509&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-days&lt;/span&gt; 365 &lt;span class=&quot;nt&quot;&gt;-subj&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;/CN=registry.ocp.home.lab&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-addext&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;subjectAltName = DNS:registry.ocp.home.lab&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-out&lt;/span&gt; /opt/registry/tls/domain.crt
+Generating a RSA private key
+..............................++++
+................................................................................................................................................................................................................................................................++++
+writing new private key to &lt;span class=&quot;s1&quot;&gt;'/opt/registry/tls/domain.key'&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;-----&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The initialized certificate should be trusted. In Red Hat family system you need to copy the created certificate to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/pki/ca-trust/source/anchors/&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;admin@podman tls]&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo cp &lt;/span&gt;domain.crt /etc/pki/ca-trust/source/anchors/
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;admin@podman tls]&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;update-ca-trust
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;admin@podman tls]&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;trust list | &lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;registry
+    label: registry.ocp.home.lab
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;admin@podman tls]&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;run-container&quot;&gt;Run container&lt;/h2&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;admin@podman tls]&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;podman run &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; registry &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; 5000:5000 &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt; /opt/registry/volume:/var/lib/registry &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt; /opt/registry/auth:/opt/auth &lt;span class=&quot;nt&quot;&gt;-e&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;REGISTRY_AUTH=htpasswd&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-e&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;REGISTRY_AUTH_HTPASSWD_REALM=Registry Realm&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-e&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;REGISTRY_AUTH_HTPASSWD_PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/opt/auth/auth &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt; /opt/registry/tls:/certs &lt;span class=&quot;nt&quot;&gt;-e&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-e&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;REGISTRY_HTTP_TLS_KEY=/certs/domain.key&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-e&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;REGISTRY_COMPATIBILITY_SCHEMA1_ENABLED&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;   &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; docker.io/library/registry:latest
+773638fc8df066bcba844ad13189ebfbc09f14439391e68729aaf3f01e161ff2
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;admin@podman tls]&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;podman ps &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt;
+CONTAINER ID  IMAGE                              COMMAND               CREATED        STATUS                   PORTS                   NAMES
+773638fc8df0  docker.io/library/registry:latest  /etc/docker/regis...  3 seconds ago  Up 3 seconds ago         0.0.0.0:5000-&amp;gt;5000/tcp  registry
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;admin@podman tls]&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Set correct SELinux context For the mounted volumes (/opt/registry/volume and /opt/registry/auth). Or disable SELinux.&lt;/li&gt;
+  &lt;li&gt;Open port 5000 in firewall. Or disable the local firewall.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;log-inout-to-registry&quot;&gt;Log in/out to registry&lt;/h2&gt;
+
+&lt;p&gt;And now let’s try to log in to the registry:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;admin@podman tls]&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;podman &lt;span class=&quot;nb&quot;&gt;logout&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--all&lt;/span&gt;
+Removed login credentials &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;all registries
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;And try log out:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;admin@podman tls]&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;podman &lt;span class=&quot;nb&quot;&gt;logout &lt;/span&gt;registry.ocp.home.lab:5000
+Removed login credentials &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;registry.ocp.home.lab:5000
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;After successfull login, podman stores credentials file in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/run/user/1000/containers/auth.json&lt;/code&gt;. Here, I just copied that file and will use for future login:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;admin@podman auth]&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;podman &lt;span class=&quot;nb&quot;&gt;logout &lt;/span&gt;registry.ocp.home.lab:5000
+Removed login credentials &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;registry.ocp.home.lab:5000
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;admin@podman auth]&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;admin@podman auth]&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cp&lt;/span&gt; /run/user/1000/containers/auth.json &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;admin@podman auth]&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;podman login registry.ocp.home.lab:5000 &lt;span class=&quot;nt&quot;&gt;--authfile&lt;/span&gt; auth.json 
+Authenticating with existing credentials &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;registry.ocp.home.lab:5000
+Existing credentials are valid. Already logged &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;to registry.ocp.home.lab:5000
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;admin@podman auth]&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;pull-and-push-container&quot;&gt;Pull and push container&lt;/h2&gt;
+
+&lt;p&gt;Let’s try to pull an image to the registry:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;admin@podman auth]&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;podman images
+REPOSITORY                                 TAG         IMAGE ID      CREATED      SIZE
+localhost/newsbase                         latest      f8e04e34b36d  5 days ago   1.04 GB
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;I am going to push the image &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;newsbase&lt;/code&gt; from localhost. First of all, use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;podman tag&lt;/code&gt; to tag the image for the registry.&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;admin@podman auth]&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;podman tag newsbase registry.ocp.home.lab:5000/newsbase:1.0
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;admin@podman auth]&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;admin@podman auth]&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;podman images
+REPOSITORY                                 TAG         IMAGE ID      CREATED      SIZE
+localhost/newsbase                         latest      f8e04e34b36d  5 days ago   1.04 GB
+registry.ocp.home.lab:5000/newsbase        1.0         f8e04e34b36d  5 days ago   1.04 GB
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;And then push it to the registry:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;admin@podman auth]&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;podman push registry.ocp.home.lab:5000/newsbase:1.0
+Getting image &lt;span class=&quot;nb&quot;&gt;source &lt;/span&gt;signatures
+Copying blob 1edf512cf84d &lt;span class=&quot;k&quot;&gt;done  
+&lt;/span&gt;Copying blob ef5d9ad2a541 &lt;span class=&quot;k&quot;&gt;done  
+&lt;/span&gt;Copying blob 3a3840c076ed &lt;span class=&quot;k&quot;&gt;done  
+&lt;/span&gt;Copying blob 3c00d5ae4a99 &lt;span class=&quot;k&quot;&gt;done  
+&lt;/span&gt;Copying blob e0b9a99c51af &lt;span class=&quot;k&quot;&gt;done  
+&lt;/span&gt;Copying blob c862261aa254 &lt;span class=&quot;k&quot;&gt;done  
+&lt;/span&gt;Copying blob 60ab6cf94fff &lt;span class=&quot;k&quot;&gt;done  
+&lt;/span&gt;Copying blob 93749af418e7 &lt;span class=&quot;k&quot;&gt;done  
+&lt;/span&gt;Copying blob 718375ad3f65 &lt;span class=&quot;k&quot;&gt;done  
+&lt;/span&gt;Copying config f8e04e34b3 &lt;span class=&quot;k&quot;&gt;done  
+&lt;/span&gt;Writing manifest to image destination
+Storing signatures
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;admin@podman auth]&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Remove newsbase image from the local images list and pull that from the registry back:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;admin@podman auth]&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;podman pull registry.ocp.home.lab:5000/newsbase:1.0
+Trying to pull registry.ocp.home.lab:5000/newsbase:1.0...
+Getting image &lt;span class=&quot;nb&quot;&gt;source &lt;/span&gt;signatures
+........
+Copying blob 9a6655d6eaed &lt;span class=&quot;k&quot;&gt;done  
+&lt;/span&gt;Copying config f8e04e34b3 &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;  
+.........
+Writing manifest to image destination
+Storing signatures
+f8e04e34b36dddd6de5d4e5cd02051385b10ff6a66e847a3ab989d3f5565ccda
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;admin@podman auth]&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;podman images
+REPOSITORY                                 TAG         IMAGE ID      CREATED      SIZE
+registry.ocp.home.lab:5000/newsbase        1.0         f8e04e34b36d  5 days ago   1.04 GB
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.redhat.com/sysadmin/simple-container-registry&quot;&gt;How to implement a simple personal/private Linux container image registry for internal use&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><category term="podman" /><category term="container" /><summary type="html">It is very easy to set up a simple container registry on podman. Here below I show how to set up a local simple container registry for personal use.</summary></entry><entry><title type="html">Stop and start Openshift 4 cluster</title><link href="http://localhost:4000/site/openshift49-gracefull-restart/" rel="alternate" type="text/html" title="Stop and start Openshift 4 cluster" /><published>2022-02-10T20:00:00+01:00</published><updated>2022-02-10T20:00:00+01:00</updated><id>http://localhost:4000/site/openshift49-gracefull-restart</id><content type="html" xml:base="http://localhost:4000/site/openshift49-gracefull-restart/">&lt;p&gt;In this post I describe shortly how to shutdown and start up Openshift cluster.&lt;/p&gt;
 
 &lt;h2 id=&quot;preparation&quot;&gt;Preparation&lt;/h2&gt;
 
@@ -942,31 +1096,4 @@ spec:
 NAME      CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS   REASON   AGE
 test-pv   10Gi       RWX            Retain           Available                                   22h
 [admin@dns try]$ 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><category term="openshift" /><summary type="html">Set ip NFS Server and export a created share.</summary></entry><entry><title type="html">Check and approve pendings csrs in Openshift cluster</title><link href="http://localhost:4000/site/check-approve-csr-openshift/" rel="alternate" type="text/html" title="Check and approve pendings csrs in Openshift cluster" /><published>2021-11-16T18:30:00+01:00</published><updated>2021-11-16T18:30:00+01:00</updated><id>http://localhost:4000/site/check-approve-csr-openshift</id><content type="html" xml:base="http://localhost:4000/site/check-approve-csr-openshift/">&lt;p&gt;After installing Openshift cluster you should log in and check for csr. Moreover, I regularly controls if some csr have to be approved or not.&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@ocp4 try]$ oc get csr
-NAME        AGE     SIGNERNAME                                    REQUESTOR                                        CONDITION
-csr-6m4m7   4m29s   kubernetes.io/kube-apiserver-client-kubelet   system:node:etcd-2.okd4.home.lab                 Approved,Issued
-csr-7qww9   4m13s   kubernetes.io/kube-apiserver-client-kubelet   system:node:okd4-compute-1.okd4.home.lab         Approved,Issued
-csr-glzgb   4m29s   kubernetes.io/kube-apiserver-client-kubelet   system:node:okd4-control-plane-1.okd4.home.lab   Pending
-csr-lsdcc   4m19s   kubernetes.io/kube-apiserver-client-kubelet   system:node:etcd-3.okd4.home.lab                 Pending
-csr-nwjpv   35s     kubernetes.io/kube-apiserver-client-kubelet   system:node:okd4-control-plane-1.okd4.home.lab   Approved,Issued
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;As you can see, there is some certificates in Pending status. In order to approve each of them manually, run the following command:&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;oc adm certificate approve &amp;lt;csr_name&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;And use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jq&lt;/code&gt; tool to verify all csr at once:&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@ocp4 try]$ oc get csr -ojson | jq -r '.items[] | select(.status == {} ) | .metadata.name' | xargs oc adm certificate approve
-certificatesigningrequest.certificates.k8s.io/csr-glzgb approved
-certificatesigningrequest.certificates.k8s.io/csr-lsdcc approved
-[admin@ocp4 try]$ oc get csr
-NAME        AGE     SIGNERNAME                                    REQUESTOR                                        CONDITION
-csr-6m4m7   5m5s    kubernetes.io/kube-apiserver-client-kubelet   system:node:etcd-2.okd4.home.lab                 Approved,Issued
-csr-7qww9   4m49s   kubernetes.io/kube-apiserver-client-kubelet   system:node:okd4-compute-1.okd4.home.lab         Approved,Issued
-csr-glzgb   5m5s    kubernetes.io/kube-apiserver-client-kubelet   system:node:okd4-control-plane-1.okd4.home.lab   Approved,Issued
-csr-lsdcc   4m55s   kubernetes.io/kube-apiserver-client-kubelet   system:node:etcd-3.okd4.home.lab                 Approved,Issued
-csr-nwjpv   71s     kubernetes.io/kube-apiserver-client-kubelet   system:node:okd4-control-plane-1.okd4.home.lab   Approved,Issued
-[admin@ocp4 try]$ 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><category term="openshift" /><summary type="html">After installing Openshift cluster you should log in and check for csr. Moreover, I regularly controls if some csr have to be approved or not.</summary></entry></feed>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><category term="openshift" /><summary type="html">Set ip NFS Server and export a created share.</summary></entry></feed>

@@ -290,7 +290,7 @@ defaults:
       path: "_posts"
       type: posts
     values:
-      toc: false
+      toc: true
       layout: single
       author_profile: false
       read_time: false
