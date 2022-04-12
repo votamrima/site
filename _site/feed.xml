@@ -1,4 +1,53 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="http://localhost:4000/site/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/site/" rel="alternate" type="text/html" /><updated>2022-02-23T21:36:58+01:00</updated><id>http://localhost:4000/site/feed.xml</id><title type="html">notes</title><subtitle>.</subtitle><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><entry><title type="html">My experience of Openshift 4.9 installation on Proxmox with a restricted network</title><link href="http://localhost:4000/site/installing-openshift4.9/" rel="alternate" type="text/html" title="My experience of Openshift 4.9 installation on Proxmox with a restricted network" /><published>2022-01-15T20:00:00+01:00</published><updated>2022-01-15T20:00:00+01:00</updated><id>http://localhost:4000/site/installing-openshift4.9</id><content type="html" xml:base="http://localhost:4000/site/installing-openshift4.9/">&lt;p&gt;In this post I tried to describe my experience that I had during Openshift 4.9 installation at my home lab. Redhat allows to use Openshift during 60 days for free without support.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="http://localhost:4000/site/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/site/" rel="alternate" type="text/html" /><updated>2022-04-12T17:20:33+02:00</updated><id>http://localhost:4000/site/feed.xml</id><title type="html">notes</title><subtitle>.</subtitle><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><entry><title type="html">Stop and start Openshift 4 cluster</title><link href="http://localhost:4000/site/openshift49-gracefull-restart/" rel="alternate" type="text/html" title="Stop and start Openshift 4 cluster" /><published>2022-02-10T20:00:00+01:00</published><updated>2022-02-10T20:00:00+01:00</updated><id>http://localhost:4000/site/openshift49-gracefull-restart</id><content type="html" xml:base="http://localhost:4000/site/openshift49-gracefull-restart/">&lt;p&gt;In this post I describe shortly how to shutdown and start up Openshift cluster.&lt;/p&gt;
+
+&lt;h2 id=&quot;preparation&quot;&gt;Preparation&lt;/h2&gt;
+
+&lt;p&gt;Check if all nodes are properly running:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;oc get nodes &lt;span class=&quot;nt&quot;&gt;--show-labels&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Check if all pods in all projects are working properly. Save the current state:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;oc get pods &lt;span class=&quot;nt&quot;&gt;--all-namespaces&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Additionally, you can create backup of namespaces. See &lt;a href=&quot;https://velero.io&quot;&gt;velero&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;shutdown-cluster&quot;&gt;Shutdown cluster:&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Gracefully shutdown all worker nodes: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;shutdown -h now&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Gracefully shutdown Infra nodes: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;shutdown -h now&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Gracefully shutdown all masters: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;shutdown -h now&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;start-cluster&quot;&gt;Start cluster:&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Start master nodes.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Start infra nodes.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Start worker node.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Check if nodes are started: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;oc get nodes&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Check if pods are working: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;oc get pods --all-namespaces&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;reference&quot;&gt;Reference:&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.redhat.com/en/blog/how-stop-and-start-production-openshift-cluster&quot;&gt;How To: Stop and start a production OpenShift Cluster&lt;/a&gt;&lt;/p&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><category term="openshift" /><summary type="html">In this post I describe shortly how to shutdown and start up Openshift cluster.</summary></entry><entry><title type="html">My experience of Openshift 4.9 installation on Proxmox with a restricted network</title><link href="http://localhost:4000/site/installing-openshift4.9/" rel="alternate" type="text/html" title="My experience of Openshift 4.9 installation on Proxmox with a restricted network" /><published>2022-01-15T20:00:00+01:00</published><updated>2022-01-15T20:00:00+01:00</updated><id>http://localhost:4000/site/installing-openshift4.9</id><content type="html" xml:base="http://localhost:4000/site/installing-openshift4.9/">&lt;p&gt;In this post I tried to describe my experience that I had during Openshift 4.9 installation at my home lab. Redhat allows to use Openshift during 60 days for free without support.&lt;/p&gt;
 
 &lt;h2 id=&quot;preparing-environment&quot;&gt;Preparing environment&lt;/h2&gt;
 
@@ -202,7 +251,7 @@ oc &lt;span class=&quot;nb&quot;&gt;whoami&lt;/span&gt; &lt;span class=&quot;nt&
 &lt;p&gt;That’s it.&lt;/p&gt;
 
 &lt;h2 id=&quot;reference&quot;&gt;Reference:&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=sCLJYNI77Bk&quot;&gt;How to Fix Cannot Install Windows 11 on VMware Workstation&lt;/a&gt;&lt;/p&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><category term="windows11" /><summary type="html">Problem Today I tried to install Windows 11 on my virtual platform and during installation faced with the following problem:</summary></entry><entry><title type="html">Creating a systemctl application startup job</title><link href="http://localhost:4000/site/create-systemctl-service/" rel="alternate" type="text/html" title="Creating a systemctl application startup job" /><published>2021-12-15T07:15:00+01:00</published><updated>2021-12-15T07:15:00+01:00</updated><id>http://localhost:4000/site/create-systemctl-service</id><content type="html" xml:base="http://localhost:4000/site/create-systemctl-service/">&lt;p&gt;Here I have posted some information about how to create a simple service startup job for linux.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=sCLJYNI77Bk&quot;&gt;How to Fix Cannot Install Windows 11 on VMware Workstation&lt;/a&gt;&lt;/p&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><category term="windows" /><summary type="html">Problem Today I tried to install Windows 11 on my virtual platform and during installation faced with the following problem:</summary></entry><entry><title type="html">Creating a systemctl application startup job</title><link href="http://localhost:4000/site/create-systemctl-service/" rel="alternate" type="text/html" title="Creating a systemctl application startup job" /><published>2021-12-15T07:15:00+01:00</published><updated>2021-12-15T07:15:00+01:00</updated><id>http://localhost:4000/site/create-systemctl-service</id><content type="html" xml:base="http://localhost:4000/site/create-systemctl-service/">&lt;p&gt;Here I have posted some information about how to create a simple service startup job for linux.&lt;/p&gt;
 
 &lt;p&gt;Here below is shown a sample service file for systemctl&lt;/p&gt;
 
@@ -472,6 +521,11 @@ oc &lt;span class=&quot;nb&quot;&gt;whoami&lt;/span&gt; &lt;span class=&quot;nt&
   &lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=8sv-6AN0_cg&quot;&gt;https://www.youtube.com/watch?v=8sv-6AN0_cg&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><category term="regex" /><summary type="html">Mostly used regex paterns Other patterns Examples: Source</summary></entry><entry><title type="html">Deploy a python application using podman. Deploy rootless container and connect podmanized database container</title><link href="http://localhost:4000/site/deploy-application-on-podman/" rel="alternate" type="text/html" title="Deploy a python application using podman. Deploy rootless container and connect podmanized database container" /><published>2021-11-28T19:30:00+01:00</published><updated>2021-11-28T19:30:00+01:00</updated><id>http://localhost:4000/site/deploy-application-on-podman</id><content type="html" xml:base="http://localhost:4000/site/deploy-application-on-podman/">&lt;p&gt;In order to connect a rootless application container to the rootles database container I used port mapping technique. The following steps were used for successfully applying application with connection to database.&lt;/p&gt;
 
+&lt;p&gt;First of all I installed libvirt package in order to enable virtualization network interface:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;admin@podman ~]&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;yum &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;libvirt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
 &lt;p&gt;Deploy database container. I mapped the database port 3306 from the container to the port 33306 at host machine.&lt;/p&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;podman run -d --name mysql-db -e MYSQL_USER=admin -e MYSQL_PASSWORD=mysql -e MYSQL_DATABASE=words -e MYSQL_ROOT_PASSWORD=mysql -p 33306:3306 -v /opt/homelab_projects/mysql_db_dir_noroot:/var/lib/mysql/data rhscl/mysql-57-rhel7
@@ -618,17 +672,17 @@ CONTAINER ID    IMAGE                                          COMMAND          
 ...
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
-&lt;/ol&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><category term="podman" /><category term="mysql" /><summary type="html">MySQL Install mysql client:</summary></entry><entry><title type="html">Openshift authentication using HTPasswd provider</title><link href="http://localhost:4000/site/create-openshift-oauth-users/" rel="alternate" type="text/html" title="Openshift authentication using HTPasswd provider" /><published>2021-11-19T18:30:00+01:00</published><updated>2021-11-19T18:30:00+01:00</updated><id>http://localhost:4000/site/create-openshift-oauth-users</id><content type="html" xml:base="http://localhost:4000/site/create-openshift-oauth-users/">&lt;p&gt;In this post I shortly describe how to create users for Openshift using HTPasswd provider. More about authentication providers are able to find in &lt;a href=&quot;https://docs.openshift.com/container-platform/4.9/authentication/understanding-authentication.html&quot;&gt;official documentation&lt;/a&gt;&lt;/p&gt;
+&lt;/ol&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><category term="podman" /><category term="database" /><summary type="html">MySQL Install mysql client:</summary></entry><entry><title type="html">Basic user management in Openshift</title><link href="http://localhost:4000/site/create-openshift-oauth-users/" rel="alternate" type="text/html" title="Basic user management in Openshift" /><published>2021-11-19T18:30:00+01:00</published><updated>2021-11-19T18:30:00+01:00</updated><id>http://localhost:4000/site/create-openshift-oauth-users</id><content type="html" xml:base="http://localhost:4000/site/create-openshift-oauth-users/">&lt;p&gt;In this post I shortly describe how to create users for Openshift using HTPasswd provider. More about authentication providers are able to find in &lt;a href=&quot;https://docs.openshift.com/container-platform/4.9/authentication/understanding-authentication.html&quot;&gt;official documentation&lt;/a&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;using-default-user&quot;&gt;Using default user&lt;/h3&gt;
+&lt;h2 id=&quot;kubeadmin-user&quot;&gt;kubeadmin user&lt;/h2&gt;
 
-&lt;p&gt;During installation Openshift creates default &lt;em&gt;kubeadmin&lt;/em&gt; with a password. Password you can find in installation folder: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;installation_folder&amp;gt;/auth/kubeadmin-password&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;During installation Openshift creates default &lt;em&gt;kubeadmin&lt;/em&gt; with a automatically generated password. Password you can find in installation folder: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;installation_folder&amp;gt;/auth/kubeadmin-password&lt;/code&gt;&lt;/p&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@ocp4 try]$ cat install_dir/auth/kubeadmin-password 
 bVM5i-CxeZI-NDvoS-d9wtV[admin@ocp4 try]$ 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Additionally, under &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;installation_folder&amp;gt;/auth/&lt;/code&gt; is located &lt;em&gt;kubeconfig&lt;/em&gt; file that can be used for loging to openshift cluster and working with cluster as well.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;kubeconfig&lt;/em&gt; locates in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;installation_folder&amp;gt;/auth/&lt;/code&gt;.&lt;/p&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@ocp4 try]$ oc --kubeconfig install_dir/auth/kubeconfig get node
 NAME                                 STATUS     ROLES    AGE   VERSION
@@ -643,15 +697,17 @@ okd4-control-plane-1.okd4.home.lab   Ready      master   35d   v1.20.0+558d959-1
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;export KUBECONFIG=/opt/install_dir/auth/kubeconfig
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;oauth-and-identity-providers&quot;&gt;OAuth and identity providers&lt;/h3&gt;
+&lt;h2 id=&quot;oauth-and-identity-providers&quot;&gt;OAuth and identity providers&lt;/h2&gt;
 
 &lt;p&gt;Authentication in Openshift is supported by Authentication Operator which runs on OAuth server. Users attempt to authenticate to the Opeshift API using using OAuth access tokens.&lt;/p&gt;
 
 &lt;p&gt;In order to use OAuth server it should be enabled and configured as well. Using kubeadmin user I specifed &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HTPasswd&lt;/code&gt; identity provider. Generally, the following list of identity providers are able to configure and use in Openshift: HTPasswd, Keystone, LDAP, Basic authentication, Request header, GitHub or GitHub Enterprise, GitLab, Google, OpenID Connect. More in detail about each of the provider is given in &lt;a href=&quot;https://docs.openshift.com/container-platform/4.7/authentication/understanding-identity-provider.html&quot;&gt;Openhift Documentation&lt;/a&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;configuring-htpasswd-identity-provider&quot;&gt;Configuring HTPasswd identity provider&lt;/h3&gt;
+&lt;h2 id=&quot;configuring-htpasswd-identity-provider&quot;&gt;Configuring HTPasswd identity provider&lt;/h2&gt;
 
-&lt;p&gt;Create an HTPasswd authentication file using following format: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;htpasswd -c -b -B &amp;lt;filename&amp;gt; &amp;lt;username&amp;gt; &amp;lt;password&amp;gt;&lt;/code&gt;. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-c&lt;/code&gt; parameter creates file. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-b&lt;/code&gt; uses a password which is given in command from the command line. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-B&lt;/code&gt; - Force bcrypt encryption of the password&lt;/p&gt;
+&lt;h3 id=&quot;creating-htpasswd-file&quot;&gt;Creating htpasswd file&lt;/h3&gt;
+
+&lt;p&gt;Basic format for creating HTPasswd authentitation file looks like this: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;htpasswd -c -b -B &amp;lt;filename&amp;gt; &amp;lt;username&amp;gt; &amp;lt;password&amp;gt;&lt;/code&gt;. Here &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-c&lt;/code&gt; parameter creates file, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-b&lt;/code&gt; uses a password which is given in command from the command line. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-B&lt;/code&gt; - Force bcrypt encryption of the password&lt;/p&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@ocp4 try]$ htpasswd -c -b -B my_ocp_users admin admin
 Adding password for user admin
@@ -675,7 +731,9 @@ developer:$2y$05$Ab1TxMQV0T7te6NmKXaALOX/6XsFHsV06LYcaZHwIdIDpkJiObN2m
 [admin@ocp4 try]$ 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Create a secret from created file. Here the secret named as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;myusers&lt;/code&gt; and used a prefix &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;htpasswd&lt;/code&gt; in front of the the path to the file. Moreover, the secret should be create in namespace &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;openshift-config&lt;/code&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;apply-htpasswd-file&quot;&gt;Apply htpasswd file&lt;/h3&gt;
+
+&lt;p&gt;In order to apply a httpasswd file for Openshift, first of should be created a secret in openshift-config namespace. In the following command I described how I did. Here, it is important to define &lt;em&gt;htpasswd&lt;/em&gt; as a type of appling secret.&lt;/p&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@ocp4 try]$ oc create secret generic myusers --from-file htpasswd=my_ocp_users -n openshift-config
 secret/localusers created
@@ -685,9 +743,9 @@ secret/localusers created
 &lt;p&gt;Checking out created secret:&lt;/p&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@ocp4 try]$ oc get secrets -n openshift-config
-NAME                                  TYPE                                  DATA   AGE
+NAME                      TYPE                     DATA   AGE
 ......
-myusers                            Opaque                                1      27s
+myusers                   Opaque                   1      27s
 .......
 [admin@ocp4 try]$ 
 
@@ -730,7 +788,26 @@ oauth-openshift-777bfcd76c-v2xzl   1/1     Running       0          49s
 oauth-openshift-777bfcd76c-wpqsq   1/1     Running       0          41s
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Here I assigned properly roles to the created users. For admin user I want to give full access to the openshift cluster. Therefore, it should applied &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cluster-admin&lt;/code&gt; role. Developer user will be granted to create new projects.&lt;/p&gt;
+&lt;p&gt;If the pods are not being recreated, remove them. In this case, Openshift will re-deploy new pods with the updated configuration.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;admin@ocp4 htpasswd]&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;oc delete pods &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; openshift-authentication &lt;span class=&quot;nt&quot;&gt;--all&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--force&lt;/span&gt;
+warning: Immediate deletion does not &lt;span class=&quot;nb&quot;&gt;wait &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;confirmation that the running resource has been terminated. The resource may &lt;span class=&quot;k&quot;&gt;continue &lt;/span&gt;to run on the cluster indefinitely.
+pod &lt;span class=&quot;s2&quot;&gt;&quot;oauth-openshift-7f55497fcd-s56qd&quot;&lt;/span&gt; force deleted
+pod &lt;span class=&quot;s2&quot;&gt;&quot;oauth-openshift-7f55497fcd-z7d9c&quot;&lt;/span&gt; force deleted
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;admin@ocp4 htpasswd]&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;oc get pods &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; openshift-authentication
+NAME                               READY   STATUS              RESTARTS   AGE
+oauth-openshift-7f55497fcd-9v4zl   0/1     ContainerCreating   0          3s
+oauth-openshift-7f55497fcd-h7x8m   0/1     ContainerCreating   0          3s
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;admin@ocp4 htpasswd]&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;oc get pods &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; openshift-authentication
+NAME                               READY   STATUS    RESTARTS   AGE
+oauth-openshift-5c6444d496-hj52l   1/1     Running   0          9m35s
+oauth-openshift-5c6444d496-hvf2m   1/1     Running   0          9m31s
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;admin@ocp4 htpasswd]&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;assigning-privileges&quot;&gt;Assigning privileges&lt;/h2&gt;
+
+&lt;p&gt;Here I shortly show how has been assigned &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cluster-admin&lt;/code&gt; role to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;admin&lt;/code&gt; user. For admin user I want to give full access to the openshift cluster. Therefore, it should applied &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cluster-admin&lt;/code&gt; role. Developer user will be granted to create new projects.&lt;/p&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@ocp4 try]$ oc adm policy add-cluster-role-to-user cluster-admin admin
 Warning: User 'admin' not found
@@ -747,7 +824,9 @@ Using project &quot;default&quot;.
 admin
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Before giving any role to developer user I am going to disabled priviledge to create projects for all users. This priviledge creates Openshift during installation by default.&lt;/p&gt;
+&lt;h2 id=&quot;remove-project-creation-privileges&quot;&gt;Remove project creation privileges&lt;/h2&gt;
+
+&lt;p&gt;One of important points of user managment is vemove project creation privileges from all users by default. By default, this option is active for all users.&lt;/p&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@ocp4 ~]$ oc get clusterrolebinding | grep self-prov
 self-provisioners                        ClusterRole/self-provisioner             36d
@@ -772,17 +851,17 @@ Subjects:
 
 &lt;p&gt;And remove the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;self-provisioner&lt;/code&gt; role from the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;system:authenticated:oauth&lt;/code&gt; group&lt;/p&gt;
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@ocp4 ~]$ oc adm policy remove-cluster-role-from-group self-provisioner system:authenticated:oauth
-Warning: Your changes may get lost whenever a master is restarted, unless you prevent reconciliation of this rolebinding using the following command: 
-oc annotate clusterrolebinding.rbac self-provisioners 'rbac.authorization.kubernetes.io/autoupdate=false' --overwrite
-clusterrole.rbac.authorization.k8s.io/self-provisioner removed: &quot;system:authenticated:oauth&quot;
-[admin@ocp4 ~]$ 
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;admin@ocp4 ~]&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;oc adm policy remove-cluster-role-from-group self-provisioner system:authenticated:oauth
+Warning: Your changes may get lost whenever a master is restarted, unless you prevent reconciliation of this rolebinding using the following &lt;span class=&quot;nb&quot;&gt;command&lt;/span&gt;: 
+oc annotate clusterrolebinding.rbac self-provisioners &lt;span class=&quot;s1&quot;&gt;'rbac.authorization.kubernetes.io/autoupdate=false'&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--overwrite&lt;/span&gt;
+clusterrole.rbac.authorization.k8s.io/self-provisioner removed: &lt;span class=&quot;s2&quot;&gt;&quot;system:authenticated:oauth&quot;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;admin@ocp4 ~]&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Thus will be removed self-provisioners rolebinding and will be disabled priviledge to create projects for all users.&lt;/p&gt;
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@ocp4 ~]$ oc get clusterrolebinding | grep self-prov
-[admin@ocp4 ~]$ 
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;admin@ocp4 ~]&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;oc get clusterrolebinding | &lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;self-prov
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;admin@ocp4 ~]&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;And granting self-provisioner cluster role to developer user.&lt;/p&gt;
@@ -798,8 +877,8 @@ group.user.openshift.io/developers added: &quot;developer&quot;
 
 &lt;p&gt;Assigned self-provisioner role to developers group:&lt;/p&gt;
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@ocp4 ~]$ oc adm policy add-cluster-role-to-group self-provisioner developers
-clusterrole.rbac.authorization.k8s.io/self-provisioner added: &quot;developers&quot;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[admin@ocp4 ~]$ oc adm policy add-cluster-role-to-user --rolebinding-name self-provisioning-admin self-provisioner admin
+clusterrole.rbac.authorization.k8s.io/self-provisioner added: &quot;admin&quot;
 [admin@ocp4 ~]$ 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -890,40 +969,4 @@ csr-glzgb   5m5s    kubernetes.io/kube-apiserver-client-kubelet   system:node:ok
 csr-lsdcc   4m55s   kubernetes.io/kube-apiserver-client-kubelet   system:node:etcd-3.okd4.home.lab                 Approved,Issued
 csr-nwjpv   71s     kubernetes.io/kube-apiserver-client-kubelet   system:node:okd4-control-plane-1.okd4.home.lab   Approved,Issued
 [admin@ocp4 try]$ 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><category term="openshift" /><summary type="html">After installing Openshift cluster you should log in and check for csr. Moreover, I regularly controls if some csr have to be approved or not.</summary></entry><entry><title type="html">Editing files in Linux VM using remote Visual Studio Code</title><link href="http://localhost:4000/site/edit-files-with-rmate/" rel="alternate" type="text/html" title="Editing files in Linux VM using remote Visual Studio Code" /><published>2021-10-18T19:30:00+02:00</published><updated>2021-10-18T19:30:00+02:00</updated><id>http://localhost:4000/site/edit-files-with-rmate</id><content type="html" xml:base="http://localhost:4000/site/edit-files-with-rmate/">&lt;p&gt;Sometimes we need to edit a file directly on Linux VM using Visual Studio Code.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;Launch Visual Studio Code. Additionally, you have to able to connect to the bash of remote machine from VS Code.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Go to the ‘Extensions’ page and search for ‘Remote VSCode’&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Install the extension and re-launch Visual Studio Code ( client side of rmate)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;In your Linux Virtual Machine, execute the following command in your terminal to install rmate server&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mkdir /opt/rmate
-$ sudo wget -O /opt/rmate/rmate https://raw.github.com/aurora/rmate/master/rmate
-$ sudo chmod a+x /opt/rmate/rmate
-ln -s /opt/rmate/rmate /usr/local/bin/rmate 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Go back to your Visual Studio Code and open up the command palette (CTRL+P for Windows and CMD+P for Mac) then execute the following command:
-    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Remote: Start Server 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Once the server is ready, open up a new terminal and connect to your Linux Virtual Machine using the following command:
-    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; $ ssh -R 52698:localhost:52698 VIRTUAL_MACHINE_IP_ADDRESS 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;In vs code terminal, execute the rmate command with the file that you want to open up in your Visual Studio Code in your local machine
-    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; $ rmate demo.py 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><category term="ide" /><summary type="html">Sometimes we need to edit a file directly on Linux VM using Visual Studio Code.</summary></entry></feed>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;avatar&quot;=&gt;nil, &quot;bio&quot;=&gt;&quot;&quot;, &quot;location&quot;=&gt;nil, &quot;email&quot;=&gt;nil}</name></author><category term="openshift" /><summary type="html">After installing Openshift cluster you should log in and check for csr. Moreover, I regularly controls if some csr have to be approved or not.</summary></entry></feed>

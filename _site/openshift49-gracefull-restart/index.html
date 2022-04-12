@@ -9,38 +9,38 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Check and approve pendings csrs in Openshift cluster - notes</title>
-<meta name="description" content="After installing Openshift cluster you should log in and check for csr. Moreover, I regularly controls if some csr have to be approved or not.">
+<!-- begin _includes/seo.html --><title>Stop and start Openshift 4 cluster - notes</title>
+<meta name="description" content="In this post I describe shortly how to shutdown and start up Openshift cluster.">
 
 
 
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="notes">
-<meta property="og:title" content="Check and approve pendings csrs in Openshift cluster">
-<meta property="og:url" content="http://localhost:4000/site/check-approve-csr-openshift/">
+<meta property="og:title" content="Stop and start Openshift 4 cluster">
+<meta property="og:url" content="http://localhost:4000/site/openshift49-gracefull-restart/">
 
 
-  <meta property="og:description" content="After installing Openshift cluster you should log in and check for csr. Moreover, I regularly controls if some csr have to be approved or not.">
-
-
-
-
-
-
-
-  <meta property="article:published_time" content="2021-11-16T18:30:00+01:00">
+  <meta property="og:description" content="In this post I describe shortly how to shutdown and start up Openshift cluster.">
 
 
 
 
 
-  
+
+
+  <meta property="article:published_time" content="2022-02-10T20:00:00+01:00">
+
+
+
+
 
   
 
+  
 
-<link rel="canonical" href="http://localhost:4000/site/check-approve-csr-openshift/">
+
+<link rel="canonical" href="http://localhost:4000/site/openshift49-gracefull-restart/">
 
 
 
@@ -156,7 +156,7 @@
         <span class="sep">/</span>
       
       
-        <li class="current">Check and approve pendings csrs in Openshift cluster</li>
+        <li class="current">Stop and start Openshift 4 cluster</li>
       
     
   </ol>
@@ -227,16 +227,16 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Check and approve pendings csrs in Openshift cluster">
-    <meta itemprop="description" content="After installing Openshift cluster you should log in and check for csr. Moreover, I regularly controls if some csr have to be approved or not.">
-    <meta itemprop="datePublished" content="2021-11-16T18:30:00+01:00">
+    <meta itemprop="headline" content="Stop and start Openshift 4 cluster">
+    <meta itemprop="description" content="In this post I describe shortly how to shutdown and start up Openshift cluster.">
+    <meta itemprop="datePublished" content="2022-02-10T20:00:00+01:00">
     
 
     <div class="page__inner-wrap">
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="http://localhost:4000/site/check-approve-csr-openshift/" class="u-url" itemprop="url">Check and approve pendings csrs in Openshift cluster
+            <a href="http://localhost:4000/site/openshift49-gracefull-restart/" class="u-url" itemprop="url">Stop and start Openshift 4 cluster
 </a>
           </h1>
           
@@ -247,7 +247,7 @@
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2021-11-16T18:30:00+01:00">November 16, 2021</time>
+        <time datetime="2022-02-10T20:00:00+01:00">February 10, 2022</time>
       </span>
     
 
@@ -262,35 +262,56 @@
 
       <section class="page__content e-content" itemprop="text">
         
-        <p>After installing Openshift cluster you should log in and check for csr. Moreover, I regularly controls if some csr have to be approved or not.</p>
+        <p>In this post I describe shortly how to shutdown and start up Openshift cluster.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@ocp4 try]$ oc get csr
-NAME        AGE     SIGNERNAME                                    REQUESTOR                                        CONDITION
-csr-6m4m7   4m29s   kubernetes.io/kube-apiserver-client-kubelet   system:node:etcd-2.okd4.home.lab                 Approved,Issued
-csr-7qww9   4m13s   kubernetes.io/kube-apiserver-client-kubelet   system:node:okd4-compute-1.okd4.home.lab         Approved,Issued
-csr-glzgb   4m29s   kubernetes.io/kube-apiserver-client-kubelet   system:node:okd4-control-plane-1.okd4.home.lab   Pending
-csr-lsdcc   4m19s   kubernetes.io/kube-apiserver-client-kubelet   system:node:etcd-3.okd4.home.lab                 Pending
-csr-nwjpv   35s     kubernetes.io/kube-apiserver-client-kubelet   system:node:okd4-control-plane-1.okd4.home.lab   Approved,Issued
+<h2 id="preparation">Preparation</h2>
+
+<p>Check if all nodes are properly running:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>oc get nodes <span class="nt">--show-labels</span>
 </code></pre></div></div>
 
-<p>As you can see, there is some certificates in Pending status. In order to approve each of them manually, run the following command:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>oc adm certificate approve &lt;csr_name&gt;
+<p>Check if all pods in all projects are working properly. Save the current state:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>oc get pods <span class="nt">--all-namespaces</span>
 </code></pre></div></div>
 
-<p>And use <code class="language-plaintext highlighter-rouge">jq</code> tool to verify all csr at once:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@ocp4 try]$ oc get csr -ojson | jq -r '.items[] | select(.status == {} ) | .metadata.name' | xargs oc adm certificate approve
-certificatesigningrequest.certificates.k8s.io/csr-glzgb approved
-certificatesigningrequest.certificates.k8s.io/csr-lsdcc approved
-[admin@ocp4 try]$ oc get csr
-NAME        AGE     SIGNERNAME                                    REQUESTOR                                        CONDITION
-csr-6m4m7   5m5s    kubernetes.io/kube-apiserver-client-kubelet   system:node:etcd-2.okd4.home.lab                 Approved,Issued
-csr-7qww9   4m49s   kubernetes.io/kube-apiserver-client-kubelet   system:node:okd4-compute-1.okd4.home.lab         Approved,Issued
-csr-glzgb   5m5s    kubernetes.io/kube-apiserver-client-kubelet   system:node:okd4-control-plane-1.okd4.home.lab   Approved,Issued
-csr-lsdcc   4m55s   kubernetes.io/kube-apiserver-client-kubelet   system:node:etcd-3.okd4.home.lab                 Approved,Issued
-csr-nwjpv   71s     kubernetes.io/kube-apiserver-client-kubelet   system:node:okd4-control-plane-1.okd4.home.lab   Approved,Issued
-[admin@ocp4 try]$ 
-</code></pre></div></div>
+<p>Additionally, you can create backup of namespaces. See <a href="https://velero.io">velero</a>.</p>
 
+<h2 id="shutdown-cluster">Shutdown cluster:</h2>
+
+<ol>
+  <li>
+    <p>Gracefully shutdown all worker nodes: <code class="language-plaintext highlighter-rouge">shutdown -h now</code></p>
+  </li>
+  <li>
+    <p>Gracefully shutdown Infra nodes: <code class="language-plaintext highlighter-rouge">shutdown -h now</code></p>
+  </li>
+  <li>
+    <p>Gracefully shutdown all masters: <code class="language-plaintext highlighter-rouge">shutdown -h now</code></p>
+  </li>
+</ol>
+
+<h2 id="start-cluster">Start cluster:</h2>
+
+<ol>
+  <li>
+    <p>Start master nodes.</p>
+  </li>
+  <li>
+    <p>Start infra nodes.</p>
+  </li>
+  <li>
+    <p>Start worker node.</p>
+  </li>
+</ol>
+
+<p>Check if nodes are started: <code class="language-plaintext highlighter-rouge">oc get nodes</code></p>
+
+<p>Check if pods are working: <code class="language-plaintext highlighter-rouge">oc get pods --all-namespaces</code></p>
+
+<h2 id="reference">Reference:</h2>
+<p><a href="https://www.redhat.com/en/blog/how-stop-and-start-production-openshift-cluster">How To: Stop and start a production OpenShift Cluster</a></p>
 
         
       </section>
@@ -317,7 +338,7 @@ csr-nwjpv   71s     kubernetes.io/kube-apiserver-client-kubelet   system:node:ok
 
         
 
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2021-11-16T18:30:00+01:00">November 16, 2021</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2022-02-10T20:00:00+01:00">February 10, 2022</time></p>
 
       </footer>
 
@@ -326,12 +347,11 @@ csr-nwjpv   71s     kubernetes.io/kube-apiserver-client-kubelet   system:node:ok
       
   <nav class="pagination">
     
-      <a href="/site/edit-files-with-rmate/" class="pagination--pager" title="Editing files in Linux VM using remote Visual Studio Code
+      <a href="/site/installing-openshift4.9/" class="pagination--pager" title="My experience of Openshift 4.9 installation on Proxmox with a restricted network
 ">Previous</a>
     
     
-      <a href="/site/create-persistence-storage-for-openshift/" class="pagination--pager" title="Create persistance storage for openshift
-">Next</a>
+      <a href="#" class="pagination--pager disabled">Next</a>
     
   </nav>
 
@@ -345,43 +365,6 @@ csr-nwjpv   71s     kubernetes.io/kube-apiserver-client-kubelet   system:node:ok
     <div class="page__related">
       <h2 class="page__related-title">You may also enjoy</h2>
       <div class="grid__wrapper">
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/site/openshift49-gracefull-restart/" rel="permalink">Stop and start Openshift 4 cluster
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2022-02-10T20:00:00+01:00">February 10, 2022</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">In this post I describe shortly how to shutdown and start up Openshift cluster.
-</p>
-  </article>
-</div>
-
         
           
 
@@ -490,6 +473,48 @@ Today I tried to install Windows 11 on my virtual platform and during installati
 
 
     <p class="archive__item-excerpt" itemprop="description">Here I have posted some information about how to create a simple service startup job for linux.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/site/regex-help/" rel="permalink">A short help for regular expressions
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-12-08T16:30:00+01:00">December 8, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">
+  Mostly used regex paterns
+  Other patterns
+  Examples:
+  Source
+
 </p>
   </article>
 </div>

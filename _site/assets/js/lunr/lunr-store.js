@@ -7,7 +7,7 @@ var store = [{
       },{
         "title": "Cheatsheet for Vagrant",
         "excerpt":"Creating a VM vagrant init – Initialize Vagrant with a Vagrantfile and ./.vagrant directory, using no specified base image. Beforeyou can do vagrant up, you’ll need to specify a base image in the Vagrantfile. vagrant init – Initialize Vagrant with a specific box. To find a box, go to the...","categories": [],
-        "tags": ["puppet"],
+        "tags": ["vagrant"],
         "url": "/site/vagrant-cheetsheet/",
         "teaser": null
       },{
@@ -19,25 +19,25 @@ var store = [{
       },{
         "title": "Using hiera in puppet. Example: creating a folder",
         "excerpt":"In this post I am trying to show how to configure hiera files on puppet master. For demonstration purpose I use a simple task that will create a folder. The main idea of this post is to get basic understand of hiera concept. Look up where is stored the main...","categories": [],
-        "tags": ["hiera","puppet"],
+        "tags": ["puppet"],
         "url": "/site/hiera-in-puppet/",
         "teaser": null
       },{
         "title": "Simple HTTPS Server using python",
         "excerpt":"Generating key and cert files with Openssl: [root@test crazytests]# openssl req -x509 -newkey rsa:4096 -keyout testkey.pem -out testcert.pem Generating a 4096 bit RSA private key .......++ ..............................................................................................................................................................................................................................++ writing new private key to 'testkey.pem' Enter PEM pass phrase: Verifying - Enter PEM pass phrase: ----- You are about to be asked...","categories": [],
-        "tags": ["python","https"],
+        "tags": ["python","webserver"],
         "url": "/site/a-simple-python-server/",
         "teaser": null
       },{
-        "title": " Giving more space for the /boot filesystem",
+        "title": "Expanding /boot partition",
         "excerpt":"Recently I tried to update my centos 7 test machine. Unfortunatelly, yum update command returned the following error “At least 54MB more space needed on the /boot filesystem.”. df -h command showed following: [root@server ~]# df -h Filesystem Size Used Avail Use% Mounted on /dev/mapper/cl_centos03-root 32G 13G 19G 41% /...","categories": [],
-        "tags": ["filesystem","linux","disk"],
+        "tags": ["linux"],
         "url": "/site/more-space-for-boot-fs/",
         "teaser": null
       },{
-        "title": "Is a port opened?",
+        "title": "Check for opened ports without telnet",
         "excerpt":"If there is no telnet tools is installed on the host, try the following command to check if a port opened or not. -bash-4.2$ timeout 1 bash -c '(echo &gt; /dev/tcp/ip_adderess/port) &gt;/dev/null 2&gt;&amp;1' &amp;&amp; echo Port is open || echo Port is closed Example -bash-4.2$ timeout 1 bash -c '(echo...","categories": [],
-        "tags": ["port","linux","network"],
+        "tags": ["linux"],
         "url": "/site/port-checking/",
         "teaser": null
       },{
@@ -77,20 +77,20 @@ var store = [{
         "url": "/site/create-persistence-storage-for-openshift/",
         "teaser": null
       },{
-        "title": "Openshift authentication using HTPasswd provider",
-        "excerpt":"In this post I shortly describe how to create users for Openshift using HTPasswd provider. More about authentication providers are able to find in official documentation Using default user During installation Openshift creates default kubeadmin with a password. Password you can find in installation folder: &lt;installation_folder&gt;/auth/kubeadmin-password [admin@ocp4 try]$ cat install_dir/auth/kubeadmin-password...","categories": [],
+        "title": "Basic user management in Openshift",
+        "excerpt":"In this post I shortly describe how to create users for Openshift using HTPasswd provider. More about authentication providers are able to find in official documentation kubeadmin user During installation Openshift creates default kubeadmin with a automatically generated password. Password you can find in installation folder: &lt;installation_folder&gt;/auth/kubeadmin-password [admin@ocp4 try]$ cat...","categories": [],
         "tags": ["openshift"],
         "url": "/site/create-openshift-oauth-users/",
         "teaser": null
       },{
         "title": "Deploy MySQL and PostgreSQL database systems on Podman with regular (non-root) user",
         "excerpt":"MySQL Install mysql client: sudo yum install mysql Create a folder on the local host for storing databases and configure SELinux option: mkdir /opt/homelab_projects/mysql_db_dir_noroot [admin@workstation homelab_projects]$ sudo semanage fcontext -a -t container_file_t '/opt/homelab_projects/mysql_db_dir_noroot(/*)' [admin@workstation homelab_projects]$ restorecon -v 'mysql_db_dir_noroot' [admin@workstation homelab_projects]$ ll -Z total 56 ......... drwxrwxr-x. 2 admin admin unconfined_u:object_r:container_file_t:s0...","categories": [],
-        "tags": ["podman","mysql"],
+        "tags": ["podman","database"],
         "url": "/site/running-database-on-podman/",
         "teaser": null
       },{
         "title": "Deploy a python application using podman. Deploy rootless container and connect podmanized database container",
-        "excerpt":"In order to connect a rootless application container to the rootles database container I used port mapping technique. The following steps were used for successfully applying application with connection to database. Deploy database container. I mapped the database port 3306 from the container to the port 33306 at host machine....","categories": [],
+        "excerpt":"In order to connect a rootless application container to the rootles database container I used port mapping technique. The following steps were used for successfully applying application with connection to database. First of all I installed libvirt package in order to enable virtualization network interface: [admin@podman ~]$ sudo yum install...","categories": [],
         "tags": ["podman","python"],
         "url": "/site/deploy-application-on-podman/",
         "teaser": null
@@ -109,7 +109,7 @@ var store = [{
       },{
         "title": "Fixing \"Cannot Install Windows 11\" error during installation",
         "excerpt":"Problem Today I tried to install Windows 11 on my virtual platform and during installation faced with the following problem: Solution In this screen type Shift + F10 at the same time to open a command promt. Then in command line type regedit: In the opened Registry Editor window, go...","categories": [],
-        "tags": ["windows11"],
+        "tags": ["windows"],
         "url": "/site/windows11-requirements-error/",
         "teaser": null
       },{
@@ -117,5 +117,11 @@ var store = [{
         "excerpt":"In this post I tried to describe my experience that I had during Openshift 4.9 installation at my home lab. Redhat allows to use Openshift during 60 days for free without support. Preparing environment Set up DNS and DHCP Set up proxy Download RHCOS (https://console.redhat.com/openshift/install/metal/user-provisioned) Create bare metal environment. In...","categories": [],
         "tags": ["openshift"],
         "url": "/site/installing-openshift4.9/",
+        "teaser": null
+      },{
+        "title": "Stop and start Openshift 4 cluster",
+        "excerpt":"In this post I describe shortly how to shutdown and start up Openshift cluster. Preparation Check if all nodes are properly running: oc get nodes --show-labels Check if all pods in all projects are working properly. Save the current state: oc get pods --all-namespaces Additionally, you can create backup of...","categories": [],
+        "tags": ["openshift"],
+        "url": "/site/openshift49-gracefull-restart/",
         "teaser": null
       }]
