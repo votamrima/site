@@ -2,7 +2,7 @@
 layout: single
 title: "Basics of Ansible collections"
 subtitle: ""
-date: 2022-05-18 16:00:00 +0100
+date: 2022-05-18 08:00:00 +0100
 background: '/image/01.jpg'
 tags: ['ansible']
 ---
