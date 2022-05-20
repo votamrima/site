@@ -7,6 +7,7 @@ background: '/image/01.jpg'
 tags: ['ansible']
 ---
 
+In this post I am about troubleshooting of ansible playbooks. Ansible provides several ways of managing playbook. Some of them are: log configuration, defining some options such as ``--step``, ``-v`` and defining running management in playbook using such modules as ``fail`` or ``assert``
 
 ## Log file configuration
 
