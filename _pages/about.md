@@ -11,7 +11,7 @@ Welcome, dear guest.
 
 This is my personal wiki web site that I use for my personal needs. Of course, if you found something here interesting feel free to use it. 
 
-There are some mistakes you can find. Usually, I do not check texts during preparation, howeover can apply some changes when I come back to post later. 
+There are some mistakes you can find. Usually, I do not check text when I type. Howeover, later when/if I come back to the post surely mistakes will be adjusted and post could be modified.
 
 Thank you.
 
