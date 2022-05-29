@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "Basics storage management using Ansible"
+title: "Basics of storage management using Ansible"
 subtitle: ""
 date: 2022-05-15 13:00:00 +0100
 background: '/image/01.jpg'
