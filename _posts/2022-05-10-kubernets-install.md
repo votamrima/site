@@ -7,7 +7,7 @@ background: '/image/01.jpg'
 tags: ['kubernetes']
 ---
 
-In this post I describe the installation process of a simple Kubernetes cluster. 
+In this post I describe the installation process of a simple Kubernetes cluster. This post has not been finished yet.
 
 Cluster concists from 3 nodes: 1 master node, 2 worker nodes, based on Fedora 35 and all VMs are running at Proxmox.
 
