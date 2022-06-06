@@ -4,7 +4,7 @@ title: "Creating systemd tasks for applications and podman rootless containers"
 subtitle: ""
 date: 2021-12-15 07:15:00 +0100
 background: '/image/01.jpg'
-tags: ['linux']
+tags: ['linux', 'podman', 'container']
 ---
 
 Here I describe a procees of creating a simple service startup job at linux.
