@@ -28,8 +28,8 @@ Here below I share a basic playbook for managing storage:
     block:
     - name: Create partition
       parted:
-        device: "\{{ item.device }}"
-        number: "\{{ item.number }}"
+        device: "{ {{ item.device }} }"
+        number: "{{ item.number }}"
         state: "{{ item.state }}"
         part_start: "{{ item.start }}"
         part_end: "{{ item.end }}"
