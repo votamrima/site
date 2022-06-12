@@ -101,9 +101,9 @@ var store = [{
         "url": "/site/regex-help/",
         "teaser": null
       },{
-        "title": "Creating a systemctl application startup job",
-        "excerpt":"Here I have posted some information about how to create a simple service startup job for linux. Here below is shown a sample service file for systemctl [Unit] Description=Description for application After=network.target [Service] User=&lt;user&gt; Group=&lt;group&gt; WorkingDirectory=&lt;path where running file is located&gt; Environment=&lt;path with environment variable PATH \"PATH=/location\"&gt; EnvironmentFile=&lt;path to environment...","categories": [],
-        "tags": ["linux"],
+        "title": "Creating systemd tasks for applications and podman rootless containers",
+        "excerpt":"Here I describe a procees of creating a simple service startup job at linux. Sample systemd file Here below is shown a sample service file for systemctl [Unit] Description=Description for application After=network.target [Service] User=&lt;user&gt; Group=&lt;group&gt; WorkingDirectory=&lt;path where running file is located&gt; Environment=&lt;path with environment variable PATH \"PATH=/location\"&gt; EnvironmentFile=&lt;path to environment...","categories": [],
+        "tags": ["linux","podman","container"],
         "url": "/site/create-systemctl-service/",
         "teaser": null
       },{
@@ -129,5 +129,35 @@ var store = [{
         "excerpt":"It is very easy to set up a simple container registry on podman. Here below I show how to set up a local simple container registry for personal use. Preparation If podman and htpasswd packages are not installed on the host, install them: [admin@podman auth]$ sudo dnf provides htpasswd [sudo]...","categories": [],
         "tags": ["podman","container"],
         "url": "/site/private-container-registry/",
+        "teaser": null
+      },{
+        "title": "Troubleshooting in Ansible",
+        "excerpt":"In this post I am about troubleshooting of ansible playbooks. Ansible provides several ways of managing playbook. Some of them are: log configuration, defining some options such as --step, -v and defining running management in playbook using such modules as fail or assert Log file configuration Unfortunatelly, logging is not...","categories": [],
+        "tags": ["ansible"],
+        "url": "/site/ansible-troubleshooting/",
+        "teaser": null
+      },{
+        "title": "Ansible Jinj2 templates",
+        "excerpt":"Jinja templating helps to standartize and to template files such as config and system roles. Here is basic syntax. Using template module: - name: Deploy hello.html template: src: templates/hello.html.j2 dest: /var/www/html/hello.html $ cat vars/all/all.yml print_msg = \"This file is managed by Ansible\" $ cat templates/hello.html.j2 The system kernel is: \\'{%...","categories": [],
+        "tags": ["ansible"],
+        "url": "/site/ansible-jinja2-templates/",
+        "teaser": null
+      },{
+        "title": "Kubernetes installation. (Not finished)",
+        "excerpt":"In this post I describe the installation process of a simple Kubernetes cluster. This post has not been finished yet. Cluster concists from 3 nodes: 1 master node, 2 worker nodes, based on Fedora 35 and all VMs are running at Proxmox. Node configuration Following steps should be proceeded on...","categories": [],
+        "tags": ["kubernetes"],
+        "url": "/site/kubernets-install/",
+        "teaser": null
+      },{
+        "title": "Basics of storage management using Ansible",
+        "excerpt":"Generally, there are available 5 modules that allow to manage storage: parted, lvg, lvol, filesystem, mount. parted module creates partition. lvg, lvol - module are supporting to create logical volume groups. filesystem - module creates a filesystem mount module mounts a created partition and insert mounting config to /etc/fstab. Code...","categories": [],
+        "tags": ["ansible"],
+        "url": "/site/ansible-basic-storage-management/",
+        "teaser": null
+      },{
+        "title": "Basics of Ansible collections",
+        "excerpt":"Ansible collection provides set of roles, modules, some plugins that are able to download on ansible control host and use them in playbooks. For example, community.crypto collection provides modules for managing TLS/SSL certificates. Collections are supported by Ansible starting with version 2.9. Main benefit of collections: - Ansible content collection...","categories": [],
+        "tags": ["ansible"],
+        "url": "/site/ansible-collections/",
         "teaser": null
       }]

@@ -7,7 +7,7 @@ background: '/image/01.jpg'
 tags: ['ansible']
 ---
 
-
+{% raw %}
 Generally, there are available 5 modules that allow to manage storage: ``parted``, ``lvg``, ``lvol``, ``filesystem``, ``mount``. 
 
 - ``parted`` module creates partition.
@@ -19,7 +19,8 @@ Generally, there are available 5 modules that allow to manage storage: ``parted`
 
 Here below I share a basic playbook for managing storage:
 
-````
+
+````yaml
 - name: Create new partition
   hosts: machinea
   gather_facts: true
@@ -28,7 +29,7 @@ Here below I share a basic playbook for managing storage:
     block:
     - name: Create partition
       parted:
-        device: "{ {{ item.device }} }"
+        device: "{{ item.device }}"
         number: "{{ item.number }}"
         state: "{{ item.state }}"
         part_start: "{{ item.start }}"
@@ -69,6 +70,7 @@ Here below I share a basic playbook for managing storage:
     become: true
 ````
 
+
 File with variables in this example is locating in ``host_vars/machinea/vars.yml``
 
 ````yaml
@@ -98,3 +100,5 @@ logical_volumes:
 
 ### Reference:
 - ``ansible-doc`` command
+
+{% endraw %}

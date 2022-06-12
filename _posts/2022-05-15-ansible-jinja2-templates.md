@@ -29,9 +29,11 @@ $ cat templates/hello.html.j2
 The system kernel is: {{ ansible_hostname }}
 ````
 
-- ``{% EXPR %}`` - for expressions or logic. 
-- ``{{ EXPR }}`` - outputs results of expressions or variables
-- ``{# COMMENT #}`` - comments 
+{% raw %}
+- `` \'{% EXPR %}' `` - for expressions or logic. 
+- `` \'{{ EXPR }}' `` - outputs results of expressions or variables
+- `` \'{# COMMENT #}' `` - comments
+{% endraw %}
 
 We can manage a jinja file using loops and conditions.
 

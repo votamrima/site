@@ -9,19 +9,19 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Creating a systemctl application startup job - notes</title>
-<meta name="description" content="Here I have posted some information about how to create a simple service startup job for linux.">
+<!-- begin _includes/seo.html --><title>Creating systemd tasks for applications and podman rootless containers - notes</title>
+<meta name="description" content="Here I describe a procees of creating a simple service startup job at linux.">
 
 
 
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="notes">
-<meta property="og:title" content="Creating a systemctl application startup job">
+<meta property="og:title" content="Creating systemd tasks for applications and podman rootless containers">
 <meta property="og:url" content="http://localhost:4000/site/create-systemctl-service/">
 
 
-  <meta property="og:description" content="Here I have posted some information about how to create a simple service startup job for linux.">
+  <meta property="og:description" content="Here I describe a procees of creating a simple service startup job at linux.">
 
 
 
@@ -156,7 +156,7 @@
         <span class="sep">/</span>
       
       
-        <li class="current">Creating a systemctl application startup job</li>
+        <li class="current">Creating systemd tasks for applications and podman rootless containers</li>
       
     
   </ol>
@@ -227,8 +227,8 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Creating a systemctl application startup job">
-    <meta itemprop="description" content="Here I have posted some information about how to create a simple service startup job for linux.">
+    <meta itemprop="headline" content="Creating systemd tasks for applications and podman rootless containers">
+    <meta itemprop="description" content="Here I describe a procees of creating a simple service startup job at linux.">
     <meta itemprop="datePublished" content="2021-12-15T07:15:00+01:00">
     
 
@@ -236,7 +236,7 @@
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="http://localhost:4000/site/create-systemctl-service/" class="u-url" itemprop="url">Creating a systemctl application startup job
+            <a href="http://localhost:4000/site/create-systemctl-service/" class="u-url" itemprop="url">Creating systemd tasks for applications and podman rootless containers
 </a>
           </h1>
           
@@ -265,12 +265,14 @@
           <aside class="sidebar__right ">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
-              
+              <ul class="toc__menu"><li><a href="#sample-systemd-file">Sample systemd file</a></li><li><a href="#running-and-activating-tasks">Running and activating tasks</a></li><li><a href="#running-rootless-containers">Running rootless containers</a></li><li><a href="#reference">Reference</a></li></ul>
 
             </nav>
           </aside>
         
-        <p>Here I have posted some information about how to create a simple service startup job for linux.</p>
+        <p>Here I describe a procees of creating a simple service startup job at linux.</p>
+
+<h2 id="sample-systemd-file">Sample systemd file</h2>
 
 <p>Here below is shown a sample service file for systemctl</p>
 
@@ -290,9 +292,11 @@
 <span class="nv">WantedBy</span><span class="o">=</span>multi-user.target
 </code></pre></div></div>
 
+<h2 id="running-and-activating-tasks">Running and activating tasks</h2>
+
 <p>A service file should be located under <code class="language-plaintext highlighter-rouge">/etc/systemd/system</code> folder. A service file can be named anyhow, but extension of the file should be ended with <code class="language-plaintext highlighter-rouge">.service</code>. For instance: <code class="language-plaintext highlighter-rouge">/etc/systemd/system/testapp.service</code>.</p>
 
-<p>When file is being created reload daemon:</p>
+<p>When file is created reload daemon:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>systemctl daemon-reload
 </code></pre></div></div>
@@ -306,6 +310,79 @@
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>systemctl <span class="nb">enable </span>testapp.service
 </code></pre></div></div>
+
+<h2 id="running-rootless-containers">Running rootless containers</h2>
+
+<p>In order to automate starting and stopping a rootless container on podman I followed these steps:</p>
+
+<ol>
+  <li>Generating systemd unit file using and update it:</li>
+</ol>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="o">[</span>admin@podman ~]<span class="nv">$ </span>podman generate systemd <span class="nt">--new</span> <span class="nt">--files</span> <span class="nt">--name</span> registry
+/home/admin/container-registry.service
+
+</code></pre></div></div>
+
+<p>After update file looks like as following:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="se">\#</span> container-registry2.service
+
+<span class="se">\#</span> autogenerated by Podman 4.0.2
+
+<span class="se">\#</span> Mon Jun  6 19:38:56 CEST 2022
+
+<span class="o">[</span>Unit]
+<span class="nv">Description</span><span class="o">=</span>Podman container-registry2.service
+<span class="nv">Documentation</span><span class="o">=</span>man:podman-generate-systemd<span class="o">(</span>1<span class="o">)</span>
+<span class="nv">Wants</span><span class="o">=</span>network-online.target
+<span class="nv">After</span><span class="o">=</span>network-online.target
+<span class="nv">RequiresMountsFor</span><span class="o">=</span>%t/containers
+
+<span class="o">[</span>Service]
+<span class="nv">Environment</span><span class="o">=</span><span class="nv">PODMAN_SYSTEMD_UNIT</span><span class="o">=</span>%n
+<span class="nv">Restart</span><span class="o">=</span>on-failure
+<span class="nv">TimeoutStopSec</span><span class="o">=</span>70
+<span class="nv">ExecStartPre</span><span class="o">=</span>/bin/rm <span class="nt">-f</span> %t/%n.ctr-id
+<span class="nv">ExecStart</span><span class="o">=</span>/usr/bin/podman start registry2
+<span class="nv">ExecStop</span><span class="o">=</span>/usr/bin/podman stop registry2
+<span class="nv">Type</span><span class="o">=</span>notify
+<span class="nv">NotifyAccess</span><span class="o">=</span>all
+
+<span class="o">[</span>Install]
+<span class="nv">WantedBy</span><span class="o">=</span>default.target
+
+</code></pre></div></div>
+
+<ol>
+  <li>Installation generated unit file</li>
+</ol>
+
+<p>For rootless container I need to store the unit file in <code class="language-plaintext highlighter-rouge">~/.config/systemd/user/</code>. For the root container copy the file to <code class="language-plaintext highlighter-rouge">/etc/systemd/system/</code>.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cp </span>container-registry.service ~/.config/systemd/user/registry.service
+</code></pre></div></div>
+
+<p>Then, for running the user services placed in $HOME/.config/systemd/user, enable service using <code class="language-plaintext highlighter-rouge">--user</code> parameter:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>admin@podman ~]<span class="nv">$ </span>systemctl <span class="nt">--user</span> <span class="nb">enable </span>registry.service
+</code></pre></div></div>
+
+<p>Activate controlling the systemd login for admin:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>admin@podman ~]<span class="nv">$ </span>loginctl enable-linger admin
+</code></pre></div></div>
+
+<p>That’s it.</p>
+
+<h2 id="reference">Reference</h2>
+<ul>
+  <li><a href="https://docs.podman.io/en/latest/markdown/podman-generate-systemd.1.html">podman generate systemd</a></li>
+  <li>other resources</li>
+</ul>
+
 
         
       </section>
@@ -322,7 +399,11 @@
     <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
     <span itemprop="keywords">
     
-      <a href="/site/tags/#linux" class="page__taxonomy-item p-category" rel="tag">linux</a>
+      <a href="/site/tags/#container" class="page__taxonomy-item p-category" rel="tag">container</a><span class="sep">, </span>
+    
+      <a href="/site/tags/#linux" class="page__taxonomy-item p-category" rel="tag">linux</a><span class="sep">, </span>
+    
+      <a href="/site/tags/#podman" class="page__taxonomy-item p-category" rel="tag">podman</a>
     
     </span>
   </p>
@@ -370,7 +451,7 @@
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/site/private-container-registry/" rel="permalink">Private container registry on podman
+        <a href="/site/ansible-collections/" rel="permalink">Basics of Ansible collections
 </a>
       
     </h2>
@@ -382,7 +463,7 @@
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2022-03-28T21:00:00+02:00">March 28, 2022</time>
+        <time datetime="2022-05-18T09:00:00+02:00">May 18, 2022</time>
       </span>
     
 
@@ -392,7 +473,44 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">It is very easy to set up a simple container registry on podman. Here below I show how to set up a local simple container registry for personal use.
+    <p class="archive__item-excerpt" itemprop="description">Ansible collection provides set of roles, modules, some plugins that are able to download on ansible control host and use them in playbooks. For example, com...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/site/ansible-basic-storage-management/" rel="permalink">Basics of storage management using Ansible
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-05-15T14:00:00+02:00">May 15, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">
+Generally, there are available 5 modules that allow to manage storage: parted, lvg, lvol, filesystem, mount.
 </p>
   </article>
 </div>
@@ -407,7 +525,7 @@
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/site/openshift49-gracefull-restart/" rel="permalink">Stop and start Openshift 4 cluster
+        <a href="/site/kubernets-install/" rel="permalink">Kubernetes installation. (Not finished)
 </a>
       
     </h2>
@@ -419,7 +537,7 @@
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2022-02-10T20:00:00+01:00">February 10, 2022</time>
+        <time datetime="2022-05-10T09:00:00+02:00">May 10, 2022</time>
       </span>
     
 
@@ -429,7 +547,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">In this post I describe shortly how to shutdown and start up Openshift cluster.
+    <p class="archive__item-excerpt" itemprop="description">In this post I describe the installation process of a simple Kubernetes cluster. This post has not been finished yet.
 </p>
   </article>
 </div>
@@ -444,7 +562,7 @@
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/site/installing-openshift4.9/" rel="permalink">My experience of Openshift 4.9 installation on Proxmox with a restricted network
+        <a href="/site/ansible-jinja2-templates/" rel="permalink">Ansible Jinj2 templates
 </a>
       
     </h2>
@@ -456,7 +574,7 @@
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2022-01-15T20:00:00+01:00">January 15, 2022</time>
+        <time datetime="2022-05-05T20:00:00+02:00">May 5, 2022</time>
       </span>
     
 
@@ -466,45 +584,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">In this post I tried to describe my experience that I had during Openshift 4.9 installation at my home lab. Redhat allows to use Openshift during 60 days for...</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/site/windows11-requirements-error/" rel="permalink">Fixing “Cannot Install Windows 11” error during installation
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2022-01-02T18:40:00+01:00">January 2, 2022</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">Problem
-Today I tried to install Windows 11 on my virtual platform and during installation faced with the following problem:
-
+    <p class="archive__item-excerpt" itemprop="description">Jinja templating helps to standartize and to template files such as config and system roles. Here is basic syntax.
 </p>
   </article>
 </div>

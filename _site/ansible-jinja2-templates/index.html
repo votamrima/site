@@ -9,38 +9,38 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Check and approve pendings csrs in Openshift cluster - notes</title>
-<meta name="description" content="After installing Openshift cluster you should log in and check for csr. Moreover, I regularly controls if some csr have to be approved or not.">
+<!-- begin _includes/seo.html --><title>Ansible Jinj2 templates - notes</title>
+<meta name="description" content="Jinja templating helps to standartize and to template files such as config and system roles. Here is basic syntax.">
 
 
 
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="notes">
-<meta property="og:title" content="Check and approve pendings csrs in Openshift cluster">
-<meta property="og:url" content="http://localhost:4000/site/check-approve-csr-openshift/">
+<meta property="og:title" content="Ansible Jinj2 templates">
+<meta property="og:url" content="http://localhost:4000/site/ansible-jinja2-templates/">
 
 
-  <meta property="og:description" content="After installing Openshift cluster you should log in and check for csr. Moreover, I regularly controls if some csr have to be approved or not.">
-
-
-
-
-
-
-
-  <meta property="article:published_time" content="2021-11-16T18:30:00+01:00">
+  <meta property="og:description" content="Jinja templating helps to standartize and to template files such as config and system roles. Here is basic syntax.">
 
 
 
 
 
-  
+
+
+  <meta property="article:published_time" content="2022-05-05T20:00:00+02:00">
+
+
+
+
 
   
 
+  
 
-<link rel="canonical" href="http://localhost:4000/site/check-approve-csr-openshift/">
+
+<link rel="canonical" href="http://localhost:4000/site/ansible-jinja2-templates/">
 
 
 
@@ -156,7 +156,7 @@
         <span class="sep">/</span>
       
       
-        <li class="current">Check and approve pendings csrs in Openshift cluster</li>
+        <li class="current">Ansible Jinj2 templates</li>
       
     
   </ol>
@@ -227,16 +227,16 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Check and approve pendings csrs in Openshift cluster">
-    <meta itemprop="description" content="After installing Openshift cluster you should log in and check for csr. Moreover, I regularly controls if some csr have to be approved or not.">
-    <meta itemprop="datePublished" content="2021-11-16T18:30:00+01:00">
+    <meta itemprop="headline" content="Ansible Jinj2 templates">
+    <meta itemprop="description" content="Jinja templating helps to standartize and to template files such as config and system roles. Here is basic syntax.">
+    <meta itemprop="datePublished" content="2022-05-05T20:00:00+02:00">
     
 
     <div class="page__inner-wrap">
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="http://localhost:4000/site/check-approve-csr-openshift/" class="u-url" itemprop="url">Check and approve pendings csrs in Openshift cluster
+            <a href="http://localhost:4000/site/ansible-jinja2-templates/" class="u-url" itemprop="url">Ansible Jinj2 templates
 </a>
           </h1>
           
@@ -247,7 +247,7 @@
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2021-11-16T18:30:00+01:00">November 16, 2021</time>
+        <time datetime="2022-05-05T20:00:00+02:00">May 5, 2022</time>
       </span>
     
 
@@ -265,39 +265,67 @@
           <aside class="sidebar__right ">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
-              
+              <ul class="toc__menu"><li><a href="#using-loops">Using Loops</a></li><li><a href="#using-condition">Using condition:</a></li><li><a href="#reference">Reference</a></li></ul>
 
             </nav>
           </aside>
         
-        <p>After installing Openshift cluster you should log in and check for csr. Moreover, I regularly controls if some csr have to be approved or not.</p>
+        <p>Jinja templating helps to standartize and to template files such as config and system roles. Here is basic syntax.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@ocp4 try]$ oc get csr
-NAME        AGE     SIGNERNAME                                    REQUESTOR                                        CONDITION
-csr-6m4m7   4m29s   kubernetes.io/kube-apiserver-client-kubelet   system:node:etcd-2.okd4.home.lab                 Approved,Issued
-csr-7qww9   4m13s   kubernetes.io/kube-apiserver-client-kubelet   system:node:okd4-compute-1.okd4.home.lab         Approved,Issued
-csr-glzgb   4m29s   kubernetes.io/kube-apiserver-client-kubelet   system:node:okd4-control-plane-1.okd4.home.lab   Pending
-csr-lsdcc   4m19s   kubernetes.io/kube-apiserver-client-kubelet   system:node:etcd-3.okd4.home.lab                 Pending
-csr-nwjpv   35s     kubernetes.io/kube-apiserver-client-kubelet   system:node:okd4-control-plane-1.okd4.home.lab   Approved,Issued
+<p>Using template module:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Deploy hello.html</span>
+  <span class="na">template</span><span class="pi">:</span>
+    <span class="na">src</span><span class="pi">:</span> <span class="s">templates/hello.html.j2</span>
+    <span class="na">dest</span><span class="pi">:</span> <span class="s">/var/www/html/hello.html</span>
 </code></pre></div></div>
 
-<p>As you can see, there is some certificates in Pending status. In order to approve each of them manually, run the following command:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>oc adm certificate approve &lt;csr_name&gt;
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="nv">$ </span><span class="nb">cat </span>vars/all/all.yml
+print_msg <span class="o">=</span> <span class="s2">"This file is managed by Ansible"</span>
+
+<span class="nv">$ </span><span class="nb">cat </span>templates/hello.html.j2
+
+The system kernel is: 
 </code></pre></div></div>
 
-<p>And use <code class="language-plaintext highlighter-rouge">jq</code> tool to verify all csr at once:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@ocp4 try]$ oc get csr -ojson | jq -r '.items[] | select(.status == {} ) | .metadata.name' | xargs oc adm certificate approve
-certificatesigningrequest.certificates.k8s.io/csr-glzgb approved
-certificatesigningrequest.certificates.k8s.io/csr-lsdcc approved
-[admin@ocp4 try]$ oc get csr
-NAME        AGE     SIGNERNAME                                    REQUESTOR                                        CONDITION
-csr-6m4m7   5m5s    kubernetes.io/kube-apiserver-client-kubelet   system:node:etcd-2.okd4.home.lab                 Approved,Issued
-csr-7qww9   4m49s   kubernetes.io/kube-apiserver-client-kubelet   system:node:okd4-compute-1.okd4.home.lab         Approved,Issued
-csr-glzgb   5m5s    kubernetes.io/kube-apiserver-client-kubelet   system:node:okd4-control-plane-1.okd4.home.lab   Approved,Issued
-csr-lsdcc   4m55s   kubernetes.io/kube-apiserver-client-kubelet   system:node:etcd-3.okd4.home.lab                 Approved,Issued
-csr-nwjpv   71s     kubernetes.io/kube-apiserver-client-kubelet   system:node:okd4-control-plane-1.okd4.home.lab   Approved,Issued
-[admin@ocp4 try]$ 
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">\'{% EXPR %}'</code> - for expressions or logic.</li>
+  <li><code class="language-plaintext highlighter-rouge">\'{{ EXPR }}'</code> - outputs results of expressions or variables</li>
+  <li><code class="language-plaintext highlighter-rouge">\'{# COMMENT #}'</code> - comments</li>
+</ul>
+
+<p>We can manage a jinja file using loops and conditions.</p>
+
+<h2 id="using-loops">Using Loops</h2>
+
+<div class="language-jinja highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">{# Check list with the models of auto #}</span>
+
 </code></pre></div></div>
+
+<p>Or let’s print all defined hostnames</p>
+
+<div class="language-jinja highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>
+
+<p>Or classic task, define /etc/hosts file:</p>
+
+<div class="language-jinja highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>
+
+<h2 id="using-condition">Using condition:</h2>
+
+<div class="language-jinja highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>
+
+<p>Additionally, in jinja template we can apply some filters to express the output to yaml or json or to get expression from yaml and json. These filters are: <code class="language-plaintext highlighter-rouge">to_json</code>, <code class="language-plaintext highlighter-rouge">to_yaml</code>, <code class="language-plaintext highlighter-rouge">to_nice_yaml</code>, <code class="language-plaintext highlighter-rouge">to_nice_json</code>, <code class="language-plaintext highlighter-rouge">from_json</code>, <code class="language-plaintext highlighter-rouge">from_yaml</code>.</p>
+
+<h2 id="reference">Reference</h2>
+<ul>
+  <li><a href="https://docs.ansible.com/ansible/2.9/user_guide/playbooks_filters.html">Ansible Playbook Filters</a></li>
+  <li><a href="https://docs.ansible.com/ansible/2.9/modules/template_module.html">Ansible Templates</a></li>
+</ul>
 
 
         
@@ -315,7 +343,7 @@ csr-nwjpv   71s     kubernetes.io/kube-apiserver-client-kubelet   system:node:ok
     <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
     <span itemprop="keywords">
     
-      <a href="/site/tags/#openshift" class="page__taxonomy-item p-category" rel="tag">openshift</a>
+      <a href="/site/tags/#ansible" class="page__taxonomy-item p-category" rel="tag">ansible</a>
     
     </span>
   </p>
@@ -325,7 +353,7 @@ csr-nwjpv   71s     kubernetes.io/kube-apiserver-client-kubelet   system:node:ok
 
         
 
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2021-11-16T18:30:00+01:00">November 16, 2021</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2022-05-05T20:00:00+02:00">May 5, 2022</time></p>
 
       </footer>
 
@@ -334,11 +362,11 @@ csr-nwjpv   71s     kubernetes.io/kube-apiserver-client-kubelet   system:node:ok
       
   <nav class="pagination">
     
-      <a href="/site/edit-files-with-rmate/" class="pagination--pager" title="Editing files in Linux VM using remote Visual Studio Code
+      <a href="/site/ansible-troubleshooting/" class="pagination--pager" title="Troubleshooting in Ansible
 ">Previous</a>
     
     
-      <a href="/site/create-persistence-storage-for-openshift/" class="pagination--pager" title="Create persistance storage for openshift
+      <a href="/site/kubernets-install/" class="pagination--pager" title="Kubernetes installation. (Not finished)
 ">Next</a>
     
   </nav>
@@ -474,7 +502,7 @@ Generally, there are available 5 modules that allow to manage storage: parted, l
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/site/ansible-jinja2-templates/" rel="permalink">Ansible Jinj2 templates
+        <a href="/site/ansible-troubleshooting/" rel="permalink">Troubleshooting in Ansible
 </a>
       
     </h2>
@@ -486,7 +514,7 @@ Generally, there are available 5 modules that allow to manage storage: parted, l
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2022-05-05T20:00:00+02:00">May 5, 2022</time>
+        <time datetime="2022-04-23T09:00:00+02:00">April 23, 2022</time>
       </span>
     
 
@@ -496,8 +524,7 @@ Generally, there are available 5 modules that allow to manage storage: parted, l
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">Jinja templating helps to standartize and to template files such as config and system roles. Here is basic syntax.
-</p>
+    <p class="archive__item-excerpt" itemprop="description">In this post I am about troubleshooting of ansible playbooks. Ansible provides several ways of managing playbook. Some of them are: log configuration, defini...</p>
   </article>
 </div>
 
