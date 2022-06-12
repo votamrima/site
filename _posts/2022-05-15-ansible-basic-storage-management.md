@@ -43,7 +43,7 @@ Here below I share a basic playbook for managing storage:
         state: "{{ item.vg_state }}"
       loop: "{{ partitions }}"
 
-    - name: Create a logical volume of
+    - name: Create a logical volume
       lvol:
         vg: "{{ item.vg_group }}"
         lv: "{{ item.lvol_name }}"
