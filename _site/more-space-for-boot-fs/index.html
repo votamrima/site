@@ -10,7 +10,7 @@
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>Expanding /boot partition - notes</title>
-<meta name="description" content="Recently I tried to update my centos 7 test machine. Unfortunatelly, yum update command returned the following error “At least 54MB more space needed on the /boot filesystem.”.">
+<meta name="description" content="">
 
 
 
@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://localhost:4000/site/more-space-for-boot-fs/">
 
 
-  <meta property="og:description" content="Recently I tried to update my centos 7 test machine. Unfortunatelly, yum update command returned the following error “At least 54MB more space needed on the /boot filesystem.”.">
+  <meta property="og:description" content="">
 
 
 
@@ -228,7 +228,7 @@
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Expanding /boot partition">
-    <meta itemprop="description" content="Recently I tried to update my centos 7 test machine. Unfortunatelly, yum update command returned the following error “At least 54MB more space needed on the /boot filesystem.”.">
+    <meta itemprop="description" content="">
     <meta itemprop="datePublished" content="2019-08-16T21:17:00+02:00">
     
 
@@ -270,7 +270,8 @@
             </nav>
           </aside>
         
-        <p>Recently I tried to update my centos 7 test machine. Unfortunatelly, <code class="language-plaintext highlighter-rouge">yum update</code> command returned the following error “At least 54MB more space needed on the /boot filesystem.”.</p>
+        
+<p>Recently I tried to update my centos 7 test machine. Unfortunatelly, <code class="language-plaintext highlighter-rouge">yum update</code> command returned the following error “At least 54MB more space needed on the /boot filesystem.”.</p>
 
 <p><code class="language-plaintext highlighter-rouge">df -h</code> command showed following:</p>
 
@@ -356,6 +357,7 @@ tmpfs                         379M   40K  379M   1% /run/user/1000
 </code></pre></div></div>
 
 <p>In this output we can see that unused files were removed and it was cleaned up 275 MB.</p>
+
 
         
       </section>
@@ -480,7 +482,6 @@ tmpfs                         379M   40K  379M   1% /run/user/1000
 
 
     <p class="archive__item-excerpt" itemprop="description">
-Generally, there are available 5 modules that allow to manage storage: parted, lvg, lvol, filesystem, mount.
 </p>
   </article>
 </div>

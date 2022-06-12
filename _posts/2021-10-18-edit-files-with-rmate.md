@@ -6,7 +6,7 @@ date: 2021-10-18 18:30:00 +0100
 tags: ['ide']
 ---
 
-{% endraw %}
+{% raw %}
 
 Sometimes we need to edit a file directly on Linux VM using Visual Studio Code.
 

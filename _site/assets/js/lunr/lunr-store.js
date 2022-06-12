@@ -12,7 +12,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Removing tmux from the puppet learning machine",
-        "excerpt":"   cleanly and gracefully killing all tmux opened sessions and server too: ``` tmux kill-server   2. or killing all tmux processes:  pkill -f tmux    3. removing tmux application  yum erase -y tmux ````  ","categories": [],
+        "excerpt":"    cleanly and gracefully killing all tmux opened sessions and server too: ``` tmux kill-server   2. or killing all tmux processes:  pkill -f tmux    3. removing tmux application  yum erase -y tmux ````   ","categories": [],
         "tags": ["puppet"],
         "url": "/site/tmux-remove-puppetserver/",
         "teaser": null
@@ -24,7 +24,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Simple HTTPS Server using python",
-        "excerpt":"Generating key and cert files with Openssl: [root@test crazytests]# openssl req -x509 -newkey rsa:4096 -keyout testkey.pem -out testcert.pem Generating a 4096 bit RSA private key .......++ ..............................................................................................................................................................................................................................++ writing new private key to 'testkey.pem' Enter PEM pass phrase: Verifying - Enter PEM pass phrase: ----- You are about to be asked...","categories": [],
+        "excerpt":"Here below I am going to shortly describe the process of setting up a simple https server on python Generating key and cert files with Openssl: [root@test crazytests]# openssl req -x509 -newkey rsa:4096 -keyout testkey.pem -out testcert.pem Generating a 4096 bit RSA private key .......++ ..............................................................................................................................................................................................................................++ writing new private key...","categories": [],
         "tags": ["python","webserver"],
         "url": "/site/a-simple-python-server/",
         "teaser": null
@@ -72,7 +72,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Create persistance storage for openshift",
-        "excerpt":"Set ip NFS Server and export a created share. A simple process of creating NFS is described on this site. Please, use search function. Set up persistent volume Firstly, I created a setup_pv.yaml file with following content: vim setup_pv.yml apiVersion: v1 kind: PersistentVolume metadata: name: test-pv spec: capacity: storage: 10Gi...","categories": [],
+        "excerpt":"Here I am going to shortly describe a process of mounting a NFS shares to Openshift cluster. Create persistent volume resource Firstly, I created a setup_pv.yaml file with following content: apiVersion: v1 kind: PersistentVolume metadata: name: test-pv spec: capacity: storage: 10Gi accessModes: - ReadWriteMany persistentVolumeReclaimPolicy: Retain nfs: path: /opt/okdn_share/test server:...","categories": [],
         "tags": ["openshift"],
         "url": "/site/create-persistence-storage-for-openshift/",
         "teaser": null

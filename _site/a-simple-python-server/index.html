@@ -10,7 +10,7 @@
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>Simple HTTPS Server using python - notes</title>
-<meta name="description" content="Generating key and cert files with Openssl:">
+<meta name="description" content="">
 
 
 
@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://localhost:4000/site/a-simple-python-server/">
 
 
-  <meta property="og:description" content="Generating key and cert files with Openssl:">
+  <meta property="og:description" content="">
 
 
 
@@ -228,7 +228,7 @@
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Simple HTTPS Server using python">
-    <meta itemprop="description" content="  Generating key and cert files with Openssl:">
+    <meta itemprop="description" content="">
     <meta itemprop="datePublished" content="2019-08-06T00:38:00+02:00">
     
 
@@ -270,7 +270,10 @@
             </nav>
           </aside>
         
-        <ol>
+        
+<p>Here below I am going to shortly describe the process of setting up a simple https server on python</p>
+
+<ol>
   <li>Generating key and cert files with Openssl:</li>
 </ol>
 
@@ -315,6 +318,7 @@ httpd_soccet = ssl.wrap_socket(httpd.socket, keyfile="testkey.pem", certfile='te
 httpd.serve_forever()
 [root@test crazytests]#
 </code></pre></div></div>
+
 
         
       </section>
@@ -441,7 +445,6 @@ httpd.serve_forever()
 
 
     <p class="archive__item-excerpt" itemprop="description">
-Generally, there are available 5 modules that allow to manage storage: parted, lvg, lvol, filesystem, mount.
 </p>
   </article>
 </div>

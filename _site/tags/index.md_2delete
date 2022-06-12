@@ -799,7 +799,8 @@ In this post is noted a way of creating a simple NFS share server on centos 8 ma
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">Recently I tried to update my centos 7 test machine. Unfortunatelly, yum update command returned the following error “At least 54MB more space needed on the ...</p>
+    <p class="archive__item-excerpt" itemprop="description">
+</p>
   </article>
 </div>
 
@@ -836,14 +837,7 @@ In this post is noted a way of creating a simple NFS share server on centos 8 ma
 
 
     <p class="archive__item-excerpt" itemprop="description">
-  create configuration file:
-    bash-3.2# cat /etc/logrotate.d/myconf-logrotate.conf
-PATH_TO_FILE/LOG.FILE {
-daily
-missingok
-rotate 10
-compress
-delaycompre...</p>
+</p>
   </article>
 </div>
 
@@ -1007,7 +1001,8 @@ delaycompre...</p>
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">In this post I shortly describe how to create users for Openshift using HTPasswd provider. More about authentication providers are able to find in official d...</p>
+    <p class="archive__item-excerpt" itemprop="description">
+</p>
   </article>
 </div>
 
@@ -1043,7 +1038,7 @@ delaycompre...</p>
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">Set ip NFS Server and export a created share.
+    <p class="archive__item-excerpt" itemprop="description">
 </p>
   </article>
 </div>
@@ -1080,7 +1075,7 @@ delaycompre...</p>
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">After installing Openshift cluster you should log in and check for csr. Moreover, I regularly controls if some csr have to be approved or not.
+    <p class="archive__item-excerpt" itemprop="description">
 </p>
   </article>
 </div>
@@ -1233,7 +1228,8 @@ delaycompre...</p>
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">In order to connect a rootless application container to the rootles database container I used port mapping technique. The following steps were used for succe...</p>
+    <p class="archive__item-excerpt" itemprop="description">
+</p>
   </article>
 </div>
 
@@ -1360,7 +1356,6 @@ delaycompre...</p>
 
 
     <p class="archive__item-excerpt" itemprop="description">
-Generally, there are available 5 modules that allow to manage storage: parted, lvg, lvol, filesystem, mount.
 </p>
   </article>
 </div>
@@ -1523,7 +1518,8 @@ Generally, there are available 5 modules that allow to manage storage: parted, l
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">In this post I am trying to show how to configure hiera files on puppet master. For demonstration purpose I use a simple task that will create a folder. The ...</p>
+    <p class="archive__item-excerpt" itemprop="description">
+</p>
   </article>
 </div>
 
@@ -1560,10 +1556,6 @@ Generally, there are available 5 modules that allow to manage storage: parted, l
 
 
     <p class="archive__item-excerpt" itemprop="description">
-  cleanly and gracefully killing all tmux opened sessions and server too:
-```
-tmux kill-server
-
 </p>
   </article>
 </div>
@@ -1610,7 +1602,8 @@ tmux kill-server
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">In order to connect a rootless application container to the rootles database container I used port mapping technique. The following steps were used for succe...</p>
+    <p class="archive__item-excerpt" itemprop="description">
+</p>
   </article>
 </div>
 
@@ -1647,8 +1640,6 @@ tmux kill-server
 
 
     <p class="archive__item-excerpt" itemprop="description">
-  Generating key and cert files with Openssl:
-
 </p>
   </article>
 </div>
@@ -1882,14 +1873,7 @@ tmux kill-server
 
 
     <p class="archive__item-excerpt" itemprop="description">
-  create configuration file:
-    bash-3.2# cat /etc/logrotate.d/myconf-logrotate.conf
-PATH_TO_FILE/LOG.FILE {
-daily
-missingok
-rotate 10
-compress
-delaycompre...</p>
+</p>
   </article>
 </div>
 
@@ -1937,9 +1921,8 @@ delaycompre...</p>
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">Creating a VM
-
-  vagrant init – Initialize Vagrant with a Vagrantfile and ./.vagrant directory, using no specified base image. Beforeyou can do vagrant up, y...</p>
+    <p class="archive__item-excerpt" itemprop="description">
+</p>
   </article>
 </div>
 
@@ -1990,8 +1973,6 @@ delaycompre...</p>
 
 
     <p class="archive__item-excerpt" itemprop="description">
-  Generating key and cert files with Openssl:
-
 </p>
   </article>
 </div>
@@ -2040,7 +2021,7 @@ delaycompre...</p>
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">Sometimes we need to edit a file directly on Linux VM using Visual Studio Code.
+    <p class="archive__item-excerpt" itemprop="description">
 </p>
   </article>
 </div>

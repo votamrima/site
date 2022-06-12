@@ -10,7 +10,7 @@
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>Create persistance storage for openshift - notes</title>
-<meta name="description" content="Set ip NFS Server and export a created share.">
+<meta name="description" content="">
 
 
 
@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://localhost:4000/site/create-persistence-storage-for-openshift/">
 
 
-  <meta property="og:description" content="Set ip NFS Server and export a created share.">
+  <meta property="og:description" content="">
 
 
 
@@ -228,7 +228,7 @@
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Create persistance storage for openshift">
-    <meta itemprop="description" content="Set ip NFS Server and export a created share.">
+    <meta itemprop="description" content="">
     <meta itemprop="datePublished" content="2021-11-17T16:30:00+01:00">
     
 
@@ -265,32 +265,31 @@
           <aside class="sidebar__right ">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
-              <ul class="toc__menu"><li><a href="#set-ip-nfs-server-and-export-a-created-share">Set ip NFS Server and export a created share.</a></li><li><a href="#set-up-persistent-volume">Set up persistent volume</a></li></ul>
+              <ul class="toc__menu"><li><a href="#create-persistent-volume-resource">Create persistent volume resource</a></li><li><a href="#apply-resource-and-check-results">Apply resource and check results</a></li></ul>
 
             </nav>
           </aside>
         
-        <h3 id="set-ip-nfs-server-and-export-a-created-share">Set ip NFS Server and export a created share.</h3>
+        
+<p>Here I am going to shortly describe a process of mounting a NFS shares to Openshift cluster.</p>
 
-<p>A simple process of creating NFS is described on this site. Please, use search function.</p>
+<h2 id="create-persistent-volume-resource">Create persistent volume resource</h2>
 
-<h3 id="set-up-persistent-volume">Set up persistent volume</h3>
-<p>Firstly, I created a setup_pv.yaml file with following content:</p>
+<p>Firstly, I created a <code class="language-plaintext highlighter-rouge">setup_pv.yaml</code> file with following content:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vim setup_pv.yml
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: test-pv
-spec:
-  capacity:
-    storage: 10Gi
-  accessModes:
-    - ReadWriteMany
-  persistentVolumeReclaimPolicy: Retain
-  nfs:
-    path: /opt/okdn_share/test
-    server: 192.168.11.61
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">PersistentVolume</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">test-pv</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">capacity</span><span class="pi">:</span>
+    <span class="na">storage</span><span class="pi">:</span> <span class="s">10Gi</span>
+  <span class="na">accessModes</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">ReadWriteMany</span>
+  <span class="na">persistentVolumeReclaimPolicy</span><span class="pi">:</span> <span class="s">Retain</span>
+  <span class="na">nfs</span><span class="pi">:</span>
+    <span class="na">path</span><span class="pi">:</span> <span class="s">/opt/okdn_share/test</span>
+    <span class="na">server</span><span class="pi">:</span> <span class="s">192.168.11.61</span>
 </code></pre></div></div>
 
 <p>According to the yaml file I used share from the host 192.168.11.61, path <code class="language-plaintext highlighter-rouge">/opt/okdn_share/test</code>. Name of the storage will be test-pv.</p>
@@ -299,17 +298,19 @@ spec:
   <p><code class="language-plaintext highlighter-rouge">showmount -e 192.168.11.61</code> command prints list of available shares that available on the host.</p>
 </blockquote>
 
+<h2 id="apply-resource-and-check-results">Apply resource and check results</h2>
+
 <p>When yaml file is created, create apply it using oc command:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>oc create -f setup_pv.yml
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>oc create <span class="nt">-f</span> setup_pv.yml
 </code></pre></div></div>
 
 <p>And finally, check if a persistence volume is created:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[admin@dns try]$ oc get pv
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>admin@dns try]<span class="nv">$ </span>oc get pv
 NAME      CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS   REASON   AGE
 test-pv   10Gi       RWX            Retain           Available                                   22h
-[admin@dns try]$ 
+<span class="o">[</span>admin@dns try]<span class="nv">$ </span>
 </code></pre></div></div>
 
 
@@ -436,7 +437,6 @@ test-pv   10Gi       RWX            Retain           Available                  
 
 
     <p class="archive__item-excerpt" itemprop="description">
-Generally, there are available 5 modules that allow to manage storage: parted, lvg, lvol, filesystem, mount.
 </p>
   </article>
 </div>

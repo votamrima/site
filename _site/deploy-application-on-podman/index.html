@@ -10,7 +10,7 @@
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>Deploy a python application using podman. Deploy rootless container and connect podmanized database container - notes</title>
-<meta name="description" content="In order to connect a rootless application container to the rootles database container I used port mapping technique. The following steps were used for successfully applying application with connection to database.">
+<meta name="description" content="">
 
 
 
@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://localhost:4000/site/deploy-application-on-podman/">
 
 
-  <meta property="og:description" content="In order to connect a rootless application container to the rootles database container I used port mapping technique. The following steps were used for successfully applying application with connection to database.">
+  <meta property="og:description" content="">
 
 
 
@@ -228,7 +228,7 @@
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Deploy a python application using podman. Deploy rootless container and connect podmanized database container">
-    <meta itemprop="description" content="In order to connect a rootless application container to the rootles database container I used port mapping technique. The following steps were used for successfully applying application with connection to database.">
+    <meta itemprop="description" content="">
     <meta itemprop="datePublished" content="2021-11-28T19:30:00+01:00">
     
 
@@ -270,7 +270,8 @@
             </nav>
           </aside>
         
-        <p>In order to connect a rootless application container to the rootles database container I used port mapping technique. The following steps were used for successfully applying application with connection to database.</p>
+        
+<p>In order to connect a rootless application container to the rootles database container I used port mapping technique. The following steps were used for successfully applying application with connection to database.</p>
 
 <p>First of all I installed libvirt package in order to enable virtualization network interface:</p>
 
@@ -309,6 +310,7 @@ CONTAINER ID  IMAGE                                                             
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>podman <span class="nb">exec</span> <span class="nt">-it</span> testapp bash
 </code></pre></div></div>
+
 
         
       </section>
@@ -435,7 +437,6 @@ CONTAINER ID  IMAGE                                                             
 
 
     <p class="archive__item-excerpt" itemprop="description">
-Generally, there are available 5 modules that allow to manage storage: parted, lvg, lvol, filesystem, mount.
 </p>
   </article>
 </div>
