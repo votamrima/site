@@ -7,16 +7,15 @@ background: '/image/01.jpg'
 tags: ['openshift']
 ---
 
-### Set ip NFS Server and export a created share.
+{% raw %}
 
+Here I am going to shortly describe a process of mounting a NFS shares to Openshift cluster.
 
-A simple process of creating NFS is described on this site. Please, use search function.
+## Create persistent volume resource 
 
-### Set up persistent volume
-Firstly, I created a setup_pv.yaml file with following content:
+Firstly, I created a ``setup_pv.yaml`` file with following content:
 
-````
-vim setup_pv.yml
+````yaml
 apiVersion: v1
 kind: PersistentVolume
 metadata:
@@ -36,19 +35,21 @@ According to the yaml file I used share from the host 192.168.11.61, path ``/opt
 
 > ``showmount -e 192.168.11.61`` command prints list of available shares that available on the host. 
 
+## Apply resource and check results
 
 When yaml file is created, create apply it using oc command:
 
-````
+````bash
 oc create -f setup_pv.yml
 ````
 
 And finally, check if a persistence volume is created:
 
-````
+````bash
 [admin@dns try]$ oc get pv
 NAME      CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS   REASON   AGE
 test-pv   10Gi       RWX            Retain           Available                                   22h
 [admin@dns try]$ 
 ````
 
+{% endraw %}

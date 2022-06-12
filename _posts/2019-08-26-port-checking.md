@@ -6,7 +6,8 @@ date: 2019-08-26 19:46:00 +0100
 #background: '/img/posts/01.jpg'
 tags: ['linux']
 ---
- 
+
+{% raw %} 
 
 If there is no telnet tools is installed on the host, try the following command to check if a port opened or not. 
 
@@ -23,3 +24,5 @@ Port is open
 ````
 
 If a port is closed, try to check network configuration or firewall access.
+
+{% endraw %}

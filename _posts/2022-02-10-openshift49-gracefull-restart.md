@@ -7,6 +7,9 @@ background: '/image/01.jpg'
 tags: ['openshift']
 ---
 
+{% raw %}
+
+
 In this post I describe shortly how to shutdown and start up Openshift cluster. 
 
 ## Preparation
@@ -49,3 +52,5 @@ Check if pods are working: ``oc get pods --all-namespaces``
 
 ## Reference:
 [How To: Stop and start a production OpenShift Cluster](https://www.redhat.com/en/blog/how-stop-and-start-production-openshift-cluster)
+
+{% endraw %}

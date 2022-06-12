@@ -7,6 +7,9 @@ background: '/image/01.jpg'
 tags: ['ansible']
 ---
 
+{% raw %}
+
+
 In this post I am about troubleshooting of ansible playbooks. Ansible provides several ways of managing playbook. Some of them are: log configuration, defining some options such as ``--step``, ``-v`` and defining running management in playbook using such modules as ``fail`` or ``assert``
 
 ## Log file configuration
@@ -146,3 +149,5 @@ ansible-playbook myplay.yml --check --diff
 - [https://docs.ansible.com/ansible/2.9/reference_appendices/test_strategies.html](https://docs.ansible.com/ansible/2.9/reference_appendices/test_strategies.html)
 - [https://docs.ansible.com/ansible/2.9/user_guide/playbooks_checkmode.html](https://docs.ansible.com/ansible/2.9/user_guide/playbooks_checkmode.html)
 - [Google](https://google.com)
+
+{% endraw %}

@@ -10,7 +10,7 @@
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>Ansible Jinj2 templates - notes</title>
-<meta name="description" content="Jinja templating helps to standartize and to template files such as config and system roles. Here is basic syntax.">
+<meta name="description" content="">
 
 
 
@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://localhost:4000/site/ansible-jinja2-templates/">
 
 
-  <meta property="og:description" content="Jinja templating helps to standartize and to template files such as config and system roles. Here is basic syntax.">
+  <meta property="og:description" content="">
 
 
 
@@ -228,7 +228,7 @@
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Ansible Jinj2 templates">
-    <meta itemprop="description" content="Jinja templating helps to standartize and to template files such as config and system roles. Here is basic syntax.">
+    <meta itemprop="description" content="">
     <meta itemprop="datePublished" content="2022-05-05T20:00:00+02:00">
     
 
@@ -270,7 +270,8 @@
             </nav>
           </aside>
         
-        <p>Jinja templating helps to standartize and to template files such as config and system roles. Here is basic syntax.</p>
+        
+<p>Jinja templating helps to standartize and to template files such as config and system roles. Here is basic syntax.</p>
 
 <p>Using template module:</p>
 
@@ -286,8 +287,8 @@
 print_msg <span class="o">=</span> <span class="s2">"This file is managed by Ansible"</span>
 
 <span class="nv">$ </span><span class="nb">cat </span>templates/hello.html.j2
-
-The system kernel is: 
+<span class="o">{{</span> print_msg <span class="o">}}</span>
+The system kernel is: <span class="o">{{</span> ansible_hostname <span class="o">}}</span>
 </code></pre></div></div>
 
 <ul>
@@ -301,22 +302,30 @@ The system kernel is:
 <h2 id="using-loops">Using Loops</h2>
 
 <div class="language-jinja highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">{# Check list with the models of auto #}</span>
-
+<span class="cp">{%</span> <span class="k">for</span> <span class="nv">model</span> <span class="ow">in</span> <span class="nv">models</span> <span class="k">if</span> <span class="ow">not</span> <span class="nv">model</span> <span class="o">==</span> <span class="s2">"BMW"</span> <span class="cp">%}</span>
+Line <span class="cp">{{</span> <span class="nv">loop.index</span> <span class="cp">}}</span> - <span class="cp">{{</span> <span class="nv">model</span> <span class="cp">}}</span>
+<span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
 </code></pre></div></div>
 
 <p>Or let’s print all defined hostnames</p>
 
-<div class="language-jinja highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-jinja highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{%</span> <span class="k">for</span> <span class="nv">server_name</span> <span class="ow">in</span> <span class="nv">groups</span><span class="p">[</span><span class="s1">'servers'</span><span class="p">]</span> <span class="cp">%}</span>
+<span class="cp">{{</span> <span class="nv">server_name</span> <span class="cp">}}</span>
+<span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
 </code></pre></div></div>
 
 <p>Or classic task, define /etc/hosts file:</p>
 
-<div class="language-jinja highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-jinja highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{%</span> <span class="k">for</span> <span class="nv">host</span> <span class="ow">in</span> <span class="nv">groups</span><span class="p">[</span><span class="s1">'all'</span><span class="p">]</span> <span class="cp">%}</span>
+<span class="cp">{{</span> <span class="nv">hostvars</span><span class="p">[</span><span class="nv">host</span><span class="p">][</span><span class="s1">'ansible_facts'</span><span class="p">][</span><span class="s1">'default_ipv4'</span><span class="p">][</span><span class="s1">'address'</span><span class="p">]</span> <span class="cp">}}</span> <span class="cp">{{</span> <span class="nv">hostvars</span><span class="p">[</span><span class="nv">host</span><span class="p">][</span><span class="s1">'ansible_facts'</span><span class="p">][</span><span class="s1">'fqdn'</span><span class="p">]</span> <span class="cp">}}</span> <span class="cp">{{</span> <span class="nv">hostvars</span><span class="p">[</span><span class="nv">host</span><span class="p">][</span><span class="s1">'ansible_facts'</span><span class="p">][</span><span class="s1">'hostname'</span><span class="p">]</span> <span class="cp">}}</span>
+<span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
 </code></pre></div></div>
 
 <h2 id="using-condition">Using condition:</h2>
 
-<div class="language-jinja highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-jinja highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{%</span> <span class="k">if</span> <span class="nv">finished</span> <span class="cp">%}</span>
+<span class="cp">{{</span> <span class="nv">print_me</span> <span class="cp">}}</span>
+<span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
 </code></pre></div></div>
 
 <p>Additionally, in jinja template we can apply some filters to express the output to yaml or json or to get expression from yaml and json. These filters are: <code class="language-plaintext highlighter-rouge">to_json</code>, <code class="language-plaintext highlighter-rouge">to_yaml</code>, <code class="language-plaintext highlighter-rouge">to_nice_yaml</code>, <code class="language-plaintext highlighter-rouge">to_nice_json</code>, <code class="language-plaintext highlighter-rouge">from_json</code>, <code class="language-plaintext highlighter-rouge">from_yaml</code>.</p>
@@ -413,7 +422,8 @@ The system kernel is:
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">Ansible collection provides set of roles, modules, some plugins that are able to download on ansible control host and use them in playbooks. For example, com...</p>
+    <p class="archive__item-excerpt" itemprop="description">
+</p>
   </article>
 </div>
 
@@ -487,7 +497,7 @@ Generally, there are available 5 modules that allow to manage storage: parted, l
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">In this post I describe the installation process of a simple Kubernetes cluster. This post has not been finished yet.
+    <p class="archive__item-excerpt" itemprop="description">
 </p>
   </article>
 </div>
@@ -524,7 +534,8 @@ Generally, there are available 5 modules that allow to manage storage: parted, l
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">In this post I am about troubleshooting of ansible playbooks. Ansible provides several ways of managing playbook. Some of them are: log configuration, defini...</p>
+    <p class="archive__item-excerpt" itemprop="description">
+</p>
   </article>
 </div>
 

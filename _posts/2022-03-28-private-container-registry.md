@@ -7,6 +7,8 @@ background: '/image/01.jpg'
 tags: ['podman', 'container']
 ---
 
+{% raw %}
+
 
 It is very easy to set up a simple container registry on podman. Here below I show how to set up a local simple container registry for personal use. 
 
@@ -166,3 +168,5 @@ registry.ocp.home.lab:5000/newsbase        1.0         f8e04e34b36d  5 days ago 
 ## References
 - [How to implement a simple personal/private Linux container image registry for internal use](https://www.redhat.com/sysadmin/simple-container-registry)
 
+
+{% endraw %}

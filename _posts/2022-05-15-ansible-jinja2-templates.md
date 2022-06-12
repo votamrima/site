@@ -7,6 +7,8 @@ background: '/image/01.jpg'
 tags: ['ansible']
 ---
 
+{% raw %}
+
 Jinja templating helps to standartize and to template files such as config and system roles. Here is basic syntax.
 
 Using template module:
@@ -29,11 +31,10 @@ $ cat templates/hello.html.j2
 The system kernel is: {{ ansible_hostname }}
 ````
 
-{% raw %}
+
 - `` \'{% EXPR %}' `` - for expressions or logic. 
 - `` \'{{ EXPR }}' `` - outputs results of expressions or variables
 - `` \'{# COMMENT #}' `` - comments
-{% endraw %}
 
 We can manage a jinja file using loops and conditions.
 
@@ -77,3 +78,5 @@ Additionally, in jinja template we can apply some filters to express the output 
 - [Ansible Playbook Filters](https://docs.ansible.com/ansible/2.9/user_guide/playbooks_filters.html)
 - [Ansible Templates](https://docs.ansible.com/ansible/2.9/modules/template_module.html)
 
+
+{% endraw %}

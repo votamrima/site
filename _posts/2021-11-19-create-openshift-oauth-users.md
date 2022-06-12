@@ -7,6 +7,8 @@ background: '/image/01.jpg'
 tags: ['openshift']
 ---
 
+{% raw %}
+
 In this post I shortly describe how to create users for Openshift using HTPasswd provider. More about authentication providers are able to find in [official documentation](https://docs.openshift.com/container-platform/4.9/authentication/understanding-authentication.html)
 
 
@@ -263,3 +265,4 @@ to build a new example application in Ruby. Or use kubectl to deploy a simple Ku
 [admin@ocp4 ~]$
 ````
 
+{% endraw %}

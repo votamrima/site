@@ -7,6 +7,8 @@ background: '/image/01.jpg'
 tags: ['ansible']
 ---
 
+{% raw %}
+
 
 Ansible collection provides set of roles, modules, some plugins that are able to download on ansible control host and use them in playbooks. For example, ``community.crypto`` collection provides modules for managing TLS/SSL certificates. 
 
@@ -153,3 +155,5 @@ Real example:
 - [Ansible user guide](https://docs.ansible.com/ansible/2.9/user_guide/collections_using.html)
 - Other sources
 
+
+{% endraw %}

@@ -7,6 +7,8 @@ background: '/img/posts/01.jpg'
 tags: ['linux']
 ---
 
+{% raw %}
+
 * In the grub menu select actual kernel and type "-e"
 ![IMAGE](../images/reseting-root-password/pic-1.png)
 
@@ -39,3 +41,5 @@ touch /.autorelabel
 * Exit from single mode session
    
 * Try to login using a new password
+
+{% endraw %}

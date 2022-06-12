@@ -10,7 +10,7 @@
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>Basics of Ansible collections - notes</title>
-<meta name="description" content="Ansible collection provides set of roles, modules, some plugins that are able to download on ansible control host and use them in playbooks. For example, community.crypto collection provides modules for managing TLS/SSL certificates.">
+<meta name="description" content="">
 
 
 
@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://localhost:4000/site/ansible-collections/">
 
 
-  <meta property="og:description" content="Ansible collection provides set of roles, modules, some plugins that are able to download on ansible control host and use them in playbooks. For example, community.crypto collection provides modules for managing TLS/SSL certificates.">
+  <meta property="og:description" content="">
 
 
 
@@ -228,7 +228,7 @@
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Basics of Ansible collections">
-    <meta itemprop="description" content="Ansible collection provides set of roles, modules, some plugins that are able to download on ansible control host and use them in playbooks. For example, community.crypto collection provides modules for managing TLS/SSL certificates.">
+    <meta itemprop="description" content="">
     <meta itemprop="datePublished" content="2022-05-18T09:00:00+02:00">
     
 
@@ -270,7 +270,8 @@
             </nav>
           </aside>
         
-        <p>Ansible collection provides set of roles, modules, some plugins that are able to download on ansible control host and use them in playbooks. For example, <code class="language-plaintext highlighter-rouge">community.crypto</code> collection provides modules for managing TLS/SSL certificates.</p>
+        
+<p>Ansible collection provides set of roles, modules, some plugins that are able to download on ansible control host and use them in playbooks. For example, <code class="language-plaintext highlighter-rouge">community.crypto</code> collection provides modules for managing TLS/SSL certificates.</p>
 
 <p>Collections are supported by Ansible starting with version 2.9.</p>
 
@@ -362,7 +363,7 @@ ansible-galaxy collection <span class="nb">install </span>http://&lt;webserver&g
         <span class="na">option1</span><span class="pi">:</span> <span class="s">value</span>
 
     <span class="pi">-</span> <span class="na">debug</span><span class="pi">:</span>
-        <span class="na">msg</span><span class="pi">:</span> <span class="s1">'</span><span class="s">'</span>
+        <span class="na">msg</span><span class="pi">:</span> <span class="s1">'</span><span class="s">{{</span><span class="nv"> </span><span class="s">lookup("my_namespace.my_collection.lookup1",</span><span class="nv"> </span><span class="s">'param1')| my_namespace.my_collection.filter1 }}'</span>
 
 </code></pre></div></div>
 
@@ -380,7 +381,7 @@ ansible-galaxy collection <span class="nb">install </span>http://&lt;webserver&g
         <span class="na">option1</span><span class="pi">:</span> <span class="s">value</span>
 
     <span class="pi">-</span> <span class="na">debug</span><span class="pi">:</span>
-        <span class="na">msg</span><span class="pi">:</span> <span class="s1">'</span><span class="s">'</span>
+        <span class="na">msg</span><span class="pi">:</span> <span class="s1">'</span><span class="s">{{</span><span class="nv"> </span><span class="s">lookup("my_namespace.my_collection.lookup1",</span><span class="nv"> </span><span class="s">'param1')| my_namespace.my_collection.filter1 }}'</span>
 
 </code></pre></div></div>
 
@@ -530,7 +531,7 @@ Generally, there are available 5 modules that allow to manage storage: parted, l
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">In this post I describe the installation process of a simple Kubernetes cluster. This post has not been finished yet.
+    <p class="archive__item-excerpt" itemprop="description">
 </p>
   </article>
 </div>
@@ -567,7 +568,7 @@ Generally, there are available 5 modules that allow to manage storage: parted, l
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">Jinja templating helps to standartize and to template files such as config and system roles. Here is basic syntax.
+    <p class="archive__item-excerpt" itemprop="description">
 </p>
   </article>
 </div>
@@ -604,7 +605,8 @@ Generally, there are available 5 modules that allow to manage storage: parted, l
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">In this post I am about troubleshooting of ansible playbooks. Ansible provides several ways of managing playbook. Some of them are: log configuration, defini...</p>
+    <p class="archive__item-excerpt" itemprop="description">
+</p>
   </article>
 </div>
 

@@ -96,7 +96,7 @@ var store = [{
         "teaser": null
       },{
         "title": "A short help for regular expressions",
-        "excerpt":"Mostly used regex paterns Other patterns Examples: Source Mostly used regex paterns Token Explanation [abcd] a single character of a/b/c or d [^abcd] any character except a/b/c or d [a-z] matches any characters between a to z [a-zA-Z] matches any characters between a to z and A to Z [^a-p]...","categories": [],
+        "excerpt":"Mostly used regex paterns Token Explanation [abcd] a single character of a/b/c or d [^abcd] any character except a/b/c or d [a-z] matches any characters between a to z [a-zA-Z] matches any characters between a to z and A to Z [^a-p] matches any characters that are not in range...","categories": [],
         "tags": ["regex"],
         "url": "/site/regex-help/",
         "teaser": null
@@ -138,7 +138,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Ansible Jinj2 templates",
-        "excerpt":"Jinja templating helps to standartize and to template files such as config and system roles. Here is basic syntax. Using template module: - name: Deploy hello.html template: src: templates/hello.html.j2 dest: /var/www/html/hello.html $ cat vars/all/all.yml print_msg = \"This file is managed by Ansible\" $ cat templates/hello.html.j2 The system kernel is: \\'{%...","categories": [],
+        "excerpt":"Jinja templating helps to standartize and to template files such as config and system roles. Here is basic syntax. Using template module: - name: Deploy hello.html template: src: templates/hello.html.j2 dest: /var/www/html/hello.html $ cat vars/all/all.yml print_msg = \"This file is managed by Ansible\" $ cat templates/hello.html.j2 {{ print_msg }} The system...","categories": [],
         "tags": ["ansible"],
         "url": "/site/ansible-jinja2-templates/",
         "teaser": null

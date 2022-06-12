@@ -7,6 +7,7 @@ date: 2020-11-06 23:38:00 +0100
 tags: ['linux']
 ---
  
+ {% raw %}
 <p>In this post is noted a way of creating a simple NFS share server on centos 8 machine.</p>
 
 **1. Installing NFS**
@@ -114,3 +115,4 @@ Export list for 192.168.11.61:
 [root@workstation ~]# 
 ````
 
+{% endraw %}

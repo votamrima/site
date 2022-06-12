@@ -650,7 +650,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">Here I describe a procees of creating a simple service startup job at linux.
+    <p class="archive__item-excerpt" itemprop="description">
 </p>
   </article>
 </div>
@@ -687,7 +687,8 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">In this post is noted a way of creating a simple NFS share server on centos 8 machine.
+    <p class="archive__item-excerpt" itemprop="description">
+In this post is noted a way of creating a simple NFS share server on centos 8 machine.
 </p>
   </article>
 </div>
@@ -725,9 +726,6 @@
 
 
     <p class="archive__item-excerpt" itemprop="description">
-  In the grub menu select actual kernel and type “-e”
-
-
 </p>
   </article>
 </div>
@@ -764,7 +762,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">If there is no telnet tools is installed on the host, try the following command to check if a port opened or not.
+    <p class="archive__item-excerpt" itemprop="description">
 </p>
   </article>
 </div>
@@ -935,7 +933,7 @@ delaycompre...</p>
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">In this post I describe shortly how to shutdown and start up Openshift cluster.
+    <p class="archive__item-excerpt" itemprop="description">
 </p>
   </article>
 </div>
@@ -972,7 +970,8 @@ delaycompre...</p>
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">In this post I tried to describe my experience that I had during Openshift 4.9 installation at my home lab. Redhat allows to use Openshift during 60 days for...</p>
+    <p class="archive__item-excerpt" itemprop="description">
+</p>
   </article>
 </div>
 
@@ -1160,7 +1159,7 @@ delaycompre...</p>
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">It is very easy to set up a simple container registry on podman. Here below I show how to set up a local simple container registry for personal use.
+    <p class="archive__item-excerpt" itemprop="description">
 </p>
   </article>
 </div>
@@ -1197,7 +1196,7 @@ delaycompre...</p>
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">Here I describe a procees of creating a simple service startup job at linux.
+    <p class="archive__item-excerpt" itemprop="description">
 </p>
   </article>
 </div>
@@ -1270,8 +1269,7 @@ delaycompre...</p>
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">MySQL
-Install mysql client:
+    <p class="archive__item-excerpt" itemprop="description">
 </p>
   </article>
 </div>
@@ -1324,7 +1322,8 @@ Install mysql client:
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">Ansible collection provides set of roles, modules, some plugins that are able to download on ansible control host and use them in playbooks. For example, com...</p>
+    <p class="archive__item-excerpt" itemprop="description">
+</p>
   </article>
 </div>
 
@@ -1398,7 +1397,7 @@ Generally, there are available 5 modules that allow to manage storage: parted, l
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">Jinja templating helps to standartize and to template files such as config and system roles. Here is basic syntax.
+    <p class="archive__item-excerpt" itemprop="description">
 </p>
   </article>
 </div>
@@ -1435,7 +1434,8 @@ Generally, there are available 5 modules that allow to manage storage: parted, l
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">In this post I am about troubleshooting of ansible playbooks. Ansible provides several ways of managing playbook. Some of them are: log configuration, defini...</p>
+    <p class="archive__item-excerpt" itemprop="description">
+</p>
   </article>
 </div>
 
@@ -1697,8 +1697,7 @@ tmux kill-server
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">MySQL
-Install mysql client:
+    <p class="archive__item-excerpt" itemprop="description">
 </p>
   </article>
 </div>
@@ -1735,10 +1734,8 @@ Install mysql client:
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">Left Join and right
-Let’s say we have two tables - posts and users. Struncture of the both tables is following:
-
-  post table has such columns as: id, title,...</p>
+    <p class="archive__item-excerpt" itemprop="description">
+</p>
   </article>
 </div>
 
@@ -1792,7 +1789,7 @@ Let’s say we have two tables - posts and users. Struncture of the both tables 
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">It is very easy to set up a simple container registry on podman. Here below I show how to set up a local simple container registry for personal use.
+    <p class="archive__item-excerpt" itemprop="description">
 </p>
   </article>
 </div>
@@ -1829,7 +1826,7 @@ Let’s say we have two tables - posts and users. Struncture of the both tables 
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">Here I describe a procees of creating a simple service startup job at linux.
+    <p class="archive__item-excerpt" itemprop="description">
 </p>
   </article>
 </div>
@@ -2095,11 +2092,6 @@ delaycompre...</p>
 
 
     <p class="archive__item-excerpt" itemprop="description">
-  Mostly used regex paterns
-  Other patterns
-  Examples:
-  Source
-
 </p>
   </article>
 </div>
@@ -2148,9 +2140,7 @@ delaycompre...</p>
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">Problem
-Today I tried to install Windows 11 on my virtual platform and during installation faced with the following problem:
-
+    <p class="archive__item-excerpt" itemprop="description">
 </p>
   </article>
 </div>
@@ -2199,7 +2189,7 @@ Today I tried to install Windows 11 on my virtual platform and during installati
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">In this post I describe the installation process of a simple Kubernetes cluster. This post has not been finished yet.
+    <p class="archive__item-excerpt" itemprop="description">
 </p>
   </article>
 </div>

@@ -7,6 +7,8 @@ date: 2019-06-03 16:38:00 +0100
 tags: ['puppet']
 ---
 
+{% raw %}
+
 1. cleanly and gracefully killing all tmux opened sessions and server too:
 ```
 tmux kill-server
@@ -22,3 +24,5 @@ pkill -f tmux
 ````
 yum erase -y tmux 
 ````
+
+{% endraw %}

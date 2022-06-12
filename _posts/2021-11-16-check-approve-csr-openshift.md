@@ -6,7 +6,9 @@ date: 2021-11-16 18:30:00 +0100
 #background: '/img/posts/01.jpg'
 tags: ['openshift']
 ---
- 
+
+{% raw %}
+
 After installing Openshift cluster you should log in and check for csr. Moreover, I regularly controls if some csr have to be approved or not.
 
 ````
@@ -40,3 +42,4 @@ csr-nwjpv   71s     kubernetes.io/kube-apiserver-client-kubelet   system:node:ok
 ````
 
 
+{% endraw %}

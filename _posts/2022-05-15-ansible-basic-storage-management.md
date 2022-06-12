@@ -8,6 +8,7 @@ tags: ['ansible']
 ---
 
 {% raw %}
+
 Generally, there are available 5 modules that allow to manage storage: ``parted``, ``lvg``, ``lvol``, ``filesystem``, ``mount``. 
 
 - ``parted`` module creates partition.

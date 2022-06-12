@@ -3,10 +3,11 @@ layout: single
 title: "Editing files in Linux VM using remote Visual Studio Code"
 subtitle: ""
 date: 2021-10-18 18:30:00 +0100
-#background: '/img/posts/01.jpg'
 tags: ['ide']
 ---
- 
+
+{% endraw %}
+
 Sometimes we need to edit a file directly on Linux VM using Visual Studio Code.
 
 1. Launch Visual Studio Code. Additionally, you have to able to connect to the bash of remote machine from VS Code. 
@@ -38,3 +39,5 @@ Remote: Start Server
 ````
  $ rmate demo.py 
 ````
+
+{% endraw %}

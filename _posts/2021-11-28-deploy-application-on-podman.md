@@ -7,6 +7,8 @@ background: '/image/01.jpg'
 tags: ['podman', 'python']
 ---
 
+{% raw %}
+
 In order to connect a rootless application container to the rootles database container I used port mapping technique. The following steps were used for successfully applying application with connection to database.
 
 First of all I installed libvirt package in order to enable virtualization network interface:
@@ -51,3 +53,5 @@ Additionally, I would give a short command for entering to the container:
 ````bash
 podman exec -it testapp bash
 ````
+
+{% endraw %}

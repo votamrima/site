@@ -6,7 +6,9 @@ date: 2019-08-16 20:17:00 +0100
 #background: '/img/posts/01.jpg'
 tags: ['linux']
 ---
- 
+
+{% raw %}
+
 Recently I tried to update my centos 7 test machine. Unfortunatelly, ``yum update`` command returned the following error "At least 54MB more space needed on the /boot filesystem.".
 
 ``df -h`` command showed following:
@@ -97,3 +99,5 @@ tmpfs                         379M   40K  379M   1% /run/user/1000
 ````
 
 In this output we can see that unused files were removed and it was cleaned up 275 MB. 
+
+{% endraw %}

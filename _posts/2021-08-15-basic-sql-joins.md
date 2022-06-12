@@ -7,6 +7,8 @@ background: '/image/01.jpg'
 tags: ['database']
 ---
 
+{% raw %}
+
 ## Left Join and right
 Let's say we have two tables - ``posts`` and ``users``. Struncture of the both tables is following:
 1. ``post`` table has such columns as: id, title, content, user_id and date. Column user_id is a foreign key and related with the id column of ``users`` table
@@ -35,3 +37,5 @@ By default, by ``left join`` and ``right join`` is being used ``outer join``.  I
 
 ## References:
 - [Postgres Tutorial. Joins](https://www.postgresqltutorial.com/postgresql-joins/)
+
+{% endraw %}

@@ -7,6 +7,8 @@ background: '/image/01.jpg'
 tags: ['openshift']
 ---
 
+{% raw %}
+
 In this post I tried to describe my experience that I had during Openshift 4.9 installation at my home lab. Redhat allows to use Openshift during 60 days for free without support.
 
 ## Preparing environment
@@ -183,3 +185,5 @@ Log in to Openshift using default kubeadmin user. Password is being generated du
 
 ## Reference:
 [Installing a user-provisioned bare metal cluster on a restricted network. Redhat documentation](https://docs.openshift.com/container-platform/4.9/installing/installing_bare_metal/installing-restricted-networks-bare-metal.html)
+
+{% endraw %}

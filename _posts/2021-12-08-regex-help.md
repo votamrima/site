@@ -7,10 +7,7 @@ background: '/image/01.jpg'
 tags: ['regex']
 ---
 
-- [Mostly used regex paterns](#mostly-used-regex-paterns)
-- [Other patterns](#other-patterns)
-- [Examples:](#examples)
-- [Source](#source)
+{% raw %}
 
 ## Mostly used regex paterns
 
@@ -102,3 +99,5 @@ A regex that identifies all urls in the text:
 ## Source
 1. [https://regex101.com/](https://regex101.com/)
 2. [https://www.youtube.com/watch?v=8sv-6AN0_cg](https://www.youtube.com/watch?v=8sv-6AN0_cg)
+
+{% endraw %}

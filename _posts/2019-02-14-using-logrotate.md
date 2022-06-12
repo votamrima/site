@@ -7,6 +7,8 @@ background: '/image/01.jpg'
 tags: ['logrotate', 'linux']
 ---
 
+{% raw %}
+
 1. create configuration file:
 ````
 bash-3.2# cat /etc/logrotate.d/myconf-logrotate.conf
@@ -39,3 +41,5 @@ Sources:
 1. man logrotate.conf and man logrotate
 2. [Crontab Generator](https://crontab-generator.org/)
 3. [How to Use logrotate to Manage Log Files](https://www.linode.com/docs/uptime/logs/use-logrotate-to-manage-log-files/)
+
+{% endraw %}

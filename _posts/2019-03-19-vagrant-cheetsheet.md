@@ -7,7 +7,7 @@ date: 2019-06-03 16:38:00 +0100
 tags: ['vagrant']
 ---
 
-
+{% raw %}
 
 ### Creating a VM
 * ``vagrant init`` -- Initialize Vagrant with a Vagrantfile and ./.vagrant directory, using no specified base image. Beforeyou can do vagrant up, you'll need to specify a base image in the Vagrantfile.
@@ -66,3 +66,5 @@ tags: ['vagrant']
 
 ### Source 
 Regularly check this [source](https://gist.github.com/wpscholar/a49594e2e2b918f4d0c4)
+
+{% endraw %}

@@ -7,8 +7,11 @@ background: '/image/01.jpg'
 tags: ['windows']
 ---
 
+{% raw %}
+
 ## Problem
 Today I tried to install Windows 11 on my virtual platform and during installation faced with the following problem:
+
 ![Image](images/../../images/windows11-requirements-error/pic1.png)
 
 ## Solution
@@ -48,5 +51,9 @@ And click on "Install now" button.
 
 That's it.
 
+{% endraw %}
+
+
 ## Reference:
 [How to Fix Cannot Install Windows 11 on VMware Workstation](https://www.youtube.com/watch?v=sCLJYNI77Bk)
+
