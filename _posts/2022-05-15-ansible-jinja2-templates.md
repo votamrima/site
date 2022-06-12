@@ -12,6 +12,7 @@ Jinja templating helps to standartize and to template files such as config and s
 Using template module:
 
 ````yaml
+
 - name: Deploy hello.html
   template:
     src: templates/hello.html.j2
@@ -19,6 +20,7 @@ Using template module:
 ````
 
 ````bash
+
 $ cat vars/all/all.yml
 print_msg = "This file is managed by Ansible"
 

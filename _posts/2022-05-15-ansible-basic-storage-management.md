@@ -19,7 +19,7 @@ Generally, there are available 5 modules that allow to manage storage: ``parted`
 
 Here below I share a basic playbook for managing storage:
 
-````bash
+````
 - name: Create new partition
   hosts: machinea
   gather_facts: true
