@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "How I deployed first app in kubernetes"
+title: "How I deployed my first app in kubernetes"
 subtitle: ""
 date: 2022-06-01 08:00:00 +0100
 background: '/image/01.jpg'
@@ -77,19 +77,19 @@ This deployment.yml file describes following:
 And apply ``deployment.yml`` file:
 
 ````bash
-[seymur@workstation newsbase]$ kubectl apply -f deployment.yml 
+[admin@workstation newsbase]$ kubectl apply -f deployment.yml 
 deployment.apps/newsbase created
 ````
 
 Check if pods have been running:
 
 ````bash
-[seymur@workstation newsbase]$ kubectl get pods -n newsbase
+[admin@workstation newsbase]$ kubectl get pods -n newsbase
 NAME                        READY   STATUS    RESTARTS   AGE
 newsbase-7c4bb87566-ghmv8   1/1     Running   1          5m
 newsbase-7c4bb87566-jqnnr   1/1     Running   1          5m
 newsbase-7c4bb87566-pqw68   1/1     Running   1          5m
-[seymur@workstation newsbase]$ 
+[admin@workstation newsbase]$ 
 
 ````
 
