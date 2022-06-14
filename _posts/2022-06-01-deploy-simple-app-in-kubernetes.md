@@ -18,7 +18,6 @@ Connection values and other variables were defined in ``.env`` file located in a
 
 ## Deploy application
 
-
 First of all it was created a namespace:
 
 ````bash
@@ -152,5 +151,9 @@ subsets:
         name: connection-to-db
 
 ````
+
+## References
+- [access-external-database-from-kubernetes](https://stackoverflow.com/questions/63344920/access-external-database-from-kubernetes)
+- 
 
 {% endraw %}
