@@ -55,14 +55,23 @@ Available commands are:
 
 In order to set up a vm we need to declare a file with instructions for packer. There are two type of files: JSON files and HCL file. 
 
-I used to apply following hcl file for my task. The file is starting with declaring variables. I declared 
-``proxmox_api_url``, ``proxmox_api_token_id`` and ``proxmox_api_token_secret``. These variables are able to define in the external file, by passing as a command parameter and by defining in the the same hcl file. In my task I set the 2 variables in a external file and secret I gave in command line as a parameter.
+I used to apply following hcl file for my task. The file is starting by defining required plugins. This plugin will be installed using ``packer init hcls/``. In the following part are being declared variables. I declared ``proxmox_api_url``, ``proxmox_api_token_id`` and ``proxmox_api_token_secret``. These variables are able to define in the external file, by passing as a command parameter and by defining in the the same hcl file. In my task I set the 2 variables in a external file and secret I gave in command line as a parameter.
 
 Second part of the file is consisting of ``source`` part. Here are defined main parameters of the VM, iso file, disk, network and etc. 
 
 Third part is the building part what actually runs building process and after provisioning tasks.
 
 ````vim
+
+packer {
+  required_plugins {
+    proxmox = {
+      version = ">= 1.0.6"
+      source  = "github.com/hashicorp/proxmox"
+    }
+  }
+}
+
 variable "proxmox_api_url" {
   type = string
 }
@@ -154,6 +163,22 @@ build {
 By running packer creates a temporary http server using a randomly generated port. Such approach allows to download a kicstart file during installation and set up a machine. Kickstart file is located in ``http`` folder (``http_directory = "http" ``). The kickstart file that I used for this task is shared on github. [Link](https://github.com/votamrima/terraforming/blob/master/packer/http/ks.conf)
 
 ## Running Packer
+
+First of all we need to install required plugin for packer.
+
+````bash
+[admin@workstation packer]$ packer init hcls/
+Installed plugin github.com/hashicorp/proxmox v1.0.8 in "/home/admin/.config/packer/plugins/github.com/hashicorp/proxmox/packer-plugin-proxmox_v1.0.8_x5.0_linux_amd64"
+````
+
+And check installed plugin:
+
+````bash
+[admin@workstation packer]$ packer plugins installed
+/home/admin/.config/packer/plugins/github.com/hashicorp/proxmox/packer-plugin-proxmox_v1.0.8_x5.0_linux_amd64
+````
+
+Next step is setting up a machine.
 
 ````bash
 [admin@workstation packer]$ packer build -var-file='creds.pkr.hcl' -var proxmox_api_token_secret="<my-secret>" hcls/proxmox-centos.pkr.hcl
