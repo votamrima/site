@@ -36,7 +36,6 @@ Installing 'community.general:8.0.1' to '/home/admin/.ansible/collections/ansibl
 These installations were necessary prerequisites for utilizing the dig command within Ansible. However, the dig command did not return the expected DNS name, prompting me to switch to nslookup.
 
 
-
 ## Setting the Hostname
 
 ### Extracting Output from nslookup
